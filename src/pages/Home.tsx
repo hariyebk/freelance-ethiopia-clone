@@ -1,27 +1,24 @@
-import { Link } from "react-router-dom";
-import JobSeekers from "../components/JobSeekers";
 import Brands from "../components/Brands";
 import Pricing from "../components/Pricing";
+import Hero from "../components/Hero";
+import Card from "../components/Card";
+import Testimonials from "../components/Testimonials";
+import Marquee from "react-fast-marquee";
 
 export default function Home() {
     return ( 
         <section className="max-container min-h-screen mx-56">
-            {/* HERO */}
-            <div className="flex justify-between items-center gap-10">
-                <div className="flex flex-col justify-start max-w-[500px] mt-5">
-                    <h1 className="heading1 text-orange-600 font-bold pt-7 opacity-75 mt-5"> Find The Right Talent Right Now!</h1>
-                    <p className="mt-4 text-stone-600 text-lg font-sans font-semibold"> Hire with a click of a button. Thousands of the best talents are waiting for you. </p>
-                    <Link to="/register" className=" flex justify-center mt-8 max-w-[200px] rounded-full bg-gradient-to-r from-orange-600 to-pink-500 py-3 text-xl text-slate-100 font-sans font-semibold">
-                        Start Hiring
-                    </Link>
-                </div>
-                <div>
-                    <img src="./Images/banner.png" />
-                </div>
-            </div>
-            <Brands />
-            <JobSeekers />
+            <Hero />
+            <Marquee pauseOnHover = {true}>
+                <Brands />
+            </Marquee>
+            <Card Title="Free for Job Seekers" des="Freelance Ethiopia is FREE for job seekers and our platform offers job and gig opportunities 365 days a year. So Get Started now and discover opportunities that are meant for you." />
             <Pricing />
+            <div className="-mt-9">
+                <Card Title="Find the right candidates" des="You are in charge of every hiring step. From posting a job to hiring a candidate. Chat with applicants directly, Shortlist and Hire the right candidates." />
+            </div>
+            <Testimonials subject="Clients" />
+            <Testimonials subject="Freelancers" />
         </section>
     )
 }

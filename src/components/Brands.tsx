@@ -5,11 +5,10 @@ export default function Brands() {
         <div className="flex justify-between items-center mt-20">
             {brands.map((brand) => {
                 return (
-                    <img src={brand} alt="brand-logo" width={60} height={60} className="object-contain" />
+                    <img src={brand} alt="brand-logo" width={60} height={60} className="object-contain mr-10" />
                 )
 
             })}
-            {/* TODO: slider */}
         </div>
     )
 }

@@ -27,10 +27,10 @@ export default function NavBar() {
                     </nav>
                 </div>
                 <div className="flex items-center gap-2 mr-10">
-                    <Link to="/login" className="bg-stone-700 mr-3 text-slate-100 text-base py-1 px-7 rounded-full">
+                    <Link to="/login" className="bg-stone-800 mr-3 text-slate-100 text-base py-1 px-7 rounded-full">
                         Login
                     </Link>
-                    <Link to="/login" className="bg-stone-700 mr-3 text-slate-100 text-base py-1 px-7 rounded-full">
+                    <Link to="/login" className="bg-stone-800 mr-3 text-slate-100 text-base py-1 px-7 rounded-full">
                         Sign up
                     </Link>
                 </div>
