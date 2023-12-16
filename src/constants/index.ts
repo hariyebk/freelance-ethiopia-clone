@@ -171,3 +171,8 @@ export const faq = [
     },
     
 ]
+export enum userTypes {
+    newuser = "newuser",
+    olduser = "olduser",
+    unknown = "unknown"
+} 

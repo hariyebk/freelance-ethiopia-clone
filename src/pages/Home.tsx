@@ -1,8 +1,8 @@
-import Brands from "../components/Brands";
-import Pricing from "../components/Pricing";
-import Hero from "../components/Hero";
-import Card from "../components/Card";
-import Testimonials from "../components/Testimonials";
+import Brands from "../shared/Brands";
+import Pricing from "../shared/Pricing";
+import Hero from "../shared/Hero";
+import Card from "../shared/Card";
+import Testimonials from "../shared/Testimonials";
 import Marquee from "react-fast-marquee";
 
 export default function Home() {

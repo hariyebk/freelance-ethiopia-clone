@@ -15,7 +15,7 @@ export default function NavBar() {
                         <img src="/Images/logo.png" alt="logo" className="h-10 w-32 object-contain" />
                     </Link>
                     <nav className="max-xl:hidden ml-7 bg-white">
-                        <ul className="flex justify-between items-center gap-3">
+                        <ul className="flex justify-between items-center gap-5">
                             {navlinks.map((link) => {
                                 return (
                                     <li key={link.label} className="font-normal text-md text-gray-500">
@@ -26,11 +26,11 @@ export default function NavBar() {
                         </ul>
                     </nav>
                 </div>
-                <div className="flex items-center gap-2 mr-10">
-                    <Link to="/login" className="bg-stone-800 mr-3 text-slate-100 text-base py-1 px-7 rounded-full">
+                <div className="flex items-center gap-2 max-lg:mr-2 mr-10">
+                    <Link to="/login" className="bg-stone-800 mr-3 text-slate-100 max-lg:text-sm text-base py-1 max-lg:px-5 px-7 rounded-full">
                         Login
                     </Link>
-                    <Link to="/login" className="bg-stone-800 mr-3 text-slate-100 text-base py-1 px-7 rounded-full">
+                    <Link to="/onboard" className="bg-stone-800 mr-3 text-slate-100 max-lg:text-sm text-base py-1 max-lg:px-5 px-7 rounded-full">
                         Sign up
                     </Link>
                 </div>

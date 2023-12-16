@@ -1,7 +1,9 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom"
-import AppLayout from "./components/AppLayout"
-import {About, Job, Faq, Help, Login, Signup} from "./pages"
+import AppLayout from "./shared/AppLayout"
+import {About, Job, Faq, Help, Login, Signup, } from "./pages"
 import Home from "./pages/Home"
+import NotFound from "./pages/NotFound"
+import Register from "./pages/Register"
 export default function App() {
   return (
       <BrowserRouter>
@@ -15,8 +17,10 @@ export default function App() {
               <Route path="/about" element = {<About />} />
               <Route path="/help" element = {<Help/>} />
               <Route path="/login" element = {<Login />} />
-              <Route path="/signup" element = {<Signup />} />
+              <Route path="/onboard" element = {<Signup />} />
+              <Route path="/register" element = {<Register />} />
           </Route>
+          <Route path="/*" element = {<NotFound />} />
         </Routes>
       </BrowserRouter>
   )

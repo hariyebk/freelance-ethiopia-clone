@@ -37,7 +37,7 @@ export default function Footer() {
                     <div className="mr-10 max-lg:mx-auto">
                         {contactInfo.map((info) => {
                             return (
-                                <div className="flex flex-1 flex-col text-slate-200">
+                                <div key={info.Title} className="flex flex-1 flex-col text-slate-200">
                                     <h3 className="font-bold font-palanquin text-xl mb-2"> {info.Title} </h3>
                                     <div className="flex items-center gap-3 mt-2">
                                         <FiPhoneCall />
