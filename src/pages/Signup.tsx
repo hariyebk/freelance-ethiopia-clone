@@ -1,9 +1,9 @@
 import { useReducer} from "react";
 import { FiUserCheck } from "react-icons/fi";
 import { FiUserPlus } from "react-icons/fi";
-import { userTypes } from "../constants";
-import { useNavigate} from "react-router-dom";
+import { bottomNavRoute, userTypes } from "../constants";
 import Goback from "../shared/Goback";
+import BottomNav from "../shared/BottomNav";
 interface STATEPROPS {
     newUser: boolean,
     telegramUser: boolean
@@ -21,13 +21,13 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
         case userTypes.newuser:
             return {
                 ...state,
-                newUser: true,
+                newUser: state.newUser ? false : true,
                 telegramUser: false
             }
         case userTypes.olduser:
             return {
                 ...state,
-                telegramUser: true,
+                telegramUser: state.telegramUser ? false : true,
                 newUser: false
             }
         default:
@@ -36,7 +36,6 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 }
 export default function Signup() {
     const [{newUser, telegramUser}, dispatch] = useReducer(reducer, initial)
-    const navigate = useNavigate()
     return (
         <section className="flex flex-col w-full min-h-screen">
             <div className="md:hidden ml-10 mt-8">
@@ -58,15 +57,7 @@ export default function Signup() {
                     </div>
                 </div>
             </div>
-            <div className="flex max-lg:gap-5 max-lg:mb-20 justify-between items-center mx-20 max-lg:mt-14 mt-28">
-                <div className="max-lg:hidden">
-                    <Goback />
-                </div>
-                <button className="bg-stone-800 max-lg:ml-20 max-lg:px-16 px-16 max-lg:py-2 py-3 text-slate-100 text-lg rounded-full" onClick={() => {
-                    if(!newUser && !telegramUser) return
-                    navigate("/register")
-                }}> Continue </button>
-            </div>
+            <BottomNav place={bottomNavRoute.onboard} route={bottomNavRoute.register} newUser = {newUser} telegramUser = {telegramUser} />
         </section>
     )
 }

@@ -175,4 +175,61 @@ export enum userTypes {
     newuser = "newuser",
     olduser = "olduser",
     unknown = "unknown"
+}
+export enum bottomNavRoute {
+    onboard = "onboard",
+    register = "register",
+
 } 
+export const countries = [
+    {
+        value: "et",
+        label: "Ethiopia"
+    },
+    {
+        value: "ke",
+        label: "Kenya"
+    },
+    {
+        value: "ug",
+        label: "Uganda"
+    },
+    {
+        value: "tz",
+        label: "Tanzania"
+    }
+]
+export const cities = [
+    {
+        value: "aa",
+        label: "Addis Ababa"
+    },
+    {
+        value: "dd",
+        label: "Dire Dawa"
+    },
+    {
+        value: "hw",
+        label: "Hawasa"
+    },
+    {
+        value: "bd",
+        label: "Bahirdar"
+    },
+    {
+        value: "ad",
+        label: "Adama"
+    },
+    {
+        value: "go",
+        label: "Gonder"
+    },
+    {
+        value: "ji",
+        label: "Jijiga"
+    },
+    {
+        value: "hr",
+        label: "Harar"
+    }
+]
