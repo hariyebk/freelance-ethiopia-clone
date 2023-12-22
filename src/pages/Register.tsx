@@ -32,7 +32,7 @@ export default function Register() {
     return (
         <section className="w-full min-h-screen flex items-start justify-center mt-10 mb-20">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-5">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-3">
                     <h1 className="text-2xl font-palanquin mb-7 mx-auto"> Account Information </h1>
                     {/* email */}
                     <FormField

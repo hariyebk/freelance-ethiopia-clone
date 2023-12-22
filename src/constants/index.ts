@@ -233,3 +233,21 @@ export const cities = [
         label: "Harar"
     }
 ]
+export const jobDescription = "looking for a Sales Agent that is highly motivated and results-oriented to join our team. You will be responsible for selling our services to new and existing customers, as well as meeting sales targets and goals as a Sales Agent."
+export const jobResponsibilities = [
+    "presenting, promoting, and selling products/services to prospective customers",
+    "establishing, developing, and maintaining positive customer relationships",
+    "reaching out to customer leads through calling and in person."
+]
+export const jobRequirments = [
+    "0 years of experience",
+    "Excellent at selling, communication, and negotiation skills.",
+    "prioritizing, time management, and organizational abilities",
+]
+export const JobQualifications = [
+    "Experience with sports betting industry",
+    "Familiarity with specific accounting practices and regulation.",
+    "Knowledge of tax laws and regulations related to online betting operations"
+]
+
+export const HowToApply = "https://docs.google.com/forms/d/17Ok4RD3PfjBoANdrWAlTpAu6ayzRESls2RVOLBgB6po/edit"

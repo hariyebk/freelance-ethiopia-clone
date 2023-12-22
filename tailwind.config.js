@@ -24,6 +24,9 @@ export default {
         foreground: "hsl(var(--foreground))",
         primary: "#ef754c",
         secondary: "#e94969",
+        darkblue: "#1f2937",
+        fade: "#8a8ea2",
+        tagbg: "#ebebeb",
         // primary: {
         //   DEFAULT: "hsl(var(--primary))",
         //   foreground: "hsl(var(--primary-foreground))",
@@ -73,6 +76,9 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
+        sans: ['Arial', 'Helvetica', 'Roboto', 'system-ui', 'sans-serif'],
+        serif: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        mono: ['Courier New', 'monospace'],
         palanquin: ['Palanquin', 'sans-serif'],
         montserrat: ['Montserrat', 'sans-serif'],
       }
