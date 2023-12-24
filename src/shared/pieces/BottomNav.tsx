@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import Goback from "./Goback"
-import { bottomNavRoute } from "../constants"
+import { bottomNavRoute } from "../../constants"
 
 interface NavProps {
     route: string,

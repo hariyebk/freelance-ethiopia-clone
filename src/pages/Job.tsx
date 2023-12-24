@@ -1,11 +1,15 @@
 import { IoSearchOutline } from "react-icons/io5";
-import PostCard from "../shared/PostCard";
+import PostCard from "../shared/pieces/PostCard";
+import { CiFilter } from "react-icons/ci";
+import { useFilterContext } from "../context/Provider";
+import FilterOptions from "../shared/pieces/FilterOptions";
+
 export default function Job() {
+    const {setOpen} = useFilterContext()
     return (
         <section className="w-full min-h-screen">
-            <div className="flex gap-8 ml-44">
-                {/* Job List section */}
-                <div className="w-[700px] h-full">
+            <div className="flex gap-8 max-lg:mx-5 ml-44">
+                <div className="max-lg:w-[460px] w-[700px]">
                     <div className="flex flex-col flex-1 shadow-md p-2 my-14">
                         <div className="flex items-center justify-start border border-slate-200 rounded-lg pl-3">
                             <IoSearchOutline style = {{color: "#ef754c", fontSize: "20px"}} />
@@ -14,7 +18,12 @@ export default function Job() {
                                 <IoSearchOutline style = {{color: "#fff", fontSize: "20px"}} />
                             </button>
                         </div>
-                        <h1 className="text-2xl text-darkblue font-palanquin font-medium mt-10 ml-5"> Jobs You Might Like </h1>
+                        <div className="flex items-center justify-between mt-10 ml-5 pr-4">
+                            <h1 className="text-2xl text-darkblue font-palanquin font-medium "> Jobs You Might Like </h1>
+                            <button className="lg:hidden focus:outline-none mt-2" onClick={() => setOpen(true)}>
+                                <CiFilter style = {{fontSize: "40px", color: "#ef754c"}} />
+                            </button>
+                        </div>
                         <p className="mt-5 ml-6 text-sm text-primary font-medium font-palanquin"> All jobs </p>
                         <hr className="relative top-[10px] w-20 ml-3 border border-t-2 border-primary" />
                         <hr className="mt-2 border border-t-1 border-gray-100 leading-5" />
@@ -23,13 +32,9 @@ export default function Job() {
                         <PostCard />
                     </div>
                 </div>
-                {/* Filter Options */}
-                <div className="my-14 w-[300px] min-h-screen shadow-md">
-                    <div className="flex flex-col items-start justify-between m-3">
-                        <h2 className="text-primary text-lg ml-5 font-palanquin"> Filter jobs </h2>
-                    </div>
+                <div className="my-14 shadow-md max-lg:hidden pb-48 px-5 overflow-scroll custom-scrollbar">
+                    <FilterOptions />
                 </div>
-                
             </div>
         </section>
     )

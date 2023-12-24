@@ -1,4 +1,4 @@
-import { brands } from "../constants"
+import { brands } from "../../constants"
 
 export default function Brands() {
     return (

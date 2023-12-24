@@ -1,4 +1,4 @@
-import { enterpriseOpr, packages } from "../constants";
+import { enterpriseOpr, packages } from "../../constants";
 import { Link } from "react-router-dom";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
@@ -9,7 +9,7 @@ export default function Pricing() {
     return (
         <div className="mt-10 flex flex-1 flex-col items-start min-h-screen">
             <h1 className="mx-auto font-bold font-montserrat text-6xl text-black"> Our <span className="text-primary font-bold"> Pricing </span></h1>
-            <p className="mt-10 text-black text-xl font-palanquin"> Our subscription packages provide an easy and cost-efficient way to find qualified job candidates quickly. The three packages offer different lengths of subscription time, so you can choose the one that meets your needs. </p>
+            <p className="mt-10 text-darkblue text-xl font-palanquin"> Our subscription packages provide an easy and cost-efficient way to find qualified job candidates quickly. The three packages offer different lengths of subscription time, so you can choose the one that meets your needs. </p>
             <div className="mt-16 flex justify-between items-start w-full gap-7">
                 {packages.map((plan) => {
                     return (
@@ -39,7 +39,7 @@ export default function Pricing() {
                         )
                     })}
                 </ul>
-                <div className="flex flex-col gap-3 my-7 font-montserrat">
+                <div className="flex flex-col gap-3 my-7 text-sm font-palanquin">
                     <Link to={`/`} className="text-sm hover:text-primary flex items-center gap-2"> 
                         <FaPhoneAlt />
                         <span> +251956666667 </span> 

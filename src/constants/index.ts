@@ -249,5 +249,70 @@ export const JobQualifications = [
     "Familiarity with specific accounting practices and regulation.",
     "Knowledge of tax laws and regulations related to online betting operations"
 ]
+export const HowToApply = "Send your resume and cover letter to vaccancy-jobs@gmail.com. make sure to mention the appropriate subject for your email."
 
-export const HowToApply = "https://docs.google.com/forms/d/17Ok4RD3PfjBoANdrWAlTpAu6ayzRESls2RVOLBgB6po/edit"
+export const jobSectors = [
+    "Software design and development",
+    "Media and Communication",
+    "Food and Drink preparation",
+    "Information Technology",
+    "Accounting and Finance",
+    "Creative art and Design",
+    "Architecture and Urban planning",
+    "construction and civil engineering",
+    "Health care",
+    "Hospitality and Tourism",
+    "Translation and Transcript",
+    "Manufacturing and product deisgn",
+    "Logistic and Supply chain Managment",
+    "Sales and Promotion",
+    "Secretarial and office managment",
+    "Agriculture",
+    "Fashion",
+    "Research and data Analytics",
+    "Law",
+    "Beauty and Grooming",
+    "Teaching and Tutor",
+    "Pharmaceutical",
+    "Marketing and Advertisemet",
+    "Advisory and Consultancy",
+    "Transportation",
+]
+export const jobTypes = [
+    "Full time",
+    "Part time",
+    "Contractual",
+    "Freelance",
+    "Volunteer",
+    "Paid internship",
+    "unpaid internship",
+]
+export const Gender = [
+    "Male",
+    "Female",
+    "Both"
+]
+export const Experience = [
+    "Senior",
+    "Intermidate",
+    "junior",
+]
+export const salary = [
+    "< 5,000",
+    "5,000 - 10,000",
+    "10,000 - 20,000",
+    "20,000 - 50,000",
+    "> 50,000"
+]
+export const location = [
+    "Addis Ababa",
+    "Dire Dawa",
+    "Hawassa",
+    "Mekelle",
+    "Adama",
+    "Jijiga",
+    "Bahirdar",
+    "Gonder",
+    "Jimma",
+    "Ambo",
+]

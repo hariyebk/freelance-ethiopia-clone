@@ -77,11 +77,45 @@
         transition: background-color 5000s ease-in-out 0s;
     }
 }
+
 @layer base {
     * {
     @apply border-border;
     }
     body {
     @apply bg-background text-foreground;
+    }
+}
+
+@layer components { 
+    .custom-scrollbar {
+        height: 100vh;
+        overflow: auto;
+    }   
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 5px;
+        cursor: pointer;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #ffffff;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #ef754c;
+        border-radius: 50px;
+    }
+    .main-scrollbar {
+        height: 100vh;
+        overflow: auto;
+    }
+    .main-scrollbar::-webkit-scrollbar {
+        width: 7px;
+        cursor: pointer;
+    }
+    .main-scrollbar::-webkit-scrollbar-track {
+        background: #ffffff;
+    }
+    .main-scrollbar::-webkit-scrollbar-thumb {
+        background: #ef754c;
+        border-radius: 50px;
     }
 }

@@ -1,5 +1,5 @@
-import Brands from "../shared/Brands";
-import Pricing from "../shared/Pricing";
+import Brands from "../shared/pieces/Brands";
+import Pricing from "../shared/pieces/Pricing";
 import Hero from "../shared/Hero";
 import Card from "../shared/Card";
 import Testimonials from "../shared/Testimonials";

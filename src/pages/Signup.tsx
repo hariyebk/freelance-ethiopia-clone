@@ -2,8 +2,8 @@ import { useReducer} from "react";
 import { FiUserCheck } from "react-icons/fi";
 import { FiUserPlus } from "react-icons/fi";
 import { bottomNavRoute, userTypes } from "../constants";
-import Goback from "../shared/Goback";
-import BottomNav from "../shared/BottomNav";
+import Goback from "../shared/pieces/Goback";
+import BottomNav from "../shared/pieces/BottomNav";
 interface STATEPROPS {
     newUser: boolean,
     telegramUser: boolean
