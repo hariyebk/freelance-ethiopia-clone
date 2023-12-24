@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom"
 import { HiBars4 } from "react-icons/hi2";
 import { navlinks } from "../constants";
+import { useApi } from "../context/Provider";
 
 
 export default function NavBar() {
+    const {setOpenNav} = useApi()
     return (
         <div>
             <div className="ml-8 mt-5 flex justify-between items-center">
                 <div className="flex justify-between items-center">
-                    <button className="sm:hidden mr-2 h-16">
+                    <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
                         <HiBars4 />
                     </button>
                     <Link to="/">

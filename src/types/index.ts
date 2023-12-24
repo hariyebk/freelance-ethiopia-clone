@@ -2,6 +2,8 @@ import React from "react";
 
 
 export type IcontextType = {
-    open: boolean,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    openFilter: boolean,
+    openNav: boolean
+    setOpenFilter: React.Dispatch<React.SetStateAction<boolean>>,
+    setOpenNav:React.Dispatch<React.SetStateAction<boolean>>
 }

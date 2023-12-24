@@ -1,11 +1,11 @@
 import { IoSearchOutline } from "react-icons/io5";
 import PostCard from "../shared/pieces/PostCard";
 import { CiFilter } from "react-icons/ci";
-import { useFilterContext } from "../context/Provider";
+import { useApi } from "../context/Provider";
 import FilterOptions from "../shared/pieces/FilterOptions";
 
 export default function Job() {
-    const {setOpen} = useFilterContext()
+    const {setOpenFilter} = useApi()
     return (
         <section className="w-full min-h-screen">
             <div className="flex gap-8 max-lg:mx-5 ml-44">
@@ -20,7 +20,7 @@ export default function Job() {
                         </div>
                         <div className="flex items-center justify-between mt-10 ml-5 pr-4">
                             <h1 className="text-2xl text-darkblue font-palanquin font-medium "> Jobs You Might Like </h1>
-                            <button className="lg:hidden focus:outline-none mt-2" onClick={() => setOpen(true)}>
+                            <button className="lg:hidden focus:outline-none mt-2" onClick={() => setOpenFilter(true)}>
                                 <CiFilter style = {{fontSize: "40px", color: "#ef754c"}} />
                             </button>
                         </div>

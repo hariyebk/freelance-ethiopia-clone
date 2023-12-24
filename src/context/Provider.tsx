@@ -3,16 +3,21 @@ import { IcontextType } from "../types"
 
 
 const initial_state = {
-    open: false,
-    setOpen: () => {}
+    openFilter: false,
+    setOpenFilter: () => {},
+    openNav: false,
+    setOpenNav: () => {}
 }
 const FilterConext = createContext<IcontextType>(initial_state)
 export default function Provider({children}: {children: React.ReactNode}) {
-    const [open, setOpen] = useState(false)
+    const [openFilter, setOpenFilter] = useState(false)
+    const [openNav, setOpenNav] = useState(false)
     return (
         <FilterConext.Provider value={{
-            open,
-            setOpen
+            openFilter,
+            openNav,
+            setOpenFilter,
+            setOpenNav
         }}>
             {children}
         </FilterConext.Provider>
@@ -20,7 +25,7 @@ export default function Provider({children}: {children: React.ReactNode}) {
 }
 
 
-export function useFilterContext(){
+export function useApi(){
     const context = useContext(FilterConext)
     if(!context) throw new Error("context is used out of it's provider")
     return context
