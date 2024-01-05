@@ -4,6 +4,8 @@ import {About, Job, Faq, Help, Login, Signup, } from "./pages"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import Register from "./pages/Register"
+import Profile from "./pages/Profile"
+import ProfileSetUp from "./pages/ProfileSetUp"
 export default function App() {
   return (
       <BrowserRouter>
@@ -19,6 +21,9 @@ export default function App() {
               <Route path="/login" element = {<Login />} />
               <Route path="/onboard" element = {<Signup />} />
               <Route path="/register" element = {<Register />} />
+              {/* TODO: USER MUST BE AUTHENTICATED */}
+              <Route path="/profile-type" element = {<Profile />} />
+              <Route path="/profile-type/new" element = {<ProfileSetUp />} />
           </Route>
           <Route path="/*" element = {<NotFound />} />
         </Routes>

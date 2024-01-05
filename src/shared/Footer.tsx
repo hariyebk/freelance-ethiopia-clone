@@ -9,7 +9,7 @@ export default function Footer() {
             <div className="flex justify-between items-center">
                 <div className="my-20 max-lg:ml-12 ml-20 flex max-lg:flex-col justify-between items-center gap-10">
                     <div className="flex flex-1 max-lg:flex-row max-lg:gap-10 flex-col">
-                        <img src="./Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />
+                        <img src="/Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />
                         <p className="mt-5 font-montserrat text-slate-200 max-lg:text-sm max-lg:w-[200px] text-base font-normal  max-w-[400px]"> Powerful Freelance Marketplace System with ability to change the Users (Freelancers & Clients)</p>
                     </div>
                     <div className="flex justify-between items-center max-lg:max-w-[450px] w-[500px] gap-2">

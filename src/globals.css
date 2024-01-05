@@ -119,3 +119,12 @@
         border-radius: 50px;
     }
 }
+
+@layer utilities {
+    .account_card {
+        @apply max-lg:mt-6 mt-2 px-4 bg-white shadow-md rounded-md flex items-center justify-between gap-5 py-3
+    }
+    .account_card_label {
+        @apply max-lg:text-base text-xl text-stone-700 font-palanquin font-medium
+    }
+}
