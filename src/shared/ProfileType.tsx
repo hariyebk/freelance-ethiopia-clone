@@ -12,7 +12,7 @@ export default function ProfileType({children, title, description}: ProfileTypeP
             </span>
             <div className="max-lg:mx-7 max-lg:w-full lg:w-[380px] flex flex-col max-lg:items-center items-start max-lg:-mt-20  mt-24 lg:ml-36 font-palanquin">
                 <h3 className="max-lg:text-2xl text-2xl font-normal"> {title} </h3>
-                <p className="mt-7 max-lg:px-5 max-lg:leading-6 text-fade max-lg:text-sm max-lg:text-center text-base"> {description} </p>
+                <p className="mt-7 max-lg:px-5 max-lg:leading-5] text-fade max-lg:text-sm max-lg:text-center text-base"> {description} </p>
                 {children}
             </div>
         </div>

@@ -10,7 +10,7 @@ export default function AcccountCard({name, role}: AccountCardProps) {
     const [selected, setSelected] = useState(false)
     return (
         <div className="flex flex-col items-center justify-center">
-        <div className="max-lg:w-[400px] w-full h-[100px] max-lg:mt-6 mt-3 bg-white shadow-md rounded-md flex items-center justify-between gap-5 px-4 py-7">
+        <div className="max-lg:w-[400px] w-[390px] h-[100px] max-lg:mt-6 mt-3 bg-white shadow-md rounded-md flex items-center justify-between gap-5 px-4 py-7">
             <div className="flex items-center justify-between space-x-9">
                 <img src="./Images/userAvatar.png" alt="profile-image" width={40} height={40} className="rounded-full object-contain mt-2" />
                 <div className="pt-7 flex flex-col items-start gap-3">

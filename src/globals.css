@@ -127,4 +127,10 @@
     .account_card_label {
         @apply max-lg:text-base text-xl text-stone-700 font-palanquin font-medium
     }
+    .profile_container {
+        @apply w-full mt-5 pl-10 flex flex-col items-start
+    }
+    .tiny_line {
+        @apply w-full mt-7 px-2 border border-gray-300
+    }
 }

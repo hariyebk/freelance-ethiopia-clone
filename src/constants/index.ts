@@ -334,4 +334,14 @@ export const AccountTypes = [
         actionType: "Ustartup"
     }
 ]
-
+export const skills = [
+    "React",
+    "Typescript",
+    "Javascript",
+    "Nextjs",
+    "Express",
+    "Dart",
+    "Flutter",
+    "Postgressql",
+    "Mongodb"
+]

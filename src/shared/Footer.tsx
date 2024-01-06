@@ -5,8 +5,8 @@ import { IoLocationOutline } from "react-icons/io5";
 
 export default function Footer() {
     return (
-        <section className="bg-stone-700 max-container">
-            <div className="flex justify-between items-center">
+        <section className="bg-stone-700 relative">
+            <div className="flex justify-between items-center inset-x-0 bottom-0">
                 <div className="my-20 max-lg:ml-12 ml-20 flex max-lg:flex-col justify-between items-center gap-10">
                     <div className="flex flex-1 max-lg:flex-row max-lg:gap-10 flex-col">
                         <img src="/Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />

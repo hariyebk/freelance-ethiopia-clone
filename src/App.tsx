@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import ProfileSetUp from "./pages/ProfileSetUp"
+import ProfilePage from "./pages/ProfilePage"
 export default function App() {
   return (
       <BrowserRouter>
@@ -24,6 +25,7 @@ export default function App() {
               {/* TODO: USER MUST BE AUTHENTICATED */}
               <Route path="/profile-type" element = {<Profile />} />
               <Route path="/profile-type/new" element = {<ProfileSetUp />} />
+              <Route path="/profile/:id" element = {<ProfilePage />} />
           </Route>
           <Route path="/*" element = {<NotFound />} />
         </Routes>

@@ -10,7 +10,7 @@ import SidebarNav from "./pieces/SidebarNav";
 export default function AppLayout() {
     const {openFilter, openNav} = useApi()
     return (
-        <div className="overflow-scroll max-xl:overflow-x-hidden main-scrollbar">
+        <div className="overflow-scroll overflow-x-hidden main-scrollbar">
             <NavBar />  
             <Outlet />
             <Footer />
