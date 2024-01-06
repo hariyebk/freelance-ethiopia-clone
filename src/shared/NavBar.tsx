@@ -8,7 +8,7 @@ export default function NavBar() {
     const {setOpenNav} = useApi()
     return (
         <div>
-            <div className="ml-8 mt-5 flex justify-between items-center">
+            <div className="ml-8 mt-8 flex justify-between items-center">
                 <div className="flex justify-between items-center">
                     <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
                         <HiBars4 />

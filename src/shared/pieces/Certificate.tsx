@@ -16,9 +16,9 @@ export default function Certificate({title, issuedBy, startDate, expireDate, rou
                 <span className="mx-2"> By </span>
                 <p> {issuedBy} </p>
             </div>
-            <div className="mt-3 flex items-center gap-3 text-sm font-semibold">
+            <div className="mt-3 flex items-center text-sm font-semibold">
                 <span> From: {startDate}</span>
-                <span> - </span>
+                <span className="mx-2"> - </span>
                 <span> To: {expireDate} </span>
             </div>
         </Link>

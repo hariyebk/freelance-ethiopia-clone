@@ -1,5 +1,5 @@
 
-import { useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 import Bio from "../shared/Profile/Bio"
 import Certifications from "../shared/Profile/Certifications"
 import Languages from "../shared/Profile/Languages"
@@ -10,7 +10,7 @@ import UserDetail from "../shared/Profile/UserDetail"
 import WorkExperience from "../shared/Profile/WorkExperience"
 
 export default function ProfilePage() {
-    const params = useParams()
+    // const params = useParams()
     
     return (
         <section className="w-full min-h-screen">
