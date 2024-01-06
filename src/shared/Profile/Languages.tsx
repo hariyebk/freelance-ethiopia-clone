@@ -1,6 +1,7 @@
-
+import { useApi } from "../../context/Provider"
 
 export default function Languages() {
+    const {setEditLanguages} = useApi()
     return (
         <div className="mt-5 w-[260px] flex items-start gap-4 rounded-xl shadow-lg border border-gray-300 py-5 pl-5">
             <div className="flex flex-wrap flex-col gap-3 w-36">
@@ -18,7 +19,7 @@ export default function Languages() {
                     <p className="text-gray-500"> Beginner </p>
                 </div>
             </div>
-            <button className="text-sm text-red-500 font-palanquin font-semibold"> Edit </button>
+            <button className="text-sm text-red-500 font-palanquin font-semibold" onClick={() => setEditLanguages(true)}> Edit </button>
         </div>
     )
 }

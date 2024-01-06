@@ -7,22 +7,27 @@ const initial_state = {
     setOpenFilter: () => {},
     openNav: false,
     setOpenNav: () => {},
-    editProfile: false,
-    setEditProfile: () => {}
+    editPortfolioLinks: false,
+    setEditPortfolioLinks: () => {},
+    editLanguages: false,
+    setEditLanguages: () => {}
 }
 const FilterConext = createContext<IcontextType>(initial_state)
 export default function Provider({children}: {children: React.ReactNode}) {
     const [openFilter, setOpenFilter] = useState(false)
     const [openNav, setOpenNav] = useState(false)
-    const [editProfile, setEditProfile] = useState(false)
+    const [editPortfolioLinks, setEditPortfolioLinks] = useState(false)
+    const [editLanguages, setEditLanguages] = useState(false)
     return (
         <FilterConext.Provider value={{
             openFilter,
             openNav,
             setOpenFilter,
             setOpenNav,
-            editProfile,
-            setEditProfile
+            editPortfolioLinks,
+            setEditPortfolioLinks,
+            editLanguages,
+            setEditLanguages
         }}>
             {children}
         </FilterConext.Provider>

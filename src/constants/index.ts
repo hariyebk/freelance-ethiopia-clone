@@ -345,3 +345,23 @@ export const skills = [
     "Postgressql",
     "Mongodb"
 ]
+export const Languages = [
+    {
+        language: "Amharic",
+        level: "Native"
+    },
+    {
+        language: "English",
+        level: "Professional"
+    },
+    {
+        language: "Spanish",
+        level: "Beginner"
+    }
+]
+export const Language_levels = [
+    "Native",
+    "Professional",
+    "Intermidate",
+    "Beginner"
+]

@@ -5,10 +5,12 @@ import { useApi } from "../context/Provider";
 import SideFilter from "./pieces/SideFilter";
 import SidebarNav from "./pieces/SidebarNav";
 import SidebarEditProfile from "./pieces/SidebarEditProfile";
+import EditPortfolioLinks from "./pieces/EditPortfolioLinks";
+import EditLanguages from "./pieces/EditLanguages";
 
 
 export default function AppLayout() {
-    const {openFilter, openNav, editProfile} = useApi()
+    const {openFilter, openNav, editPortfolioLinks, setEditPortfolioLinks, editLanguages, setEditLanguages} = useApi()
     return (
         <div className="overflow-scroll overflow-x-hidden main-scrollbar">
             <NavBar />  
@@ -16,7 +18,16 @@ export default function AppLayout() {
             <Footer />
             {openFilter && <SideFilter />}
             {openNav && <SidebarNav />}
-            {editProfile && <SidebarEditProfile />}
+            {editPortfolioLinks && (
+                <SidebarEditProfile close={setEditPortfolioLinks} title="Update your Portfolio Links">
+                    <EditPortfolioLinks />
+                </SidebarEditProfile>
+            )}
+            {editLanguages && (
+                <SidebarEditProfile close={setEditLanguages} title="Update Languages">
+                    <EditLanguages />
+                </SidebarEditProfile>
+            )}
         </div>
     )
 }
