@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { signupValidation } from "../../lib/validation"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../components/ui/form"
-// import { useNavigate } from "react-router-dom"
 import { IoLocationOutline } from "react-icons/io5"
 import { CiMail, CiUser } from "react-icons/ci"
 import { FiUsers } from "react-icons/fi"
@@ -27,7 +26,6 @@ interface UserFormProps {
 }
 
 export default function UserForm({user, newUser, FormHeader, FormButtons} : UserFormProps) {
-    // const navigate = useNavigate()
 
     const form = useForm<z.infer<typeof  signupValidation>>({
         resolver: zodResolver(signupValidation),
@@ -48,10 +46,10 @@ export default function UserForm({user, newUser, FormHeader, FormButtons} : User
             
     }
     return (
-        <section className="w-full min-h-screen flex items-start justify-center mt-10 mb-20">
+        <section className="w-full min-h-screen flex items-start justify-center max-lg:3 mt-10 mb-20">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-3">
-                    <div className="flex justify-center">
+                    <div className="w-full flex items-start">
                         {FormHeader}
                     </div>
                     <main className="mt-4">
