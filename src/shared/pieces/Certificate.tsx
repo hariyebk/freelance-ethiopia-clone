@@ -11,7 +11,7 @@ interface CertificateProps {
 export default function Certificate({title, issuedBy, startDate, expireDate, routeTo}: CertificateProps) {
     return (
         <Link to={routeTo} className="mt-5 flex flex-col">
-            <div className="flex items-center justify-between text-base text-stone-600 font-palanquin font-semibold">
+            <div className="flex flex-wrap items-center justify-between max-lg:text-sm text-base text-stone-600 font-palanquin font-semibold">
                 <h2> {title} </h2>
                 <span className="mx-2"> By </span>
                 <p> {issuedBy} </p>

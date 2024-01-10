@@ -14,8 +14,8 @@ export default function ProfilePage() {
     
     return (
         <section className="w-full min-h-screen">
-            <div className="flex gap-20 mt-20 mx-40">
-                <div className="w-[85%] h-full mb-48 shadow-lg">
+            <div className="flex gap-20 mt-20 max-lg:mx-5 mx-40">
+                <div className="max-lg:w-full w-[85%] h-full mb-48 shadow-lg">
                     <div className="flex flex-col items-start">
                         <div className="w-full h-[150px] rounded-t-2xl bg-gradient-to-r from-primary to-secondary" />
                         <UserDetail />
@@ -29,9 +29,13 @@ export default function ProfilePage() {
                         <WorkExperience />
                         <hr className="tiny_line" />
                         <Certifications />
+                        <div className="hidden max-lg:block w-full">
+                            <PortfolioLinks />
+                            <Languages />
+                        </div>
                     </div>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="hidden lg:flex flex-col items-center">
                     <PortfolioLinks />
                     <Languages />
                 </div>

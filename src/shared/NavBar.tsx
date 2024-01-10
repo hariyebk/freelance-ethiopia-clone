@@ -11,7 +11,7 @@ export default function NavBar() {
             <div className="ml-8 mt-8 flex justify-between items-center">
                 <div className="flex justify-between items-center">
                     <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
-                        <HiBars4 />
+                        <HiBars4 style = {{fontSize: "30px", color: "#e94969"}} />
                     </button>
                     <Link to="/">
                         <img src="/Images/logo.png" alt="logo" className="h-10 w-32 object-contain" />
