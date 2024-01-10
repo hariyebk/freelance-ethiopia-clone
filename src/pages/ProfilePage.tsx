@@ -1,7 +1,6 @@
-
-// import { useParams } from "react-router-dom"
 import Bio from "../shared/Profile/Bio"
 import Certifications from "../shared/Profile/Certifications"
+import Education from "../shared/Profile/Education"
 import Languages from "../shared/Profile/Languages"
 import MainServices from "../shared/Profile/MainServices"
 import PortfolioLinks from "../shared/Profile/PortfolioLinks"
@@ -28,9 +27,13 @@ export default function ProfilePage() {
                         <hr className="tiny_line" />
                         <WorkExperience />
                         <hr className="tiny_line" />
+                        <Education />
+                        <hr className="tiny_line" />
                         <Certifications />
+                        <hr className="tiny_line" />
                         <div className="hidden max-lg:block w-full">
                             <PortfolioLinks />
+                            <hr className="tiny_line" />
                             <Languages />
                         </div>
                     </div>

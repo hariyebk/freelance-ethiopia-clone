@@ -1,10 +1,12 @@
+import { useLocation } from "react-router-dom"
 import { skills } from "../../constants"
 import TitleAndEdit from "../pieces/TitleAndEdit"
 
 export default function Skills() {
+    const {pathname} = useLocation()
     return (
         <section className="profile_container">
-            <TitleAndEdit title="Skills" routeTo="/edit-skills" />
+            <TitleAndEdit title="Skills" routeTo= {`${pathname}/edit-skills`} />
             <div className="w-full flex flex-wrap items-start gap-2 mt-5 pr-2">
                 {
                     skills.map((skill) => {

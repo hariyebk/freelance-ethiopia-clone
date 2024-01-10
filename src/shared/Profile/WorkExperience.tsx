@@ -1,10 +1,12 @@
+import { useLocation } from "react-router-dom"
 import TitleAndEdit from "../pieces/TitleAndEdit"
 import Experience from "./Experience"
 
 export default function WorkExperience() {
+    const {pathname} = useLocation()
     return (
         <section className="profile_container">
-            <TitleAndEdit title="Work Experience" routeTo="/" />
+            <TitleAndEdit title="Work Experience" routeTo= {`${pathname}/edit-workExperiences`} />
             {/* Experience */}
             <Experience
             position="Front-end Developer"

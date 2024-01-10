@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 
 interface CertificateProps {
-    title: string,
+    label: string,
     issuedBy: string,
     startDate: string,
     expireDate: string,
     routeTo: string
 }
 
-export default function Certificate({title, issuedBy, startDate, expireDate, routeTo}: CertificateProps) {
+export default function Certificate({label, issuedBy, startDate, expireDate, routeTo}: CertificateProps) {
     return (
         <Link to={routeTo} className="mt-5 flex flex-col">
-            <div className="flex flex-wrap items-center justify-between max-lg:text-sm text-base text-stone-600 font-palanquin font-semibold">
-                <h2> {title} </h2>
+            <div className="flex flex-wrap items-center max-lg:text-sm">
+                <Link to={routeTo} target="_blank" rel="noopener"> <p className="truncate ... hover:text-primary max-lg:text-sm text-stone-600 font-palanquin font-semibold"> {label} </p> </Link>
                 <span className="mx-2"> By </span>
-                <p> {issuedBy} </p>
+                <p className="max-lg:text-sm text-stone-600 font-palanquin font-semibold"> {issuedBy} </p>
             </div>
             <div className="mt-3 flex items-center text-sm font-semibold">
                 <span> From: {startDate}</span>
