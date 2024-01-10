@@ -15,4 +15,3 @@ export const signupValidation = z.object({
     country: z.string(),
     city: z.string()
 })
-
