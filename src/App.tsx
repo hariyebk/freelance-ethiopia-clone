@@ -7,6 +7,8 @@ import Register from "./pages/Register"
 import Profile from "./pages/Profile"
 import ProfileSetUp from "./pages/ProfileSetUp"
 import ProfilePage from "./pages/ProfilePage"
+import EditUserDetails from "./shared/Profile/EditPages/EditUserDetails"
+
 export default function App() {
   return (
       <BrowserRouter>
@@ -26,6 +28,7 @@ export default function App() {
               <Route path="/profile-type" element = {<Profile />} />
               <Route path="/profile-type/new" element = {<ProfileSetUp />} />
               <Route path="/profile/:id" element = {<ProfilePage />} />
+              <Route path= "/profile/:id/edit-userDetails" element = {<EditUserDetails />}/> 
           </Route>
           <Route path="/*" element = {<NotFound />} />
         </Routes>

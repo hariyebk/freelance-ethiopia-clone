@@ -130,6 +130,9 @@
     .profile_container {
         @apply w-full mt-5 pl-10 flex flex-col items-start
     }
+    /* .common-container {
+        @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
+    } */
     .tiny_line {
         @apply w-full mt-7 px-2 border border-gray-300
     }
