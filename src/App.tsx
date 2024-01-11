@@ -8,6 +8,8 @@ import Profile from "./pages/Profile"
 import ProfileSetUp from "./pages/ProfileSetUp"
 import ProfilePage from "./pages/ProfilePage"
 import EditUserDetails from "./shared/Profile/EditPages/EditUserDetails"
+import EditSkills from "./shared/Profile/EditPages/EditSkills"
+import EditBio from "./shared/Profile/EditPages/EditBio"
 
 export default function App() {
   return (
@@ -29,6 +31,8 @@ export default function App() {
               <Route path="/profile-type/new" element = {<ProfileSetUp />} />
               <Route path="/profile/:id" element = {<ProfilePage />} />
               <Route path= "/profile/:id/edit-userDetails" element = {<EditUserDetails />}/> 
+              <Route path= "/profile/:id/edit-skills" element = {<EditSkills />}/> 
+              <Route path= "/profile/:id/edit-bio" element = {<EditBio />}/> 
           </Route>
           <Route path="/*" element = {<NotFound />} />
         </Routes>

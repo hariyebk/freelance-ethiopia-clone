@@ -12,7 +12,7 @@ interface NavProps {
 export default function BottomNav({route, newUser, telegramUser, place}: NavProps) {
     const navigate = useNavigate()
     return (
-        <div className="flex max-lg:gap-5 max-lg:mb-20 justify-between items-center mx-20 max-lg:mt-14 mt-28">
+        <div className="flex max-lg:gap-5 max-lg:mb-20 justify-between items-center cursor-pointer mx-20 max-lg:mt-14 mt-28">
             <div className="max-lg:hidden">
                 <Goback />
             </div>

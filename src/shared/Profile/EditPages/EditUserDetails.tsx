@@ -1,15 +1,12 @@
-import { FaLongArrowAltLeft } from "react-icons/fa";
 import UserDetailsForm from "../../Forms/UserForm";
 import FormHeader from "../../pieces/FormHeader";
-import { useNavigate } from "react-router-dom";
+import Goback from "../../pieces/Goback";
 
 export default function EditUserDetails() {
-    const navigate = useNavigate()
     return (
         <section className="w-full min-h-screen">
-            <div className="hidden max-lg:flex ml-10 mt-10 items-center gap-3 cursor-pointer hover:text-primary" onClick={() => navigate(-1)}>
-                <FaLongArrowAltLeft style = {{fontSize: "20px"}} />
-                <p className="text-primary font-palanquin font-semibold"> Go back </p>
+            <div className="lg:hidden max-lg:flex ml-10 mt-10 items-center gap-3 cursor-pointer hover:text-primary">
+                <Goback />
             </div>
             <div className="mx-48 flex flex-col flex-1 items-start">
                 <UserDetailsForm newUser={false} FormHeader={

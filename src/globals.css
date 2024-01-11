@@ -108,7 +108,8 @@
         overflow: auto;
     }
     .main-scrollbar::-webkit-scrollbar {
-        width: 7px;
+        height: 10vh;
+        width: 8px;
         cursor: pointer;
     }
     .main-scrollbar::-webkit-scrollbar-track {

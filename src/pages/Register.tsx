@@ -1,15 +1,12 @@
-import { FaLongArrowAltLeft } from "react-icons/fa";
 import UserForm from "../shared/Forms/UserForm";
 import FormHeader from "../shared/pieces/FormHeader";
-import { useNavigate } from "react-router-dom";
+import Goback from "../shared/pieces/Goback";
 
 export default function Register() {
-    const navigate = useNavigate()
     return (
         <section className="lg:mt-10">
-            <div className="hidden max-lg:flex ml-10 mt-10 items-center gap-3 cursor-pointer hover:text-primary" onClick={() => navigate(-1)}>
-                <FaLongArrowAltLeft style = {{fontSize: "20px"}} />
-                <p className="text-primary font-palanquin font-semibold"> Go back </p>
+            <div className="lg:hidden max-lg:flex ml-10 mt-10 items-center gap-3 cursor-pointer hover:text-primary">
+                <Goback />
             </div>
             <UserForm newUser={true} FormHeader={
                 <FormHeader imageAddress="/Icons/edit-profile.png" title="Create Your Account" />
