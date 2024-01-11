@@ -28,7 +28,7 @@ export default function EditSkills() {
                             <h2 className="text-xl text-stone-600 font-palanquin font-semibold"> Skills </h2>
                         </div>
                         <div className="ml-8 cursor-pointer hover:text-primary">
-                            <button onClick={handleOpen}>
+                            <button onClick={handleOpen} className="focus:outline-none">
                                 <IoAddSharp style = {{fontSize: "30px"}} />
                             </button>
                             {/* MODAL */}
