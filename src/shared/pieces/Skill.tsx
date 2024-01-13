@@ -1,14 +1,17 @@
-
+import { IoClose } from "react-icons/io5";
 interface SkillProps {
     skill: string,
-    type?: string
 }
 export default function Skill({skill}: SkillProps) {
     return (
-        <section className=" max-lg:mt-5 mt-10 lg:mx-20 rounded-xl bg-gray-100 border border-gray-100 shadow-lg px-7 py-3">
-            <form className="flex items-center">
-                <input defaultValue={skill} className="w-[500px] bg-gray-100 outline-none focus:outline-none text-left text-base text-stone-800 font-palanquin font-semibold px-7" />
-            </form>
+        <section className="gap-3 bg-stone-800 text-sm text-white px-5 py-2 rounded-full mr-3 my-3">
+            <div className="flex items-center gap-3 justify-between">
+                <p> {skill} </p>
+                {/* TODO: OnClick delete the skill */}
+                <button className="hover:text-primary">
+                    <IoClose />
+                </button>
+            </div>
         </section>
     )
 }

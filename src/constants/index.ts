@@ -365,3 +365,18 @@ export const Language_levels = [
     "Intermidate",
     "Beginner"
 ]
+export const mainservices = [
+    {
+        sector: "Software Design and Development",
+        role: "Full stack Web Developer"
+    },
+    {
+        sector: "Software Design and Development",
+        role: "Graphic design"
+    },
+
+    {
+        sector: "Sales and Marketing",
+        role: "Sales"
+    }
+]

@@ -12,7 +12,7 @@ export default function ProfilePage() {
     // const params = useParams()
     
     return (
-        <section className="w-full min-h-screen">
+        <section className="w-full">
             <div className="flex gap-20 mt-20 max-lg:mx-5 mx-40">
                 <div className="max-lg:w-full w-[85%] h-full mb-48 shadow-lg">
                     <div className="flex flex-col items-start">
