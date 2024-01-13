@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import LayoutForSkillsAndMainServices from "./LayoutForSkillsAndMainServices";
+import Layout from "./Layout";
 import MainComponentForMainServices from "./components/MainComponentForMainServices";
 import ModalForMainServices from "./components/ModalForMainServices";
 
@@ -9,7 +9,7 @@ export default function EditMainServices() {
     }, [])
     return (
         <section className="w-full">
-            <LayoutForSkillsAndMainServices title="Main Services" ModalComponent = {
+            <Layout title="Main Services" ModalComponent = {
                 <div className="h-[450px]">
                     <ModalForMainServices />
                 </div>

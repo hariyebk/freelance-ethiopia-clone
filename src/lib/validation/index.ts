@@ -15,3 +15,12 @@ export const signupValidation = z.object({
     country: z.string(),
     city: z.string()
 })
+export const WorkExperienceValidation = z.object({
+    position: z.string().min(2, {message: "Title is too short"}).max(20, {message: "Title is too long"}),
+    company: z.string().min(3, {message: "company name is too short"}).max(20, {message: "Company name is too long"}),
+    city: z.string().min(3, {message: "city name is too short"}).max(20, {message: "City name is too long"}).optional(),
+    country: z.string().min(3, {message: "country name is too short"}).max(20, {message: "Country name is too long"}),
+    startDate: z.string(),
+    finishDate: z.string(),
+    contribution: z.string()
+})

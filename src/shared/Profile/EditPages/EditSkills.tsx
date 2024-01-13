@@ -1,13 +1,13 @@
 import { skills } from "../../../constants";
 import Skill from "../../pieces/Skill";
-import LayoutForSkillsAndMainServices from "./LayoutForSkillsAndMainServices";
+import Layout from "./Layout";
 import ModalForSkill from "./components/ModalForSkill";
 
 
 export default function EditSkills() {
     return (
         <section className="w-full">
-            <LayoutForSkillsAndMainServices title="Skills" ModalComponent = {
+            <Layout title="Skills" ModalComponent = {
                 <ModalForSkill />
             } MainComponent = {
                 <div className="flex flex-col">

@@ -8,10 +8,10 @@ import PopOver from "../../PopOver"
 interface Props {
     title: string,
     MainComponent: React.ReactNode,
-    ModalComponent: React.ReactNode
+    ModalComponent?: React.ReactNode
 }
 
-export default function LayoutForSkillsAndMainServices({title, MainComponent, ModalComponent}: Props) {
+export default function Layout({title, MainComponent, ModalComponent}: Props) {
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)

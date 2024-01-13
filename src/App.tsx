@@ -11,6 +11,7 @@ import EditUserDetails from "./shared/Profile/EditPages/EditUserDetails"
 import EditSkills from "./shared/Profile/EditPages/EditSkills"
 import EditBio from "./shared/Profile/EditPages/EditBio"
 import EditMainServices from "./shared/Profile/EditPages/EditMainServices"
+import EditWorkExperiences from "./shared/Profile/EditPages/EditWorkExperiences"
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
               <Route path= "/profile/:id/edit-skills" element = {<EditSkills />}/> 
               <Route path= "/profile/:id/edit-bio" element = {<EditBio />}/> 
               <Route path= "/profile/:id/edit-mainServices" element = {<EditMainServices />}/> 
+              <Route path= "/profile/:id/edit-workExperiences" element = {<EditWorkExperiences />}/> 
           </Route>
           <Route path="/*" element = {<NotFound />} />
         </Routes>

@@ -217,6 +217,5 @@ export default function UserForm({user, newUser, FormHeader, FormButtons} : User
                 </form>
             </Form>
         </section>
-        
     )
 }

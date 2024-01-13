@@ -1,8 +1,17 @@
+import Layout from "./Layout";
+import MainComponentForWork from "./components/MainComponentForWork";
+import ModalForWork from "./components/ModalForWork";
 
 export default function EditWorkExperiences() {
     return (
-        <section className="">
-
+        <section className="w-full">
+            <Layout title="Work Experiences" MainComponent = {
+                <MainComponentForWork />
+            } ModalComponent = {
+                <div className="h-[350px] overflow-scroll overflow-x-hidden custom-scrollbar">
+                    <ModalForWork />
+                </div>
+            } />
         </section>
     )
 }

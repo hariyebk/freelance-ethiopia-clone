@@ -11,9 +11,7 @@ export default function WorkExperience() {
             <Experience
             position="Front-end Developer"
             company="The wild Oasis"
-            location={{
-                country: "Remote"
-            }}
+            country= "Remote"
             startDate="June-2023"
             finishedDate="Augest-2023"
             contribution="As the Front-end developer, I took charge of the conceptualizing and development process, bringing the application to life and ensuring it met the hotel's requirements."
@@ -22,9 +20,7 @@ export default function WorkExperience() {
             <Experience
             position="Backend Developer"
             company="Natours"
-            location={{
-                country: "Remote"
-            }}
+            country= "Remote"
             startDate="March-2023"
             finishedDate="June-2023"
             contribution="I focused on building public and protected RESTful API endpoints using Express.js. Leveraging the power of this Nodejs framework"

@@ -134,6 +134,9 @@
     .form_container {
         @apply flex max-lg:flex-col flex-1 items-center justify-between gap-6 mb-5
     }
+    .btn {
+        @apply w-full mt-8 rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-2 text-white text-base
+    }
     /* .common-container {
         @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
     } */
