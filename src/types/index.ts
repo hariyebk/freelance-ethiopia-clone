@@ -1,4 +1,6 @@
 export type IcontextType = {
+    isAuthenticated: boolean,
+    setAuthenticated:  React.Dispatch<React.SetStateAction<boolean>>,
     openFilter: boolean,
     openNav: boolean
     setOpenFilter: React.Dispatch<React.SetStateAction<boolean>>,

@@ -1,18 +1,17 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import { useApi } from "../context/Provider";
 import SideFilter from "./pieces/SideFilter";
 import SidebarNav from "./pieces/SidebarNav";
 import SidebarEditProfile from "./pieces/SidebarEditProfile";
 import EditPortfolioLinks from "./pieces/EditPortfolioLinks";
 import EditLanguages from "./pieces/EditLanguages";
-
+import { useApi } from "../context/Provider";
 
 export default function AppLayout() {
     const {openFilter, openNav, editPortfolioLinks, setEditPortfolioLinks, editLanguages, setEditLanguages} = useApi()
     return (
-        <div className="overflow-scroll overflow-x-hidden main-scrollbar">
+        <section>
             <NavBar />  
             <Outlet />
             <Footer />
@@ -28,6 +27,6 @@ export default function AppLayout() {
                     <EditLanguages />
                 </SidebarEditProfile>
             )}
-        </div>
+        </section>
     )
 }

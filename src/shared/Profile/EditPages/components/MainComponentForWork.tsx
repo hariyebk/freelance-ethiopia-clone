@@ -4,7 +4,7 @@ import Experience from "../../Experience";
 
 export default function MainComponentForWork() {
     return (
-        <section className="mt-10 max-lg:mx-3 mx-16">
+        <section className="max-lg:mt-3 mt-10 max-lg:mx-3 mx-16">
             <div className="flex items-center justify-between gap-5">
                 <Experience
                 position="Front-end Developer"

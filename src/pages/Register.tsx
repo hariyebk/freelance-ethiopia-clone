@@ -4,7 +4,7 @@ import Goback from "../shared/pieces/Goback";
 
 export default function Register() {
     return (
-        <section className="lg:mt-10">
+        <section className="lg:mt-20">
             <div className="lg:hidden max-lg:flex ml-10 mt-10 items-center gap-3 cursor-pointer hover:text-primary">
                 <Goback />
             </div>

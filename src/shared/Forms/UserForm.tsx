@@ -43,7 +43,7 @@ export default function UserForm({user, newUser, FormHeader, FormButtons} : User
             
     }
     return (
-        <section className="w-full min-h-screen flex items-start justify-center max-lg:3 mt-10 mb-20">
+        <section className="w-full flex items-start justify-center max-lg:3 mt-10 mb-32">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-3">
                     <div className="w-full flex items-start">

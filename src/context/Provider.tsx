@@ -3,6 +3,8 @@ import { IcontextType } from "../types"
 
 
 const initial_state = {
+    isAuthenticated: true,
+    setAuthenticated: () => {},
     openFilter: false,
     setOpenFilter: () => {},
     openNav: false,
@@ -18,8 +20,12 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [openNav, setOpenNav] = useState(false)
     const [editPortfolioLinks, setEditPortfolioLinks] = useState(false)
     const [editLanguages, setEditLanguages] = useState(false)
+    const [isAuthenticated, setAuthenticated] = useState(true)
+
     return (
         <FilterConext.Provider value={{
+            isAuthenticated,
+            setAuthenticated,
             openFilter,
             openNav,
             setOpenFilter,

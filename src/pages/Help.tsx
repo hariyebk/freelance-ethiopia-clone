@@ -1,6 +1,8 @@
 
 export default function Help() {
     return (
-        <div>Help</div>
+        <section className="w-full h-full">
+
+        </section>
     )
 }

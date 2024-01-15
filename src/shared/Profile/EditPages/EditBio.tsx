@@ -3,8 +3,8 @@ import Goback from "../../pieces/Goback";
 
 export default function EditBio(){
     return (
-        <section className="w-full mt-20 lg:mx-36 lg:mb-20 mb-28">
-            <div className="max-lg:w-[400px] w-[450px] flex flex-col items-start lg:gap-8 max-lg:mr-5">
+        <section className="w-full mt-20 lg:mb-20 mb-28">
+            <div className="lg:mx-24 max-lg:w-[400px] w-[450px] flex flex-col items-start lg:gap-8 max-lg:mr-5">
                 <div className="max-lg:ml-10 max-lg:mb-6">
                     <Goback />
                 </div>

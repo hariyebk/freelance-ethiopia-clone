@@ -1,4 +1,3 @@
-
 import AcccountCard from "../shared/pieces/AcccountCard";
 import ProfileType from "../shared/ProfileType";
 
