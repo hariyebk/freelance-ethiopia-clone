@@ -10,9 +10,7 @@ export default function EditMainServices() {
     return (
         <section className="w-full">
             <Layout title="Main Services" ModalComponent = {
-                <div className="h-[450px]">
-                    <ModalForMainServices />
-                </div>
+                <ModalForMainServices />
             } MainComponent = {
                 <MainComponentForMainServices />
             } />

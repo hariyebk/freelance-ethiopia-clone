@@ -32,7 +32,9 @@ export default function MainComponentForWork() {
                     <IoClose style = {{fontSize: "20px"}} />
                 </button>
             </div>
-
+            <div className="mt-10">
+                <button className="btn"> Update </button>
+            </div>
         </section>
     )
 }

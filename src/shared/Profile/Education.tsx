@@ -3,7 +3,7 @@ import TitleAndEdit from "../pieces/TitleAndEdit";
 import EducationItem from "../pieces/EducationItem";
 
 export default function Education() {
-    const pathname = useLocation()
+    const {pathname} = useLocation()
     return (
         <section className="profile_container">
             <TitleAndEdit title="Education" routeTo={`${pathname}/edit-education`} />

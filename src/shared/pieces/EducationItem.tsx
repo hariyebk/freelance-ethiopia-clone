@@ -1,5 +1,5 @@
 
-interface EducationProps {
+export interface EducationProps {
     Institute: string,
     EnrolledIn: string,
     FieldOfStudy: string,

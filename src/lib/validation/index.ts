@@ -24,3 +24,20 @@ export const WorkExperienceValidation = z.object({
     finishDate: z.string(),
     contribution: z.string()
 })
+export const EducationValidation = z.object({
+    Institute: z.string().min(2, {message: "University name is too long"}).max(40, {message: "University name is too short"}),
+    EnrolledIn: z.string(),
+    FieldOfStudy: z.string().min(2, {message: "Field of Study is too short"}).max(20, {message: "Field of Study is too long"}),
+    StartDate: z.string(),
+    FinishedDate: z.string()
+})
+export const JobSectorValidation = z.object({
+    sector: z.string(),
+    role: z.string()
+})
+export const skillValidation = z.object({
+    skill: z.string()
+})
+export const certificationValidation = z.object({
+    certification: z.string()
+})

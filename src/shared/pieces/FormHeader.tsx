@@ -8,7 +8,7 @@ interface FormHeaderProps {
 
 export default function FormHeader({title, imageAddress}: FormHeaderProps) {
     return (
-        <div className="w-full flex gap-56 max-lg:mt-10 mb-5">
+        <div className="w-full flex gap-20 max-lg:mt-10 mb-5">
             <div className="hidden lg:flex items-center gap-3 cursor-pointer hover:text-primary">
                 <Goback />
             </div>

@@ -380,3 +380,11 @@ export const mainservices = [
         role: "Sales"
     }
 ]
+export const EducationLevel = [
+    "Bachelor's Degree",
+    "Masters Degree",
+    "PHD",
+    "8th Grade",
+    "High School Diploma",
+    "TVET Diploma",
+]
