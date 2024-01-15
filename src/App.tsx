@@ -1,26 +1,15 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom"
-import {About, Job, Faq, Help, Login, Signup, } from "./pages"
-import Home from "./pages/Home"
-import NotFound from "./pages/NotFound"
-import Register from "./pages/Register"
-import Profile from "./pages/Profile"
-import ProfileSetUp from "./pages/ProfileSetUp"
-import ProfilePage from "./pages/ProfilePage"
-import EditUserDetails from "./shared/Profile/EditPages/EditUserDetails"
-import EditSkills from "./shared/Profile/EditPages/EditSkills"
-import EditBio from "./shared/Profile/EditPages/EditBio"
-import EditMainServices from "./shared/Profile/EditPages/EditMainServices"
-import EditWorkExperiences from "./shared/Profile/EditPages/EditWorkExperiences"
-import EditEducation from "./shared/Profile/EditPages/EditEducation"
-import EditCertifications from "./shared/Profile/EditPages/EditCertifications"
-import Protect from "./shared/Protect"
-import AppLayout from "./shared/AppLayout"
+import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfilePage, ProfileSetUp, Applied } from "./pages"
+import {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout} from "./shared"
+import ShortList from "./pages/ShortList"
+import SavedJobs from "./pages/SavedJobs"
 
 export default function App() {
   return (
       <BrowserRouter>
         <Routes>
           <Route element = {<AppLayout />}>
+                  {/* MENU FOR NON-AUTHENTICATED USERS */}
                   <Route path="/" element = {<Home />} />
                   <Route path="/job" element = {<Job />} />
                   <Route path="/faq" element = {<Faq />} />
@@ -32,7 +21,7 @@ export default function App() {
               <Route element = {
                 <Protect />
               }>
-                  {/* TODO: USER MUST BE AUTHENTICATED */}
+                  {/* USER PROFILE PAGES */}
                   <Route path="/profile-type" element = {<Profile />} />
                   <Route path="/profile-type/new" element = {<ProfileSetUp />} />
                   <Route path="/profile/:id" element = {<ProfilePage />} />
@@ -42,7 +31,11 @@ export default function App() {
                   <Route path= "/profile/:id/edit-mainServices" element = {<EditMainServices />}/> 
                   <Route path= "/profile/:id/edit-workExperiences" element = {<EditWorkExperiences />}/> 
                   <Route path= "/profile/:id/edit-education" element = {<EditEducation />}/> 
-                  <Route path= "/profile/:id/edit-certification" element = {<EditCertifications />}/> 
+                  <Route path= "/profile/:id/edit-certification" element = {<EditCertifications />}/>
+                  {/* MENU FOR AUTHENTICATED USERS */}
+                  <Route path="/applied" element = {<Applied />} />
+                  <Route path="/short-list" element = {<ShortList />} />
+                  <Route path="/saved-jobs" element = {<SavedJobs />} />
               </Route>
           </Route>
           <Route path="/*" element = {<NotFound />} />

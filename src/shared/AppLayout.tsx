@@ -11,7 +11,7 @@ import { useApi } from "../context/Provider";
 export default function AppLayout() {
     const {openFilter, openNav, editPortfolioLinks, setEditPortfolioLinks, editLanguages, setEditLanguages} = useApi()
     return (
-        <section>
+        <section className="max-lg:overflow-x-hidden">
             <NavBar />  
             <Outlet />
             <Footer />

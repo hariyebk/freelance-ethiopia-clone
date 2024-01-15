@@ -16,6 +16,20 @@ export const navlinks = [
         label: "Help",
     }
 ]
+export const AuthenticatedNavLinks = [
+    {
+        path: "/applied",
+        label: "Applied"
+    },
+    {
+        path: "/short-list",
+        label: "Short Listed"
+    },
+    {
+        path: "/saved-jobs",
+        label: "Saved"
+    }
+]
 export const footerLinks = [
     {
         Title: "For Clients",
