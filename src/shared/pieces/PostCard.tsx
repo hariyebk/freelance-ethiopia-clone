@@ -12,7 +12,7 @@ export default function PostCard() {
     return (
         <div className="flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3">
             <div className="flex items-center justify-between w-full">
-                <h2 className="text-darkblue text-xl font-palanquin font-semibold opacity-95"> Accountant </h2>
+                <h2 className="text-darkblue text-xl font-palanquin font-semibold opacity-95 -z-10"> Accountant </h2>
                 <div className="flex items-center gap-3">
                     <button> <IoMdShareAlt style = {{fontSize: "25px", color: "#ef754c"}}/> </button>
                     <button> <CiBookmark style = {{fontSize: "25px", color: "#ef754c"}} /> </button>
@@ -25,7 +25,7 @@ export default function PostCard() {
             </div>
             <div>
                 <JobParts label="Description" content={jobDescription} />
-                {!expand && <div className="pb-7 mt-5 flex items-center hover:text-primary cursor-pointer" onClick={() => setExpand(true)}> 
+                {!expand && <div className="w-fit pb-7 mt-5 flex items-center hover:text-primary cursor-pointer" onClick={() => setExpand(true)}> 
                 <MdKeyboardArrowDown style = {{fontSize: "30px"}} />
                 <p> Read more</p>
                 </div>}

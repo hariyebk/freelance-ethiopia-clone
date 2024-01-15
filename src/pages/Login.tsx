@@ -21,9 +21,9 @@ export default function Login() {
         
     }
     return (
-        <section className="flex w-full min-h-screen items-center justify-center">
+        <section className="flex w-full min-h-screen items-center justify-center mt-16">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-8 -mt-5 p-10 shadow-md">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-8 -mt-5 p-10 shadow-md rounded-md bg-slate-50">
                     <h2 className="font-semibold max-lg:text-2xl text-3xl font-palanquin text-center">  Log in to Afriworks </h2>
                     {/* email */}
                     <FormField

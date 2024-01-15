@@ -37,11 +37,11 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 export default function Signup() {
     const [{newUser, telegramUser}, dispatch] = useReducer(reducer, initial)
     return (
-        <section className="flex flex-col w-full min-h-screen">
+        <section className="flex flex-col w-full max-lg:mt-28 lg:my-24 ">
             <div className="md:hidden ml-10 mt-8">
                 <Goback />
             </div>
-            <div className="mt-20 flex items-start justify-center">
+            <div className="mt-20 flex items-start justify-center gap-16">
                 <img src="/Images/onboard.svg" alt="onboarding-image" className=" max-lg:hidden object-contain w-80 h-auto"/>
                 <div className="flex flex-col ml-10">
                     <h1 className="max-lg:text-xl text-2xl text-slate-800 font-palanquin"> Are you new or our Telegram Bot user? </h1>

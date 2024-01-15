@@ -7,9 +7,9 @@ import { faq } from '../constants';
 
 export default function Faq() {
     return (
-        <div className="min-h-screen flex flex-col mt-24 mb-10 max-lg:mx-5 max-lg:text-justify mx-56">
+        <div className="min-h-screen flex flex-col mt-36 mb-10 max-lg:mx-5 max-lg:text-justify mx-56">
             <h1 className="max-lg:text-4xl text-6xl text-secondary font-palanquin mx-auto"> FAQ's </h1>
-            <div className='mt-10 w-full'>
+            <div className='mt-10 w-full -z-10'>
                 {
                     faq.map((q) => {
                         return (

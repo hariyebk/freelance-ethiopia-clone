@@ -21,10 +21,10 @@ export default function Layout({title, MainComponent, ModalComponent}: Props) {
             <div className="lg:hidden mt-10 mb-14 ml-10">
                 <Goback />
             </div>
-            <div className="max-lg:mt-10 mt-20 mx-auto max-lg:w-[430px] w-[600px] h-auto bg-white border border-gray-100 shadow-md rounded-lg">
+            <div className="max-lg:mt-10 mt-20 mx-auto max-lg:w-[430px] w-[600px] h-auto bg-slate-50 border border-gray-100 shadow-md rounded-lg">
                 <div className="max-lg:mb-10 mb-20 flex flex-col flex-1 items-start max-lg:px-6 px-10 py-8">
                     {/* HEADER */}
-                    <div className="w-full flex items-center justify-between">
+                    <div className="w-full flex items-center justify-between max-lg:px-6">
                         <div className="flex items-center gap-6">
                             <span className="max-lg:hidden bg-gray-200 cursor-pointer hover:text-primary rounded-full flex justify-center items-center w-16 h-16" onClick={() => navigate(-1)}>
                                 <GoArrowLeft style = {{fontSize: "20px"}} />

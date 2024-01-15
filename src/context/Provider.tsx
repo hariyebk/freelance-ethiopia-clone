@@ -20,7 +20,7 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [openNav, setOpenNav] = useState(false)
     const [editPortfolioLinks, setEditPortfolioLinks] = useState(false)
     const [editLanguages, setEditLanguages] = useState(false)
-    const [isAuthenticated, setAuthenticated] = useState(true)
+    const [isAuthenticated, setAuthenticated] = useState(false)
 
     return (
         <FilterConext.Provider value={{

@@ -17,8 +17,8 @@ export default function NavBar() {
         navigate("/login")
     }
     return (
-        <div>
-            <div className="ml-8 mt-8 flex justify-between items-center">
+        <div className="fixed inset-x-0 top-0">
+            <div className=" w-full lg:ml-8 max-lg:pt-5 pt-8 pb-5 max-lg:pl-5  flex justify-between items-center bg-white border-b border-b-slate-50 lg:z-50">
                 <div className="flex justify-between items-center">
                     <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
                         <HiBars4 style = {{fontSize: "30px", color: "#e94969"}} />
@@ -26,7 +26,7 @@ export default function NavBar() {
                     <Link to="/">
                         <img src="/Images/logo.png" alt="logo" className="h-10 w-32 object-contain" />
                     </Link>
-                    <nav className="max-xl:hidden ml-7 bg-white">
+                    <nav className="max-xl:hidden ml-7">
                         <ul className="flex justify-between items-center gap-5">
                             <NavLinkLogic />
                         </ul>
@@ -53,7 +53,7 @@ export default function NavBar() {
                         </div>
                     ):(
                         <div>
-                            <Link to="/login" className="bg-stone-800 mr-3 text-slate-100 text-sm py-2 max-lg:px-5 px-7 rounded-full">
+                            <Link to="/login" className="bg-stone-800 mr-7 text-slate-100 text-sm py-2 max-lg:px-8 px-7 rounded-full">
                                 Login
                             </Link>
                         </div>
@@ -61,7 +61,6 @@ export default function NavBar() {
                     }
                 </div>
             </div>
-            <hr className="mt-4" />
         </div>
     )
 }
