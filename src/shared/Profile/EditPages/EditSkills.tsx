@@ -6,7 +6,7 @@ import ModalForSkill from "./components/ModalForSkill";
 
 export default function EditSkills() {
     return (
-        <section className="w-full">
+        <section className="w-full mt-36">
             <Layout title="Skills" ModalComponent = {
                 <ModalForSkill />
             } MainComponent = {

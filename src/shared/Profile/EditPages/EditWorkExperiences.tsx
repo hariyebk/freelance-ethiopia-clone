@@ -4,7 +4,7 @@ import ModalForWork from "./components/ModalForWork";
 
 export default function EditWorkExperiences() {
     return (
-        <section className="w-full">
+        <section className="w-full mt-36 mb-20">
             <Layout title="Work Experiences" MainComponent = {
                 <MainComponentForWork />
             } ModalComponent = {

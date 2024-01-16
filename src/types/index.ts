@@ -10,3 +10,9 @@ export type IcontextType = {
     editLanguages: boolean,
     setEditLanguages: React.Dispatch<React.SetStateAction<boolean>>
 }
+
+export enum status {
+    pending = "pending",
+    hired = "hired",
+    rejected = "rejected"
+}

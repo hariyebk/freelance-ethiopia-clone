@@ -8,7 +8,7 @@ export default function EditMainServices() {
         window.scrollTo(0, 0)
     }, [])
     return (
-        <section className="w-full">
+        <section className="w-full mt-40 mb-20">
             <Layout title="Main Services" ModalComponent = {
                 <ModalForMainServices />
             } MainComponent = {

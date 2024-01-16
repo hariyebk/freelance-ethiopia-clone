@@ -62,7 +62,7 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 export default function NewProfile(){
     const [{Private, Coorporate, Lstartup, Ustartup}, dispatch] = useReducer(reducer, initial)
     return (
-        <section className="max-lg:w-[300px] w-full h-auto">
+        <section className="max-lg:w-[300px] w-full h-auto -z-10">
             <div className="mt-7">
                 <div className="account_card">
                     <p className="account_card_label"> Private client </p>

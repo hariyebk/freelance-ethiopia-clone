@@ -20,7 +20,7 @@ export default function ModalForSkill() {
     return (
         <section className="">
             <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start mx-5 gap-3">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start lg:mx-5 gap-3">
                 <FormField
                 control={form.control}
                 name="skill"

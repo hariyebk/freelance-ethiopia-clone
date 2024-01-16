@@ -21,13 +21,13 @@ export const AuthenticatedNavLinks = [
         path: "/applied",
         label: "Applied"
     },
-    {
-        path: "/short-list",
-        label: "Short Listed"
-    },
+    // {
+    //     path: "/short-list",
+    //     label: "Short Listed"
+    // },
     {
         path: "/saved-jobs",
-        label: "Saved"
+        label: "Saved Jobs"
     }
 ]
 export const footerLinks = [
@@ -401,4 +401,62 @@ export const EducationLevel = [
     "8th Grade",
     "High School Diploma",
     "TVET Diploma",
+]
+export const Applications = [
+    {
+        role: "Backend Developer",
+        companyName: "Elad Technologies",
+        location: "On site",
+        status: "pending",
+        description: "Develop and maintain backend systems, APIs, and databases. Collaborate with team to ensure efficient and secure data processing.",
+        requiredSkills: ["Nodejs", "Mongodb", "Nestjs", "REST Api", "Docker"]
+    },
+    {
+        role: "Frontend Developer",
+        companyName: "ABC Solutions",
+        location: "Remote",
+        status: "pending",
+        description: "Create engaging user interfaces using HTML, CSS, and JavaScript. Collaborate with designers and backend developers to deliver seamless web experiences.",
+        requiredSkills: ["React", "Nextjs", "Tailwindcss"]
+    },
+    {
+        role: "Mobile App Developer",
+        companyName: "Yc Lab",
+        location: "Remote",
+        status: "rejected",
+        description: "Build intuitive and performant mobile applications for iOS and Android platforms. Collaborate with cross-functional teams to deliver user-friendly mobile experiences.",
+        requiredSkills: ["Flutter", "Firebase", "Node"]
+    },
+    {
+        role: "Full Stack Developer",
+        companyName: "PQR Innovations",
+        location: "On site",
+        status: "pending",
+        description: "Develop end-to-end web applications, from frontend to backend. Contribute to all stages of the software development lifecycle.",
+        requiredSkills: ["Nextjs", "Express", "Docker", "Postrgresql", "Graphql"]
+    },
+    {
+        role: "DevOps Engineer",
+        companyName: "Moh systems",
+        location: "On site",
+        status: "rejected",
+        description: "Automate software deployment, configuration, and monitoring. Ensure scalability, reliability, and security of infrastructure and systems.",
+        requiredSkills: ["CI/CD pipelines", "AWS", "Docker", "Kubernetes"]
+    }
+]
+export const ApplicationStatus = [
+    "all",
+    "pending",
+    "hired",
+    "rejected",
+]
+export const sortByDate = [
+    {
+        label: "latest",
+        query: "Recent first"
+    },
+    {
+        label: "earlier",
+        query: "Earlier first"
+    }
 ]

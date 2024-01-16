@@ -4,7 +4,7 @@ import ModalForEducation from "./components/ModalForEducation";
 
 export default function EditEducation() {
     return (
-        <section className="w-full">
+        <section className="w-full mt-36 mb-20">
             <Layout title="Education" MainComponent = {
                 <MainComponentForEducation />
             } ModalComponent = {

@@ -6,9 +6,13 @@ import { loginValidation } from "../lib/validation";
 import { Form, FormField, FormItem, FormMessage, FormControl} from "../components/ui/form";
 import { Link } from "react-router-dom";
 import { Input } from "../components/ui/input";
+// import { IoEyeOffOutline } from "react-icons/io5";
+// import { IoEyeOutline } from "react-icons/io5";
+import { useState } from "react";
 
 
 export default function Login() {
+    const [showPassword, setShowPassword] = useState(false)
     const form = useForm<z.infer<typeof  loginValidation>>({
         resolver: zodResolver(loginValidation),
         defaultValues: {
@@ -45,7 +49,20 @@ export default function Login() {
                     render={({ field }) => (
                         <FormItem className="flex flex-1 flex-col justify-start gap-3 w-full">
                         <FormControl className="focus:outline-none">
-                        <Input placeholder="password" className="w-full border-gray-500 focus:border-none no-autofill outline-none py-6" {...field} />
+                            {/* <div className="w-full flex items-center justify-between border-gray-500 border rounded-md bg-white focus-visible:ring-black focus-visible:ring-2"> */}
+                            <Input type="password"  placeholder="Password" className="w-full border-gray-500 focus:border-none no-autofill outline-none py-6" {...field} />
+                                {/* <div className="relative flex items-center pt-1">
+                                    {showPassword ? (
+                                        <button onClick={(showPassword) => setShowPassword(!showPassword)} className="absolute right-4">
+                                            <IoEyeOutline />
+                                        </button>
+                                    ) : (
+                                        <button onClick={(showPassword) => setShowPassword(!showPassword)} className="absolute right-4">
+                                            <IoEyeOffOutline />
+                                        </button>
+                                    )}
+                                </div> */}
+                            {/* </div> */}
                         </FormControl>
                         <FormMessage className='text-sm text-red-500 font-palanquin' />
                         </FormItem>

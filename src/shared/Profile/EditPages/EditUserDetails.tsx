@@ -4,7 +4,7 @@ import Goback from "../../pieces/Goback";
 
 export default function EditUserDetails() {
     return (
-        <section className="w-full min-h-screen">
+        <section className="w-full mt-28">
             <div className="lg:hidden max-lg:flex ml-10 mt-10 items-center gap-3 cursor-pointer hover:text-primary">
                 <Goback />
             </div>
