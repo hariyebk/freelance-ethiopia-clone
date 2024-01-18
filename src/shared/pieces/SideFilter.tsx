@@ -1,6 +1,7 @@
 import { IoMdClose } from "react-icons/io";
-import { useApi } from "../../context/Provider";
+
 import FilterOptions from "./FilterOptions";
+import useApi from "../../context/hook";
 export default function SideFilter() {
     const {setOpenFilter} = useApi()
     return (

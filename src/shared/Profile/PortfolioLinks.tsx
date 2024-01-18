@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useApi } from "../../context/Provider"
+import useApi from "../../context/hook"
 
 export default function PortfolioLinks() {
     const {setEditPortfolioLinks} = useApi()

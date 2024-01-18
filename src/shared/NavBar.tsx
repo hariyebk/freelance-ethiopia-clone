@@ -3,9 +3,10 @@ import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
-import { useApi } from "../context/Provider";
+
 import NavLinkLogic from "./pieces/NavLinkLogic";
 import { handleAccountSwitch } from "../utils/switchAccount";
+import useApi from "../context/hook";
 
 
 export default function NavBar() {

@@ -1,8 +1,8 @@
 import { IoMdClose } from "react-icons/io"
-import { useApi } from "../../context/Provider"
 import NavLinkLogic from "./NavLinkLogic"
 import { RxLoop } from "react-icons/rx"
 import { handleAccountSwitch } from "../../utils/switchAccount"
+import useApi from "../../context/hook"
 
 
 export default function SidebarNav() {

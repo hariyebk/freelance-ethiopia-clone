@@ -6,7 +6,8 @@ import SidebarNav from "./pieces/SidebarNav";
 import SidebarEditProfile from "./pieces/SidebarEditProfile";
 import EditPortfolioLinks from "./pieces/EditPortfolioLinks";
 import EditLanguages from "./pieces/EditLanguages";
-import { useApi } from "../context/Provider";
+import useApi from "../context/hook";
+
 
 export default function AppLayout() {
     const {openFilter, openNav, editPortfolioLinks, setEditPortfolioLinks, editLanguages, setEditLanguages} = useApi()

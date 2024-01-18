@@ -1,8 +1,9 @@
 import { IoSearchOutline } from "react-icons/io5";
 import PostCard from "../shared/pieces/PostCard";
 import { CiFilter } from "react-icons/ci";
-import { useApi } from "../context/Provider";
+
 import FilterOptions from "../shared/pieces/FilterOptions";
+import useApi from "../context/hook";
 
 export default function Job() {
     const {setOpenFilter} = useApi()

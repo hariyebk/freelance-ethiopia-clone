@@ -123,15 +123,45 @@ export const enterpriseOpr = [
 export const clientTestimonials = [
     {
         name: "Dagi spa",
-        comment: "We have been using freelance for over 2 years now. We have hired many employees through freelance."
+        comment: "We have been using Freelance Ethiopia for over 2 years now, and The platform has provided us with access to a vast pool of talented freelancers who have become valuable members of our team.",
     },
     {
         name: "Suntech holdings",
-        comment: "We like how easy it is to use. We have hired over 18 employees through freelance. A lot of them are fresh graduates."
+        comment: "Freelance Ethiopia has been essential in helping us create captivating content for our travel agency. Through the platform, we have collaborated with Ethiopian freelance writers and photographers."
     },
     {
         name: "BeU delivery",
-        comment: "Since we started our company we have been using freelance ethiopia. We have found over 60% of our employees from freelance ethiopia."
+        comment: "Since we started our company we have been using freelance ethiopia. We have found over 60% of our employees from freelance ethiopia.",
+    },
+    {
+        name: "Addis Marketing Agency",
+        comment: "Freelance Ethiopia has revolutionized our marketing campaigns. The platform connects us with talented Ethiopian freelancers who bring fresh ideas and creativity to our projects.",
+    },
+    {
+        name: "Sheba Tech Innovations",
+        comment: "As an innovative tech company, we rely on Freelance Ethiopia to find skilled Ethiopian freelancers. The platform has a wide range of tech professionals who excel in areas such as software development, UI/UX design, and data analysis.",
+    }
+]
+export const freelancersTestimonials = [
+    {
+        name: "Hanna Gebremariam",
+        comment: "As a content writer, Freelance Ethiopia has provided me with a platform to share my unique perspective and storytelling abilities.",
+    },
+    {
+        name: "Solomon Tadesse",
+        comment: "Freelance Ethiopia has been my go-to platform for finding web development projects. The platform's emphasis on Ethiopian freelancers has allowed me to showcase my skills and connect with clients who value my expertise.",
+    },
+    {
+        name: "Lemlem Kebede",
+        comment: "Freelance Ethiopia has transformed my career as an Ethiopian translator. The platform has connected me with clients seeking translation services for Amharic and other Ethiopian languages.",
+    },
+    {
+        name: "Tewodros Assefa",
+        comment: "Freelance Ethiopia has been instrumental in helping me grow my photography business. The platform connects me with clients who want to capture the beauty of Ethiopia through my lens.",
+    },
+    {
+        name: "Aida Mengistu",
+        comment: "Freelance Ethiopia has been a game-changer for my freelance career. The platform has connected me with diverse clients who appreciate my Ethiopian heritage and my skills as a graphic designer.",
     }
 ]
 export const faq = [

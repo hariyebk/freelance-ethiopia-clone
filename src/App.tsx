@@ -1,7 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom"
 import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfilePage, ProfileSetUp, Applied } from "./pages"
 import {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout} from "./shared"
-import ShortList from "./pages/ShortList"
 import SavedJobs from "./pages/SavedJobs"
 
 export default function App() {
@@ -34,7 +33,6 @@ export default function App() {
                   <Route path= "/profile/:id/edit-certification" element = {<EditCertifications />}/>
                   {/* MENU FOR AUTHENTICATED USERS */}
                   <Route path="/applied" element = {<Applied />} />
-                  <Route path="/short-list" element = {<ShortList />} />
                   <Route path="/saved-jobs" element = {<SavedJobs />} />
               </Route>
           </Route>

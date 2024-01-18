@@ -1,5 +1,5 @@
 import { AuthenticatedNavLinks, navlinks } from "../../constants"
-import { useApi } from "../../context/Provider"
+import useApi from "../../context/hook"
 import SingleLink from "./SingleLink"
 
 export default function NavLinkLogic() {

@@ -2,7 +2,10 @@ import { Link, useSearchParams} from "react-router-dom";
 import { ApplicationStatus, sortByDate } from "../../constants";
 import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
 
-export default function ApplicationFilter() {
+interface ApplicationFilterProps {
+    saved?: boolean
+}
+export default function ApplicationFilter({saved}: ApplicationFilterProps) {
     const [searchParams] = useSearchParams()
     const filterQuery = searchParams.get("status")
     const sortQuery = searchParams.get("sort")
@@ -10,7 +13,7 @@ export default function ApplicationFilter() {
     return (
         <section className="my-8">
             <div className="flex items-center gap-3">
-                <div>
+                <div className={`${saved ? "hidden": "block"}`}>
                     <Popover>
                         <PopoverTrigger>
                             <button className="filter"> Filter by status </button>

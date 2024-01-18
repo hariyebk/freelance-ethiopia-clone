@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useState } from "react"
 import { IcontextType } from "../types"
 
 
@@ -14,7 +14,7 @@ const initial_state = {
     editLanguages: false,
     setEditLanguages: () => {}
 }
-const FilterConext = createContext<IcontextType>(initial_state)
+export const FilterConext = createContext<IcontextType>(initial_state)
 export default function Provider({children}: {children: React.ReactNode}) {
     const [openFilter, setOpenFilter] = useState(false)
     const [openNav, setOpenNav] = useState(false)
@@ -38,11 +38,4 @@ export default function Provider({children}: {children: React.ReactNode}) {
             {children}
         </FilterConext.Provider>
     )
-}
-
-
-export function useApi(){
-    const context = useContext(FilterConext)
-    if(!context) throw new Error("context is used out of it's provider")
-    return context
 }

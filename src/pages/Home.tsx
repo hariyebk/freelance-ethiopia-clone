@@ -4,10 +4,11 @@ import Hero from "../shared/Hero";
 import Card from "../shared/Card";
 import Testimonials from "../shared/Testimonials";
 import Marquee from "react-fast-marquee";
+import { clientTestimonials, freelancersTestimonials } from "../constants";
 
 export default function Home() {
     return ( 
-        <section className="max-container min-h-screen mx-56 mt-20">
+        <section className="max-container min-h-screen max-lg:mx-10 mx-56 mt-20 -z-10">
             <Hero />
             <Marquee style={{zIndex: -10}}>
                 <Brands />
@@ -17,8 +18,10 @@ export default function Home() {
             <div className="-mt-9">
                 <Card Title="Find the right candidates" des="You are in charge of every hiring step. From posting a job to hiring a candidate. Chat with applicants directly, Shortlist and Hire the right candidates." />
             </div>
-            <Testimonials subject="Clients" />
-            <Testimonials subject="Freelancers" />
+            <div className="mb-40">
+                <Testimonials subject="Clients" testimonial={clientTestimonials} />
+                <Testimonials subject="Freelancers" testimonial={freelancersTestimonials} />
+            </div>
         </section>
     )
 }

@@ -1,5 +1,5 @@
-import { useApi } from "../../context/Provider"
 import { IoIosArrowRoundForward } from "react-icons/io";
+import useApi from "../../context/hook";
 
 export default function Languages() {
     const {setEditLanguages} = useApi()

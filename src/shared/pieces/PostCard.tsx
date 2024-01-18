@@ -4,16 +4,20 @@ import { HowToApply, JobQualifications, jobDescription, jobRequirments, jobRespo
 import JobParts from "./JobParts";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
-
-export default function PostCard() {
+interface PostCardProps {
+    saved?: boolean,
+    applied?: boolean
+}
+export default function PostCard({saved, applied}: PostCardProps) {
     const [expand, setExpand] = useState(false)
     return (
-        <div className="flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3">
+        <div className={`${saved && "-z-10"} flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3`}>
             <div className="flex items-center justify-between w-full">
-                <h2 className="text-darkblue text-xl font-palanquin font-semibold opacity-95 -z-10"> Accountant </h2>
-                <div className="flex items-center gap-3">
+                <h2 className="text-darkblue text-xl font-palanquin font-semibold"> Accountant </h2>
+                <div className={`${saved ? "hidden" : "block"} flex items-center gap-3`}>
                     <button> <IoMdShareAlt style = {{fontSize: "25px", color: "#ef754c"}}/> </button>
                     <button> <CiBookmark style = {{fontSize: "25px", color: "#ef754c"}} /> </button>
                 </div>
@@ -35,8 +39,8 @@ export default function PostCard() {
                     <JobParts label="Qualifications" content={JobQualifications} />
                     <JobParts label= "How to Apply" content={HowToApply} />
                     {/* Tags */}
-                    <div className="flex justify-start max-lg:gap-5 gap-20 my-10">
-                        <button className="bg-stone-800 text-slate-100 rounded-full max-lg:px-4 px-8 py-2 text-sm">
+                    <div className="flex flex-wrap justify-start max-lg:gap-5 gap-20 my-10">
+                        <button className="bg-stone-800 text-slate-100 text-ellipsis rounded-full max-lg:px-4 px-8 py-2 text-sm">
                             Accounting and Finance
                         </button>
                         <button className="bg-stone-800 text-slate-100 rounded-full max-lg:px-4 px-8 py-2 text-sm">
@@ -70,9 +74,18 @@ export default function PostCard() {
                             <MdKeyboardArrowUp style = {{fontSize: "40px"}} />
                             <p> Collapse </p>
                         </div>
+                        {applied ? (
+                            <div className="flex items-center gap-3">
+                                <FaCheckCircle style = {{fontSize: "20px", color: "#ef754c"}} />
+                                <p className="text-base font-palanquin font-semibold"> Applied </p>
+                            </div>
+
+                        ) : (
                         <Link to={"/"} className="mr-6">
                             <button className="w-[150px] text-base text-slate-100 bg-gradient-to-r from-primary to-secondary px-10 py-2 rounded-full"> Apply </button>
                         </Link>
+                        ) 
+                        }
                     </div>
                 </section>}
             </div>
