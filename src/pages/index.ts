@@ -9,7 +9,13 @@ import NotFound from "./NotFound"
 import Register from "./Register"
 import Profile from "./Profile"
 import ProfileSetUp from "./ProfileSetUp"
-import ProfilePage from "./ProfilePage"
+import ProfileLayout from "./ProfileLayout";
 import Applied from "./Applied"
+import SavedJobs from "./SavedJobs"
+import Settings from "./Settings"
+import MyPosts from "./MyPosts"
+import Post from "./Post"
+import PostDetails from "./PostDetails"
+import JobSeekerProfile from "./JobSeekerProfile"
 
-export {About, Faq, Job, Login, Signup, Help, Home, NotFound, Register, Profile, ProfilePage, ProfileSetUp, Applied}
+export {About, Faq, Job, Login, Signup, Help, Home, NotFound, Register, Profile, ProfileLayout, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile}

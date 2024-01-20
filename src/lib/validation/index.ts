@@ -10,10 +10,28 @@ export const signupValidation = z.object({
     firstName: z.string().min(2, {message: "first name is required"}).max(8, {message: "first name is too long"}),
     lastName: z.string().min(2, {message: "last name is required"}).max(8, {message: "last name is too long"}),
     bio: z.string().min(2, {message: "bio is too short"}).max(100, {message: "bio is too long"}).optional(),
-    birthDate: z.string().min(6, {message: "birthdate is required"}),
+    birthDate: z.string(),
     gender: z.string(),
     country: z.string(),
     city: z.string()
+}).refine((value) => {
+    // convert the string into date
+    const birthdate = new Date(value.birthDate);
+    // get today's date
+    const today = new Date();
+    // compare if the user is at least 14 years old
+    const age = today.getFullYear() - birthdate.getFullYear();
+    const isAtLeast14 = age >= 14;
+
+    return isAtLeast14
+    }, {
+        message: 'You Must be at least 14 years old',
+        path: ["birthDate"]
+    }
+
+)
+export const UserAvatarValidation = z.object({
+    file: z.custom<File[]>(),
 })
 export const WorkExperienceValidation = z.object({
     position: z.string().min(2, {message: "Title is too short"}).max(20, {message: "Title is too long"}),
@@ -40,4 +58,38 @@ export const skillValidation = z.object({
 })
 export const certificationValidation = z.object({
     certification: z.string()
+})
+export const SettingsValidation = z.object({
+    password: z.string().optional(),
+    passwordConfirm: z.string().optional(),
+    sectorPreference: z.string().optional()
+}).refine((value) => {
+    if(value.password === ""){
+        return true
+    }
+    if(value.password){
+        return value.password.length >= 6
+    }
+}, {
+    message: "password must be at least 6 characters",
+    path: ["password"]
+}).refine(
+    (values) => {
+        return values.password === values.passwordConfirm;
+    },
+    {
+        message: "Passwords must match!",
+        path: ["passwordConfirm"],
+    }
+)
+export const JobPostValidation = z.object({
+    title: z.string().min(2, {message: "Job Title is too short"}).max(70, {message: "Job Title is too long"}),
+    site: z.string(),
+    type: z.string(),
+    level: z.string(),
+    sector: z.string(),
+    experience: z.string(),
+    gender: z.string(),
+    deadline: z.string(),
+    quantity: z.number().default(1)
 })

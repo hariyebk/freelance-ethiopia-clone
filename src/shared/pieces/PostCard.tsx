@@ -22,7 +22,7 @@ export default function PostCard({saved, applied}: PostCardProps) {
                     <button> <CiBookmark style = {{fontSize: "25px", color: "#ef754c"}} /> </button>
                 </div>
             </div>
-            <div className="flex items-center justify-evenly max-lg:gap-4 gap-7 mt-3 text-sm text-fade">
+            <div className="flex items-center justify-evenly max-lg:gap-4 gap-7 mt-3 max-lg:text-xs text-sm text-fade">
                 <p className="hover:text-primary"> Jambo bet </p>
                 <p className="hover:text-primary"> posted 4 hours ago</p>
                 <p className="uppercase hover:text-primary "> Addis Ababa, Ethiopia</p>
@@ -80,6 +80,8 @@ export default function PostCard({saved, applied}: PostCardProps) {
                                 <p className="text-base font-palanquin font-semibold"> Applied </p>
                             </div>
 
+                        ) : saved && !applied ? (
+                            <Link to={`/post:id`} className="w-[200px]  text-center text-base text-slate-100 bg-gradient-to-r from-primary to-secondary px-5 py-2 rounded-full"> see applications </Link>
                         ) : (
                         <Link to={"/"} className="mr-6">
                             <button className="w-[150px] text-base text-slate-100 bg-gradient-to-r from-primary to-secondary px-10 py-2 rounded-full"> Apply </button>

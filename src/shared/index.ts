@@ -7,5 +7,6 @@ import EditEducation from "./Profile/EditPages/EditEducation"
 import EditCertifications from "./Profile/EditPages/EditCertifications"
 import Protect from "./Protect"
 import AppLayout from "./AppLayout"
+import JobSeekerOnly from "./JobSeekerOnly"
 
-export {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout}
+export {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly}

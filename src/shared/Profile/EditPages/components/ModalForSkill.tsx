@@ -27,7 +27,7 @@ export default function ModalForSkill() {
                 render={({ field }) => (
                     <FormItem className="flex flex-1 flex-col justify-start gap-2 w-full">
                     <FormLabel className="w-full text-center max-lg:text-lg text-xl text-stone-500 font-semibold font-palanquin mb-5"> Add a new skill </FormLabel>
-                    <FormControl className="mt-5">
+                    <FormControl className="max-lg:mt-2 mt-5">
                         <Input type="text" placeholder="Add a new skill" className="w-full mt-2 border border-gray-400 no-autofill focus:border-none" {...field} />
                     </FormControl>
                     <FormMessage className='text-sm text-red-500' />

@@ -20,13 +20,13 @@ export default function Job() {
                             </button>
                         </div>
                         <div className="flex items-center justify-between mt-10 ml-5 pr-4">
-                            <h1 className="text-2xl text-darkblue font-palanquin font-medium "> Jobs You Might Like </h1>
+                            <h1 className="text-2xl text-darkblue font-palanquin"> Jobs You Might Like </h1>
                             <button className="lg:hidden focus:outline-none mt-2" onClick={() => setOpenFilter(true)}>
                                 <CiFilter style = {{fontSize: "40px", color: "#ef754c"}} />
                             </button>
                         </div>
-                        <p className="mt-5 ml-6 text-sm text-primary font-medium font-palanquin"> All jobs </p>
-                        <hr className="relative top-[10px] w-20 ml-3 border border-t-2 border-primary -z-10" />
+                        <p className="mt-5 ml-6 text-sm text-primary font-semibold font-palanquin"> All jobs </p>
+                        <hr className="relative top-[11px] w-20 ml-3 border border-t-2 border-primary -z-10" />
                         <hr className="mt-2 border border-t-1 border-gray-100 leading-5" />
                         <p className="text-[15px] ml-4 mt-5 text-gray-600 font-sans font-normal"> Browse jobs that match your experiace to a client’s hiring preference. Ordered by most relevant. </p>
                         <hr className="mt-3 border-t-2 border-gray-100 leading-5" />

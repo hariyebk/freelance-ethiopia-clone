@@ -1,22 +1,32 @@
-import { AuthenticatedNavLinks, navlinks } from "../../constants"
+import { AuthenticatedNavLinks, EmployerNavLinks, navlinks } from "../../constants"
 import useApi from "../../context/hook"
+import { AccountRoles } from "../../types";
 import SingleLink from "./SingleLink"
 
 export default function NavLinkLogic() {
-    const {isAuthenticated} = useApi()
+    const {role} = useApi()
     return (
         <>
-            {isAuthenticated ? 
-            AuthenticatedNavLinks.map((link) => {
-                return (
-                    <SingleLink key={link.label} link={link} />
-                )
-            })
-            : navlinks.map((link) => {
-                return (
-                    <SingleLink key={link.label} link={link} />
-                )
-            })}
+            {role === AccountRoles.employer ? (
+                EmployerNavLinks.map((link) => {
+                    return (
+                        <SingleLink key={link.label} link={link} />
+                    )
+                })
+            ): role === AccountRoles.jobseeker ? (
+                AuthenticatedNavLinks.map((link) => {
+                    return (
+                        <SingleLink key={link.label} link={link} />
+                    )
+                })
+            ): (
+                navlinks.map((link) => {
+                    return (
+                        <SingleLink key={link.label} link={link} />
+                    )
+                })
+            )
+            }
         </>
     )
 }

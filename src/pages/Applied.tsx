@@ -7,7 +7,7 @@ export default function Applied() {
             <div className="mx-auto max-lg:w-[450px] w-[700px] h-auto shadow-lg bg-slate-50 rounded-md pb-28">
                 <div className="pt-10 max-lg:px-14 px-14">
                     <div className="flex items-center justify-between text-stone-600 font-palanquin font-semibold">
-                        <h1 className="text-2xl max-lg:text-xl"> Your Applications </h1>
+                        <h1 className="text-2xl max-lg:text-lg"> Your Applications </h1>
                         <p className="text-xl max-lg:text-lg"> Status </p>
                     </div>
                     <ApplicationFilter />

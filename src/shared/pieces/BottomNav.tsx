@@ -16,7 +16,7 @@ export default function BottomNav({route, newUser, telegramUser, place}: NavProp
             <div className="max-lg:hidden">
                 <Goback />
             </div>
-            <button className="bg-stone-800 max-lg:ml-20 max-lg:px-16 px-16 max-lg:py-2 py-3 text-slate-100 text-lg rounded-full" onClick={() => {
+            <button className="bg-stone-800 max-lg:w-[200px] max-lg:ml-32 max-lg:px-5 px-10 py-2 text-slate-100 max-lg:text-sm text-base rounded-full" onClick={() => {
                 if(place === bottomNavRoute.onboard && !newUser && !telegramUser) return
                 navigate(`/${route}`)
             }}> Continue </button>

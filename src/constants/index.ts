@@ -21,13 +21,19 @@ export const AuthenticatedNavLinks = [
         path: "/applied",
         label: "Applied"
     },
-    // {
-    //     path: "/short-list",
-    //     label: "Short Listed"
-    // },
     {
         path: "/saved-jobs",
         label: "Saved Jobs"
+    }
+]
+export const EmployerNavLinks = [
+    {
+        path: "/my-posts",
+        label: "My posts"
+    },
+    {
+        path: "/post",
+        label: "Post A job"
     }
 ]
 export const footerLinks = [
@@ -71,7 +77,6 @@ export const footerLinks = [
         ] 
     },
 ]
-
 export const contactInfo = [
     {
         Title: "Contact us",
@@ -331,15 +336,20 @@ export const jobTypes = [
     "Paid internship",
     "unpaid internship",
 ]
+export const jobSite = [
+    "On_site",
+    "Remote",
+    "Hybrid"
+]
 export const Gender = [
     "Male",
     "Female",
-    "Both"
+    "Any"
 ]
 export const Experience = [
-    "Senior",
+    "Junior",
     "Intermidate",
-    "junior",
+    "Senior"
 ]
 export const salary = [
     "< 5,000",
@@ -412,13 +422,12 @@ export const Language_levels = [
 export const mainservices = [
     {
         sector: "Software Design and Development",
-        role: "Full stack Web Developer"
+        role: "Full stack Web Developement"
     },
     {
         sector: "Software Design and Development",
         role: "Graphic design"
     },
-
     {
         sector: "Sales and Marketing",
         role: "Sales"

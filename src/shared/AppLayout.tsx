@@ -10,10 +10,10 @@ import useApi from "../context/hook";
 
 
 export default function AppLayout() {
-    const {openFilter, openNav, editPortfolioLinks, setEditPortfolioLinks, editLanguages, setEditLanguages} = useApi()
+    const {openFilter, openNav, editPortfolioLinks, setEditPortfolioLinks, editLanguages, setEditLanguages, isAuthenticated} = useApi()
     return (
         <section className="max-lg:overflow-x-hidden">
-            <NavBar />  
+            <NavBar authenticated={isAuthenticated} />  
             <Outlet />
             <Footer />
             {openFilter && <SideFilter />}

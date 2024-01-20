@@ -26,7 +26,7 @@ export default function ApplicationItem({application}: ApplicationItemProps){
     return (
         <section className='my-7'>
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-lg max-lg:text-base max-lg:text-ellipsis font-palanquin">
+                <div className="flex items-center gap-1.5 text-lg max-lg:text-base max-lg:text-ellipsis font-palanquin max-lg:mr-3">
                     <p> {application.role}, </p>
                     <span className="max-lg:hidden"> at </span>
                     <p>{application.companyName} </p>

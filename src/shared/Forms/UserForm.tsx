@@ -19,27 +19,30 @@ interface UserFormProps {
     }
     newUser: boolean,
     FormHeader: React.ReactNode,
-    FormButtons: React.ReactNode
+    FormButtons: React.ReactNode,
+    handleSubmit?: () => void
 }
 
-export default function UserForm({user, newUser, FormHeader, FormButtons} : UserFormProps) {
-
+export default function UserForm({user, newUser, FormHeader, FormButtons, handleSubmit} : UserFormProps) {
     const form = useForm<z.infer<typeof  signupValidation>>({
         resolver: zodResolver(signupValidation),
         defaultValues: {
-            // file: [],
             email: user?.email || "",
             firstName: user?.firstName  || "",
             lastName: user?.lastName  || "",
             gender: user?.gender || "",
             city: user?.city  || "",
             country: user?.country  || "",
-            birthDate: user?.birthDate  || ""
+            birthDate: user?.birthDate
         },
     })
 
     async function onSubmit(values: z.infer<typeof signupValidation>){
         console.log(values)
+        if(handleSubmit){
+            handleSubmit()
+        }
+        
             
     }
     return (
