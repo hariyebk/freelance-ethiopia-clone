@@ -4,8 +4,8 @@ import Goback from "../../pieces/Goback";
 
 export default function EditUserDetails() {
     return (
-        <section className="w-full mt-28">
-            <div className="lg:hidden max-lg:flex ml-10 mt-10 items-center gap-3 cursor-pointer hover:text-primary">
+        <section className="w-full max-lg:mt-36 mt-28">
+            <div className="lg:hidden max-lg:flex ml-10 mt-10 items-center gap-3 hover:text-primary">
                 <Goback />
             </div>
             <div className="mx-48 flex flex-col flex-1 items-start">

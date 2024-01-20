@@ -18,8 +18,8 @@ export default function NavBar() {
         navigate("/login")
     }
     return (
-        <div className="fixed inset-x-0 top-0">
-            <div className=" w-full lg:ml-8 max-lg:pt-5 pt-8 pb-5 max-lg:pl-5  flex justify-between items-center bg-white border-b border-b-slate-50 lg:z-50">
+        <div className="fixed inset-x-0 top-0 z-30">
+            <div className="w-full lg:ml-8 max-lg:pt-5 pt-8 pb-5 max-lg:pl-5  flex justify-between items-center bg-white border-b border-b-slate-50">
                 <div className="flex justify-between items-center">
                     <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
                         <HiBars4 style = {{fontSize: "30px", color: "#e94969"}} />

@@ -1,6 +1,5 @@
 import { useReducer} from "react"
-import { Link } from "react-router-dom"
-// import { AccountTypes } from "../../constants"
+import { AccountTypes } from "../../types"
 
 interface STATEPROPS {
     Private: boolean,
@@ -61,8 +60,26 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 
 export default function NewProfile(){
     const [{Private, Coorporate, Lstartup, Ustartup}, dispatch] = useReducer(reducer, initial)
+    let currentlyActive: string
+    if(Private){
+        currentlyActive = AccountTypes.private
+    }
+    if(Coorporate){
+        currentlyActive = AccountTypes.Coorporate
+    }
+    if(Lstartup){
+        currentlyActive = AccountTypes.licensed_startup
+    }
+    if(Ustartup){
+        currentlyActive = AccountTypes.unlicensed_startup
+    }
+    function handleAccountType(){
+        console.log(currentlyActive)
+        // TODO: SET THE USERS ACCOUNT TYPE
+
+    }
     return (
-        <section className="max-lg:w-[300px] w-full h-auto -z-10">
+        <section className="max-lg:w-[300px] w-full">
             <div className="mt-7">
                 <div className="account_card">
                     <p className="account_card_label"> Private client </p>
@@ -80,10 +97,8 @@ export default function NewProfile(){
                     <p className="account_card_label"> Unlicensed Startup  </p>
                     <p className={`${Ustartup ? "bg-stone-800 ring-2 ring-primary" : "border-gray-600"} border rounded-full w-4 h-4 cursor-pointer focus:outline-none`} onClick={() => dispatch({type: "Ustartup"})} />
                 </div>
-                <button className={`${!Private && !Coorporate && !Lstartup && !Ustartup ? "bg-stone-800 opacity-50" : "bg-gradient-to-r from-primary to-secondary"} text-base text-slate-100 text-center w-full cursor-pointer rounded-full max-lg:px-4 px-6 max-lg:py-2 py-3 my-10`}>
-                    <Link to={"/"}>
+                <button onClick={handleAccountType} className={`${!Private && !Coorporate && !Lstartup && !Ustartup ? "bg-stone-800 opacity-50" : "bg-gradient-to-r from-primary to-secondary"} text-base text-slate-100 text-center w-full cursor-pointer rounded-full max-lg:px-4 px-6 max-lg:py-2 py-3 my-10`}>
                         Choose Account Type
-                    </Link>
                 </button>
             </div>
         </section>

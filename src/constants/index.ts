@@ -370,24 +370,6 @@ export const location = [
     "Jimma",
     "Ambo",
 ]
-export const AccountTypes = [
-    {
-        label:  "Private client",
-        actionType: "Private",
-    },
-    {
-        label: "Corporate Company",
-        actionType: "Coorporate"
-    },
-    {
-        label:  "Licensed Startup",
-        actionType: "Lstartup"
-    },
-    {
-        label: "Unlicensed Startup",
-        actionType: "Ustartup"
-    }
-]
 export const skills = [
     "React",
     "Typescript",

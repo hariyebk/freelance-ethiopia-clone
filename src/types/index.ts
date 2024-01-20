@@ -22,3 +22,10 @@ export enum AccountRoles {
     jobseeker = "jobseeker",
     employer = "employer"
 }
+
+export enum AccountTypes {
+    private = "Private",
+    Coorporate =  "Coorporate",
+    licensed_startup = "Licensed Startup",
+    unlicensed_startup = "Unlicensed Startup"
+} 

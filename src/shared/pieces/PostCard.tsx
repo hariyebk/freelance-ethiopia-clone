@@ -14,7 +14,7 @@ interface PostCardProps {
 export default function PostCard({saved, applied}: PostCardProps) {
     const [expand, setExpand] = useState(false)
     return (
-        <div className={`${saved && "-z-10"} flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3`}>
+        <div className="flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3">
             <div className="flex items-center justify-between w-full">
                 <h2 className="text-darkblue text-xl font-palanquin font-semibold"> Accountant </h2>
                 <div className={`${saved ? "hidden" : "block"} flex items-center gap-3`}>
