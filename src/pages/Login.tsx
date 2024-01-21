@@ -1,18 +1,18 @@
-
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { loginValidation } from "../lib/validation";
 import { Form, FormField, FormItem, FormMessage, FormControl} from "../components/ui/form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../components/ui/input";
-// import { IoEyeOffOutline } from "react-icons/io5";
-// import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
+import { IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
 
-
 export default function Login() {
+    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
+    console.log(showPassword)
     const form = useForm<z.infer<typeof  loginValidation>>({
         resolver: zodResolver(loginValidation),
         defaultValues: {
@@ -20,8 +20,12 @@ export default function Login() {
             password: ""
         },
     })
+    function handlePassword(){
+        setShowPassword(!showPassword)
+    }
     async function onSubmit(values: z.infer<typeof loginValidation>){
         console.log(values)
+        navigate("/profile-type")
         
     }
     return (
@@ -36,7 +40,7 @@ export default function Login() {
                     render={({ field }) => (
                         <FormItem className="flex flex-1 flex-col justify-start gap-3 w-full">
                         <FormControl className="focus:outline-none">
-                        <Input placeholder="Email" className="w-full border-gray-500 focus:border-none no-autofill outline-none py-6" {...field} />
+                        <Input placeholder="Email" className="w-full border-gray-500 focus:border-none no-autofill outline-none py-3" {...field} />
                         </FormControl>
                         <FormMessage className='text-sm text-red-500 font-palanquin' />
                         </FormItem>
@@ -49,20 +53,20 @@ export default function Login() {
                     render={({ field }) => (
                         <FormItem className="flex flex-1 flex-col justify-start gap-3 w-full">
                         <FormControl className="focus:outline-none">
-                            {/* <div className="w-full flex items-center justify-between border-gray-500 border rounded-md bg-white focus-visible:ring-black focus-visible:ring-2"> */}
-                            <Input type="password"  placeholder="Password" className="w-full border-gray-500 focus:border-none no-autofill outline-none py-6" {...field} />
-                                {/* <div className="relative flex items-center pt-1">
+                            <div className="w-full bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
+                                <div className="relative flex items-center pt-1">
                                     {showPassword ? (
-                                        <button onClick={(showPassword) => setShowPassword(!showPassword)} className="absolute right-4">
+                                        <button type="button" onClick={handlePassword} className="absolute right-4">
                                             <IoEyeOutline />
                                         </button>
                                     ) : (
-                                        <button onClick={(showPassword) => setShowPassword(!showPassword)} className="absolute right-4">
+                                        <button type="button" onClick={handlePassword} className="absolute right-4">
                                             <IoEyeOffOutline />
                                         </button>
                                     )}
-                                </div> */}
-                            {/* </div> */}
+                                </div>
+                            </div>
                         </FormControl>
                         <FormMessage className='text-sm text-red-500 font-palanquin' />
                         </FormItem>

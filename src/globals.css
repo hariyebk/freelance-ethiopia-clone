@@ -126,7 +126,7 @@
         @apply max-lg:mt-6 mt-2 px-4 bg-white shadow-md rounded-md flex items-center justify-between gap-5 py-3
     }
     .account_card_label {
-        @apply max-lg:text-base text-xl text-stone-700 font-palanquin font-medium
+        @apply max-lg:text-base text-lg text-stone-700 font-palanquin font-medium
     }
     .profile_container {
         @apply w-full mt-5 pl-10  flex flex-col items-start

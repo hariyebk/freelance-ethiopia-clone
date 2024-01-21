@@ -6,6 +6,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { cities, countries } from "../../constants"
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "../../components/ui/select"
 import { Input } from "../../components/ui/input"
+import { useState } from "react"
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
 
 interface UserFormProps {
     user?: {
@@ -24,6 +26,10 @@ interface UserFormProps {
 }
 
 export default function UserForm({user, newUser, FormHeader, FormButtons, handleSubmit} : UserFormProps) {
+    const [showPassword, setShowPassword] = useState(false)
+    function handlePassword(){
+        setShowPassword(!showPassword)
+    }
     const form = useForm<z.infer<typeof  signupValidation>>({
         resolver: zodResolver(signupValidation),
         defaultValues: {
@@ -131,8 +137,21 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 render={({ field }) => (
                                     <FormItem className="flex flex-1 flex-col justify-start gap-2 w-full">
                                     <FormLabel className="text-base text-stone-500 font-semibold font-palanquin"> Password </FormLabel>
-                                    <FormControl className="border-gray-400 focus:border-none py-6">
-                                        <Input type="password" placeholder="password" className="w-full no-autofill outline-none" {...field}/> 
+                                    <FormControl className="focus:outline-none">
+                                    <div className="w-full bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                        <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
+                                        <div className="relative flex items-center pt-1">
+                                            {showPassword ? (
+                                                <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                    <IoEyeOutline />
+                                                </button>
+                                            ) : (
+                                                <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                    <IoEyeOffOutline />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
                                     </FormControl>
                                     <FormMessage  className='text-sm text-red-500' />
                                     </FormItem>

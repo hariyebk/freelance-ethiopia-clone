@@ -8,8 +8,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { jobSectors } from "../constants"
 import { AccountRoles } from "../types"
 import useApi from "../context/hook"
+import { useState } from "react"
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
 
 export default function Settings() {
+    const [showPassword, setShowPassword] = useState(false)
+    function handlePassword(){
+        setShowPassword(!showPassword)
+    }
     const {role} = useApi()
     const form = useForm<z.infer<typeof SettingsValidation>>({
         resolver: zodResolver(SettingsValidation),
@@ -38,8 +44,21 @@ export default function Settings() {
                             render={({ field }) => (
                                 <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-base font-palanquin font-medium"> New Password </FormLabel>
-                                <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Input type="password" className="w-[350px] no-autofill outline-none" {...field}/> 
+                                <FormControl className="focus:outline-none">
+                                    <div className="max-lg:w-[320px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                        <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
+                                        <div className="relative flex items-center pt-1">
+                                            {showPassword ? (
+                                                <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                    <IoEyeOutline />
+                                                </button>
+                                            ) : (
+                                                <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                    <IoEyeOffOutline />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -52,8 +71,21 @@ export default function Settings() {
                             render={({ field }) => (
                                 <FormItem className="mt-5 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-base font-palanquin font-medium"> Confirm Password </FormLabel>
-                                <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Input type="password" className="w-[350px] no-autofill outline-none" {...field}/> 
+                                <FormControl className="focus:outline-none">
+                                    <div className="max-lg:w-[320px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                            <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
+                                            <div className="relative flex items-center pt-1">
+                                                {showPassword ? (
+                                                    <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                        <IoEyeOutline />
+                                                    </button>
+                                                ) : (
+                                                    <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                        <IoEyeOffOutline />
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
                                 </FormControl>
                                 <FormMessage  className='text-sm text-red-500' />
                                 </FormItem>
