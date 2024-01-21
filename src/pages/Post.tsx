@@ -29,9 +29,9 @@ export default function Post() {
     }
     return (
         <section className="w-full mt-32 mb-36">
-            <div className="mx-auto max-lg:w-[450px] w-[600px] h-auto shadow-lg bg-slate-50 rounded-md pt-10 pb-28 max-lg:px-16">
+            <div className="mx-auto max-lg:w-[450px] w-[600px] h-auto shadow-lg bg-slate-50 rounded-md pt-10 max-lg:ml-7 pb-28 max-lg:px-8">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full lg:px-28">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full lg:pl-32">
                     <main className="">
                         <h1 className="text-2xl text-stone-500 font-semibold "> Post a Job </h1>
                             {/* TITLE */}

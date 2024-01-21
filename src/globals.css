@@ -91,6 +91,7 @@
     .custom-scrollbar {
         height: 100vh;
         overflow: auto;
+        cursor: auto;
     }   
     .custom-scrollbar::-webkit-scrollbar {
         width: 5px;

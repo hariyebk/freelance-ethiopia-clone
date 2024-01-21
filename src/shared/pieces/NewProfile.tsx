@@ -1,6 +1,7 @@
 import { useReducer} from "react"
-import { AccountTypes } from "../../types"
+import { AccountRoles, AccountTypes } from "../../types"
 import { useNavigate } from "react-router-dom"
+import useApi from "../../context/hook"
 
 interface STATEPROPS {
     Jobseeker: boolean,
@@ -76,6 +77,7 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 
 export default function NewProfile(){
     const navigate = useNavigate()
+    const {role, setRole} = useApi()
     const [{Jobseeker, Private, Coorporate, Lstartup, Ustartup}, dispatch] = useReducer(reducer, initial)
     // checks if at least one of the account type is selected , then it turn the button color to orange, if noting is selected it will stay inactive
     const isNotSelected = !Jobseeker && !Private && !Coorporate && !Lstartup && !Ustartup
@@ -98,7 +100,11 @@ export default function NewProfile(){
     function handleAccountType(){
         console.log(currentlyActive)
         // TODO: SET THE USERS ACCOUNT TYPE
-        navigate("/")
+        if(currentlyActive === AccountRoles.jobseeker && !role){
+            // TODO: update the user's role in DB
+            setRole(AccountRoles.jobseeker)
+            navigate("/job")
+        }
 
     }
     return (

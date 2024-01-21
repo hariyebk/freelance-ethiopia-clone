@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom"
-import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile } from "./pages"
+import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber } from "./pages"
 import {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly} from "./shared"
 import EmployersOnly from "./shared/EmployersOnly"
 import EmployerProfile from "./pages/EmployerProfile"
@@ -21,6 +21,7 @@ export default function App() {
                   <Route path="/onboard" element = {<Signup />} />
                   <Route path="/register" element = {<Register />} />
                   <Route path="/register/upload-photo" element = {<UploadUserAvatar />} />
+                  <Route path="/verify-your-phone-number" element = {<VerifyPhoneNumber />} />
                   {/* AUTHENTICATION MIDDLEWARE */}
               <Route element = {
                 <Protect />
@@ -28,6 +29,8 @@ export default function App() {
                       {/* AUTHENTICATED USERS PAGES */}
                       <Route path="/profile-type" element = {<Profile />} />
                       <Route path="/profile-type/new" element = {<ProfileSetUp />} />
+                      <Route path="/post/:id/apply" element = {<Apply />} />
+                      <Route path="/settings" element = {<Settings />} />
                 {/* JOB SEEKER AUTHORIZATION MIDDLEWARE */}
                 <Route element = {
                   <JobSeekerOnly />
@@ -42,7 +45,6 @@ export default function App() {
                       <Route path= "/jobseeker-profile/:id/edit-certification" element = {<EditCertifications />}/>
                       <Route path="/applied" element = {<Applied />} />
                       <Route path="/saved-jobs" element = {<SavedJobs />} />
-                      <Route path="/settings" element = {<Settings />} />
                   </Route>
                   {/* EMPLOYER AUTHORIZATION MIDDLEWARE */}
                   <Route element = {

@@ -8,7 +8,7 @@ import { clientTestimonials, freelancersTestimonials } from "../constants";
 
 export default function Home() {
     return ( 
-        <section className="max-container max-lg:mx-14 mx-56 mt-20">
+        <section className="max-container max-lg:mx-10 mx-56 mt-20">
             <Hero />
             <Marquee style={{zIndex: -10}}>
                 <Brands />

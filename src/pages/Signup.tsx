@@ -4,6 +4,7 @@ import { FiUserPlus } from "react-icons/fi";
 import { bottomNavRoute, userTypes } from "../constants";
 import Goback from "../shared/pieces/Goback";
 import BottomNav from "../shared/pieces/BottomNav";
+import { useNavigate } from "react-router-dom";
 interface STATEPROPS {
     newUser: boolean,
     telegramUser: boolean
@@ -36,6 +37,18 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 }
 export default function Signup() {
     const [{newUser, telegramUser}, dispatch] = useReducer(reducer, initial)
+    const navigate = useNavigate()
+    function handleClick(){
+        if(!newUser && !telegramUser) return
+        // If the user is new , redirect them to the register page
+        if(newUser){
+            return navigate("/register")
+        }
+        // IF the user is from telegram, redirect them to the phone verification page
+        if(telegramUser){
+            return navigate("/verify-your-phone-number")
+        }
+    }
     return (
         <section className="flex flex-col w-full max-lg:mt-28 lg:my-24 ">
             <div className="md:hidden ml-10 mt-8">
@@ -57,7 +70,12 @@ export default function Signup() {
                     </div>
                 </div>
             </div>
-            <BottomNav place={bottomNavRoute.onboard} route={bottomNavRoute.register} newUser = {newUser} telegramUser = {telegramUser} />
+            <button onClick={handleClick} className={`${!newUser && !telegramUser ? "bg-stone-800 opacity-50" : "bg-stone-800"} lg:hidden mt-16 mb-28 mx-40 rounded-full  text-slate-100 text-sm w-[200px] px-3 py-2 text-center`}>
+                countinue
+            </button>
+            <div className="max-lg:hidden">
+                <BottomNav place={bottomNavRoute.onboard} route={bottomNavRoute.register} newUser = {newUser} telegramUser = {telegramUser} />
+            </div>
         </section>
     )
 }

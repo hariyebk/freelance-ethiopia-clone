@@ -17,5 +17,8 @@ import MyPosts from "./MyPosts"
 import Post from "./Post"
 import PostDetails from "./PostDetails"
 import JobSeekerProfile from "./JobSeekerProfile"
+import Apply from "./Apply";
+import VerifyPhoneNumber from "./VerifyPhoneNumber";
 
-export {About, Faq, Job, Login, Signup, Help, Home, NotFound, Register, Profile, ProfileLayout, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile}
+
+export {About, Faq, Job, Login, Signup, Help, Home, NotFound, Register, Profile, ProfileLayout, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber}

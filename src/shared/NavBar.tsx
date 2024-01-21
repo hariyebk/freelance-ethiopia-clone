@@ -3,14 +3,13 @@ import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
-
 import NavLinkLogic from "./pieces/NavLinkLogic";
 import { handleAccountSwitch } from "../utils/switchAccount";
 import useApi from "../context/hook";
 import { AccountRoles } from "../types";
 
 export default function NavBar() {
-    const {setOpenNav, isAuthenticated, role} = useApi()
+    const {setOpenNav, role} = useApi()
     const navigate = useNavigate()
     const fakeuserid = "653e8db1e8b915a518a8"
     function handleLogout(){
@@ -18,8 +17,8 @@ export default function NavBar() {
         navigate("/login")
     }
     return (
-        <div className="fixed inset-x-0 top-0 z-30">
-            <div className="w-full lg:ml-8 max-lg:pt-5 pt-8 pb-5 max-lg:pl-5  flex justify-between items-center bg-white border-b border-b-slate-50">
+        <div className="w-full fixed inset-x-0 top-0 z-30">
+            <div className="pl-8 max-lg:pt-5 pt-8 pb-5 max-lg:pl-5  flex justify-between items-center bg-white border-b border-b-slate-50">
                 <div className="flex justify-between items-center">
                     <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
                         <HiBars4 style = {{fontSize: "30px", color: "#e94969"}} />
@@ -34,7 +33,7 @@ export default function NavBar() {
                     </nav>
                 </div>
                 <div className="flex items-center gap-2 max-lg:mr-2 mr-10">
-                    {isAuthenticated ? (
+                    {role ? (
                         <div className="flex items-center justify-between gap-7">
                             <Link to="/settings" className="hover:text-primary">
                                 <IoSettingsOutline style = {{fontSize: "26px"}} />
@@ -49,7 +48,8 @@ export default function NavBar() {
                             </button>
                             {/* TODO: USER ID */}
                             <Link to={`${role === AccountRoles.jobseeker ? `/jobseeker-profile/${fakeuserid}`: `/employer-profile/${fakeuserid}`}`} className="max-lg:mr-6 mr-3 -ml-3">
-                                <img src="/Images/hari.jpg" alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
+                                {/* TODO: FETCH THE USERS PROFILE IMAGE*/}
+                                <img src={`${role ? "Images/hari.jpg" : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
                             </Link>
                         </div>
                     ):(

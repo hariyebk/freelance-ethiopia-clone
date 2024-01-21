@@ -11,7 +11,7 @@ export default function Job() {
         <section className="w-full mt-20">
             <div className="flex gap-8 lg:ml-44 max-lg:mx-7">
                 <div className="max-lg:w-[600px] w-[700px]">
-                    <div className="flex flex-col flex-1 shadow-md max-lg:px-10 p-2 my-14">
+                    <div className="flex flex-col flex-1 shadow-md max-lg:px-5 p-2 my-14">
                         <div className="flex items-center justify-start border border-slate-200 rounded-lg pl-3">
                             <IoSearchOutline style = {{color: "#ef754c", fontSize: "20px"}} />
                             <input type="search" placeholder="Seacrh for job" className="w-full h-full ml-3 py-2.5 outline-none"  />

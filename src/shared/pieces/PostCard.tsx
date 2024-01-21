@@ -13,6 +13,8 @@ interface PostCardProps {
 }
 export default function PostCard({saved, applied}: PostCardProps) {
     const [expand, setExpand] = useState(false)
+    // TODO: GET THE ID OF THE POST
+    const fakePostId = "65411d9672cba7889d66"
     return (
         <div className="flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3">
             <div className="flex items-center justify-between w-full">
@@ -83,8 +85,8 @@ export default function PostCard({saved, applied}: PostCardProps) {
                         ) : saved && !applied ? (
                             <Link to={`/post:id`} className="w-[200px]  text-center text-base text-slate-100 bg-gradient-to-r from-primary to-secondary px-5 py-2 rounded-full"> see applications </Link>
                         ) : (
-                        <Link to={"/"} className="mr-6">
-                            <button className="w-[150px] text-base text-slate-100 bg-gradient-to-r from-primary to-secondary px-10 py-2 rounded-full"> Apply </button>
+                        <Link to={`/post/${fakePostId}/apply`} className="mr-6">
+                            <button className="w-[120px] max-lg:text-sm text-base text-slate-100 bg-gradient-to-r from-primary to-secondary max-lg:px-4 px-10 py-2 rounded-full"> Apply </button>
                         </Link>
                         ) 
                         }

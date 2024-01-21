@@ -12,19 +12,27 @@ export default function NavLinkLogic() {
                     return (
                         <SingleLink key={link.label} link={link} />
                     )
-                })
+                    })
             ): role === AccountRoles.jobseeker ? (
-                AuthenticatedNavLinks.map((link) => {
-                    return (
-                        <SingleLink key={link.label} link={link} />
-                    )
-                })
+                <div className="flex max-lg:flex-col max-lg:items-start items-center max-lg:gap-3 gap-10 max-lg:pl-3">
+                    {
+                        AuthenticatedNavLinks.map((link) => {
+                            return (
+                                <SingleLink key={link.label} link={link} />
+                            )
+                        })
+                    }
+                </div>
             ): (
-                navlinks.map((link) => {
-                    return (
-                        <SingleLink key={link.label} link={link} />
-                    )
-                })
+                <div className="flex max-lg:flex-col max-lg:items-start items-center max-lg:gap-3 gap-10 max-lg:pl-3">
+                    {
+                        navlinks.map((link) => {
+                            return (
+                                <SingleLink key={link.label} link={link} />
+                            )
+                        })
+                    }
+                </div>
             )
             }
         </>

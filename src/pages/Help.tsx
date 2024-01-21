@@ -1,7 +1,7 @@
 
 export default function Help() {
     return (
-        <section className="w-full h-full">
+        <section className="w-full min-h-screen">
 
         </section>
     )

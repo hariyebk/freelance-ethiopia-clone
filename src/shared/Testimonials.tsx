@@ -20,7 +20,7 @@ export default function Testimonials({subject, testimonial}: TestimonialsProps) 
                 opts={{
                     align: "center",
                 }}
-                className="mt-20 w-[700px] max-lg:w-[400px] mx-auto"
+                className="mt-20 w-[700px] max-lg:w-[350px] mx-auto"
                 >
                     <CarouselContent>
                         {testimonial.map((client) => {
