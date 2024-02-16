@@ -98,22 +98,39 @@ export const brands = [
 ]
 export const packages = [
     {
-        name: "silver",
+        name: "Tier 1",
         duration: "3 Months",
         price: "15,000 ETB",
-        describtion: "Perfect for businesses who need help finding immediate hires or those looking to hire over a short period of time."
+        describtion: "Perfect for businesses who need help finding immediate hires or those looking to hire over a short period of time.",
+        features: [
+            "Screen Question Feature",
+            "1 Recruiiters",
+            "35 Jobs",
+        ]
     },
     {
-        name: "Gold",
+        name: "Tier 2",
         duration: "6 Months",
         price: "25,000 ETB",
-        describtion: "Perfect for businesses who need help expanding their talent pool without making a long-term commitment."
+        describtion: "Perfect for businesses who need help expanding their talent pool without making a long-term commitment.",
+        features: [
+            "Auto Approval Job Post Feature",
+            "Screen Question Feature",
+            "2 Recruiiters",
+            "60 Jobs",
+        ]
     },
     {
-        name: "Platinum",
+        name: "Tier 3",
         duration: "1 Year",
         price: "40,000 ETB",
-        describtion: "Ideal for businesses who are looking for quality hires over a longer period to create a successful team."
+        describtion: "Ideal for businesses who are looking for quality hires over a longer period to create a successful team.",
+        features: [
+            "Auto Approval Job Post Feature",
+            "Screen Question Feature",
+            "5 Recruiiters",
+            "100 Jobs",
+        ]
     }
 ]
 export const enterpriseOpr = [

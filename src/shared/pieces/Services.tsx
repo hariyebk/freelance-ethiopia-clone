@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
 import { enterpriseOpr } from "../../constants"
-import { GoDotFill } from "react-icons/go"
-import { FaPhoneAlt } from "react-icons/fa"
+// import { GoDotFill } from "react-icons/go"
+import { FaPhoneAlt, FaRegCheckCircle } from "react-icons/fa"
 import { IoMdMail } from "react-icons/io"
 import { HiOutlinePaperAirplane } from "react-icons/hi2"
 
 export default function Services() {
     return (
-        <div className="max-lg:w-full w-[900px] max-lg:my-10 my-20 max-lg:px-10 max-lg:pt-5 shadow-lg border rounded-xl max-lg:h-auto h-[270px] flex max-lg:flex-col lg:gap-5">
+        <div className="max-lg:w-full w-[900px] max-lg:my-10 my-20 max-lg:px-10 max-lg:pt-5 shadow-lg border rounded-xl max-lg:h-auto h-auto pb-6 flex max-lg:flex-col lg:gap-5">
                 <div className="flex flex-col mt-7 ml-7 mb-7">
                     <h3 className="text-xl uppercase font-bold font-palanquin text-stone-950"> Enterprise </h3>
                     <div className="max-lg:flex items-center gap-2.5 max-lg:my-2">
@@ -20,7 +20,10 @@ export default function Services() {
                 <ul className="mt-7 max-lg:px-9">
                     {enterpriseOpr.map((service) => {
                         return (
-                            <li key={service} className="text-base flex items-center max-lg:mb-2 mb-1 font-montserrat text-stone-800"> <GoDotFill/> &nbsp; <span> {service} </span> </li>
+                            <li key={service} className="text-base flex items-center gap-3 max-lg:mb-2 mb-3 font-montserrat text-stone-800"> 
+                                <FaRegCheckCircle className="text-primary w-5 h-5" />
+                                <span> {service} </span>
+                            </li>
                         )
                     })}
                 </ul>

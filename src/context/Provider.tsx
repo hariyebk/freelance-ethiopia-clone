@@ -23,7 +23,7 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [editPortfolioLinks, setEditPortfolioLinks] = useState(false)
     const [editLanguages, setEditLanguages] = useState(false)
     const [isAuthenticated, setAuthenticated] = useState(true)
-    const [role, setRole] = useState("jobseeker")
+    const [role, setRole] = useState("employer")
 
     return (
         <FilterConext.Provider value={{
