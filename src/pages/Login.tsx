@@ -12,7 +12,6 @@ import { useState } from "react";
 export default function Login() {
     const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false)
-    console.log(showPassword)
     const form = useForm<z.infer<typeof  loginValidation>>({
         resolver: zodResolver(loginValidation),
         defaultValues: {

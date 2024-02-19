@@ -1,16 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import { UserAvatarValidation } from "../lib/validation"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../components/ui/form"
 import AvatarUploader from "../shared/pieces/AvatarUploader"
 import Goback from "../shared/pieces/Goback"
 import { useState } from "react"
+import { useUploadAvatar } from "../lib/Tanstackquery/queriesAndMutations"
+import Box from "@mui/material/Box"
+import CircularProgress from "@mui/material/CircularProgress"
 
 export default function UploadUserAvatar() {
-    const navigate = useNavigate()
     const [isAvatar, setIsAvatar] = useState(false)
+    const {isPending, mutate: upload} = useUploadAvatar()
     const form = useForm<z.infer<typeof  UserAvatarValidation>>({
         resolver: zodResolver(UserAvatarValidation),
         defaultValues: {
@@ -19,9 +21,21 @@ export default function UploadUserAvatar() {
     })
 
     async function onSubmit(values: z.infer<typeof UserAvatarValidation>){
-        console.log(values)
-        // TODO: CREATE THE USERS PROFILE PICTURE
-        navigate("/profile-type/new")
+        const imageInfo = values.file[0]
+        upload(imageInfo) 
+    }
+
+    // LOADING SPINNER
+    if(isPending){
+        return (
+            <div className="min-h-screen">
+                <div className="flex items-center justify-center h-screen">
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress/>
+                    </Box>
+                </div>
+            </div>
+        )
     }
     return (
         <section className="w-full mt-40 mb-36">

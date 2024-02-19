@@ -1,7 +1,8 @@
 
 export default function VerifyPhoneNumbre() {
     return (
-        <section className='w-full min-h-screen'>
+        <section className="min-h-screen">
+                
 
         </section>
     )

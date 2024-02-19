@@ -6,13 +6,14 @@ export const loginValidation = z.object({
 })
 export const signupValidation = z.object({
     email: z.string().email(),
-    password: z.string().min(8, { message: "Password must be at least 8 characters." }).optional(),
+    password: z.string().min(8, { message: "Password must be at least 8 characters." }),
     firstName: z.string().min(2, {message: "first name is required"}).max(8, {message: "first name is too long"}),
     lastName: z.string().min(2, {message: "last name is required"}).max(8, {message: "last name is too long"}),
     bio: z.string().min(2, {message: "bio is too short"}).max(100, {message: "bio is too long"}).optional(),
     birthDate: z.string(),
     gender: z.string(),
     country: z.string(),
+    phone: z.string().min(9, {message: "phone number is too short"}).max(9, {message: "please make sure to remove 0 before the number"}).regex(/^[0-9]+$/),
     city: z.string()
 }).refine((value) => {
     // convert the string into date
