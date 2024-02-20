@@ -4,10 +4,11 @@ type USER = signUpType & {
     id: string,
     type: string,
     avatar: string
-} | null
+} 
 
 export type IcontextType = {
-    user: USER,
+    user: USER | null,
+    setUser: React.Dispatch<React.SetStateAction<USER>> | React.Dispatch<React.SetStateAction<null>>
     Loading: boolean,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     openFilter: boolean,

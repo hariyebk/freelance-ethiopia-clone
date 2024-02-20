@@ -1,4 +1,4 @@
-import { Link} from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -10,12 +10,14 @@ import {AccountRoles} from "../types";
 import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
 
 export default function NavBar() {
-    const {setOpenNav, role, user} = useApi()
-    // const {isLoading, data} = useGetUserInfo()
+    const {setOpenNav, role, setRole, user} = useApi()
     const {isPending, mutate: logout} = useLogout() 
+    const navigate = useNavigate()
 
     function handleLogout(){
+        setRole("")
         logout()
+        navigate('/login')
     }
 
     return (

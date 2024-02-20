@@ -31,7 +31,9 @@ export async function Login(email: string, password: string){
         password
     })
     if(error) throw new Error(error.message)
-    return {data}
+    const {data: user, error: error1} = await supabase.from("clients").select("*").eq("email", data.user.email).single()
+    if(error1) throw new Error(error1.message)
+    return {user}  
 }
 export async function Logout(){
     const {error} = await supabase.auth.signOut()

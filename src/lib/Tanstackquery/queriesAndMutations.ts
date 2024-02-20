@@ -4,6 +4,8 @@ import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
 import { authenticated } from "../../constants"
+import useApi from "../../context/hook"
+import { AccountRoles } from "../../types"
 
 // Query and Mutation hooks
 
@@ -20,23 +22,24 @@ export const useSignup = () => {
 }
 // LOGIN
 export const useLogin = () => {
+    const {setRole, setUser} = useApi()
     const navigate = useNavigate()
     return useMutation({
         mutationFn: ({email, password}: {email: string, password: string}) => Login(email, password),
-        onSuccess: () => {
-            navigate('/profile-type')
+        onSuccess: (data) => {
+            setRole(data.user.type)
+            setUser(data.user)
+            toast.success("you are logged in")
+            data.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
         },
         onError: (error) => toast.error(error.message)
     })
 }
 // LOGOUT
 export const useLogout = () => {
-    const navigate = useNavigate()
     return useMutation({
         mutationFn: Logout,
-        onSuccess: () => {
-            navigate('/login')
-        },
+        onSuccess: () => toast.success("you are logged out"),
         onError: () => toast.error("logout failed please try again")
     })
 }

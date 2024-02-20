@@ -11,11 +11,9 @@ import { useState } from "react";
 import { useLogin } from "../lib/Tanstackquery/queriesAndMutations";
 import Box from "@mui/material/Box"
 import CircularProgress from "@mui/material/CircularProgress";
-// import useApi from "../context/hook";
 
 export default function Login() {
-    const {isPending, mutate:login, data} = useLogin()
-    console.log(data)
+    const {isPending, mutate:login} = useLogin()
     const [showPassword, setShowPassword] = useState(false)
     const form = useForm<z.infer<typeof  loginValidation>>({
         resolver: zodResolver(loginValidation),
@@ -31,7 +29,6 @@ export default function Login() {
         const email = values.email
         const password = values.password
         login({email, password})
-        // setRole(data?.data.user.type)
     }
 
     // LOADING SPINNER

@@ -6,6 +6,7 @@ import EmployerProfile from "./pages/EmployerProfile"
 import UploadUserAvatar from "./pages/UploadUserAvatar"
 import useApi from "./context/hook"
 import { Box, CircularProgress } from "@mui/material"
+import { Toaster } from "react-hot-toast"
 
 export default function App() {
   const {Loading} = useApi()
@@ -24,7 +25,6 @@ export default function App() {
 
   // TODO:  FIX THE DELAY
   return (
-    // Provide the client to your App
         <BrowserRouter>
           <Routes>
               <Route element = {<AppLayout />}>
@@ -78,6 +78,7 @@ export default function App() {
               </Route>
               <Route path="/*" element = {<NotFound />} />
           </Routes>
+          <Toaster />
         </BrowserRouter>
   )
 }

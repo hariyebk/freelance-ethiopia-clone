@@ -4,6 +4,7 @@ import {useGetUserInfo } from "../lib/Tanstackquery/queriesAndMutations"
 
 const initial_state = {
     user: null,
+    setUser: () => {},
     Loading: false,
     setLoading: () => {},
     role: "",
@@ -39,6 +40,7 @@ export default function Provider({children}: {children: React.ReactNode}) {
             Loading,
             setLoading,
             user,
+            setUser,
             role,
             setRole,
             openFilter,
