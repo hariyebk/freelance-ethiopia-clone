@@ -498,3 +498,4 @@ export const sortByDate = [
         query: "Earlier first"
     }
 ]
+export const authenticated = "authenticated"

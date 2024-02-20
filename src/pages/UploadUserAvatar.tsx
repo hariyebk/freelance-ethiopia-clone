@@ -9,8 +9,11 @@ import { useState } from "react"
 import { useUploadAvatar } from "../lib/Tanstackquery/queriesAndMutations"
 import Box from "@mui/material/Box"
 import CircularProgress from "@mui/material/CircularProgress"
+import { useNavigate, useParams } from "react-router-dom"
 
 export default function UploadUserAvatar() {
+    const navigate = useNavigate()
+    const {id} = useParams()
     const [isAvatar, setIsAvatar] = useState(false)
     const {isPending, mutate: upload} = useUploadAvatar()
     const form = useForm<z.infer<typeof  UserAvatarValidation>>({
@@ -21,8 +24,13 @@ export default function UploadUserAvatar() {
     })
 
     async function onSubmit(values: z.infer<typeof UserAvatarValidation>){
-        const imageInfo = values.file[0]
-        upload(imageInfo) 
+        // The user can choose not to upload their avatar
+        if(values.file){
+            const imageInfo = values.file[0]
+            upload(imageInfo) 
+            return 
+        }
+        navigate(`/profile-type/${id}/new`)
     }
 
     // LOADING SPINNER

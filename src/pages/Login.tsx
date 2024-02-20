@@ -3,14 +3,19 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { loginValidation } from "../lib/validation";
 import { Form, FormField, FormItem, FormMessage, FormControl} from "../components/ui/form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { Input } from "../components/ui/input";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
+import { useLogin } from "../lib/Tanstackquery/queriesAndMutations";
+import Box from "@mui/material/Box"
+import CircularProgress from "@mui/material/CircularProgress";
+// import useApi from "../context/hook";
 
 export default function Login() {
-    const navigate = useNavigate()
+    const {isPending, mutate:login, data} = useLogin()
+    console.log(data)
     const [showPassword, setShowPassword] = useState(false)
     const form = useForm<z.infer<typeof  loginValidation>>({
         resolver: zodResolver(loginValidation),
@@ -23,9 +28,23 @@ export default function Login() {
         setShowPassword(!showPassword)
     }
     async function onSubmit(values: z.infer<typeof loginValidation>){
-        console.log(values)
-        navigate("/profile-type")
-        
+        const email = values.email
+        const password = values.password
+        login({email, password})
+        // setRole(data?.data.user.type)
+    }
+
+    // LOADING SPINNER
+    if(isPending){
+        return (
+            <div className="min-h-screen">
+                <div className="flex items-center justify-center h-screen">
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress/>
+                    </Box>
+                </div>
+            </div>
+        )
     }
     return (
         <section className="flex w-full min-h-screen items-center justify-center mt-16">

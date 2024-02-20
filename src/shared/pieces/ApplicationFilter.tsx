@@ -16,7 +16,7 @@ export default function ApplicationFilter({saved}: ApplicationFilterProps) {
                 <div className={`${saved ? "hidden": "block"}`}>
                     <Popover>
                         <PopoverTrigger>
-                            <button className="filter"> Filter by status </button>
+                            <div className="filter"> Filter by status </div>
                         </PopoverTrigger>
                         <PopoverContent className="w-fit mt-1 px-4">
                             <div className="flex flex-col w-auto">
@@ -34,7 +34,7 @@ export default function ApplicationFilter({saved}: ApplicationFilterProps) {
                 <div>
                 <Popover>
                     <PopoverTrigger>
-                        <button className="filter"> Sort by date </button>
+                        <div className="filter"> Sort by date </div>
                     </PopoverTrigger>
                     <PopoverContent className="w-fit mt-1">
                         <div className="flex flex-col">

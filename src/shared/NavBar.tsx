@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link} from "react-router-dom"
 import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -6,16 +6,18 @@ import { SlLogout } from "react-icons/sl";
 import NavLinkLogic from "./pieces/NavLinkLogic";
 import { handleAccountSwitch } from "../utils/switchAccount";
 import useApi from "../context/hook";
-import { AccountRoles } from "../types";
+import {AccountRoles} from "../types";
+import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
 
 export default function NavBar() {
-    const {setOpenNav, role} = useApi()
-    const navigate = useNavigate()
-    const fakeuserid = "653e8db1e8b915a518a8"
+    const {setOpenNav, role, user} = useApi()
+    // const {isLoading, data} = useGetUserInfo()
+    const {isPending, mutate: logout} = useLogout() 
+
     function handleLogout(){
-        // TODO: After logging out the user redirect them to the login page
-        navigate("/login")
+        logout()
     }
+
     return (
         <div className="w-full fixed inset-x-0 top-0 z-30">
             <div className="pl-8 max-lg:pt-5 pt-8 pb-5 max-lg:pl-5  flex justify-between items-center bg-white border-b border-b-slate-50">
@@ -32,7 +34,7 @@ export default function NavBar() {
                         </ul>
                     </nav>
                 </div>
-                <div className="flex items-center gap-2 max-lg:mr-2 mr-10">
+                {isPending ? null : <div className="flex items-center gap-2 max-lg:mr-2 mr-10">
                     {role ? (
                         <div className="flex items-center justify-between gap-7">
                             <Link to="/settings" className="hover:text-primary">
@@ -47,9 +49,9 @@ export default function NavBar() {
                                 <SlLogout style = {{fontSize: "26px"}}/>
                             </button>
                             {/* TODO: USER ID */}
-                            <Link to={`${role === AccountRoles.jobseeker ? `/jobseeker-profile/${fakeuserid}`: `/employer-profile/${fakeuserid}`}`} className="max-lg:mr-6 mr-3 -ml-3">
+                            <Link to={`${role === AccountRoles.jobseeker ? `/jobseeker-profile/${user?.id}`: `/employer-profile/${user?.id}`}`} className="max-lg:mr-6 mr-3 -ml-3">
                                 {/* TODO: FETCH THE USERS PROFILE IMAGE*/}
-                                <img src={`${role ? "Images/hari.jpg" : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
+                                <img src={`${user?.avatar ? user.avatar : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
                             </Link>
                         </div>
                     ):(
@@ -60,7 +62,7 @@ export default function NavBar() {
                         </div>
                     )
                     }
-                </div>
+                </div>}
             </div>
         </div>
     )

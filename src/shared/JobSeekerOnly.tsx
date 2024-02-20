@@ -1,17 +1,18 @@
 
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import {AccountRoles} from "../types";
 import useApi from "../context/hook";
-import { AccountRoles } from "../types";
 
 export default function JobSeekerOnly() {
     const {role} = useApi()
     const navigate = useNavigate()
     useEffect(() => {
         if(role !== AccountRoles.jobseeker){
-            navigate("/")
+            navigate("/login")
         }
     }, [role, navigate])
+
     return (
         <section>
             <Outlet />

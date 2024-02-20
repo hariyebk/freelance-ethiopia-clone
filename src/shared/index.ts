@@ -8,5 +8,6 @@ import EditCertifications from "./Profile/EditPages/EditCertifications"
 import Protect from "./Protect"
 import AppLayout from "./AppLayout"
 import JobSeekerOnly from "./JobSeekerOnly"
+import UnAuthenticatedOnly from "./UnAuthenticatedOnly"
 
-export {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly}
+export {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly, UnAuthenticatedOnly}

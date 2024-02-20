@@ -15,7 +15,7 @@ export default function AvatarUploader({fieldchange, mediaUrl, setIsAvatar}: Ava
         setFile(acceptedFiles)
         fieldchange(acceptedFiles)
         setFileUrl(URL.createObjectURL(acceptedFiles[0]))
-    }, [fieldchange, file])
+    }, [fieldchange])
 
     useEffect(() => {
         if(!setIsAvatar){

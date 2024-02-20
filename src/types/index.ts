@@ -1,6 +1,15 @@
+import { signUpType } from "../pages/Register"
+
+type USER = signUpType & {
+    id: string,
+    type: string,
+    avatar: string
+} | null
+
 export type IcontextType = {
-    isAuthenticated: boolean,
-    setAuthenticated:  React.Dispatch<React.SetStateAction<boolean>>,
+    user: USER,
+    Loading: boolean,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     openFilter: boolean,
     openNav: boolean
     setOpenFilter: React.Dispatch<React.SetStateAction<boolean>>,

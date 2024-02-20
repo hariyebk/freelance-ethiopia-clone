@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import SideFilter from "./pieces/SideFilter";
@@ -11,6 +11,7 @@ import useApi from "../context/hook";
 
 export default function AppLayout() {
     const {openFilter, openNav, editPortfolioLinks, setEditPortfolioLinks, editLanguages, setEditLanguages} = useApi()
+
     return (
         <section className="max-lg:overflow-x-hidden">
             <NavBar/>  

@@ -4,13 +4,13 @@ import { useEffect} from "react";
 import useApi from "../context/hook";
 
 export default function Protect() {
-    const {isAuthenticated} = useApi()
+    const {role} = useApi()
     const navigate = useNavigate()
     useEffect(() => {
-        if(!isAuthenticated){
+        if(!role){
             navigate("/login")
         }
-    }, [isAuthenticated, navigate])
+    }, [role, navigate])
     return (
         <section>
             <Outlet />

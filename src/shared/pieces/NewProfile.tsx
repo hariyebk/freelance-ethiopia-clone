@@ -1,7 +1,9 @@
 import { useReducer} from "react"
-import { AccountRoles, AccountTypes } from "../../types"
+import { AccountRoles} from "../../types"
 import { useNavigate } from "react-router-dom"
-import useApi from "../../context/hook"
+import { useUpdateAccountType } from "../../lib/Tanstackquery/queriesAndMutations"
+import Box from "@mui/material/Box"
+import CircularProgress from "@mui/material/CircularProgress"
 
 interface STATEPROPS {
     Jobseeker: boolean,
@@ -77,35 +79,46 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 
 export default function NewProfile(){
     const navigate = useNavigate()
-    const {role, setRole} = useApi()
+    const {isPending, mutate: updateAccountType} = useUpdateAccountType()
     const [{Jobseeker, Private, Coorporate, Lstartup, Ustartup}, dispatch] = useReducer(reducer, initial)
     // checks if at least one of the account type is selected , then it turn the button color to orange, if noting is selected it will stay inactive
     const isNotSelected = !Jobseeker && !Private && !Coorporate && !Lstartup && !Ustartup
     let currentlyActive: string
     if(Jobseeker){
-        currentlyActive = AccountTypes.job_seeker
+        currentlyActive = AccountRoles.jobseeker
     }
-    if(Private){
-        currentlyActive = AccountTypes.private
+    else if(Private){
+        currentlyActive = AccountRoles.employer
     }
-    if(Coorporate){
-        currentlyActive = AccountTypes.Coorporate
+    else if(Coorporate){
+        currentlyActive = AccountRoles.employer
     }
-    if(Lstartup){
-        currentlyActive = AccountTypes.licensed_startup
+    else if(Lstartup){
+        currentlyActive = AccountRoles.employer
     }
-    if(Ustartup){
-        currentlyActive = AccountTypes.unlicensed_startup
+    else if(Ustartup){
+        currentlyActive = AccountRoles.employer
     }
-    function handleAccountType(){
-        console.log(currentlyActive)
-        // TODO: SET THE USERS ACCOUNT TYPE
-        if(currentlyActive === AccountRoles.jobseeker && !role){
-            // TODO: update the user's role in DB
-            setRole(AccountRoles.jobseeker)
-            navigate("/job")
-        }
 
+
+    function handleAccountType(){
+        // If nothing is selected , return
+        if(!currentlyActive) return
+        updateAccountType(currentlyActive)
+        // setRole(currentlyActive)
+        currentlyActive === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+    }
+
+    if(isPending){
+        return (
+            <div className="min-h-screen">
+                <div className="flex items-center justify-center h-screen">
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress/>
+                    </Box>
+                </div>
+            </div>
+        )
     }
     return (
         <section className="max-lg:w-[300px] w-full">
