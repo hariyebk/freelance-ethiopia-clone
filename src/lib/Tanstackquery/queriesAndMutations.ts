@@ -65,11 +65,14 @@ export const useGetCurrentUser = () => {
 }
 // GET FULL USER INFO
 export const useGetUserInfo = () => {
-    const {isLoading, data} = useQuery({
+    const {isLoading, data, error} = useQuery({
         queryKey: ["user_info"],
         queryFn: FetchFullUserData
     })
+    if(error) throw new Error(error.message)
+
     return {isLoading, data}
+
 }
 // UPDATE ACCOUNT TYPE
 export const useUpdateAccountType = () => {
