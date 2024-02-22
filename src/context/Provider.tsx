@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { AccountRoles, IcontextType, USER } from "../types"
+import { IcontextType, USER } from "../types"
 import {useGetUserInfo } from "../lib/Tanstackquery/queriesAndMutations"
 import { useNavigate } from "react-router-dom"
 
@@ -31,11 +31,11 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [role, setRole] = useState("")
     const [user, setUser] = useState<USER | null>(null)
 
-    function updateRoleAndUser(){
-        if(!role && data?.user){
+function updateRoleAndUser(){
+        if(!role &&  data?.user){
             setRole(data?.user?.type)
             setUser(data?.user)
-            return data?.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+            navigate("/profile-type")
         }
     }
     useEffect(() => {

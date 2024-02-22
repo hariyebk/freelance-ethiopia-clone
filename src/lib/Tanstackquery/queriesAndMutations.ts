@@ -73,10 +73,9 @@ export const useGetCurrentUser = () => {
 }
 // GET FULL USER INFO
 export const useGetUserInfo = () => {
-    const {role} = useApi()
     const {isLoading, data} = useQuery({
         queryKey: ["user_info"],
-        queryFn: () => FetchFullUserData(role)
+        queryFn:  FetchFullUserData
     })
     return {isLoading, data}
 

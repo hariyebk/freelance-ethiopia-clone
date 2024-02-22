@@ -1,4 +1,4 @@
-import { Link, useNavigate} from "react-router-dom"
+import { Link} from "react-router-dom"
 import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -8,11 +8,11 @@ import { handleAccountSwitch } from "../utils/switchAccount";
 import useApi from "../context/hook";
 import {AccountRoles} from "../types";
 import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
+import { Box, CircularProgress } from "@mui/material";
 
 export default function NavBar() {
     const {setOpenNav, role, user} = useApi()
     const {isPending, mutate: logout} = useLogout()
-    const navigate = useNavigate() 
 
     function handleLogout(){
         logout()
@@ -44,7 +44,18 @@ export default function NavBar() {
                             <Link to="/profile-type" className="hover:text-primary max-lg:hidden" onClick={handleAccountSwitch}>
                                 <RxLoop style = {{fontSize: "26px"}} />
                             </Link>
-                            <button onClick={handleLogout} className="max-lg:hidden bg-stone-800 mr-3 text-slate-100 text-sm py-2 max-lg:px-5 px-7 rounded-full"> Log out</button>
+                            {isPending ? (
+                            <div>
+                                <Box sx={{ display: 'flex' }}>
+                                    <CircularProgress size={20}/>
+                                </Box>
+                            </div>
+                                
+                                ) :
+                                (
+                                <button onClick={handleLogout} className="max-lg:hidden bg-stone-800 mr-3 text-slate-100 text-sm py-2 max-lg:px-5 px-7 rounded-full"> Log out</button>
+                                )
+                            }
                             <button onClick={handleLogout} className="lg:hidden mr-5 hover:text-primary">
                                 <SlLogout style = {{fontSize: "26px"}}/>
                             </button>

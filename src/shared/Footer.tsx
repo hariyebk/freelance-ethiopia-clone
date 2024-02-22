@@ -2,6 +2,7 @@ import { contactInfo, footerLinks} from "../constants"
 import { FiPhoneCall } from "react-icons/fi";
 import { CiMail } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     return (
@@ -12,20 +13,18 @@ export default function Footer() {
                         <img src="/Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />
                         <p className="mt-5 font-montserrat text-slate-200 max-lg:text-sm max-lg:w-[200px] text-base font-normal  max-w-[400px]"> Powerful Freelance Marketplace System with ability to change the Users (Freelancers & Clients)</p>
                     </div>
-                    <div className="flex justify-between items-center max-lg:max-w-[450px] w-[500px] gap-2">
+                    <div className="flex items-center max-lg:max-w-[450px] w-[500px] gap-10">
                         {
                             footerLinks.map((catagory) => {
                                 return (
-                                    <div key={catagory.Title} className="flex flex-1 flex-col gap-5 text-slate-200">
+                                    <div key={catagory.Title} className="flex flex-col gap-5 text-slate-200">
                                         <h3 className="font-bold font-palanquin max-lg:text-base text-lg"> {catagory.Title} </h3>
-                                        <ul>
+                                        <ul className="flex flex-col gap-2">
                                             {catagory.link.map((link) => {
                                                 return (
-                                                    <li key={link.label} className="font-montserrat text-sm mb-2">
-                                                        <a href={link.path}>
-                                                            {link.label}
-                                                        </a>
-                                                    </li>
+                                                    <Link to={link.path} key={link.label} className="font-montserrat text-sm mb-2">
+                                                        {link.label}
+                                                    </Link>
                                                 )
                                             })}
                                         </ul>

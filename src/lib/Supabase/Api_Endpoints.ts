@@ -46,12 +46,11 @@ export async function getCurrentUser(){
     if(error) throw new Error(error.message)
     return data
 }
-export async function FetchFullUserData(role: string){
-    if(role) return
+export async function FetchFullUserData(){
     const data = await getCurrentUser()
-    if(!data) throw new Error("no current authenticated user found")
+    if(!data) return null
     const {data: user, error} = await supabase.from("clients").select("*").eq("email", data.user.email).single()
-    if(error) throw new Error(error.message)
+    if(error) return null
     return {user}    
 }
 export async function UploadAvatar(id: string, imageInfo: File){
