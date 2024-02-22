@@ -1,4 +1,4 @@
-import { Link} from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -10,12 +10,11 @@ import {AccountRoles} from "../types";
 import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
 
 export default function NavBar() {
-    const {setOpenNav, role, user, setLoading} = useApi()
-    const {isPending, mutate: logout} = useLogout() 
-    console.log(role)
+    const {setOpenNav, role, user} = useApi()
+    const {isPending, mutate: logout} = useLogout()
+    const navigate = useNavigate() 
 
     function handleLogout(){
-        setLoading(isPending)
         logout()
     }
 
@@ -26,7 +25,7 @@ export default function NavBar() {
                     <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
                         <HiBars4 style = {{fontSize: "30px", color: "#e94969"}} />
                     </button>
-                    <Link to={`${role === AccountRoles.jobseeker ? "/job" : "/"}`}>
+                    <Link to={`${role ? role === AccountRoles.jobseeker ? "/job" : "/my-posts": "/"}`}>
                         <img src="/Images/logo.png" alt="logo" className="h-10 w-32 object-contain" />
                     </Link>
                     <nav className="max-xl:hidden ml-7">

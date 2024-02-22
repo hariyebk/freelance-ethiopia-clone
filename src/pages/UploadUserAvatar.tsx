@@ -25,7 +25,7 @@ export default function UploadUserAvatar() {
 
     async function onSubmit(values: z.infer<typeof UserAvatarValidation>){
         // The user can choose not to upload their avatar
-        if(values.file){
+        if(values.file.length > 0){
             const imageInfo = values.file[0]
             upload(imageInfo) 
             return 

@@ -13,29 +13,31 @@ export default function Faq() {
                 {
                     faq.map((q) => {
                         return (
-                        <Accordion disableGutters elevation={0} className='border shadow-md py-2 px-3'>
-                            <AccordionSummary
-                            expandIcon={<MdExpandMore />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                            >
-                            <Typography className='mb-3 max-lg:text-base text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                            <Typography className='text-sm text-stone-600 mx-5'>
-                                {q.answer && <p className='mx-4 mb-3'> {q.answer} </p>}
-                                {q.list && (
-                                    <ul  className='mx-10 list-disc space-y-2'>
-                                        {q.list.map((point: string, index: number) => {
-                                            return (
-                                                <li key={index}> {point} </li>
-                                            )
-                                        })}
-                                    </ul>
-                                )}
-                            </Typography>
-                            </AccordionDetails>
-                        </Accordion>
+                            <div key={q.question}>
+                                <Accordion disableGutters elevation={0} className='border shadow-md py-2 px-3'>
+                                    <AccordionSummary
+                                    expandIcon={<MdExpandMore />}
+                                    aria-controls="panel1a-content"
+                                    id="panel1a-header"
+                                    >
+                                    <Typography className='mb-3 max-lg:text-base text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
+                                    </AccordionSummary>
+                                    <AccordionDetails>
+                                    <Typography className='text-sm text-stone-600 mx-5'>
+                                        {q.answer && <span className='mx-4 mb-3'> {q.answer} </span>}
+                                        {q.list && (
+                                            <span  className='mx-10 list-disc space-y-2'>
+                                                {q.list.map((point: string, index: number) => {
+                                                    return (
+                                                        <li key={index}> {point} </li>
+                                                    )
+                                                })}
+                                            </span>
+                                        )}
+                                    </Typography>
+                                    </AccordionDetails>
+                                </Accordion>
+                            </div>
                         )
                     })
                 }

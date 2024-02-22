@@ -1,6 +1,8 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { IoAdd } from "react-icons/io5";
+import toast from "react-hot-toast";
+import { AccountRoles } from "../../types";
 
 interface AccountCardProps {
     name: string,
@@ -8,6 +10,13 @@ interface AccountCardProps {
 }
 export default function AcccountCard({name, role}: AccountCardProps) {
     const [selected, setSelected] = useState(false)
+    const navigate = useNavigate()
+    function handleClick(){
+        if(!selected){
+            return toast.error("please choose your account first")
+        }
+        return role === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+    }
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="max-lg:w-[400px] w-[390px] h-[100px] max-lg:mt-6 mt-3 bg-white shadow-md rounded-md flex items-center justify-between gap-5 px-4 py-7">
@@ -25,7 +34,7 @@ export default function AcccountCard({name, role}: AccountCardProps) {
                     <IoAdd style = {{fontSize: "22px"}} />
                     <p className="mt-1 text-sm text-stone-800 font-palanquin hover:text-primary"> Add New </p>
                 </Link>
-                <button className= {`${!selected ? "bg-stone-800 opacity-50" : "bg-gradient-to-r from-primary to-secondary"} mt-14 ml-20 max-lg:text-base text-sm text-slate-100 cursor-pointer rounded-full px-7 py-2 focus-visible:outline-none`} disabled = {!selected}> Choose Account Type </button>
+                <button onClick={handleClick} className= {`${!selected ? "bg-stone-800 opacity-50" : "bg-gradient-to-r from-primary to-secondary"} mt-14 ml-20 max-lg:text-base text-sm text-slate-100 cursor-pointer rounded-full px-7 py-2 focus-visible:outline-none`} disabled = {!selected}> Choose Account Type </button>
             </div>
         </div>
     )

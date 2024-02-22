@@ -1,6 +1,6 @@
 import { signUpType } from "../pages/Register"
 
-type USER = signUpType & {
+export type USER = signUpType & {
     id: string,
     type: string,
     avatar: string
@@ -8,7 +8,7 @@ type USER = signUpType & {
 
 export type IcontextType = {
     user: USER | null,
-    setUser: React.Dispatch<React.SetStateAction<USER>> | React.Dispatch<React.SetStateAction<null>>
+    setUser: React.Dispatch<React.SetStateAction<USER | null>> | React.Dispatch<React.SetStateAction<null>>
     Loading: boolean,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
     openFilter: boolean,

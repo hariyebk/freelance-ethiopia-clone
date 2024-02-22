@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
-import { AccountRoles } from "../../types"
 
 // Query and Mutation hooks
 
@@ -27,25 +26,27 @@ export const useLogin = () => {
     return useMutation({
         mutationFn: ({email, password}: {email: string, password: string}) => Login(email, password),
         onSuccess: (data) => {
-            setRole(data.user.type)
-            setUser(data.user)
             toast.success("you are logged in")
-            return data.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+            if(data.user.type){
+                setRole(data.user.type)
+                setUser(data.user)
+                return navigate("/profile-type")
+            }
         },
         onError: (error) => toast.error(error.message)
     })
 }
 // LOGOUT
 export const useLogout = () => {
-    const {setRole} = useApi()
+    const {setRole, setUser} = useApi()
     const navigate = useNavigate()
     return useMutation({
         mutationFn: Logout,
         onSuccess: () => {
-            console.log("hello")
             setRole("")
+            setUser(null)
             toast.success("you are logged out")
-            navigate('/login')
+            return navigate("/login")
         },
         onError: () => toast.error("logout failed please try again")
     })
@@ -72,10 +73,10 @@ export const useGetCurrentUser = () => {
 }
 // GET FULL USER INFO
 export const useGetUserInfo = () => {
-    // const {role} = useApi()
+    const {role} = useApi()
     const {isLoading, data} = useQuery({
         queryKey: ["user_info"],
-        queryFn: FetchFullUserData
+        queryFn: () => FetchFullUserData(role)
     })
     return {isLoading, data}
 

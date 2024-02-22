@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import { AccountRoles, IcontextType } from "../types"
+import { AccountRoles, IcontextType, USER } from "../types"
 import {useGetUserInfo } from "../lib/Tanstackquery/queriesAndMutations"
 import { useNavigate } from "react-router-dom"
 
@@ -29,16 +29,19 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [editPortfolioLinks, setEditPortfolioLinks] = useState(false)
     const [editLanguages, setEditLanguages] = useState(false)
     const [role, setRole] = useState("")
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState<USER | null>(null)
 
-    useEffect(() => {
-        setLoading(isLoading)
-        if(!role && data?.user.type){
+    function updateRoleAndUser(){
+        if(!role && data?.user){
             setRole(data?.user?.type)
             setUser(data?.user)
-            data?.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+            return data?.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
         }
-    }, [isLoading, data?.user, navigate, role])
+    }
+    useEffect(() => {
+        setLoading(isLoading)
+        updateRoleAndUser()
+    },[isLoading])
 
     
     return (

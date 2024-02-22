@@ -46,7 +46,8 @@ export async function getCurrentUser(){
     if(error) throw new Error(error.message)
     return data
 }
-export async function FetchFullUserData(){
+export async function FetchFullUserData(role: string){
+    if(role) return
     const data = await getCurrentUser()
     if(!data) throw new Error("no current authenticated user found")
     const {data: user, error} = await supabase.from("clients").select("*").eq("email", data.user.email).single()
