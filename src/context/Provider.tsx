@@ -32,13 +32,13 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        setRole(data?.user.type)
-        setUser(data?.user)
         setLoading(isLoading)
-        if(data?.user.type){
-            return data?.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+        if(!role && data?.user.type){
+            setRole(data?.user?.type)
+            setUser(data?.user)
+            data?.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
         }
-    }, [isLoading, data?.user, navigate])
+    }, [isLoading, data?.user, navigate, role])
 
     
     return (

@@ -30,16 +30,23 @@ export const useLogin = () => {
             setRole(data.user.type)
             setUser(data.user)
             toast.success("you are logged in")
-            data.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+            return data.user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
         },
         onError: (error) => toast.error(error.message)
     })
 }
 // LOGOUT
 export const useLogout = () => {
+    const {setRole} = useApi()
+    const navigate = useNavigate()
     return useMutation({
         mutationFn: Logout,
-        onSuccess: () => toast.success("you are logged out"),
+        onSuccess: () => {
+            console.log("hello")
+            setRole("")
+            toast.success("you are logged out")
+            navigate('/login')
+        },
         onError: () => toast.error("logout failed please try again")
     })
 }
@@ -65,12 +72,11 @@ export const useGetCurrentUser = () => {
 }
 // GET FULL USER INFO
 export const useGetUserInfo = () => {
-    const {isLoading, data, error} = useQuery({
+    // const {role} = useApi()
+    const {isLoading, data} = useQuery({
         queryKey: ["user_info"],
         queryFn: FetchFullUserData
     })
-    if(error) throw new Error(error.message)
-
     return {isLoading, data}
 
 }

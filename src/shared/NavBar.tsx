@@ -1,4 +1,4 @@
-import { Link, useNavigate} from "react-router-dom"
+import { Link} from "react-router-dom"
 import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -10,14 +10,13 @@ import {AccountRoles} from "../types";
 import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
 
 export default function NavBar() {
-    const {setOpenNav, role, setRole, user} = useApi()
+    const {setOpenNav, role, user, setLoading} = useApi()
     const {isPending, mutate: logout} = useLogout() 
-    const navigate = useNavigate()
+    console.log(role)
 
     function handleLogout(){
-        setRole("")
+        setLoading(isPending)
         logout()
-        navigate('/login')
     }
 
     return (
@@ -36,7 +35,7 @@ export default function NavBar() {
                         </ul>
                     </nav>
                 </div>
-                {isPending ? null : <div className="flex items-center gap-2 max-lg:mr-2 mr-10">
+                <div className="flex items-center gap-2 max-lg:mr-2 mr-10">
                     {role ? (
                         <div className="flex items-center justify-between gap-7">
                             <Link to="/settings" className="hover:text-primary">
@@ -64,7 +63,7 @@ export default function NavBar() {
                         </div>
                     )
                     }
-                </div>}
+                </div>
             </div>
         </div>
     )
