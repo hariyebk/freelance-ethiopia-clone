@@ -40,7 +40,6 @@ export default function NavBar() {
                             <Link to="/settings" className="hover:text-primary">
                                 <IoSettingsOutline style = {{fontSize: "26px"}} />
                             </Link>
-                            {/* TODO: show only if the user has another registered account */}
                             <Link to="/profile-type" className="hover:text-primary max-lg:hidden" onClick={handleAccountSwitch}>
                                 <RxLoop style = {{fontSize: "26px"}} />
                             </Link>
@@ -59,9 +58,7 @@ export default function NavBar() {
                             <button onClick={handleLogout} className="lg:hidden mr-5 hover:text-primary">
                                 <SlLogout style = {{fontSize: "26px"}}/>
                             </button>
-                            {/* TODO: USER ID */}
                             <Link to={`${role === AccountRoles.jobseeker ? `/jobseeker-profile/${user?.id}`: `/employer-profile/${user?.id}`}`} className="max-lg:mr-6 mr-3 -ml-3">
-                                {/* TODO: FETCH THE USERS PROFILE IMAGE*/}
                                 <img src={`${user?.avatar ? user.avatar : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
                             </Link>
                         </div>

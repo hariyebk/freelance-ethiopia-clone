@@ -1,5 +1,6 @@
 import supabase from "./config"
 import { signUpType } from "../../pages/Register"
+import { POST1 } from "../../types"
 
 // API ENDPOINTS
 export async function Signup(userInfo: signUpType){
@@ -68,4 +69,9 @@ export async function UpdateUserAccountType (id: string, accountType: string){
     const {data, error} = await supabase.from("clients").update({type: accountType}).eq("id", id).select("*")
     if(error) throw new Error(error.message)
     return {data}
+}
+export async function createPost1(post: POST1){
+    const {data:jobpost, error} = await supabase.from("posts").insert([{...post}]).select()
+    if(error) throw new Error("failed to post, please try again")
+    return {jobpost}
 }

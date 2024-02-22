@@ -1,5 +1,5 @@
 import { Route, Routes} from "react-router-dom"
-import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber } from "./pages"
+import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber, PostDescriptions } from "./pages"
 import {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly} from "./shared"
 import EmployersOnly from "./shared/EmployersOnly"
 import EmployerProfile from "./pages/EmployerProfile"
@@ -69,6 +69,7 @@ export default function App(){
                     } >
                             <Route path="/my-posts" element={<MyPosts />} />
                             <Route path="/post" element={<Post />} />
+                            <Route path="/post/:id/descriptions" element={<PostDescriptions />} />
                             <Route path="/post:id" element={<PostDetails />} />
                             <Route path="/employer-profile/:id" element = {<EmployerProfile />} />
                     </Route>

@@ -34,6 +34,10 @@ export const EmployerNavLinks = [
     {
         path: "/post",
         label: "Post A job"
+    },
+    {
+        path: "/post/10/descriptions",
+        label: "Post desc"
     }
 ]
 export const footerLinks = [
@@ -275,6 +279,10 @@ export const cities = [
         label: "Dire Dawa"
     },
     {
+        value: "mk",
+        label: "Mekele"
+    },
+    {
         value: "hw",
         label: "Hawasa"
     },
@@ -297,7 +305,35 @@ export const cities = [
     {
         value: "hr",
         label: "Harar"
-    }
+    },
+    {
+        value: "jm",
+        label: "Jimma"
+    },
+    {
+        value: "so",
+        label: "Sodo"
+    },
+    {
+        value: "sh",
+        label: "Shashemene"
+    },
+    {
+        value: "gm",
+        label: "Gambela"
+    },
+    {
+        value: "ar",
+        label: "Arba minch"
+    },
+    {
+        value: "de",
+        label: "Dessie"
+    },
+    {
+        value: "ho",
+        label: "Hosana"
+    },
 ]
 export const jobDescription = "looking for a Sales Agent that is highly motivated and results-oriented to join our team. You will be responsible for selling our services to new and existing customers, as well as meeting sales targets and goals as a Sales Agent."
 export const jobResponsibilities = [
@@ -367,6 +403,11 @@ export const Experience = [
     "Junior",
     "Intermidate",
     "Senior"
+]
+export const CompensationTypes = [
+    "Monthly",
+    "Hourly",
+    "Fixed"
 ]
 export const salary = [
     "< 5,000",

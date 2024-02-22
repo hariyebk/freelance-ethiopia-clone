@@ -83,17 +83,27 @@ export const SettingsValidation = z.object({
         path: ["passwordConfirm"],
     }
 )
-export const JobPostValidation = z.object({
+export const Post1Validation = z.object({
     title: z.string().min(2, {message: "Job Title is too short"}).max(70, {message: "Job Title is too long"}),
     site: z.string(),
     type: z.string(),
     level: z.string(),
     sector: z.string(),
-    experience: z.string(),
+    compensationType: z.string(),
+    location: z.string().optional(),
     gender: z.string(),
     deadline: z.string(),
     quantity: z.number().default(1)
 })
+export const Post2Validation = z.object({
+    salary: z.string().regex(/^[0-9]+$/).optional(),
+    description: z.string(),
+    responsibilities: z.string(),
+    requirments: z.string(),
+    qualifications: z.string().optional(),
+    howToApply: z.string()
+})
+
 export const CoverLetterValidation = z.object({
     coverLetter: z.string().min(5, {message: "Cover letter is too short"}).max(800, {message: "cover letter should have a maximum of 800 charcters. This is too long"})
 })

@@ -6,6 +6,22 @@ export type USER = signUpType & {
     avatar: string
 } 
 
+export type POST1 = {
+    title: string,
+    site: string,
+    type: string,
+    level: string,
+    sector: string,
+    compensationType: string,
+    location?: string,
+    gender: string,
+    deadline: string,
+    quantity: number
+}
+
+export type POST2 = {
+    description: string
+}
 export type IcontextType = {
     user: USER | null,
     setUser: React.Dispatch<React.SetStateAction<USER | null>> | React.Dispatch<React.SetStateAction<null>>

@@ -1,10 +1,11 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
-import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, getCurrentUser } from "../Supabase/Api_Endpoints"
+import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, getCurrentUser } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
+import { POST1 } from "../../types"
 
 // Query and Mutation hooks
 
@@ -86,5 +87,17 @@ export const useUpdateAccountType = () => {
     return useMutation({
         mutationFn: (accountType: string) => UpdateUserAccountType(id!, accountType),
         onError: () => toast.error("failed to set your account type")
+    })
+}
+//  CREATE FIRST POST SECTION
+export const useCreatePost = () => {
+    const navigate = useNavigate()
+    return useMutation({
+        mutationFn: (post: POST1) => createPost1(post),
+        onSuccess: (data) => {
+            console.log(data)
+            navigate(`/post/${data.jobpost[0].id}/descriptions`)
+        },
+        onError: (error) => toast(error.message)
     })
 }

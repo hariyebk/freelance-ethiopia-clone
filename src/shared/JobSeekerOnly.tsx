@@ -7,10 +7,13 @@ import useApi from "../context/hook";
 export default function JobSeekerOnly() {
     const {role} = useApi()
     const navigate = useNavigate()
-    console.log(role)
+
     useEffect(() => {
-        if(role !== AccountRoles.jobseeker){
+        if(!role){
             return navigate("/login")
+        }
+        if(role !== AccountRoles.jobseeker){
+            return navigate("/profile-type")
         }
     }, [role, navigate])
 
