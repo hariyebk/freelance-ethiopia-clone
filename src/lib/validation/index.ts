@@ -84,7 +84,7 @@ export const SettingsValidation = z.object({
     }
 )
 export const Post1Validation = z.object({
-    title: z.string().min(2, {message: "Job Title is too short"}).max(70, {message: "Job Title is too long"}),
+    title: z.string().min(2, {message: "Job Title is required or is too short"}).max(70, {message: "Job Title is too long"}),
     site: z.string(),
     type: z.string(),
     level: z.string(),
@@ -93,16 +93,59 @@ export const Post1Validation = z.object({
     location: z.string().optional(),
     gender: z.string(),
     deadline: z.string(),
-    quantity: z.number().default(1)
+    quantity: z.string().regex(/^[0-9]+$/)
 })
 export const Post2Validation = z.object({
-    salary: z.string().regex(/^[0-9]+$/).optional(),
+    salary: z.string().optional(),
     description: z.string(),
     responsibilities: z.string(),
     requirments: z.string(),
     qualifications: z.string().optional(),
-    howToApply: z.string()
-})
+    howToApply: z.string().optional()
+}).refine(
+    (value) => {
+        console.log(value.responsibilities)
+        return /,/.test(value.responsibilities)
+    },
+    {
+        message: "Please use comma to separate each responsibilities",
+        path: ["responsibilities"],
+    }
+).refine(
+    (value) => {
+        return /,/.test(value.requirments)
+    },
+    {
+        message: "Please use comma to separate each requirments",
+        path: ["responsibilities"],
+    }
+).refine(
+    (value) => {
+        if(value.qualifications){
+            return /,/.test(value.qualifications)
+        }
+        else{
+            return true
+        }
+    },
+    {
+        message: "Please use comma to separate each qualifications",
+        path: ["qualifications"],
+    }
+).refine(
+    (value) => {
+        if(value.salary){
+            return /^[0-9]+$/.test(value.salary)
+        }
+        else{
+            return true
+        }
+    },
+    {
+        message: "salary must be a number",
+        path: ["salary"],
+    }
+)
 
 export const CoverLetterValidation = z.object({
     coverLetter: z.string().min(5, {message: "Cover letter is too short"}).max(800, {message: "cover letter should have a maximum of 800 charcters. This is too long"})

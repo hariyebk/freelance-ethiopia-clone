@@ -52,6 +52,7 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
             handleSubmit(values)
         }    
     }
+    
     return (
         <section className="w-full flex items-start justify-center max-lg:3 mt-10 mb-32">
             <Form {...form}>

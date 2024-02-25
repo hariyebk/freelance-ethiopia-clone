@@ -1,6 +1,6 @@
 import supabase from "./config"
 import { signUpType } from "../../pages/Register"
-import { POST1 } from "../../types"
+import { POST1, POST2 } from "../../types"
 
 // API ENDPOINTS
 export async function Signup(userInfo: signUpType){
@@ -60,18 +60,50 @@ export async function UploadAvatar(id: string, imageInfo: File){
     const imagename = imageInfo.name.replace("/", "")
     const {error: fileUploadError, data: image } = await supabase.storage.from(bucketName).upload(imagename, imageInfo)
     if(fileUploadError) throw new Error(fileUploadError.message)
-    // TODO: update the user's data to include a url for their avatar
     const {data, error} = await supabase.from("clients").update({avatar: `${imageUrl}/${image.path}`}).eq("id", id)
     if(error) throw new Error(error.message)
     return {data}
 }
 export async function UpdateUserAccountType (id: string, accountType: string){
-    const {data, error} = await supabase.from("clients").update({type: accountType}).eq("id", id).select("*")
+    const {data: user, error} = await supabase.from("clients").update({type: accountType}).eq("id", id).select("*")
     if(error) throw new Error(error.message)
-    return {data}
+    return {user}
 }
 export async function createPost1(post: POST1){
-    const {data:jobpost, error} = await supabase.from("posts").insert([{...post}]).select()
-    if(error) throw new Error("failed to post, please try again")
+    const {data:jobpost, error} = await supabase.from("post").insert([{
+        postedBy: post.postedBy,
+        title: post.title,
+        site: post.site,
+        type: post.type,
+        level: post.level,
+        sector: post.sector,
+        compensationType: post.compensationType,
+        location: post.location ? post.location : null,
+        gender: post.gender,
+        deadline: post.deadline,
+        quantity: parseInt(post.quantity)
+    }]).select()
+    if(error?.message) throw new Error(error.message)
     return {jobpost}
+}
+
+
+export async function createPost2(id: string, post: POST2){ 
+    const {data, error} = await supabase.from("post").update({ description: post.description, salary: post.salary ? parseInt(post.salary) : null, 
+        responsibilities: post.responsibilities.replace(/[\n\r]/g, "").split(","),
+        requirments: post.requirments.replace(/[\n\r]/g, "").split(","),
+        qualifications: post.qualifications ? post.qualifications.split(",") : null,
+        howToApply: post.howToApply ? post.howToApply : null
+    }).eq("id", id).select()
+
+    if(error) throw new Error(error.message)
+    console.log(error)
+
+    return {data}
+}
+
+export async function findPostById(id: string){
+    const {data:post, error} = await supabase.from("post").select("*").eq("id", id).single()
+    if(error) throw new Error(error.message)
+    return {post}
 }

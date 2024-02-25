@@ -1,11 +1,11 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
-import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, getCurrentUser } from "../Supabase/Api_Endpoints"
+import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, findPostById, getCurrentUser } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
-import { POST1 } from "../../types"
+import { POST1, POST2 } from "../../types"
 
 // Query and Mutation hooks
 
@@ -84,20 +84,56 @@ export const useGetUserInfo = () => {
 // UPDATE ACCOUNT TYPE
 export const useUpdateAccountType = () => {
     const {id} = useParams()
+    const navigate = useNavigate()
+    const {setRole, setUser} = useApi()
     return useMutation({
         mutationFn: (accountType: string) => UpdateUserAccountType(id!, accountType),
+        onSuccess: (data) => {
+            setRole(data.user[0].type)
+            setUser(data.user[0])
+            toast.success("account created successfully")
+            navigate(`/profile-type/`)
+        },
         onError: () => toast.error("failed to set your account type")
     })
 }
 //  CREATE FIRST POST SECTION
-export const useCreatePost = () => {
+export const useCreatePost1 = () => {
     const navigate = useNavigate()
     return useMutation({
         mutationFn: (post: POST1) => createPost1(post),
         onSuccess: (data) => {
-            console.log(data)
-            navigate(`/post/${data.jobpost[0].id}/descriptions`)
+            if(!data.jobpost?.length){
+                return toast.error("failed to create the post, please try agian")
+            }
+            navigate(`/post/${data?.jobpost[0].id}/descriptions`)
         },
         onError: (error) => toast(error.message)
     })
+}
+// CREATE SECOND POST SECTION
+export const useCreatePost2 = () => {
+    const navigate = useNavigate()
+    const {id} = useParams()
+    return useMutation({
+        mutationFn: (post: POST2) => createPost2(id!, post),
+        onSuccess: (data) => {
+            console.log(data)
+            if(data.data.length === 0){
+                return toast.error("failed to create the post, something went wrong")
+            }
+            toast.success("post has been successfully created")
+            navigate("/my-posts")
+        },
+        onError: (error) => toast(error.message)
+    })
+}
+// FIND POST BY ID
+export const useFindPostById = () => {
+    const {id} = useParams()
+    const {isLoading, data} = useQuery({
+        queryKey: ["find_post"],
+        queryFn: () =>  findPostById(id!)
+    })
+    return {isLoading, data}
 }

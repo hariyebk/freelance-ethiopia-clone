@@ -102,7 +102,7 @@ export default function Settings() {
                                     <div className="leading-2 border border-gray-500 rounded-md">
                                         <Select onValueChange= {field.onChange} defaultValue={field.value}>
                                             <FormControl>
-                                                <SelectTrigger>
+                                                <SelectTrigger className="focus:border-none focus:outline-none focus:ring-white">
                                                     <SelectValue placeholder="Select the sector"/>
                                                 </SelectTrigger>
                                             </FormControl>

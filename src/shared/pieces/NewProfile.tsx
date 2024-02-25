@@ -1,6 +1,5 @@
 import { useReducer} from "react"
 import { AccountRoles} from "../../types"
-import { useNavigate } from "react-router-dom"
 import { useUpdateAccountType } from "../../lib/Tanstackquery/queriesAndMutations"
 import Box from "@mui/material/Box"
 import CircularProgress from "@mui/material/CircularProgress"
@@ -78,7 +77,6 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 }
 
 export default function NewProfile(){
-    const navigate = useNavigate()
     const {isPending, mutate: updateAccountType} = useUpdateAccountType()
     const [{Jobseeker, Private, Coorporate, Lstartup, Ustartup}, dispatch] = useReducer(reducer, initial)
     // checks if at least one of the account type is selected , then it turn the button color to orange, if noting is selected it will stay inactive
@@ -105,8 +103,6 @@ export default function NewProfile(){
         // If nothing is selected , return
         if(!currentlyActive) return
         updateAccountType(currentlyActive)
-        // setRole(currentlyActive)
-        currentlyActive === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
     }
 
     if(isPending){

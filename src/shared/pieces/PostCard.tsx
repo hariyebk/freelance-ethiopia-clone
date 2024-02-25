@@ -2,23 +2,67 @@ import { IoMdShareAlt } from "react-icons/io";
 import { CiBookmark } from "react-icons/ci";
 import { HowToApply, JobQualifications, jobDescription, jobRequirments, jobResponsibilities } from "../../constants"
 import JobParts from "./JobParts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import { FaTrash } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
+import useApi from "../../context/hook";
+import { AccountRoles } from "../../types";
+import PopOver from "../PopOver";
+
 
 interface PostCardProps {
     saved?: boolean,
     applied?: boolean
 }
-export default function PostCard({saved, applied}: PostCardProps) {
+export default function PostCard({saved, applied}: PostCardProps){
+    const {role} = useApi()
+    const navigate = useNavigate()
     const [expand, setExpand] = useState(false)
+    const [openModal, setOpenModal] = useState(false)
+    const closeModal = () => setOpenModal(false) 
+    const handleOpenModal = () => setOpenModal(true)
     // TODO: GET THE ID OF THE POST
     const fakePostId = "65411d9672cba7889d66"
+    function handleDeletePost(){
+        // TODO: Delete the post
+        closeModal()
+
+    }
+    function handleEditPost(){
+        navigate(`/edit-post/${fakePostId}`)
+    }
+
+    if(openModal){
+        return (
+            <PopOver open={true} handleClose={closeModal}>
+                <div>
+                    <p className="text-lg font-palanquin"> Are you sure you want to delete this job post ? </p>
+                    <div className="w-full mt-10 pr-10 flex items-center justify-end gap-7">
+                        <button className="px-8 py-2 border border-stone-800 bg-stone-800 text-sm text-slate-100 rounded-full" onClick={closeModal}> cancel </button>
+                        <button onClick={handleDeletePost} className="px-8 py-2 bg-red-600 text-slate-100 text-sm font-palanquin rounded-full"> Delete </button>
+                    </div>
+                </div>
+            </PopOver>
+        )
+    }
     return (
         <div className="flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3">
             <div className="flex items-center justify-between w-full">
-                <h2 className="text-darkblue text-xl font-palanquin font-semibold"> Accountant </h2>
+                <div className="w-full flex items-center justify-between">
+                    <h2 className="text-darkblue text-xl font-palanquin font-semibold"> Accountant </h2>
+                    { saved && role === AccountRoles.employer && <div className="flex items-center gap-7">
+                            <button onClick={handleEditPost}>
+                                <FaEdit className = "text-blue-600 w-5 h-5" />
+                            </button>
+                            <button onClick={handleOpenModal}>
+                                <FaTrash className = "text-red-600 w-5 h-5" />
+                            </button>
+                        </div>  
+                    }
+                </div>
                 <div className={`${saved ? "hidden" : "block"} flex items-center gap-3`}>
                     <button> <IoMdShareAlt style = {{fontSize: "25px", color: "#ef754c"}}/> </button>
                     <button> <CiBookmark style = {{fontSize: "25px", color: "#ef754c"}} /> </button>

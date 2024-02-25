@@ -6,24 +6,49 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../components/ui/input"
 import { Textarea } from "../components/ui/textarea"
 import { IoWarningOutline } from "react-icons/io5";
+import { useCreatePost2 } from "../lib/Tanstackquery/queriesAndMutations"
+import { Box, CircularProgress } from "@mui/material"
 
+interface jobPostProps {
+    description?: string,
+    requirments?: string,
+    responsibilities?: string,
+    qualifications?: string | null,
+    salary?: number | null,
+    howToApply?: string | null
+}
 
-export default function PostDescriptions(){
+export default function PostDescriptions({description, responsibilities, requirments, qualifications, salary, howToApply}: jobPostProps){
+
+    const {isPending, mutate: createPost2} = useCreatePost2()
+
     const form = useForm<z.infer<typeof Post2Validation>>({
         resolver: zodResolver(Post2Validation),
         defaultValues: {
-            description: "",
-            responsibilities: "",
-            requirments: "",
-            qualifications: "",
-            salary: "",
-            howToApply: ""
+            description: description || "",
+            responsibilities:  responsibilities|| "",
+            requirments: requirments || "",
+            qualifications: qualifications || "",
+            salary: salary?.toString() || "",
+            howToApply: howToApply || ""
         },
     })
 
     async function onSubmit(values: z.infer<typeof Post2Validation>){
-        console.log(values)
-            
+        createPost2(values)
+    }
+
+    // LOADING SPINNER
+    if(isPending){
+        return (
+            <div className="min-h-screen block">
+                <div className="flex items-center justify-center min-h-screen">
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress/>
+                    </Box>
+                </div>
+            </div>
+        )
     }
 
     return (
@@ -58,10 +83,6 @@ export default function PostDescriptions(){
                             render={({ field }) => (
                                 <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-sm lg:text-base font-palanquin font-semibold text-primary"> Basic Job Description </FormLabel>
-                                <div className="flex items-center gap-2">
-                                    <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Total characters should not exceed 200 </p>
-                                </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
                                     <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
@@ -80,10 +101,6 @@ export default function PostDescriptions(){
                                     <span> <IoWarningOutline /> </span>
                                     <p className="text-black max-lg:text-xs text-sm"> Please use comma (,) to separate each responsibilities </p>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Total characters should not exceed 500 </p>
-                                </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
                                     <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
@@ -101,10 +118,6 @@ export default function PostDescriptions(){
                                 <div className="flex items-center gap-2">
                                     <span> <IoWarningOutline /> </span>
                                     <p className="text-black max-lg:text-xs text-sm"> Please use comma (,) to separate each requirments </p>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Total characters should not exceed 500 </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
                                     <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
@@ -128,10 +141,6 @@ export default function PostDescriptions(){
                                     <span> <IoWarningOutline /> </span>
                                     <p className="text-black max-lg:text-xs text-sm"> Please use comma (,) to separate each requirments </p>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Total characters should not exceed 500 </p>
-                                </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
                                     <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
@@ -150,10 +159,6 @@ export default function PostDescriptions(){
                                     <span> <IoWarningOutline /> </span>
                                     <p className="text-black max-lg:text-xs text-sm"> You can skip this , if you want </p>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Total characters should not exceed 50 </p>
-                                </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
                                     <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[450px] h-[90px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
@@ -161,7 +166,7 @@ export default function PostDescriptions(){
                                 </FormItem>
                             )}
                             />
-                            <button className="max-lg:mt-14 mt-14 max-lg:w-[350px] w-[400px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-lg text-slate-100 font-palanquin"> post </button>
+                            <button className="max-lg:mt-14 mt-14 max-lg:w-[350px] w-[450px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-lg text-slate-100 font-palanquin"> Submit </button>
                     </main>
                 </form>
                 </Form>
