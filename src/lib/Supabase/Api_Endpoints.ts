@@ -86,14 +86,12 @@ export async function createPost1(post: POST1){
     if(error?.message) throw new Error(error.message)
     return {jobpost}
 }
-
-
 export async function createPost2(id: string, post: POST2){ 
     const {data, error} = await supabase.from("post").update({ description: post.description, salary: post.salary ? parseInt(post.salary) : null, 
         responsibilities: post.responsibilities.replace(/[\n\r]/g, "").split(","),
         requirments: post.requirments.replace(/[\n\r]/g, "").split(","),
         qualifications: post.qualifications ? post.qualifications.split(",") : null,
-        howToApply: post.howToApply ? post.howToApply : null
+        howToApply: post.howToApply ? post.howToApply.replace(/[\n\r]/g, "") : null
     }).eq("id", id).select()
 
     if(error) throw new Error(error.message)
@@ -101,9 +99,13 @@ export async function createPost2(id: string, post: POST2){
 
     return {data}
 }
-
 export async function findPostById(id: string){
     const {data:post, error} = await supabase.from("post").select("*").eq("id", id).single()
     if(error) throw new Error(error.message)
     return {post}
+}
+export async function findMyPosts(name: string){
+    const {data: posts, error} = await supabase.from("post").select("*").eq("postedBy", name).select()
+    if(error) throw new Error(error.message)
+    return {posts}
 }

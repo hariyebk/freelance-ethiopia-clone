@@ -1,5 +1,5 @@
 import { useMutation, useQuery} from "@tanstack/react-query"
-import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, findPostById, getCurrentUser } from "../Supabase/Api_Endpoints"
+import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, findMyPosts, findPostById, getCurrentUser } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
@@ -135,5 +135,16 @@ export const useFindPostById = () => {
         queryKey: ["find_post"],
         queryFn: () =>  findPostById(id!)
     })
+    return {isLoading, data}
+}
+// FETCH ALL MY POSTS
+export const useFetchAllMyPosts = () => {
+    const {user} = useApi()
+    const name = user?.firstName as string
+    const {isLoading, data} = useQuery({
+        queryKey: ["my-posts"],
+        queryFn: () =>  findMyPosts(name)
+    })
+
     return {isLoading, data}
 }

@@ -31,7 +31,7 @@ export default function Register() {
     if(isPending){
         return (
             <div className="min-h-screen">
-                <div className="flex items-center justify-center h-screen">
+                <div className="flex items-center justify-center min-h-screen">
                     <Box sx={{ display: 'flex' }}>
                         <CircularProgress/>
                     </Box>
