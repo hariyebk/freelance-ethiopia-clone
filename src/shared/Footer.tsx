@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
     return (
-        <section className="bg-stone-700 relative bottom-0 inset-x-0">
-            <div className="flex justify-between items-center inset-x-0 bottom-0">
+        <footer className="bg-stone-700 relative bottom-0 inset-x-0">
+            <div className="flex justify-between items-center">
                 <div className="max-lg:mb-10 my-20 max-lg:ml-12 ml-20 flex max-lg:flex-col justify-between items-center gap-10">
                     <div className="flex flex-1 max-lg:flex-row max-lg:gap-10 flex-col max-lg:-ml-16">
                         <img src="/Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />
@@ -63,6 +63,6 @@ export default function Footer() {
                     <p> 2023 Afriwork Inc. All right reserved </p>
                 </div>
             </div>
-        </section>
+        </footer>
     )
 }

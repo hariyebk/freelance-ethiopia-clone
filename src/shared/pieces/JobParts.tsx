@@ -4,7 +4,6 @@ interface JobPartsProps {
 }
 
 export default function JobParts({label, content}: JobPartsProps) {
-    console.log(typeof content)
     let value: React.ReactNode
     if(typeof content === "string"){
         value =  <p className="max-lg:pr-3 max-lg:text-sm text-base max-lg:leading-6 leading-7 text-stone-700 font-palanquin"> {content} </p>
