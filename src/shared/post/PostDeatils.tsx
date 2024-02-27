@@ -7,7 +7,7 @@ interface PostDeatilsProps {
     deadline?: string
 }
 
-export default function PostDeatils({compensationType, salary, level, deadline}: PostDeatilsProps) {
+export default function PostDeatils({compensationType, salary, level, deadline}: PostDeatilsProps){
     return (
         <div className="flex items-center justify-between max-lg:gap-3 gap-5">
             <div className="h-16 border-l border-gray-500" />

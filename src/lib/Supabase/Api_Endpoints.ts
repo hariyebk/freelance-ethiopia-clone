@@ -109,3 +109,8 @@ export async function findMyPosts(name: string){
     if(error) throw new Error(error.message)
     return {posts}
 }
+export async function deletePostById(id: number){
+    const {data:post, error} = await supabase.from("post").delete().eq("id", id).select()
+    if(error) throw new Error(error.message)
+    return {post}
+}

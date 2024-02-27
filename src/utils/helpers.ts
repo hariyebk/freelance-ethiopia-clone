@@ -1,13 +1,14 @@
 import {formatDistance, parseISO} from "date-fns"
 
 export function formatDateString(date: string){
-    if(date) return
+    if(!date) return
     const day = new Date(date)
     const formattedDate = day.toLocaleDateString('en-US', {
         month: "long",
         day: "numeric",
         year: "numeric"
     })
+    console.log(formattedDate)
     return formattedDate
 }
 

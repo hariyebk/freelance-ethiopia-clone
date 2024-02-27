@@ -1,5 +1,5 @@
-import { useMutation, useQuery} from "@tanstack/react-query"
-import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, findMyPosts, findPostById, getCurrentUser } from "../Supabase/Api_Endpoints"
+import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
+import { FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
@@ -118,7 +118,6 @@ export const useCreatePost2 = () => {
     return useMutation({
         mutationFn: (post: POST2) => createPost2(id!, post),
         onSuccess: (data) => {
-            console.log(data)
             if(data.data.length === 0){
                 return toast.error("failed to create the post, something went wrong")
             }
@@ -147,4 +146,21 @@ export const useFetchAllMyPosts = () => {
     })
 
     return {isLoading, data}
+}
+// DELETE POST BY ID
+export const useDeletePostById = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: (id: number) => deletePostById(id),
+        onSuccess: (data) => {
+            if(data.post.length === 0){
+                return toast.error("failed to delete the post, please try agin")
+            }
+            queryClient.invalidateQueries({
+                queryKey: ["my-posts"]
+            })
+            toast.success(`post has been successfully deleted`)
+        },
+        onError: (error) => toast.error(error.message)
+    })
 }
