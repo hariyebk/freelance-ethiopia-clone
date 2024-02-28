@@ -9,8 +9,7 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
 import { useState } from "react";
 import { useLogin } from "../lib/Tanstackquery/queriesAndMutations";
-import Box from "@mui/material/Box"
-import CircularProgress from "@mui/material/CircularProgress";
+import Spinner from "../shared/pieces/Spinner";
 
 export default function Login() {
     const {isPending, mutate:login} = useLogin()
@@ -34,13 +33,7 @@ export default function Login() {
     // LOADING SPINNER
     if(isPending){
         return (
-            <div className="min-h-screen">
-                <div className="flex items-center justify-center h-screen">
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress/>
-                    </Box>
-                </div>
-            </div>
+            <Spinner />
         )
     }
     return (

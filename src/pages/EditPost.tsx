@@ -1,6 +1,6 @@
-import { Box, CircularProgress } from "@mui/material"
 import { useFindPostById } from "../lib/Tanstackquery/queriesAndMutations"
 import { Post, PostDescriptions } from "."
+import Spinner from "../shared/pieces/Spinner"
 
 
 export default function EditPost(){
@@ -10,13 +10,7 @@ export default function EditPost(){
     // LOADING SPINNER
     if(isLoading){
         return (
-            <div className="min-h-screen">
-                <div className="flex items-center justify-center h-screen">
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress/>
-                    </Box>
-                </div>
-            </div>
+            <Spinner />
         )
     }
     return (

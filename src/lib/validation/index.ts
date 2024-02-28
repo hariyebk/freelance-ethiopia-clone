@@ -61,22 +61,23 @@ export const certificationValidation = z.object({
     certification: z.string()
 })
 export const SettingsValidation = z.object({
-    password: z.string().optional(),
-    passwordConfirm: z.string().optional(),
+    oldPassword: z.string(),
+    newPassword: z.string(),
+    passwordConfirm: z.string(),
     sectorPreference: z.string().optional()
 }).refine((value) => {
-    if(value.password === ""){
+    if(value.newPassword === ""){
         return true
     }
-    if(value.password){
-        return value.password.length >= 6
+    if(value.newPassword){
+        return value.newPassword.length >= 6
     }
 }, {
     message: "password must be at least 6 characters",
     path: ["password"]
 }).refine(
     (values) => {
-        return values.password === values.passwordConfirm;
+        return values.newPassword === values.passwordConfirm;
     },
     {
         message: "Passwords must match!",

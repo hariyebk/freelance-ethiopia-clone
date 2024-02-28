@@ -8,7 +8,7 @@ import { handleAccountSwitch } from "../utils/switchAccount";
 import useApi from "../context/hook";
 import {AccountRoles} from "../types";
 import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
-import { Box, CircularProgress } from "@mui/material";
+import Spinner from "./pieces/Spinner";
 
 export default function NavBar() {
     const {setOpenNav, role, user} = useApi()
@@ -44,12 +44,7 @@ export default function NavBar() {
                                 <RxLoop style = {{fontSize: "26px"}} />
                             </Link>
                             {isPending ? (
-                            <div>
-                                <Box sx={{ display: 'flex' }}>
-                                    <CircularProgress size={20}/>
-                                </Box>
-                            </div>
-                                
+                                <Spinner />
                                 ) :
                                 (
                                 <button onClick={handleLogout} className="max-lg:hidden bg-stone-800 mr-3 text-slate-100 text-sm py-2 max-lg:px-5 px-7 rounded-full"> Log out</button>
@@ -58,7 +53,7 @@ export default function NavBar() {
                             <button onClick={handleLogout} className="lg:hidden mr-5 hover:text-primary">
                                 <SlLogout style = {{fontSize: "26px"}}/>
                             </button>
-                            <Link to={`${role === AccountRoles.jobseeker ? `/jobseeker-profile/${user?.id}`: `/employer-profile/${user?.id}`}`} className="max-lg:mr-6 mr-3 -ml-3">
+                            <Link to={`${role === AccountRoles.jobseeker ? `/jobseeker-profile/${user?.id}`: "/profile"}`} className="max-lg:mr-6 mr-3 -ml-3">
                                 <img src={`${user?.avatar ? user.avatar : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
                             </Link>
                         </div>

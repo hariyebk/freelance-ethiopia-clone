@@ -7,7 +7,7 @@ import { Input } from "../components/ui/input"
 import { Textarea } from "../components/ui/textarea"
 import { IoWarningOutline } from "react-icons/io5";
 import { useCreatePost2 } from "../lib/Tanstackquery/queriesAndMutations"
-import { Box, CircularProgress } from "@mui/material"
+import Spinner from "../shared/pieces/Spinner"
 
 interface jobPostProps {
     description?: string,
@@ -41,13 +41,7 @@ export default function PostDescriptions({description, responsibilities, requirm
     // LOADING SPINNER
     if(isPending){
         return (
-            <div className="min-h-screen block">
-                <div className="flex items-center justify-center min-h-screen">
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress/>
-                    </Box>
-                </div>
-            </div>
+            <Spinner />
         )
     }
 

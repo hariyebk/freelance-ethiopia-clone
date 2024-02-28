@@ -114,3 +114,8 @@ export async function deletePostById(id: number){
     if(error) throw new Error(error.message)
     return {post}
 }
+export async function FetchAllPosts(){
+    const {data: posts, error} = await supabase.from("post").select("*", {count: "exact"})
+    if(error) throw new Error(error.message)
+    return {posts}
+}

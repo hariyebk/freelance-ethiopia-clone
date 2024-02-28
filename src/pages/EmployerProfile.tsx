@@ -2,7 +2,7 @@ import { ProfileLayout } from ".";
 import UserDetail from "../shared/Profile/UserDetail";
 
 
-export default function EmployerProfile() {
+export default function EmployerProfile(){
     return (
         <ProfileLayout MainProfile={(
             <div className="flex flex-col items-start mb-20">

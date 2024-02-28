@@ -6,7 +6,7 @@ import EmployerProfile from "./pages/EmployerProfile"
 import UploadUserAvatar from "./pages/UploadUserAvatar"
 import { Toaster } from "react-hot-toast"
 import useApi from "./context/hook"
-import { Box, CircularProgress } from "@mui/material"
+import Spinner from "./shared/pieces/Spinner"
 
 export default function App(){
   const {Loading} = useApi()
@@ -14,13 +14,7 @@ export default function App(){
   // LOADING SPINNER
   if(Loading){
     return (
-      <div className="min-h-screen">
-          <div className="flex items-center justify-center h-screen">
-              <Box sx={{ display: 'flex' }}>
-                  <CircularProgress/>
-              </Box>
-          </div>
-      </div>
+      <Spinner />
   )
 }
 
@@ -72,7 +66,7 @@ export default function App(){
                             <Route path="/post/:id/descriptions" element={<PostDescriptions />} />
                             <Route path="/post:id" element={<PostDetails />} />
                             <Route path="/edit-post/:id" element={<EditPost />} />
-                            <Route path="/employer-profile/:id" element = {<EmployerProfile />} />
+                            <Route path="/profile" element = {<EmployerProfile />} />
                     </Route>
                     </Route>
                 </Route>

@@ -1,7 +1,7 @@
 import { status } from "../../types"
 
 interface ApplicationItemProps {
-    application: {
+    application?: {
         role: string,
         companyName: string,
         location: string,
@@ -12,6 +12,14 @@ interface ApplicationItemProps {
 }
 
 export default function ApplicationItem({application}: ApplicationItemProps){
+    if(!application){
+        return (
+            <div className="mt-10 ml-6">
+                <p className="no-posts"> You have no applications 😔 </p>
+            </div>
+        )
+    }
+
     let statusColor:string
     if(application.status === status.pending){
         statusColor = "bg-blue-500"

@@ -5,9 +5,20 @@ import { CiFilter } from "react-icons/ci";
 import FilterOptions from "../shared/pieces/FilterOptions";
 import useApi from "../context/hook";
 import PostMain from "../shared/post/PostMain";
+import { useFetchAllPosts } from "../lib/Tanstackquery/queriesAndMutations";
+import Spinner from "../shared/pieces/Spinner";
+import PostHeader from "../shared/post/PostHeader";
 
 export default function Job() {
     const {setOpenFilter} = useApi()
+    const {isLoading, data} = useFetchAllPosts()
+
+    if(isLoading){
+        return (
+            <Spinner />
+        )
+    }
+
     return (
         <section className="w-full mt-20">
             <div className="flex gap-8 lg:ml-44 max-lg:mx-7">
@@ -31,9 +42,15 @@ export default function Job() {
                         <hr className="mt-2 border border-t-1 border-gray-100 leading-5" />
                         <p className="text-[15px] ml-4 mt-5 text-gray-600 font-sans font-normal"> Browse jobs that match your experiace to a client’s hiring preference. Ordered by most relevant. </p>
                         <hr className="mt-3 border-t-2 border-gray-100 leading-5" />
-                        <PostCard>
-                            <PostMain />
-                        </PostCard>
+                        {data?.posts.map((post) => {
+                            return (
+                                <PostCard key={post.id} post={post} Header = {
+                                    <PostHeader title={post.title} />
+                                } MainSection = {
+                                    <PostMain saved={true} post={post} />
+                                } />
+                            )
+                        })}
                     </div>
                 </div>
                 <div className="my-14 shadow-md max-lg:hidden pb-48 px-5 overflow-scroll custom-scrollbar">

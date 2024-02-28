@@ -7,9 +7,8 @@ import AvatarUploader from "../shared/pieces/AvatarUploader"
 import Goback from "../shared/pieces/Goback"
 import { useState } from "react"
 import { useUploadAvatar } from "../lib/Tanstackquery/queriesAndMutations"
-import Box from "@mui/material/Box"
-import CircularProgress from "@mui/material/CircularProgress"
 import { useNavigate, useParams } from "react-router-dom"
+import Spinner from "../shared/pieces/Spinner"
 
 export default function UploadUserAvatar() {
     const navigate = useNavigate()
@@ -36,13 +35,7 @@ export default function UploadUserAvatar() {
     // LOADING SPINNER
     if(isPending){
         return (
-            <div className="min-h-screen">
-                <div className="flex items-center justify-center h-screen">
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress/>
-                    </Box>
-                </div>
-            </div>
+            <Spinner />
         )
     }
     return (

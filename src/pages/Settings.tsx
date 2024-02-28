@@ -20,7 +20,8 @@ export default function Settings() {
     const form = useForm<z.infer<typeof SettingsValidation>>({
         resolver: zodResolver(SettingsValidation),
         defaultValues: {
-            password: "",
+            oldPassword: "",
+            newPassword: "",
             passwordConfirm: "",
             sectorPreference: ""
         },
@@ -37,12 +38,39 @@ export default function Settings() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="">
                     <main className="">
                         <h1 className="max-lg:text-lg text-xl text-stone-500 font-semibold "> Update Your Password </h1>
+                         {/* PASSWORD */}
+                        <FormField
+                            control={form.control}
+                            name="oldPassword"
+                            render={({ field }) => (
+                                <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
+                                <FormLabel className="text-base font-palanquin font-medium"> Old Password </FormLabel>
+                                <FormControl className="focus:outline-none">
+                                    <div className="max-lg:w-[320px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                        <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
+                                        <div className="relative flex items-center pt-1">
+                                            {showPassword ? (
+                                                <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                    <IoEyeOutline />
+                                                </button>
+                                            ) : (
+                                                <button type="button" onClick={handlePassword} className="absolute right-4">
+                                                    <IoEyeOffOutline />
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                </FormControl>
+                                <FormMessage className='text-sm text-red-500' />
+                                </FormItem>
+                            )}
+                            />
                         {/* PASSWORD */}
                         <FormField
                             control={form.control}
-                            name="password"
+                            name="newPassword"
                             render={({ field }) => (
-                                <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
+                                <FormItem className="mt-7 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-base font-palanquin font-medium"> New Password </FormLabel>
                                 <FormControl className="focus:outline-none">
                                     <div className="max-lg:w-[320px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
@@ -91,7 +119,7 @@ export default function Settings() {
                                 </FormItem>
                             )}
                             />
-                            <button className="mt-10 w-[200px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> Update </button>
+                            <button className="mt-10 w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> Update </button>
                             {role === AccountRoles.jobseeker && <>
                                 <h1 className="mt-14 max-lg:text-lg text-xl text-stone-500 font-semibold "> Set what kind of jobs you want to see </h1>
                                 <FormField
@@ -119,7 +147,7 @@ export default function Settings() {
                                     </FormItem>
                                 )}
                                 />
-                                <button className="max-lg:mt-14 mt-10 w-[200px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> set preference </button>
+                                <button className="max-lg:mt-14 mt-10 w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> set preference </button>
                             </>
                         }
                     </main>

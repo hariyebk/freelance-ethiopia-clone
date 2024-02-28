@@ -8,8 +8,8 @@ import { IoWarningOutline } from "react-icons/io5";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 import { CompensationTypes, Experience, Gender, cities, jobSectors, jobSite, jobTypes } from "../constants"
 import { useCreatePost1 } from "../lib/Tanstackquery/queriesAndMutations"
-import { Box, CircularProgress } from "@mui/material"
 import useApi from "../context/hook"
+import Spinner from "../shared/pieces/Spinner"
 
 interface jobPostProps {
     title?: string,
@@ -53,13 +53,7 @@ export default function Post({title, site, type, level, sector, location, compen
     // LOADING SPINNER
     if(isPending){
         return (
-            <div className="min-h-screen">
-                <div className="flex items-center justify-center h-screen">
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress/>
-                    </Box>
-                </div>
-            </div>
+            <Spinner />
         )
     }
     

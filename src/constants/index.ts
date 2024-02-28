@@ -18,6 +18,10 @@ export const navlinks = [
 ]
 export const AuthenticatedNavLinks = [
     {
+        path: "/job",
+        label: "Jobs"
+    },
+    {
         path: "/applied",
         label: "Applied"
     },
@@ -35,10 +39,6 @@ export const EmployerNavLinks = [
         path: "/post",
         label: "Post A job"
     },
-    {
-        path: "/post/10/descriptions",
-        label: "Post desc"
-    }
 ]
 export const footerLinks = [
     {
@@ -540,3 +540,8 @@ export const sortByDate = [
     }
 ]
 export const authenticated = "authenticated"
+
+export enum UrlPaths {
+    myposts = "/my-posts",
+    savedPosts = "/saved-jobs"
+}

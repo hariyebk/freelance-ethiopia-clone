@@ -1,4 +1,3 @@
-import { Box, CircularProgress } from "@mui/material";
 import { useDeletePostById, useFetchAllMyPosts } from "../lib/Tanstackquery/queriesAndMutations";
 import PostLayout from "../shared/PostLayout";
 import ApplicationFilter from "../shared/pieces/ApplicationFilter";
@@ -10,6 +9,7 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import useApi from "../context/hook";
 import { useState } from "react";
 import PopOver from "../shared/PopOver";
+import Spinner from "../shared/pieces/Spinner";
 
 export default function MyPosts(){
     const {isLoading, data} = useFetchAllMyPosts()
@@ -48,15 +48,7 @@ export default function MyPosts(){
     // LOADING SPINNER
     if(isLoading || isPending){
         return (
-            <div className="min-h-screen">
-                <div className="flex items-center justify-center min-h-screen">
-                    <Box sx={{ display: 'flex' }}>
-                        <span className="h-full">
-                            <CircularProgress/>
-                        </span>
-                    </Box>
-                </div>
-            </div>
+            <Spinner />
         )
     }
 
@@ -67,9 +59,7 @@ export default function MyPosts(){
                 {data?.posts.map((post) => {
                     return (
                         <PostCard key={post.id} post={post} Header = {
-                            <PostHeader openModal={handleOpenModal} saved={true}>
-                                <div className="w-full flex items-center justify-between">
-                                <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {post.title || "Accountant"} </h2>
+                            <PostHeader title={post.title}>
                                 { role === AccountRoles.employer && <div className="flex items-center gap-7">
                                         <button onClick={handleEditPost}>
                                             <FaEdit className = "text-blue-600 w-5 h-5" />
@@ -82,7 +72,6 @@ export default function MyPosts(){
                                         </button>
                                     </div>  
                                 }
-                            </div>
                             </PostHeader>
                         } MainSection = {
                             <PostMain saved={true} post={post} />

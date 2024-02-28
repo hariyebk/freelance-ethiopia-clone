@@ -1,10 +1,9 @@
 
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress"
 import { useSignup } from "../lib/Tanstackquery/queriesAndMutations";
 import UserForm from "../shared/Forms/UserForm";
 import FormHeader from "../shared/pieces/FormHeader";
 import Goback from "../shared/pieces/Goback";
+import Spinner from "../shared/pieces/Spinner";
 
 
 export type signUpType = {
@@ -30,13 +29,7 @@ export default function Register() {
     // LOADING SPINNER
     if(isPending){
         return (
-            <div className="min-h-screen">
-                <div className="flex items-center justify-center min-h-screen">
-                    <Box sx={{ display: 'flex' }}>
-                        <CircularProgress/>
-                    </Box>
-                </div>
-            </div>
+            <Spinner />
         )
     }
     return (
