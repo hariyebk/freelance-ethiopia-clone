@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 interface ProfileTypeProps {
     children: React.ReactNode,
     title: string,
@@ -5,6 +7,11 @@ interface ProfileTypeProps {
 }
 
 export default function ProfileType({children, title, description}: ProfileTypeProps) {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className="max-lg:mt-40 w-full h-full pb-20 flex max-lg:items-center max-lg:justify-center">
             <span className="max-lg:pl-5 pl-48 lg:mt-20">

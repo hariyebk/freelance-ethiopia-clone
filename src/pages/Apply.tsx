@@ -6,10 +6,9 @@ import { Form, FormField, FormItem, FormMessage } from "../components/ui/form"
 import { FormControl } from "@mui/material"
 import { Textarea } from "../components/ui/textarea"
 import Goback from "../shared/pieces/Goback"
-// import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 export default function Apply() {
-    // const navigate = useNavigate()
     const form = useForm<z.infer<typeof CoverLetterValidation>>({
         resolver: zodResolver(CoverLetterValidation),
         defaultValues: {
@@ -17,11 +16,14 @@ export default function Apply() {
         },
     })
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     async function onSubmit(values: z.infer<typeof CoverLetterValidation>){
         console.log(values)
         // TODO: Add the application to the job post applications array.
         form.reset()
-            
     }
     return (
         <section className="w-full max-lg:my-40 mt-52 lg:mb-40">

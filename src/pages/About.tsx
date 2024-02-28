@@ -1,5 +1,11 @@
+import { useEffect } from "react";
 
-export default function About() {
+export default function About(){
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className="max-container flex flex-col items-start min-h-screen lg:my-40 max-lg:mt-40 max-lg:mb-36 max-lg:mx-8 max-lg:text-justify mx-72">
             <h1 className="max-lg:text-5xl text-6xl text-secondary font-palanquin mx-auto"> About Us </h1>

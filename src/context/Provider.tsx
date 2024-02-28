@@ -38,6 +38,7 @@ function updateRoleAndUser(){
             navigate("/profile-type")
         }
     }
+
     useEffect(() => {
         setLoading(isLoading)
         updateRoleAndUser()

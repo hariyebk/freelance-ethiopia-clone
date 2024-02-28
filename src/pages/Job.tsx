@@ -8,10 +8,15 @@ import PostMain from "../shared/post/PostMain";
 import { useFetchAllPosts } from "../lib/Tanstackquery/queriesAndMutations";
 import Spinner from "../shared/pieces/Spinner";
 import PostHeader from "../shared/post/PostHeader";
+import { useEffect } from "react";
 
 export default function Job() {
     const {setOpenFilter} = useApi()
     const {isLoading, data} = useFetchAllPosts()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     if(isLoading){
         return (
@@ -47,7 +52,7 @@ export default function Job() {
                                 <PostCard key={post.id} post={post} Header = {
                                     <PostHeader title={post.title} />
                                 } MainSection = {
-                                    <PostMain saved={true} post={post} />
+                                    <PostMain post={post} />
                                 } />
                             )
                         })}

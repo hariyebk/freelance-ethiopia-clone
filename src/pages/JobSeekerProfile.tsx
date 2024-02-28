@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ProfileLayout } from ".";
 import Bio from "../shared/Profile/Bio";
 import Certifications from "../shared/Profile/Certifications";
@@ -10,6 +11,11 @@ import UserDetail from "../shared/Profile/UserDetail";
 import WorkExperience from "../shared/Profile/WorkExperience";
 
 export default function JobSeekerProfile() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <ProfileLayout MainProfile = {(
             <div className="flex flex-col items-start">

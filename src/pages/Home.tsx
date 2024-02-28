@@ -5,8 +5,14 @@ import Card from "../shared/Card";
 import Testimonials from "../shared/Testimonials";
 import Marquee from "react-fast-marquee";
 import { clientTestimonials, freelancersTestimonials } from "../constants";
+import { useEffect } from "react";
 
-export default function Home() {
+export default function Home(){
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return ( 
         <section className="max-container max-lg:mx-10 mx-56 mt-20">
             <Hero />

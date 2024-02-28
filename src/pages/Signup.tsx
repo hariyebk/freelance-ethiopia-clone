@@ -1,4 +1,4 @@
-import { useReducer} from "react";
+import { useEffect, useReducer} from "react";
 import { FiUserCheck } from "react-icons/fi";
 import { FiUserPlus } from "react-icons/fi";
 import { bottomNavRoute, userTypes } from "../constants";
@@ -38,17 +38,22 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 export default function Signup() {
     const [{newUser, telegramUser}, dispatch] = useReducer(reducer, initial)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     function handleClick(){
         if(!newUser && !telegramUser) return
-        // If the user is new , redirect them to the register page
         if(newUser){
             return navigate("/register")
         }
-        // IF the user is from telegram, redirect them to the phone verification page
         if(telegramUser){
-            return navigate("/verify-your-phone-number")
+            // TODO: the user should verfiy their phone number
+            return navigate("/register")
         }
     }
+
     return (
         <section className="flex flex-col w-full max-lg:mt-28 lg:my-24 ">
             <div className="md:hidden ml-10 mt-8">

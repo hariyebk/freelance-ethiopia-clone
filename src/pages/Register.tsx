@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 import { useSignup } from "../lib/Tanstackquery/queriesAndMutations";
 import UserForm from "../shared/Forms/UserForm";
 import FormHeader from "../shared/pieces/FormHeader";
@@ -21,6 +21,10 @@ export type signUpType = {
 
 export default function Register() {
     const {isPending, mutate: signup} = useSignup()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     async function handleSubmit(userData: signUpType){
         signup(userData)

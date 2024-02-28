@@ -8,11 +8,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { jobSectors } from "../constants"
 import { AccountRoles } from "../types"
 import useApi from "../context/hook"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
 
 export default function Settings() {
     const [showPassword, setShowPassword] = useState(false)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     function handlePassword(){
         setShowPassword(!showPassword)
     }

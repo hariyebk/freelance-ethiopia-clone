@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import PostLayout from "../shared/PostLayout";
 import ApplicationFilter from "../shared/pieces/ApplicationFilter";
 import PostCard from "../shared/pieces/PostCard";
@@ -5,6 +6,11 @@ import PostHeader from "../shared/post/PostHeader";
 import PostMain from "../shared/post/PostMain";
 
 export default function SavedJobs(){
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     // TODO: FETCH THE USERS SAVED POSTS
     return (
         <PostLayout title="Saved Jobs">

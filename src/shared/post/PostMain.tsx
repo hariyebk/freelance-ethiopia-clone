@@ -4,21 +4,23 @@ import { HowToApply, jobDescription, jobRequirments, jobResponsibilities } from 
 import PostTags from "./PostTags";
 import { FaCheckCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { POST1, POST2 } from "../../types";
+import { AccountRoles, POST1, POST2 } from "../../types";
 import { useState } from "react";
 import PostDeatils from "./PostDeatils";
+import useApi from "../../context/hook";
 
 interface PostMianProps {
     post?: POST1 & POST2 & {
         id: string,
         created_at: string
     },
-    saved?: boolean,
     applied?: boolean
 }
 
-export default function PostMain({post, saved, applied}: PostMianProps){
+export default function PostMain({post, applied}: PostMianProps){
     const [expand, setExpand] = useState(false)
+    const {role} = useApi()
+
     return (
         <section>
             <JobParts label="Description" content={post?.description || jobDescription} />
@@ -40,20 +42,19 @@ export default function PostMain({post, saved, applied}: PostMianProps){
                         <MdKeyboardArrowUp style = {{fontSize: "40px"}} />
                         <p> Collapse </p>
                     </div>
-                    {applied ? (
+                    {role === AccountRoles.employer ? <Link to={`/post/${post?.id}`} className="w-[200px]  text-center text-base text-slate-100 bg-gradient-to-r from-primary to-secondary max-lg:px-3 px-5 py-2 rounded-full"> see applications </Link> : applied ? (
                         <div className="flex items-center gap-3">
                             <FaCheckCircle style = {{fontSize: "20px", color: "#ef754c"}} />
                             <p className="text-base font-palanquin font-semibold"> Applied </p>
                         </div>
 
-                    ) : saved && !applied ? (
-                        <Link to={`/post/${post?.id}`} className="w-[200px]  text-center text-base text-slate-100 bg-gradient-to-r from-primary to-secondary max-lg:px-3 px-5 py-2 rounded-full"> see applications </Link>
                     ) : (
                     <Link to={`/post/${post?.id}/apply`} className="mr-6">
                         <button className="w-[120px] max-lg:text-sm text-base text-slate-100 bg-gradient-to-r from-primary to-secondary max-lg:px-4 px-10 py-2 rounded-full"> Apply </button>
                     </Link>
                     ) 
-                    }
+                    
+                }
                 </div>
                 </section>
             }

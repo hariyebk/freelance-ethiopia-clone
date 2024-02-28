@@ -4,8 +4,14 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import { MdExpandMore } from "react-icons/md";
 import { faq } from '../constants';
+import { useEffect } from 'react';
 
-export default function Faq() {
+export default function Faq(){
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <div className="mb-36 flex flex-col mt-36 max-lg:mx-16 max-lg:text-justify mx-56">
             <h1 className="max-lg:text-4xl text-6xl text-secondary font-palanquin mx-auto"> FAQ's </h1>

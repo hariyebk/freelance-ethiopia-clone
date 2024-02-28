@@ -26,7 +26,8 @@ export default function BottomNav({route, newUser, telegramUser, place}: NavProp
                 }
                 // If the user is coming from telegram , redirect them to the phone verification page
                 if(telegramUser){
-                    return navigate('/verify-your-phone-number')
+                    // TODO: the user should verfiy their phone number
+                    return navigate("/register")
                 }
             }}> Continue </button>
         </div>

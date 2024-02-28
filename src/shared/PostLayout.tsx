@@ -3,7 +3,6 @@ interface PostLayout {
     title: string,
     children: React.ReactNode,
 }
-
 export default function PostLayout({title, children}: PostLayout) {
     return (
         <section className="w-full mt-40 mb-20">

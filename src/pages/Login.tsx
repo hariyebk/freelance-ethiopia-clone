@@ -7,13 +7,18 @@ import { Link} from "react-router-dom";
 import { Input } from "../components/ui/input";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { IoEyeOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLogin } from "../lib/Tanstackquery/queriesAndMutations";
 import Spinner from "../shared/pieces/Spinner";
 
 export default function Login() {
     const {isPending, mutate:login} = useLogin()
     const [showPassword, setShowPassword] = useState(false)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const form = useForm<z.infer<typeof  loginValidation>>({
         resolver: zodResolver(loginValidation),
         defaultValues: {

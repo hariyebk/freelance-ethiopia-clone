@@ -1,7 +1,13 @@
+import { useEffect } from "react";
 import ApplicationsList from "../shared/ApplicationsList";
 import ApplicationFilter from "../shared/pieces/ApplicationFilter";
 
 export default function Applied() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     return (
         <section className="w-full mt-40 mb-36">
             <div className="mx-auto max-lg:w-[450px] w-[700px] h-auto shadow-lg bg-slate-50 rounded-md pb-28">

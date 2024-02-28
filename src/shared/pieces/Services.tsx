@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { enterpriseOpr } from "../../constants"
-// import { GoDotFill } from "react-icons/go"
 import { FaPhoneAlt, FaRegCheckCircle } from "react-icons/fa"
 import { IoMdMail } from "react-icons/io"
 import { HiOutlinePaperAirplane } from "react-icons/hi2"
@@ -9,7 +8,7 @@ export default function Services() {
     return (
         <div className="max-lg:w-full w-[900px] max-lg:my-10 my-20 max-lg:px-10 max-lg:pt-5 shadow-lg border rounded-xl max-lg:h-auto h-auto pb-6 flex max-lg:flex-col lg:gap-5">
                 <div className="flex flex-col mt-7 ml-7 mb-7">
-                    <h3 className="text-xl uppercase font-bold font-palanquin text-stone-950"> Enterprise </h3>
+                    <h3 className="text-lg font-semibold font-palanquin text-black"> Enterprise </h3>
                     <div className="max-lg:flex items-center gap-2.5 max-lg:my-2">
                         <h1 className="mt-4 max-lg:text-2xl text-4xl text-black font-bold font-palanquin"> Flexible </h1>
                         <p className="max-lg:mt-5 max-lg:mb-1 mt-2 text-primary text-xl font-bold font-palanquin "> Custom Pricing </p>

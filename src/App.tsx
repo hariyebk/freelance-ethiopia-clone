@@ -32,6 +32,7 @@ export default function App(){
                     <Route path="/register" element = {<Register />} />
                     <Route path="/profile-type/:id/new" element = {<ProfileSetUp />} />
                     <Route path="/register/:id/upload-photo" element = {<UploadUserAvatar />} />
+                    {/* TODO: IMPLEMENT THIS FEATURE */}
                     <Route path="/verify-your-phone-number" element = {<VerifyPhoneNumber />} />
 
                     {/* AUTHENTICATION MIDDLEWARE */}
@@ -46,7 +47,7 @@ export default function App(){
                       <Route element = {
                         <JobSeekerOnly />
                       }>
-                            <Route path="/jobseeker-profile/:id" element = {<JobSeekerProfile />} />
+                            <Route path="/my-profile" element = {<JobSeekerProfile />} />
                             <Route path= "/jobseeker-profile/:id/edit-userDetails" element = {<EditUserDetails />}/> 
                             <Route path= "/jobseeker-profile/:id/edit-skills" element = {<EditSkills />}/> 
                             <Route path= "/jobseeker-profile/:id/edit-bio" element = {<EditBio />}/> 
