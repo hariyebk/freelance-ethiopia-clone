@@ -7,17 +7,17 @@ export default function FilterOptions() {
             <h2 className="text-primary text-lg ml-5 font-palanquin"> Filter jobs </h2>
             <div className="mt-1 ml-5 flex flex-col items-start pt-4">
                 <hr className="w-full mt-6 border-1 border-primary" />
-                <Filter title="Job Types" lists={jobTypes} />
+                <Filter title="Job Types" param="type" lists={jobTypes} />
                 <hr className="w-full mt-6 border-1 border-primary" />
-                <Filter title="Experience level" lists={Experience} />
+                <Filter title="Experience level" param="level" lists={Experience} />
                 <hr className="w-full mt-4 border-1 border-primary" />
-                <Filter title="sectors" lists={jobSectors} />
+                <Filter title="sectors" param="sector" lists={jobSectors} />
                 <hr className="w-full mt-6 border-1 border-primary" />
-                <Filter title="Gender" lists={Gender} />
+                <Filter title="Gender" param="gender" lists={Gender} />
                 <hr className="w-full mt-6 border-1 border-primary" />
-                <Filter title="Location" lists={location} />
+                <Filter title="Location" param="location" lists={location} />
                 <hr className="w-full mt-6 border-1 border-primary" />
-                <Filter title="Salary" lists={salary} />
+                <Filter title="Salary" param="salary" lists={salary} />
             </div>
         </div>
     )

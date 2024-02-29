@@ -8,7 +8,6 @@ export function formatDateString(date: string){
         day: "numeric",
         year: "numeric"
     })
-    console.log(formattedDate)
     return formattedDate
 }
 

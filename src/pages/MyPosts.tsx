@@ -20,6 +20,7 @@ export default function MyPosts(){
     const closeModal = () => setOpenModal(false) 
     const handleOpenModal = () => setOpenModal(true)
 
+    console.log(data)
     function handleEditPost(){
 
     }
@@ -56,28 +57,34 @@ export default function MyPosts(){
         <PostLayout title="My Posts">
             <div>
                 <ApplicationFilter saved = {true} />
-                {data?.posts.map((post) => {
-                    return (
-                        <PostCard key={post.id} post={post} Header = {
-                            <PostHeader title={post.title}>
-                                { role === AccountRoles.employer && <div className="flex items-center gap-7">
-                                        <button onClick={handleEditPost}>
-                                            <FaEdit className = "text-blue-600 w-5 h-5" />
-                                        </button>
-                                        <button onClick={() => {
-                                            handleOpenModal()
-                                            setCurrentId(post.id)
-                                        }}>
-                                            <FaTrash className = "text-red-600 w-5 h-5" />
-                                        </button>
-                                    </div>  
-                                }
-                            </PostHeader>
-                        } MainSection = {
-                            <PostMain saved={true} post={post} />
-                        } />
-                    )
-                })}
+            
+                { data?.posts.length === 0 ?  <div className="my-16 ml-6">
+                        <p className="no-posts"> You haven't posted any jobs yet 😣 </p> 
+                </div> : (
+                    data?.posts.map((post) => {
+                        return (
+                            <PostCard key={post.id} post={post} Header = {
+                                <PostHeader title={post.title}>
+                                    { role === AccountRoles.employer && <div className="flex items-center gap-7">
+                                            <button onClick={handleEditPost}>
+                                                <FaEdit className = "text-blue-600 w-5 h-5" />
+                                            </button>
+                                            <button onClick={() => {
+                                                handleOpenModal()
+                                                setCurrentId(post.id)
+                                            }}>
+                                                <FaTrash className = "text-red-600 w-5 h-5" />
+                                            </button>
+                                        </div>  
+                                    }
+                                </PostHeader>
+                            } MainSection = {
+                                <PostMain post={post} />
+                            } />
+                        )
+                    })
+                )
+                }
             </div>
         </PostLayout>
     )

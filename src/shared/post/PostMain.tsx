@@ -1,6 +1,5 @@
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import JobParts from "../pieces/JobParts";
-import { HowToApply, jobDescription, jobRequirments, jobResponsibilities } from "../../constants";
 import PostTags from "./PostTags";
 import { FaCheckCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -10,7 +9,7 @@ import PostDeatils from "./PostDeatils";
 import useApi from "../../context/hook";
 
 interface PostMianProps {
-    post?: POST1 & POST2 & {
+    post: POST1 & POST2 & {
         id: string,
         created_at: string
     },
@@ -23,16 +22,16 @@ export default function PostMain({post, applied}: PostMianProps){
 
     return (
         <section>
-            <JobParts label="Description" content={post?.description || jobDescription} />
+            <JobParts label="Description" content={post?.description} />
             {!expand && <div className="w-fit pb-7 mt-5 flex items-center hover:text-primary cursor-pointer" onClick={() => setExpand(true)}> 
             <MdKeyboardArrowDown style = {{fontSize: "30px"}} />
             <p> Read more</p>
             </div>}
             {expand && <section>
-                <JobParts label="Responsibilities" content={post?.responsibilities || jobResponsibilities} />
-                <JobParts label="Requirments" content={post?.requirments || jobRequirments} />
+                <JobParts label="Responsibilities" content={post?.responsibilities} />
+                <JobParts label="Requirments" content={post?.requirments} />
                 {post?.qualifications && <JobParts label="Qualifications" content={post?.qualifications} />}
-                <JobParts label= "How to Apply" content={post?.howToApply || HowToApply} /> 
+                <JobParts label= "How to Apply" content={post?.howToApply} /> 
                 {/* Tags */}
                 <PostTags sector={post?.sector} site={post?.site} type={post?.type} />
                 {/* Details */}

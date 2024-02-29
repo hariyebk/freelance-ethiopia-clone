@@ -7,21 +7,34 @@ import PostMain from "../shared/post/PostMain";
 
 export default function SavedJobs(){
 
+    // TODO: FETCH THE USERS SAVED POSTS
+    const data:{posts: []} = {
+        posts: []
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    // TODO: FETCH THE USERS SAVED POSTS
+
     return (
         <PostLayout title="Saved Jobs">
-            <div>
-                <ApplicationFilter saved = {true} />
-                <PostCard Header = {
-                    <PostHeader title="" saved={true} />
-                } MainSection = {
-                    <PostMain applied={true} />
-                } />
-            </div>
+            <ApplicationFilter saved = {true} />
+            { data?.posts.length === 0 ?  <div className="my-16 ml-6">
+                    <p className="no-posts"> You have no saved posts </p>
+                </div> : (
+                    data.posts.map((post) => {
+                        return (
+                            <PostCard post={post} Header = {
+                                <PostHeader title="" saved={true} />
+                            } MainSection = {
+                                <PostMain post={post} applied={true} />
+                            } />
+
+                        )
+                    })
+                )
+            }
         </PostLayout>
     )
 }

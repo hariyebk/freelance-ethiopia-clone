@@ -1,7 +1,6 @@
 import { IoSearchOutline } from "react-icons/io5";
 import PostCard from "../shared/pieces/PostCard";
 import { CiFilter } from "react-icons/ci";
-
 import FilterOptions from "../shared/pieces/FilterOptions";
 import useApi from "../context/hook";
 import PostMain from "../shared/post/PostMain";
@@ -47,15 +46,20 @@ export default function Job() {
                         <hr className="mt-2 border border-t-1 border-gray-100 leading-5" />
                         <p className="text-[15px] ml-4 mt-5 text-gray-600 font-sans font-normal"> Browse jobs that match your experiace to a client’s hiring preference. Ordered by most relevant. </p>
                         <hr className="mt-3 border-t-2 border-gray-100 leading-5" />
-                        {data?.posts.map((post) => {
-                            return (
-                                <PostCard key={post.id} post={post} Header = {
-                                    <PostHeader title={post.title} />
-                                } MainSection = {
-                                    <PostMain post={post} />
-                                } />
-                            )
-                        })}
+                        
+                        { data?.posts.length === 0 ?  <div className="my-16 ml-6">
+                            <p className="no-posts"> No posts found 😣 </p>
+                        </div> : (
+                            data?.posts.map((post) => {
+                                return (
+                                    <PostCard key={post.id} post={post} Header = {
+                                        <PostHeader title={post.title} />
+                                    } MainSection = {
+                                        <PostMain post={post} />
+                                    } />
+                                )
+                            })
+                        )}
                     </div>
                 </div>
                 <div className="my-14 shadow-md max-lg:hidden pb-48 px-5 overflow-scroll custom-scrollbar">

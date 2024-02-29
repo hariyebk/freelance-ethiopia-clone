@@ -45,7 +45,7 @@ export default function NavBar() {
                             </Link>
                             {isPending ? (
                                 <Box sx={{ display: 'flex' }}>
-                                    <CircularProgress className="w-6 h-6"/>
+                                    <CircularProgress size={25} />
                                 </Box>
                                 ) :
                                 (
