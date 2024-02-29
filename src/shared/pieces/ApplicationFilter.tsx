@@ -1,14 +1,24 @@
-import { Link, useSearchParams} from "react-router-dom";
+import { useSearchParams} from "react-router-dom";
 import { ApplicationStatus, sortByDate } from "../../constants";
 import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
+
 
 interface ApplicationFilterProps {
     saved?: boolean
 }
 export default function ApplicationFilter({saved}: ApplicationFilterProps) {
-    const [searchParams] = useSearchParams()
-    const filterQuery = searchParams.get("status")
-    const sortQuery = searchParams.get("sort")
+    const [searchParams, setSearchParms] = useSearchParams()
+
+    function handleFilter(status: string){
+        searchParams.set("filter", status)
+        setSearchParms(searchParams)
+    }
+
+    function handleSort(sort: string){
+        const sortquery = sort.split(" ").at(0)?.toLowerCase() as string
+        searchParams.set("sort", sortquery)
+        setSearchParms(searchParams)
+    }
 
     return (
         <section className="my-8">
@@ -22,9 +32,9 @@ export default function ApplicationFilter({saved}: ApplicationFilterProps) {
                             <div className="flex flex-col w-auto">
                                 {ApplicationStatus.map((status) => {
                                     return (
-                                        <Link to={`${sortQuery ? `?sort=${sortQuery}&` : "?"}status=${status}`} key = {status} className="capitalize mb-2 hover:text-primary"> 
+                                        <button onClick={() => handleFilter(status)} key = {status} className="capitalize mb-2 hover:text-primary"> 
                                             {status}
-                                        </Link>
+                                        </button>
                                     )
                                 })}
                             </div>
@@ -40,9 +50,9 @@ export default function ApplicationFilter({saved}: ApplicationFilterProps) {
                         <div className="flex flex-col">
                             {sortByDate.map((date) => {
                                 return (
-                                    <Link to={`${filterQuery ? `?status=${filterQuery}&` : "?"}sort=${date.label}`} key = {date.label} className="capitalize mb-2 hover:text-primary"> 
+                                    <button onClick={() => handleSort(date.query)} key = {date.label} className="capitalize mb-2 hover:text-primary"> 
                                         {date.query}
-                                    </Link>
+                                    </button>
                                 )
                             })}
                         </div>

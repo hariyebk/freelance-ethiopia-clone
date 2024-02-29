@@ -105,7 +105,9 @@ export async function findPostById(id: string){
     return {post}
 }
 export async function findMyPosts(name: string){
-    const {data: posts, error} = await supabase.from("post").select("*").eq("postedBy", name).select()
+    const {data: posts, error} = await supabase.from("post").select("*").eq("postedBy", name).order('created_at', {
+        ascending: false
+    }).select()
     if(error) throw new Error(error.message)
     return {posts}
 }
@@ -118,4 +120,14 @@ export async function FetchAllPosts(){
     const {data: posts, error} = await supabase.from("post").select("*", {count: "exact"})
     if(error) throw new Error(error.message)
     return {posts}
+}
+export async function apply(userId: number, postId: string, coverLetter: string){
+    const application = {
+        applicantId: userId,
+        coverLetter: coverLetter
+    }
+
+    const {data: user, error} = await supabase.from("post").update({}).eq("id", postId).select("*")
+    if(error) throw new Error(error.message)
+    return {user}    
 }

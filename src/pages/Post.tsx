@@ -10,6 +10,7 @@ import { CompensationTypes, Experience, Gender, cities, jobSectors, jobSite, job
 import { useCreatePost1 } from "../lib/Tanstackquery/queriesAndMutations"
 import useApi from "../context/hook"
 import Spinner from "../shared/pieces/Spinner"
+import { useEffect } from "react"
 
 interface jobPostProps {
     title?: string,
@@ -27,6 +28,10 @@ interface jobPostProps {
 export default function Post({title, site, type, level, sector, location, compensationType, gender, deadline, quantity}: jobPostProps) {
     const {isPending, mutate: createPost1} = useCreatePost1()
     const {user} = useApi()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const form = useForm<z.infer<typeof Post1Validation>>({
         resolver: zodResolver(Post1Validation),
@@ -46,6 +51,7 @@ export default function Post({title, site, type, level, sector, location, compen
     
 
     async function onSubmit(values: z.infer<typeof Post1Validation>){
+        window.scrollTo(0, 0);
         const jobPoster = user?.firstName as string
         createPost1({...values, postedBy: jobPoster})
     }

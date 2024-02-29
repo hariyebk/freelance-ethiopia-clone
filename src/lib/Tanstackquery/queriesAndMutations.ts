@@ -159,6 +159,9 @@ export const useDeletePostById = () => {
             queryClient.invalidateQueries({
                 queryKey: ["my-posts"]
             })
+            queryClient.invalidateQueries({
+                queryKey: ["posts"]
+            })
             toast.success(`post has been successfully deleted`)
         },
         onError: (error) => toast.error(error.message)

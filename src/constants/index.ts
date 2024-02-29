@@ -540,8 +540,14 @@ export const sortByDate = [
     }
 ]
 export const authenticated = "authenticated"
-
 export enum UrlPaths {
     myposts = "/my-posts",
     savedPosts = "/saved-jobs"
 }
+export const coverLetterGuide = [
+    "Carefully read and understand the job description, requirments and qualifications.",
+    "Clearly articulate why you believe you are a strong candidate for the position.",
+    "Highlight relevant work experience.",
+    "Keep your cover letter focused and straightforward. Avoid unnecessary jargon or lengthy explanations.",
+    "Follow Instructions regarding how to apply for the job."
+]

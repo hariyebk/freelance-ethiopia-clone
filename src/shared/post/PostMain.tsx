@@ -31,7 +31,7 @@ export default function PostMain({post, applied}: PostMianProps){
                 <JobParts label="Responsibilities" content={post?.responsibilities} />
                 <JobParts label="Requirments" content={post?.requirments} />
                 {post?.qualifications && <JobParts label="Qualifications" content={post?.qualifications} />}
-                <JobParts label= "How to Apply" content={post?.howToApply} /> 
+                {post.howToApply && <JobParts label= "How to Apply" content={post?.howToApply} /> }
                 {/* Tags */}
                 <PostTags sector={post?.sector} site={post?.site} type={post?.type} />
                 {/* Details */}

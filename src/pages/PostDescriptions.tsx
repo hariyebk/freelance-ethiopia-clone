@@ -8,6 +8,7 @@ import { Textarea } from "../components/ui/textarea"
 import { IoWarningOutline } from "react-icons/io5";
 import { useCreatePost2 } from "../lib/Tanstackquery/queriesAndMutations"
 import Spinner from "../shared/pieces/Spinner"
+import { useEffect } from "react"
 
 interface jobPostProps {
     description?: string,
@@ -22,6 +23,10 @@ export default function PostDescriptions({description, responsibilities, requirm
 
     const {isPending, mutate: createPost2} = useCreatePost2()
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const form = useForm<z.infer<typeof Post2Validation>>({
         resolver: zodResolver(Post2Validation),
         defaultValues: {
@@ -35,6 +40,7 @@ export default function PostDescriptions({description, responsibilities, requirm
     })
 
     async function onSubmit(values: z.infer<typeof Post2Validation>){
+        window.scrollTo(0, 0);
         createPost2(values)
     }
 

@@ -1,5 +1,6 @@
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { Checkbox } from "../../components/ui/checkbox"
+import useApi from "../../context/hook"
 
 
 interface FilterProps {
@@ -10,9 +11,13 @@ interface FilterProps {
 
 export default function Filter({title, lists, param}: FilterProps) {
     const [searchParms, setSearchParms] = useSearchParams()
+    const {role} = useApi()
+    const navigate = useNavigate()
 
     function handleClick(value: string){
-        console.log("hello")
+        if(!role){
+            return  navigate("/login")
+        }
         const query = value.replace(/ /g, "_") as string
         searchParms.set(param, query)
         setSearchParms(searchParms)

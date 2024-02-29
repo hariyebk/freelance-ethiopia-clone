@@ -7,7 +7,7 @@ import PostHeader from "../shared/post/PostHeader";
 import { AccountRoles } from "../types";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import useApi from "../context/hook";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PopOver from "../shared/PopOver";
 import Spinner from "../shared/pieces/Spinner";
 
@@ -20,12 +20,16 @@ export default function MyPosts(){
     const closeModal = () => setOpenModal(false) 
     const handleOpenModal = () => setOpenModal(true)
 
-    console.log(data)
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     function handleEditPost(){
 
     }
 
     function handleDeletePost(id: number){
+        window.scrollTo(0, 0);
         closeModal()
         deletePost(id)
     }
@@ -63,24 +67,27 @@ export default function MyPosts(){
                 </div> : (
                     data?.posts.map((post) => {
                         return (
-                            <PostCard key={post.id} post={post} Header = {
-                                <PostHeader title={post.title}>
-                                    { role === AccountRoles.employer && <div className="flex items-center gap-7">
-                                            <button onClick={handleEditPost}>
-                                                <FaEdit className = "text-blue-600 w-5 h-5" />
-                                            </button>
-                                            <button onClick={() => {
-                                                handleOpenModal()
-                                                setCurrentId(post.id)
-                                            }}>
-                                                <FaTrash className = "text-red-600 w-5 h-5" />
-                                            </button>
-                                        </div>  
-                                    }
-                                </PostHeader>
-                            } MainSection = {
-                                <PostMain post={post} />
-                            } />
+                            <div key={post.id}>
+                                <PostCard post={post} Header = {
+                                    <PostHeader title={post.title}>
+                                        { role === AccountRoles.employer && <div className="flex items-center gap-7">
+                                                <button onClick={handleEditPost}>
+                                                    <FaEdit className = "text-blue-600 w-5 h-5" />
+                                                </button>
+                                                <button onClick={() => {
+                                                    handleOpenModal()
+                                                    setCurrentId(post.id)
+                                                }}>
+                                                    <FaTrash className = "text-red-600 w-5 h-5" />
+                                                </button>
+                                            </div>  
+                                        }
+                                    </PostHeader>
+                                } MainSection = {
+                                    <PostMain post={post} />
+                                } />
+                                <hr className="border-t border-gray-300 shadow-lg w-full" />
+                            </div>
                         )
                     })
                 )
