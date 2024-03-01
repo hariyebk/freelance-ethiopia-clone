@@ -4,7 +4,10 @@ export type USER = signUpType & {
     id: string,
     type: string,
     avatar: string,
-    preference?: string
+    preference?: {
+        sector: string,
+        location: string
+    }
 } 
 
 export type POST1 = {

@@ -140,5 +140,6 @@ export const CoverLetterValidation = z.object({
     coverLetter: z.string().min(5, {message: "Cover letter is too short"}).max(800, {message: "cover letter should have a maximum of 800 charcters. This is too long"})
 })
 export const preferenceValidation = z.object({
-    sectorPreference: z.string().optional()
+    sectorPreference: z.string(),
+    locationPreference: z.string()
 })

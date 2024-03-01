@@ -27,6 +27,7 @@ export default function Register() {
     }, []);
 
     async function handleSubmit(userData: signUpType){
+        window.scrollTo(0, 0);
         signup(userData)
     }
 

@@ -1,7 +1,7 @@
 import { useReducer} from "react"
 import { AccountRoles} from "../../types"
 import { useUpdateAccountType } from "../../lib/Tanstackquery/queriesAndMutations"
-import Spinner from "./Spinner"
+import { Box, CircularProgress } from "@mui/material"
 
 interface STATEPROPS {
     Jobseeker: boolean,
@@ -106,7 +106,11 @@ export default function NewProfile(){
 
     if(isPending){
         return (
-            <Spinner />
+            <div className="w-full h-full flex items-center justify-center">
+                <Box sx={{ display: 'flex' }}>
+                    <CircularProgress/>
+                </Box>
+            </div>
         )
     }
 

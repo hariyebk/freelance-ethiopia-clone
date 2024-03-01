@@ -131,13 +131,20 @@ export async function deletePostById(id: number){
     if(error) throw new Error(error.message)
     return {post}
 }
-export async function FetchAllPosts(){
-    const {data: posts, error} = await supabase.from("post").select("*", {count: "exact"})
-    if(error) throw new Error(error.message)
-    return {posts}
+export async function FetchAllPosts(preference?: {sector: string, location: string}){
+    if(preference){
+        const {data, error} = await supabase.from("post").select().eq("sector", preference.sector).eq("location", preference.location)
+        if(error) throw new Error(error.message)
+        return {data}
+    }
+    else {
+        const {data: posts, error: error1} = await supabase.from("post").select("*", {count: "exact"})
+        if(error1) throw new Error(error1.message)
+        return {posts}
+    }
 }
-export async function updateUserPreference(id: string, sector: string){
-    const {data: user, error} = await supabase.from("users").update({preference: sector}).eq("id", id).select("*")
+export async function updateUserPreference(id: string, preferences: {sector: string, location: string}){
+    const {data: user, error} = await supabase.from("users").update({preference: preferences}).eq("id", id).select("*")
     if(error) throw new Error(error.message)
     return {user}
 }

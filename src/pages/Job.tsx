@@ -12,6 +12,8 @@ import { useEffect } from "react";
 export default function Job() {
     const {setOpenFilter} = useApi()
     const {isLoading, data} = useFetchAllPosts()
+    const {user} = useApi()
+    const checkIfDataExists = user?.preference ? data?.data?.length === 0 : data?.posts?.length === 0 
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -26,7 +28,7 @@ export default function Job() {
     return (
         <section className="w-full mt-20">
             <div className="flex gap-8 lg:ml-44 max-lg:mx-7">
-                <div className="max-lg:w-[600px] w-[700px]">
+                <div className="max-lg:w-[600px] w-[700px] mb-20">
                     <div className="flex flex-col flex-1 shadow-md max-lg:px-5 p-2 my-14">
                         <div className="flex items-center justify-start border border-slate-200 rounded-lg pl-3">
                             <IoSearchOutline style = {{color: "#ef754c", fontSize: "20px"}} />
@@ -47,10 +49,10 @@ export default function Job() {
                         <p className="text-[15px] ml-4 mt-5 text-gray-600 font-sans font-normal"> Browse jobs that match your experiace to a client’s hiring preference. Ordered by most relevant. </p>
                         <hr className="mt-3 border-t-2 border-gray-100 leading-5" />
                         
-                        { data?.posts.length === 0 ?  <div className="my-16 ml-6">
-                            <p className="no-posts"> No posts found 😣 </p>
+                        { checkIfDataExists ?  <div className="my-16 ml-6">
+                            <p className="no-posts"> {user?.preference ? "No posts found according to your preferences 😣" :  "No posts found 😣"} </p>
                         </div> : (
-                            data?.posts.map((post) => {
+                            data?.posts?.map((post) => {
                                 return (
                                     <PostCard key={post.id} post={post} Header = {
                                         <PostHeader title={post.title} />
@@ -62,9 +64,9 @@ export default function Job() {
                         )}
                     </div>
                 </div>
-                <div className="my-14 shadow-md max-lg:hidden pb-48 px-5 overflow-scroll custom-scrollbar">
+                {!user?.preference && <div className="my-14 shadow-md max-lg:hidden pb-48 px-5 overflow-scroll custom-scrollbar">
                     <FilterOptions />
-                </div>
+                </div>}
             </div>
         </section>
     )

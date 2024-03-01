@@ -114,8 +114,12 @@ export const useUpdateAccountType = () => {
 // UPDATE USER PREFERENCE
 export const useUpdatePreference = () => {
     const {user} = useApi()
+    const id = user?.id as string
     return useMutation({
-        mutationFn: (sector: string) => updateUserPreference(user?.id as string, sector),
+        mutationFn: ({sector, location}: {sector: string, location: string}) => updateUserPreference( id, {
+            "sector": sector,
+            "location": location
+        }),
         onSuccess: (data) => {
             console.log(data.user[0])
             toast.success("your preference has been set")
@@ -195,9 +199,10 @@ export const useDeletePostById = () => {
 }
 // FETCH ALL POSTS
 export const useFetchAllPosts = () => {
+    const {user} = useApi()
     const {isLoading, data} = useQuery({
         queryKey: ["posts"],
-        queryFn: FetchAllPosts
+        queryFn: () => FetchAllPosts(user?.preference)
     })
     return {isLoading, data}
 }
