@@ -2,13 +2,15 @@ import supabase from "./config"
 import { signUpType } from "../../pages/Register"
 import { POST1, POST2 } from "../../types"
 
+
+// TODO: FOR FORGET PASSWORD -  supabase.auth.resetPasswordForEmail
 // API ENDPOINTS
 export async function Signup(userInfo: signUpType){
     // create the new user in the table
     const { data, error } = await supabase
-    .from("clients")
+    .from("users")
     .insert([
-        { firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email, bio: userInfo.bio, birthDate: userInfo.birthDate, gender: userInfo.gender, country: userInfo.country, city: userInfo.city, type: "", avatar: "" , phone: `0${userInfo.phone}`},
+        { firstName: userInfo.firstName, lastName: userInfo.lastName, email: userInfo.email, bio: userInfo.bio, birthDate: userInfo.birthDate, gender: userInfo.gender, country: userInfo.country, city: userInfo.city, type: "", avatar: "" , phone: `0${userInfo.phone}`, preference: ""},
     ])
     .select()
     
@@ -32,13 +34,13 @@ export async function Login(email: string, password: string){
         password
     })
     if(error) throw new Error(error.message)
-    const {data: user, error: error1} = await supabase.from("clients").select("*").eq("email", data.user.email).single()
+    const {data: user, error: error1} = await supabase.from("users").select("*").eq("email", data.user.email).single()
     if(error1) throw new Error(error1.message)
     return {user}  
 }
 export async function Logout(){
     const {error} = await supabase.auth.signOut()
-    if(error) throw new Error(error.message)
+    if(error) throw Error(error.message)
 }
 export async function getCurrentUser(){
     const {data: session} = await supabase.auth.getSession()
@@ -50,9 +52,22 @@ export async function getCurrentUser(){
 export async function FetchFullUserData(){
     const data = await getCurrentUser()
     if(!data) return null
-    const {data: user, error} = await supabase.from("clients").select("*").eq("email", data.user.email).single()
+    const {data: user, error} = await supabase.from("users").select("*").eq("email", data.user.email).single()
     if(error) return null
     return {user}    
+}
+export async function updatePassword({email , currentPassword, newPassword}: {email: string, currentPassword: string, newPassword: string}){
+    // check if the current password is correct
+    const {error} = await supabase.auth.signInWithPassword({
+        email,
+        password: currentPassword
+    })
+    if(error) throw new Error("your current password is incorrect")
+    //  if the current password is correct , update the users password.
+    const {data, error: error1} = await supabase.auth.updateUser({password: newPassword})
+    if(error1) throw new Error(error1.message)
+    return {data}
+    
 }
 export async function UploadAvatar(id: string, imageInfo: File){
     const bucketName = import.meta.env.VITE_STORAGE_BUCKET_NAME as string
@@ -60,12 +75,12 @@ export async function UploadAvatar(id: string, imageInfo: File){
     const imagename = imageInfo.name.replace("/", "")
     const {error: fileUploadError, data: image } = await supabase.storage.from(bucketName).upload(imagename, imageInfo)
     if(fileUploadError) throw new Error(fileUploadError.message)
-    const {data, error} = await supabase.from("clients").update({avatar: `${imageUrl}/${image.path}`}).eq("id", id)
+    const {data, error} = await supabase.from("users").update({avatar: `${imageUrl}/${image.path}`}).eq("id", id)
     if(error) throw new Error(error.message)
     return {data}
 }
 export async function UpdateUserAccountType (id: string, accountType: string){
-    const {data: user, error} = await supabase.from("clients").update({type: accountType}).eq("id", id).select("*")
+    const {data: user, error} = await supabase.from("users").update({type: accountType}).eq("id", id).select("*")
     if(error) throw new Error(error.message)
     return {user}
 }
@@ -121,13 +136,18 @@ export async function FetchAllPosts(){
     if(error) throw new Error(error.message)
     return {posts}
 }
-export async function apply(userId: number, postId: string, coverLetter: string){
-    const application = {
-        applicantId: userId,
-        coverLetter: coverLetter
-    }
-
-    const {data: user, error} = await supabase.from("post").update({}).eq("id", postId).select("*")
+export async function updateUserPreference(id: string, sector: string){
+    const {data: user, error} = await supabase.from("users").update({preference: sector}).eq("id", id).select("*")
     if(error) throw new Error(error.message)
-    return {user}    
+    return {user}
 }
+// export async function apply(userId: number, postId: string, coverLetter: string){
+//     const application = {
+//         applicantId: userId,
+//         coverLetter: coverLetter
+//     }
+
+//     const {data: user, error} = await supabase.from("post").update({}).eq("id", postId).select("*")
+//     if(error) throw new Error(error.message)
+//     return {user}    
+// }

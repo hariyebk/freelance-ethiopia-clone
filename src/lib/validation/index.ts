@@ -6,7 +6,7 @@ export const loginValidation = z.object({
 })
 export const signupValidation = z.object({
     email: z.string().email(),
-    password: z.string().min(8, { message: "Password must be at least 8 characters." }),
+    password: z.string().min(6, { message: "Password must be at least 6 characters." }),
     firstName: z.string().min(2, {message: "first name is required"}).max(8, {message: "first name is too long"}),
     lastName: z.string().min(2, {message: "last name is required"}).max(8, {message: "last name is too long"}),
     bio: z.string().min(2, {message: "bio is too short"}).max(100, {message: "bio is too long"}).optional(),
@@ -61,20 +61,9 @@ export const certificationValidation = z.object({
     certification: z.string()
 })
 export const SettingsValidation = z.object({
-    oldPassword: z.string(),
-    newPassword: z.string(),
+    currentPassword: z.string().min(6, {message: "password must be at least 6 characters long"}),
+    newPassword: z.string().min(6, {message: "password must be at least 6 characters long"}),
     passwordConfirm: z.string(),
-    sectorPreference: z.string().optional()
-}).refine((value) => {
-    if(value.newPassword === ""){
-        return true
-    }
-    if(value.newPassword){
-        return value.newPassword.length >= 6
-    }
-}, {
-    message: "password must be at least 6 characters",
-    path: ["password"]
 }).refine(
     (values) => {
         return values.newPassword === values.passwordConfirm;
@@ -147,7 +136,9 @@ export const Post2Validation = z.object({
         path: ["salary"],
     }
 )
-
 export const CoverLetterValidation = z.object({
     coverLetter: z.string().min(5, {message: "Cover letter is too short"}).max(800, {message: "cover letter should have a maximum of 800 charcters. This is too long"})
+})
+export const preferenceValidation = z.object({
+    sectorPreference: z.string().optional()
 })

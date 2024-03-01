@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser } from "../Supabase/Api_Endpoints"
+import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, updatePassword, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
@@ -15,7 +15,7 @@ export const useSignup = () => {
     return useMutation({
         mutationFn: (userData: signUpType) => Signup(userData),
         onSuccess: (response) => {
-            navigate(`/register/${response.data[0].id}/upload-photo`)
+            navigate(`/register/${response?.data[0].id}/upload-photo`)
         },
         onError: (error) => toast.error(error.message)
     })
@@ -64,6 +64,20 @@ export const useUploadAvatar = () => {
         onError: () => toast.error("uploading the image has failed, please try again") 
     })
 }
+// UPDATE USER PASSWORD 
+export const useUpdatePassword = () => {
+    const navigate = useNavigate()
+    const {user} = useApi()
+    return useMutation(({
+        mutationFn: ({currentPassword, newPassword}: {currentPassword: string, newPassword: string}) => updatePassword({email: user?.email as string, currentPassword, newPassword }),
+        onSuccess: () => {
+            toast.success("password has been changed, you need to login again")
+            navigate("/login")
+        },
+        onError: (error) => toast.error(error.message)
+    }))
+
+}
 // GET CURRENT USER
 export const useGetCurrentUser = () => {
     const {isLoading, data} = useQuery({
@@ -95,6 +109,18 @@ export const useUpdateAccountType = () => {
             navigate(`/profile-type/`)
         },
         onError: () => toast.error("failed to set your account type")
+    })
+}
+// UPDATE USER PREFERENCE
+export const useUpdatePreference = () => {
+    const {user} = useApi()
+    return useMutation({
+        mutationFn: (sector: string) => updateUserPreference(user?.id as string, sector),
+        onSuccess: (data) => {
+            console.log(data.user[0])
+            toast.success("your preference has been set")
+        },
+        onError: (error) => toast.error(error.message)
     })
 }
 //  CREATE FIRST POST SECTION
