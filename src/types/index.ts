@@ -3,7 +3,8 @@ import { signUpType } from "../pages/Register"
 export type USER = signUpType & {
     id: string,
     type: string,
-    avatar: string
+    avatar: string,
+    preference?: string
 } 
 
 export type POST1 = {
@@ -17,7 +18,7 @@ export type POST1 = {
     location?: string,
     gender: string,
     deadline: string,
-    quantity: string
+    quantity: string,
 }
 
 export type POST2 = {

@@ -9,23 +9,26 @@ import useApi from "../../context/hook"
 import { useForm } from "react-hook-form"
 import { useUpdatePreference } from "../../lib/Tanstackquery/queriesAndMutations"
 
+interface Props {
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-export default function SetPreference(){
-    const {role, setLoading} = useApi()
-    const {mutate: updatePreference} = useUpdatePreference()
+export default function SetPreference({setIsLoading}: Props){
+    const {role, user} = useApi()
+    const {isPending, mutate: updatePreference} = useUpdatePreference()
+    const sectors = [ "None", ...jobSectors]
 
     const form = useForm<z.infer<typeof preferenceValidation>>({
         resolver: zodResolver(preferenceValidation),
         defaultValues: {
-            sectorPreference: ""
+            sectorPreference: user?.preference || ""
         },
     })
 
     function onSubmit(values: z.infer<typeof preferenceValidation>){
-        setLoading(true)
         window.scrollTo(0, 0);
+        setIsLoading(isPending)
         updatePreference(values.sectorPreference!)
-        setLoading(false)
     }
 
     return (
@@ -46,7 +49,7 @@ export default function SetPreference(){
                                 </SelectTrigger>
                             </FormControl>
                             <SelectContent className="">
-                                {jobSectors.map((sector) => {
+                                {sectors.map((sector) => {
                                     return (
                                         <SelectItem  key={sector} value={sector}> {sector} </SelectItem>
                                     )
