@@ -3,22 +3,19 @@ import JobParts from "../pieces/JobParts";
 import PostTags from "./PostTags";
 import { FaCheckCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { AccountRoles, POST1, POST2 } from "../../types";
+import { AccountRoles, POST} from "../../types";
 import { useState } from "react";
 import PostDeatils from "./PostDeatils";
 import useApi from "../../context/hook";
 
 interface PostMianProps {
-    post: POST1 & POST2 & {
-        id: string,
-        created_at: string
-    },
-    applied?: boolean
+    post: POST
 }
 
-export default function PostMain({post, applied}: PostMianProps){
+export default function PostMain({post}: PostMianProps){
     const [expand, setExpand] = useState(false)
-    const {role} = useApi()
+    const {role, user} = useApi()
+    const applied = post.applications?.find((application) => application.applicant.id === user?.id)
 
     return (
         <section>

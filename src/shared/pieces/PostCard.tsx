@@ -1,12 +1,9 @@
-import {POST1, POST2 } from "../../types";
+import {POST} from "../../types";
 import PostSubHeader from "../post/PostSubHeader";
 
 
 interface PostCardProps {
-    post: POST1 & POST2 & {
-        id: string,
-        created_at: string
-    }, 
+    post: POST,
     Header: React.ReactNode,
     MainSection: React.ReactNode
 }

@@ -7,7 +7,8 @@ export type USER = signUpType & {
     preference?: {
         sector: string,
         location: string
-    }
+    },
+    appliedTo?: Application
 } 
 
 export type POST1 = {
@@ -31,6 +32,15 @@ export type POST2 = {
     qualifications?: string,
     salary?: string,
     howToApply?: string
+}
+
+export type POST = POST1 & POST2 & {
+    id: string,
+    created_at: string,
+    applications?: {
+        applicant: USER,
+        coverLetter: string
+    }[]
 }
 
 export type IcontextType = {
@@ -67,3 +77,12 @@ export enum AccountTypes {
     licensed_startup = "Licensed Startup",
     unlicensed_startup = "Unlicensed Startup"
 } 
+
+export type Application = {
+    post: POST1 & POST2 & {
+        id: string,
+        created_at: string
+    }, 
+    status: string,
+    appliedAt: string
+}[] | null

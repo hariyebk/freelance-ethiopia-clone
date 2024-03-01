@@ -1,12 +1,16 @@
 import { useEffect } from "react";
 import ApplicationsList from "../shared/ApplicationsList";
 import ApplicationFilter from "../shared/pieces/ApplicationFilter";
+import useApi from "../context/hook";
+import { Application } from "../types";
 
 export default function Applied() {
+    const {user} = useApi()
 
-    useEffect(() => {
+    useEffect(() => {   
         window.scrollTo(0, 0);
     }, []);
+
 
     return (
         <section className="w-full mt-40 mb-36">
@@ -18,7 +22,7 @@ export default function Applied() {
                     </div>
                     <ApplicationFilter />
                 </div>
-                <ApplicationsList />
+                <ApplicationsList applications={user?.appliedTo as Application} />
             </div>
         </section>
     )

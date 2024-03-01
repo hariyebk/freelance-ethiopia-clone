@@ -31,7 +31,7 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [role, setRole] = useState("")
     const [user, setUser] = useState<USER | null>(null)
 
-function updateRoleAndUser(){
+    function updateRoleAndUser(){
         if(!role &&  data?.user){
             setRole(data?.user?.type)
             setUser(data?.user)

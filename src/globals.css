@@ -152,6 +152,6 @@
         @apply text-base text-stone-600 font-palanquin font-semibold
     }
     .no-posts {
-        @apply text-2xl text-black font-palanquin
+        @apply text-xl text-black font-palanquin
     }
 }

@@ -209,12 +209,12 @@ export const useFetchAllPosts = () => {
 // APPLY FOR A JOB
 export const useApply = () => {
     const {id} = useParams()
-    const {setUser} = useApi()
+    const {user, setUser} = useApi()
     const navigate = useNavigate()
     return useMutation({
-        mutationFn: ({userId, coverLetter}: {userId: string, coverLetter: string}) => apply(id!, {
-            "userId": userId,
-            "coverLetter": coverLetter
+        mutationFn: ({userId, coverLetter}: {userId: string, coverLetter: string}) => apply(id!, userId, {
+            "coverLetter": coverLetter,
+            "applicant": user!
         }),
         onSuccess: (data) => {
             setUser(data.user[0])

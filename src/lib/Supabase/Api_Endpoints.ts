@@ -1,6 +1,6 @@
 import supabase from "./config"
 import { signUpType } from "../../pages/Register"
-import { POST1, POST2 } from "../../types"
+import { POST1, POST2, USER } from "../../types"
 
 
 // TODO: FOR FORGET PASSWORD -  supabase.auth.resetPasswordForEmail
@@ -148,7 +148,7 @@ export async function updateUserPreference(id: string, preferences: {sector: str
     if(error) throw new Error(error.message)
     return {user}
 }
-export async function apply( postId: string, application: {userId: string, coverLetter: string}){
+export async function apply( postId: string, userId: string, application: {coverLetter: string, applicant: USER}){
     // First retrieve applications array
     const {data, error} = await supabase.from("post").select().eq("id", postId).single()
     if(error) throw new Error("something went wrong, try again")
@@ -157,12 +157,12 @@ export async function apply( postId: string, application: {userId: string, cover
     const {data: post, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
     if(error1) throw new Error(error1.message)
     // First retrieve all the users applications
-    const {data: data1, error: error2} = await supabase.from("users").select().eq("id", application?.userId).single()
+    const {data: data1, error: error2} = await supabase.from("users").select().eq("id", userId).single()
     if(error2) throw new Error("something went wrong, try again")
     const tempArray2 = data1.appliedTo ? data1.appliedTo : []
     // Update the array with the new application
-    const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2, {"postId": postId, "status": "pending"}] 
-    }).eq("id", application?.userId).select("*")
+    const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2, {"post": data, "status": "pending", "appliedAt": new Date()}] 
+    }).eq("id", userId).select("*")
     if(error3) throw new Error(error3.message)
     return {post, user}    
 }
