@@ -148,13 +148,21 @@ export async function updateUserPreference(id: string, preferences: {sector: str
     if(error) throw new Error(error.message)
     return {user}
 }
-// export async function apply(userId: number, postId: string, coverLetter: string){
-//     const application = {
-//         applicantId: userId,
-//         coverLetter: coverLetter
-//     }
-
-//     const {data: user, error} = await supabase.from("post").update({}).eq("id", postId).select("*")
-//     if(error) throw new Error(error.message)
-//     return {user}    
-// }
+export async function apply( postId: string, application: {userId: string, coverLetter: string}){
+    // First retrieve applications array
+    const {data, error} = await supabase.from("post").select().eq("id", postId).single()
+    if(error) throw new Error("something went wrong, try again")
+    const tempArray1 = data.applications ? data.applications : []
+    // Update the array with the new value
+    const {data: post, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
+    if(error1) throw new Error(error1.message)
+    // First retrieve all the users applications
+    const {data: data1, error: error2} = await supabase.from("users").select().eq("id", application?.userId).single()
+    if(error2) throw new Error("something went wrong, try again")
+    const tempArray2 = data1.appliedTo ? data1.appliedTo : []
+    // Update the array with the new application
+    const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2, {"postId": postId, "status": "pending"}] 
+    }).eq("id", application?.userId).select("*")
+    if(error3) throw new Error(error3.message)
+    return {post, user}    
+}

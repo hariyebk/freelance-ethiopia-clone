@@ -9,8 +9,13 @@ import Goback from "../shared/pieces/Goback"
 import { useEffect } from "react"
 import { coverLetterGuide } from "../constants"
 import { LuDot } from "react-icons/lu";
+import { useApply } from "../lib/Tanstackquery/queriesAndMutations"
+import useApi from "../context/hook"
+import Spinner from "../shared/pieces/Spinner"
 
 export default function Apply() {
+    const {isPending, mutate: apply} = useApply()
+    const {user} = useApi()
     const form = useForm<z.infer<typeof CoverLetterValidation>>({
         resolver: zodResolver(CoverLetterValidation),
         defaultValues: {
@@ -23,9 +28,16 @@ export default function Apply() {
     }, []);
 
     async function onSubmit(values: z.infer<typeof CoverLetterValidation>){
-        console.log(values)
-        // TODO: Add the application to the job post applications array.
-        form.reset()
+        apply({
+            userId: user?.id as string,
+            coverLetter: values.coverLetter
+        })
+    }
+
+    if(isPending){
+        return (
+            <Spinner />
+        )
     }
     return (
         <section className="w-full max-lg:my-40 mt-40 lg:mb-40">

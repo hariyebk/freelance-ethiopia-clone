@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, updatePassword, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, updatePassword, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
-import { POST1, POST2 } from "../../types"
+import { POST1, POST2} from "../../types"
 
 // Query and Mutation hooks
 
@@ -205,4 +205,22 @@ export const useFetchAllPosts = () => {
         queryFn: () => FetchAllPosts(user?.preference)
     })
     return {isLoading, data}
+}
+// APPLY FOR A JOB
+export const useApply = () => {
+    const {id} = useParams()
+    const {setUser} = useApi()
+    const navigate = useNavigate()
+    return useMutation({
+        mutationFn: ({userId, coverLetter}: {userId: string, coverLetter: string}) => apply(id!, {
+            "userId": userId,
+            "coverLetter": coverLetter
+        }),
+        onSuccess: (data) => {
+            setUser(data.user[0])
+            toast.success("application successfull")
+            navigate("/applied")
+        },
+        onError: (error) => toast.error(error.message)
+    })
 }

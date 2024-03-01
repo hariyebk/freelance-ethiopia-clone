@@ -22,7 +22,7 @@ export default function PostMain({post, applied}: PostMianProps){
 
     return (
         <section>
-            <JobParts label="Description" content={post?.description} />
+            <JobParts label="Description" content={post?.description.toLowerCase()} />
             {!expand && <div className="w-fit pb-7 mt-5 flex items-center hover:text-primary cursor-pointer" onClick={() => setExpand(true)}> 
             <MdKeyboardArrowDown style = {{fontSize: "30px"}} />
             <p> Read more</p>
