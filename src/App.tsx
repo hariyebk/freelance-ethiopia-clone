@@ -41,20 +41,20 @@ export default function App(){
                     }>
                             {/* AUTHENTICATED USERS PAGES */}
                             <Route path="/profile-type" element = {<Profile />} />
-                            <Route path="/post/:id/apply" element = {<Apply />} />
+                            <Route path="/post/:jid/apply" element = {<Apply />} />
                             <Route path="/settings" element = {<Settings />} />
                       {/* JOB SEEKER AUTHORIZATION MIDDLEWARE */}
                       <Route element = {
                         <JobSeekerOnly />
                       }>
                             <Route path="/my-profile" element = {<JobSeekerProfile />} />
-                            <Route path= "/jobseeker-profile/:id/edit-userDetails" element = {<EditUserDetails />}/> 
-                            <Route path= "/jobseeker-profile/:id/edit-skills" element = {<EditSkills />}/> 
-                            <Route path= "/jobseeker-profile/:id/edit-bio" element = {<EditBio />}/> 
-                            <Route path= "/jobseeker-profile/:id/edit-mainServices" element = {<EditMainServices />}/> 
-                            <Route path= "/jobseeker-profile/:id/edit-workExperiences" element = {<EditWorkExperiences />}/> 
-                            <Route path= "/jobseeker-profile/:id/edit-education" element = {<EditEducation />}/> 
-                            <Route path= "/jobseeker-profile/:id/edit-certification" element = {<EditCertifications />}/>
+                            <Route path= "/edit-userDetails" element = {<EditUserDetails />}/> 
+                            <Route path= "/edit-skills" element = {<EditSkills />}/> 
+                            <Route path= "/edit-bio" element = {<EditBio />}/> 
+                            <Route path= "/edit-mainServices" element = {<EditMainServices />}/> 
+                            <Route path= "/edit-workExperiences" element = {<EditWorkExperiences />}/> 
+                            <Route path= "/edit-education" element = {<EditEducation />}/> 
+                            <Route path= "/edit-certification" element = {<EditCertifications />}/>
                             <Route path="/applied" element = {<Applied />} />
                             <Route path="/saved-jobs" element = {<SavedJobs />} />
                     </Route>

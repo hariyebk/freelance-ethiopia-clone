@@ -8,12 +8,11 @@ import { GoBookmarkFill } from "react-icons/go";
 
 interface PostHeader {
     id: string
-    savedPage?: boolean,
     title: string,
     children?: React.ReactNode
 }
 
-export default function PostHeader({id, children, savedPage, title}: PostHeader){
+export default function PostHeader({id, children, title}: PostHeader){
     const {role, user} = useApi()
     const {isPending, mutate: savePost} = useSavePost()
     const {isPending: isLoading, mutate: unSavePost} = useUnSavePost()
@@ -29,7 +28,7 @@ export default function PostHeader({id, children, savedPage, title}: PostHeader)
                 <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {title} </h2>
                 {children}
             </div>
-            { role === AccountRoles.jobseeker && <div className={`${ savedPage ? "hidden" : "block"} flex items-center gap-3`}>
+            { role === AccountRoles.jobseeker && <div className="flex items-center gap-3">
                 <button> <IoMdShareAlt  className = "text-primary w-6 h-6"/> </button>
                 {isPending || isLoading ? (
                     <Box sx={{ display: 'flex' }}>

@@ -9,7 +9,36 @@ export type USER = signUpType & {
         location: string
     },
     appliedTo?: Application,
-    saved_posts?: POST[]
+    saved_posts?: POST[],
+    skills?: string[],
+    main_services?: {
+        sector: string,
+        title: string
+    }[],
+    experiences?: {
+        role: string,
+        companyName: string,
+        location: string,
+        startDate: string,
+        finishedDate: string,
+        contribution: string
+    }[],
+    education: {
+        institute: string,
+        enrolled_in: string,
+        fieldOfStudy: string,
+        startDate: string,
+        finishedDate: string
+    }[],
+    certificates: {
+        title: string,
+        presentedBy: string,
+        issuedDate: string,
+        expirationDate: string,
+        link?: string
+    }[],
+    languages: string[],
+    portfolio_links: string[]
 } 
 
 export type POST1 = {

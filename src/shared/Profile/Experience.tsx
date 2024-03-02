@@ -3,13 +3,13 @@ export interface ExperienceProps {
     position: string,
     company: string,
     city?: string,
-    country: string
+    location: string
     startDate: string,
     finishedDate: string,
     contribution: string
 }
 
-export default function Experience({position, company, city, country, startDate, finishedDate, contribution}: ExperienceProps) {
+export default function Experience({position, company, city, location, startDate, finishedDate, contribution}: ExperienceProps) {
     return (
         <section className="mt-5 flex flex-col items-start">
                 <div className="flex items-center justify-between text-base text-stone-600 font-palanquin font-semibold">
@@ -20,10 +20,10 @@ export default function Experience({position, company, city, country, startDate,
                 <p className="mt-3 text-sm font-palanquin font-semibold"> Location: 
                     {
                         city ? (
-                            <span> {city}, {country} </span>
+                            <span> {city}, {location} </span>
                         )
                         :(
-                            <span> {country} </span>
+                            <span> {location} </span>
                         )
                     }
                 </p>

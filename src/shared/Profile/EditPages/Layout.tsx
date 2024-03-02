@@ -25,13 +25,13 @@ export default function Layout({title, MainComponent, ModalComponent}: Props) {
                 <div className="max-lg:mb-10 mb-20 flex flex-col flex-1 items-start max-lg:px-6 px-10 py-8">
                     {/* HEADER */}
                     <div className="w-full flex items-center justify-between max-lg:px-6">
-                        <div className="flex items-center gap-6">
-                            <span className="max-lg:hidden bg-gray-200 cursor-pointer hover:text-primary rounded-full flex justify-center items-center w-16 h-16" onClick={() => navigate(-1)}>
+                        <div className="flex items-center gap-5 mt-4">
+                            <span className="max-lg:hidden bg-gray-200 cursor-pointer hover:text-primary rounded-full flex justify-center items-center w-10 h-10" onClick={() => navigate(-1)}>
                                 <GoArrowLeft style = {{fontSize: "20px"}} />
                             </span>
                             <h2 className="text-xl text-stone-600 font-palanquin font-semibold"> {title} </h2>
                         </div>
-                        <div className="ml-8 cursor-pointer hover:text-primary">
+                        <div className="ml-8 mt-3 cursor-pointer hover:text-primary">
                             <p className="text-base text-stone-600 font-palanquin font-semibold hover:text-primary" onClick={handleOpen}>  Add new </p>
                             {/* MODAL */}
                             <PopOver open = {open} handleClose={handleClose}>

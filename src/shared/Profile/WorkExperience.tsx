@@ -1,30 +1,33 @@
-import { useLocation } from "react-router-dom"
+import useApi from "../../context/hook"
 import TitleAndEdit from "../pieces/TitleAndEdit"
 import Experience from "./Experience"
 
 export default function WorkExperience() {
-    const {pathname} = useLocation()
+    const {user} = useApi()
+
     return (
-        <section className="profile_container">
-            <TitleAndEdit title="Work Experience" routeTo= {`${pathname}/edit-workExperiences`} />
+        <section className="profile_container pb-5">
+            <TitleAndEdit title="Work Experience" routeTo= "/edit-workExperiences" />
             {/* Experience */}
-            <Experience
-            position="Front-end Developer"
-            company="The wild Oasis"
-            country= "Remote"
-            startDate="June-2023"
-            finishedDate="Augest-2023"
-            contribution="As the Front-end developer, I took charge of the conceptualizing and development process, bringing the application to life and ensuring it met the hotel's requirements."
-            />
-            <hr className="w-full mt-5 border-0.5 border-gray-300"/>
-            <Experience
-            position="Backend Developer"
-            company="Natours"
-            country= "Remote"
-            startDate="March-2023"
-            finishedDate="June-2023"
-            contribution="I focused on building public and protected RESTful API endpoints using Express.js. Leveraging the power of this Nodejs framework"
-            />
+            {!user?.experiences ? (
+                <p className="mt-10 no-posts"> You have no Experiences added to your profile 😣  </p>
+            ) :
+            user.experiences.map((experience) => {
+                return (
+                    <div key={experience.companyName}>
+                        <Experience
+                        position={experience.role}
+                        company={experience.companyName}
+                        location= {experience.location}
+                        startDate={experience.startDate}
+                        finishedDate={experience.finishedDate}
+                        contribution={experience.contribution}
+                        />
+                        {/* If this item is the last one in the array, skip it */}
+                        {user.experiences && user.experiences[user.experiences?.length - 1] === experience ? null : <hr className="w-full mt-5 border-0.5 border-gray-300"/>}
+                    </div>
+                )
+            })}
         </section>
     )
 }
