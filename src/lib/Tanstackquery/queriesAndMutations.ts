@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, updatePassword, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { signUpType } from "../../pages/Register"
@@ -220,6 +220,39 @@ export const useApply = () => {
             setUser(data.user[0])
             toast.success("application successfull")
             navigate("/applied")
+        },
+        onError: (error) => toast.error(error.message)
+    })
+}
+// SAVE POST 
+export const useSavePost = () => {
+    const {user, setUser} = useApi()
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (postId: string) => savePost({userId: user?.id as string, postId}),
+        onSuccess: (data) => {
+            setUser(data.user[0])
+            toast.success("post bookmarked")
+            queryClient.invalidateQueries({
+                queryKey: ["posts"]
+            })
+        },
+        onError: (error) => toast.error(error.message)
+    })
+}
+export const useUnSavePost = () => {
+    const {user, setUser} = useApi()
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (postId: string) => unSavePost({postId, userId: user?.id as string}),
+        onSuccess: (data) => {
+            setUser(data.user[0])
+            toast.success("post removed from bookmarks")
+            queryClient.invalidateQueries({
+                queryKey: ["posts"]
+            })
         },
         onError: (error) => toast.error(error.message)
     })

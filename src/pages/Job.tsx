@@ -55,7 +55,7 @@ export default function Job() {
                             data?.posts?.map((post) => {
                                 return (
                                     <PostCard key={post.id} post={post} Header = {
-                                        <PostHeader title={post.title} />
+                                        <PostHeader title={post.title} id={post.id} />
                                     } MainSection = {
                                         <PostMain post={post} />
                                     } />

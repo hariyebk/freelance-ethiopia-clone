@@ -26,9 +26,9 @@ export default function SavedJobs(){
                     data.posts.map((post) => {
                         return (
                             <PostCard post={post} Header = {
-                                <PostHeader title="" saved={true} />
+                                <PostHeader title="" id="" savedPage={true} />
                             } MainSection = {
-                                <PostMain post={post} applied={true} />
+                                <PostMain post={post} />
                             } />
 
                         )

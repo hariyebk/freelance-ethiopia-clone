@@ -1,6 +1,6 @@
 import supabase from "./config"
 import { signUpType } from "../../pages/Register"
-import { POST1, POST2, USER } from "../../types"
+import { POST, POST1, POST2, USER } from "../../types"
 
 
 // TODO: FOR FORGET PASSWORD -  supabase.auth.resetPasswordForEmail
@@ -165,4 +165,26 @@ export async function apply( postId: string, userId: string, application: {cover
     }).eq("id", userId).select("*")
     if(error3) throw new Error(error3.message)
     return {post, user}    
+}
+export async function savePost({postId, userId}: {postId: string, userId: string}) {
+    const {data: post, error} = await supabase.from("post").select().eq("id", postId).single()
+    if(error) throw new Error(error.message)
+    const {data, error: error1} = await supabase.from("users").select().eq("id", userId).single()
+    if(error1) throw new Error(error1.message)
+    const tempArray = data.saved_posts ? data.saved_posts : []
+    // Insert the post into the array
+    const {data: user, error: error2}  = await supabase.from("users").update({saved_posts: [...tempArray, post]}).eq("id", userId).select("*") 
+    if(error2) throw new Error(error2.message)
+    return {user}
+}
+export async function unSavePost({postId, userId}: {postId: string, userId: string}){
+    const {data, error: error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    if(!data.saved_posts) throw new Error("you don't have any saved posts")
+    // Filter out all the saved posts from the unsaved post
+    const tempArray = data.saved_posts.filter((post: POST) => post.id !== postId)
+    // Update the saved_posts array
+    const {data: user, error: error1}  = await supabase.from("users").update({saved_posts: tempArray.length === 0 ? null : [...tempArray]}).eq("id", userId).select("*") 
+    if(error1) throw new Error(error1.message)
+    return {user}
 }

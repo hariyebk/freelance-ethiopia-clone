@@ -69,7 +69,7 @@ export default function MyPosts(){
                         return (
                             <div key={post.id}>
                                 <PostCard post={post} Header = {
-                                    <PostHeader title={post.title}>
+                                    <PostHeader title={post.title} id={post.id}>
                                         { role === AccountRoles.employer && <div className="flex items-center gap-7">
                                                 <button onClick={handleEditPost}>
                                                     <FaEdit className = "text-blue-600 w-5 h-5" />

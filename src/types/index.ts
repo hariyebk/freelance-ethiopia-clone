@@ -8,7 +8,8 @@ export type USER = signUpType & {
         sector: string,
         location: string
     },
-    appliedTo?: Application
+    appliedTo?: Application,
+    saved_posts?: POST[]
 } 
 
 export type POST1 = {

@@ -34,7 +34,10 @@ export default function PostMain({post}: PostMianProps){
                 {/* Details */}
                 <PostDeatils compensationType={post?.compensationType} salary={post?.salary} level={post?.level} deadline={post?.deadline}/>
                 <div className="my-16 flex items-center justify-between">
-                    <div  className="flex items-center hover:text-primary cursor-pointer" onClick={() => setExpand(false)}>
+                    <div  className="flex items-center hover:text-primary cursor-pointer" onClick={() => {
+                        window.scrollTo(0, 0);
+                        setExpand(false)
+                    }}>
                         <MdKeyboardArrowUp style = {{fontSize: "40px"}} />
                         <p> Collapse </p>
                     </div>

@@ -2,17 +2,25 @@ import { CiBookmark } from "react-icons/ci";
 import { IoMdShareAlt } from "react-icons/io";
 import useApi from "../../context/hook";
 import { AccountRoles } from "../../types";
+import { useSavePost, useUnSavePost } from "../../lib/Tanstackquery/queriesAndMutations";
+import { Box, CircularProgress } from "@mui/material";
+import { GoBookmarkFill } from "react-icons/go";
 
 interface PostHeader {
-    saved?: boolean,
+    id: string
+    savedPage?: boolean,
     title: string,
     children?: React.ReactNode
 }
 
-export default function PostHeader({children, saved, title}: PostHeader){
-    const {role} = useApi()
+export default function PostHeader({id, children, savedPage, title}: PostHeader){
+    const {role, user} = useApi()
+    const {isPending, mutate: savePost} = useSavePost()
+    const {isPending: isLoading, mutate: unSavePost} = useUnSavePost()
+    const saved = user?.saved_posts?.find((post) => post.id === id)
 
     function handleSavePost(){
+        saved ? unSavePost(id) : savePost(id)
     }
 
     return (
@@ -21,9 +29,18 @@ export default function PostHeader({children, saved, title}: PostHeader){
                 <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {title} </h2>
                 {children}
             </div>
-            { role === AccountRoles.jobseeker && <div className={`${ saved ? "hidden" : "block"} flex items-center gap-3`}>
-                <button> <IoMdShareAlt style = {{fontSize: "25px", color: "#ef754c"}}/> </button>
-                <button onClick={handleSavePost}> <CiBookmark style = {{fontSize: "25px", color: "#ef754c"}} /> </button>
+            { role === AccountRoles.jobseeker && <div className={`${ savedPage ? "hidden" : "block"} flex items-center gap-3`}>
+                <button> <IoMdShareAlt  className = "text-primary w-6 h-6"/> </button>
+                {isPending || isLoading ? (
+                    <Box sx={{ display: 'flex' }}>
+                        <CircularProgress size={20} />
+                    </Box>
+
+                ) : (
+                    <button onClick={handleSavePost}> 
+                        {saved ? <GoBookmarkFill className = "text-primary w-6 h-6" /> : <CiBookmark  className = "text-primary w-6 h-6" /> }
+                    </button>
+                )}
             </div>
             }
         </div>
