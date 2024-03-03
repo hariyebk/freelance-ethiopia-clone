@@ -16,24 +16,26 @@ export default function SavedJobs(){
 
     return (
         <PostLayout title="Saved Jobs">
-            <ApplicationFilter saved = {true} />
-            { !user?.saved_posts ?  <div className="my-16 ml-6">
-                    <p className="no-posts"> You have no saved posts </p>
-                </div> : (
-                    user?.saved_posts?.map((post) => {
-                        return (
-                            <div key={post.id}>
-                                <PostCard post={post} Header = {
-                                    <PostHeader title={post.title} id={post.id}/>
-                                } MainSection = {
-                                    <PostMain post={post} />
-                                } />
-                            </div>
+            <div className="mb-28">
+                <ApplicationFilter saved = {true} />
+                { !user?.saved_posts ?  <div className="my-16 ml-6">
+                        <p className="no-posts"> You have no saved posts </p>
+                    </div> : (
+                        user?.saved_posts?.map((post) => {
+                            return (
+                                <div key={post.id}>
+                                    <PostCard post={post} Header = {
+                                        <PostHeader title={post.title} id={post.id}/>
+                                    } MainSection = {
+                                        <PostMain post={post} />
+                                    } />
+                                </div>
 
-                        )
-                    })
-                )
-            }
+                            )
+                        })
+                    )
+                }
+            </div>
         </PostLayout>
     )
 }

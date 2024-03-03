@@ -1,15 +1,18 @@
-import { IoClose } from "react-icons/io5";
+import { FaTrash } from "react-icons/fa";
+
 interface SkillProps {
     skill: string,
 }
 export default function Skill({skill}: SkillProps) {
+    function handleDeleteSkill(){
+
+    }
     return (
-        <section className="gap-3 bg-stone-800 text-sm text-white px-5 py-2 rounded-full mr-3 my-3">
-            <div className="flex items-center gap-3 justify-between">
+        <section className="space-x-3 bg-stone-800 text-sm text-white px-5 py-2 mx-3 my-3 rounded-md">
+            <div className="flex items-center justify-between  gap-3">
                 <p> {skill} </p>
-                {/* TODO: OnClick delete the skill */}
-                <button className="hover:text-primary">
-                    <IoClose />
+                <button onClick={handleDeleteSkill} className="ml-2">
+                    <FaTrash className ="text-red-600 w-3 h-3" />
                 </button>
             </div>
         </section>

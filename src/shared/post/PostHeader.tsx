@@ -33,7 +33,7 @@ export default function PostHeader({id, children, title}: PostHeader){
                 <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {title} </h2>
                 {children}
             </div>
-            { role === AccountRoles.jobseeker || !role && <div className="flex items-center gap-3">
+            { (role === AccountRoles.jobseeker || !role) && <div className="flex items-center gap-3">
                 <button> <IoMdShareAlt  className = "text-primary w-6 h-6"/> </button>
                 {isPending || isLoading ? (
                     <Box sx={{ display: 'flex' }}>
