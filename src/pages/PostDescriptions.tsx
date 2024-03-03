@@ -39,7 +39,7 @@ export default function PostDescriptions({description, responsibilities, requirm
         },
     })
 
-    async function onSubmit(values: z.infer<typeof Post2Validation>){
+    function onSubmit(values: z.infer<typeof Post2Validation>){
         window.scrollTo(0, 0);
         createPost2(values)
     }

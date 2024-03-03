@@ -192,3 +192,17 @@ export async function updateUserData(id: string, userInfo: signUpType){
     if(error) throw new Error(error.message)
     return {user}
 }
+export async function AddNewSkill({userId, skill}: {userId: string, skill: string}){
+    // Retrieve the Skills array
+    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    const tempArray = data.skills ? data.skills : []
+    const tempArray1 = skill.replace(/[\n\r]/g, "").split(",")
+    const tempArray2 = [...tempArray, ...tempArray1]
+    // If the user added too many skills
+    if(tempArray2.length > 9) throw new Error("total number of skills exceeded the limit")
+    // update the array
+    const {data: user, error: error1} = await supabase.from("users").update({skills: tempArray2}).eq("id", userId).select("*")
+    if(error1) throw new Error(error1.message)
+    return {user}
+}

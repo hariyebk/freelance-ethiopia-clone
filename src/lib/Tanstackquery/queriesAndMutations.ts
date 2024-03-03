@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { AddNewSkill, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -274,4 +274,24 @@ export const useUpdateUserData = () => {
             role === AccountRoles.jobseeker ?  navigate("/my-profile") : navigate("/profile")
         }
     })
+}
+// ADD NEW SKILL
+export const useAddNewSkill = () => {
+    const {user, setUser} = useApi()
+    const navigate = useNavigate()
+
+    return useMutation({
+        mutationFn: (skill: string) => AddNewSkill({
+            userId: user?.id as string,
+            skill
+        }),
+        onSuccess: (data) => {
+            console.log(data)
+            setUser(data.user[0])
+            toast.success("New skill has been added to your profile")
+            return navigate("/my-profile")
+        },
+        onError: (error) => toast.error(error.message)
+    })
+
 }

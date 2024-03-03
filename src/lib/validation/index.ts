@@ -56,7 +56,28 @@ export const JobSectorValidation = z.object({
 })
 export const skillValidation = z.object({
     skill: z.string()
-})
+}).refine(
+    (value) => {
+        if(value.skill.split(",").length === 1){
+            return false
+        }
+        else {
+            return true
+        }
+    }, 
+    {
+        message: "At least two skills, are required",
+        path: ["skill"]
+    }
+).refine(
+    (value) => {
+        return /,/.test(value.skill)
+    },
+    {
+        message: "Please use comma to separate each responsibilities",
+        path: ["responsibilities"],
+    }
+)
 export const certificationValidation = z.object({
     certification: z.string()
 })
@@ -94,7 +115,6 @@ export const Post2Validation = z.object({
     howToApply: z.string().optional()
 }).refine(
     (value) => {
-        console.log(value.responsibilities)
         return /,/.test(value.responsibilities)
     },
     {

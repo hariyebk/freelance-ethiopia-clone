@@ -7,9 +7,12 @@ import toast from "react-hot-toast"
 import { Textarea } from "../../../../components/ui/textarea"
 import { IoWarningOutline } from "react-icons/io5"
 
+interface SkillFormProps {
+    handleSubmit: (skill: string) => void
+}
 
-export default function SkillForm() {
-    
+export default function SkillForm({handleSubmit}: SkillFormProps){
+
     const form = useForm<z.infer<typeof skillValidation>>({
         resolver: zodResolver(skillValidation),
         defaultValues: {
@@ -18,11 +21,11 @@ export default function SkillForm() {
     })
     
     function onSubmit(values: z.infer<typeof  skillValidation>){
-        console.log(values)
         if(!values.skill){
             return toast.error("No skill added")
         }
-            
+        window.scrollTo(0, 0);
+        handleSubmit(values.skill)  
     }
 
 
@@ -42,7 +45,7 @@ export default function SkillForm() {
                     </div>
                     <div className="flex items-center gap-2 pb-4">
                         <span> <IoWarningOutline /> </span>
-                        <p className="text-black max-lg:text-xs text-sm"> A maximum of 8 skills allowed.  </p>
+                        <p className="text-black max-lg:text-xs text-sm"> A maximum of 9 skills allowed.  </p>
                     </div>
                     <FormControl className="max-lg:mt-2 mt-5">
                         <Textarea className="p-3 max-lg:h-[100px] h-[150px] border-gray-700 focus:outline-none focus-visible:ring-white" {...field} />
