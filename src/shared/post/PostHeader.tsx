@@ -5,6 +5,7 @@ import { AccountRoles } from "../../types";
 import { useSavePost, useUnSavePost } from "../../lib/Tanstackquery/queriesAndMutations";
 import { Box, CircularProgress } from "@mui/material";
 import { GoBookmarkFill } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 interface PostHeader {
     id: string
@@ -15,10 +16,14 @@ interface PostHeader {
 export default function PostHeader({id, children, title}: PostHeader){
     const {role, user} = useApi()
     const {isPending, mutate: savePost} = useSavePost()
+    const navigate = useNavigate()
     const {isPending: isLoading, mutate: unSavePost} = useUnSavePost()
     const saved = user?.saved_posts?.find((post) => post.id === id)
 
     function handleSavePost(){
+        if(!role){
+            return navigate("/login")
+        }
         saved ? unSavePost(id) : savePost(id)
     }
 
@@ -28,7 +33,7 @@ export default function PostHeader({id, children, title}: PostHeader){
                 <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {title} </h2>
                 {children}
             </div>
-            { role === AccountRoles.jobseeker && <div className="flex items-center gap-3">
+            { role === AccountRoles.jobseeker || !role && <div className="flex items-center gap-3">
                 <button> <IoMdShareAlt  className = "text-primary w-6 h-6"/> </button>
                 {isPending || isLoading ? (
                     <Box sx={{ display: 'flex' }}>

@@ -1,4 +1,16 @@
-import { signUpType } from "../pages/Register"
+
+export type signUpType = {
+    email: string,
+    password?: string,
+    firstName: string,
+    lastName: string,
+    bio?: string,
+    birthDate: string,
+    gender: string,
+    country: string,
+    city: string,
+    phone: string,
+}
 
 export type USER = signUpType & {
     id: string,

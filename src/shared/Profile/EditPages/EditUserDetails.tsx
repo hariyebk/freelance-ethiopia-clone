@@ -1,24 +1,35 @@
-import { signUpType } from "../../../pages/Register";
-import UserDetailsForm from "../../Forms/UserForm";
-import FormHeader from "../../pieces/FormHeader";
+import { useEffect } from "react";
 import Goback from "../../pieces/Goback";
+import UserForm from "../../Forms/UserForm";
+import { signUpType } from "../../../types";
+import { useUpdateUserData } from "../../../lib/Tanstackquery/queriesAndMutations";
+import Spinner from "../../pieces/Spinner";
 
-export default function EditUserDetails() {
-    function handleEditDetails(userData: signUpType){
-        console.log(userData)
+export default function EditUserDetails(){
 
+    const {isPending, mutate: updateUser} = useUpdateUserData()
+
+    function UpdateUser(userData: signUpType){
+        updateUser(userData)
     }
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
+    if(isPending){
+        return (
+            <Spinner />
+        )
+    }
+
     return (
         <section className="w-full max-lg:mt-36 mt-28">
             <div className="lg:hidden max-lg:flex ml-10 mt-10 items-center gap-3 hover:text-primary">
                 <Goback />
             </div>
-            <div className="mx-48 flex flex-col flex-1 items-start">
-                <UserDetailsForm newUser={false} handleSubmit={handleEditDetails} FormHeader={
-                    <FormHeader imageAddress="/Icons/edit-profile.png" title="Update Your Profile" />
-                } FormButtons={
-                    <button type="submit" className="w-72 mt-10 mx-auto flex justify-center bg-gradient-to-r from-primary to-secondary max-lg:px-16 px-16 max-lg:py-2 py-3 text-slate-100 text-lg rounded-full"> Update </button>
-                }/>
+            <div className="mx-48 mb-20 flex flex-col flex-1 items-start">
+                <UserForm handleSubmit={UpdateUser} newUser={false} />
             </div>
         </section>
     )

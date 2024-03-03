@@ -1,6 +1,5 @@
 import supabase from "./config"
-import { signUpType } from "../../pages/Register"
-import { POST, POST1, POST2, USER } from "../../types"
+import { signUpType, POST, POST1, POST2, USER } from "../../types"
 
 
 // TODO: FOR FORGET PASSWORD -  supabase.auth.resetPasswordForEmail
@@ -19,10 +18,10 @@ export async function Signup(userInfo: signUpType){
     // For Authentication
     const {error: error1} = await supabase.auth.signUp({
         email: userInfo.email,
-        password: userInfo.password,
+        password: userInfo.password as string,
     })
     // Login the user automatically
-    Login(userInfo.email, userInfo.password)
+    Login(userInfo.email, userInfo.password as string)
     
     if(error1) throw new Error(error1.message)
 
@@ -138,7 +137,7 @@ export async function FetchAllPosts(preference?: {sector: string, location: stri
         return {data}
     }
     else {
-        const {data: posts, error: error1} = await supabase.from("post").select("*", {count: "exact"})
+        const {data: posts, error: error1} = await supabase.from("post").select("*")
         if(error1) throw new Error(error1.message)
         return {posts}
     }
@@ -186,5 +185,10 @@ export async function unSavePost({postId, userId}: {postId: string, userId: stri
     // Update the saved_posts array
     const {data: user, error: error1}  = await supabase.from("users").update({saved_posts: tempArray.length === 0 ? null : [...tempArray]}).eq("id", userId).select("*") 
     if(error1) throw new Error(error1.message)
+    return {user}
+}
+export async function updateUserData(id: string, userInfo: signUpType){
+    const {data: user, error} = await supabase.from("users").update({...userInfo, phone: `0${userInfo.phone}`}).eq("id", id).select("*")
+    if(error) throw new Error(error.message)
     return {user}
 }

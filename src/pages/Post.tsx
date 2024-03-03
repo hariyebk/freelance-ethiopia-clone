@@ -50,7 +50,7 @@ export default function Post({title, site, type, level, sector, location, compen
     })
     
 
-    async function onSubmit(values: z.infer<typeof Post1Validation>){
+    function onSubmit(values: z.infer<typeof Post1Validation>){
         window.scrollTo(0, 0);
         const jobPoster = user?.firstName as string
         createPost1({...values, postedBy: jobPoster})

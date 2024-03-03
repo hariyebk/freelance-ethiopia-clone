@@ -8,31 +8,37 @@ import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from ".
 import { Input } from "../../components/ui/input"
 import { useState } from "react"
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
-import { signUpType } from "../../pages/Register"
 import { Textarea } from "../../components/ui/textarea"
+import useApi from "../../context/hook"
+import { signUpType } from "../../types"
+import lodash from "lodash"
+import toast from "react-hot-toast"
 
 interface UserFormProps {
-    user?: {
-        email: string,
-        firstName: string,
-        lastName: string,
-        gender: string,
-        city: string,
-        country: string,
-        phone: string,
-        birthDate: string
-    }
     newUser: boolean,
-    FormHeader: React.ReactNode,
-    FormButtons: React.ReactNode,
-    handleSubmit?: (userData: signUpType) => void
+    handleSubmit: (userData: signUpType) => void
 }
 
-export default function UserForm({user, newUser, FormHeader, FormButtons, handleSubmit} : UserFormProps) {
+export default function UserForm({newUser, handleSubmit} : UserFormProps) {
+
     const [showPassword, setShowPassword] = useState(false)
+    const {user} = useApi()
+    const tempData = {
+        email: user?.email,
+        firstName: user?.firstName,
+        lastName: user?.lastName,
+        gender: user?.gender,
+        city: user?.city,
+        country: user?.country,
+        phone: user?.phone.replace("0", ""),
+        birthDate: user?.birthDate
+    }
+
     function handlePassword(){
         setShowPassword(!showPassword)
     }
+
+    
     const form = useForm<z.infer<typeof  signupValidation>>({
         resolver: zodResolver(signupValidation),
         defaultValues: {
@@ -42,23 +48,46 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
             gender: user?.gender || "",
             city: user?.city  || "",
             country: user?.country  || "",
-            phone: user?.phone,
-            birthDate: user?.birthDate
+            phone: user?.phone ? user?.phone.replace("0", "") : "",
+            birthDate: user?.birthDate || ""
         },
     })
 
-    async function onSubmit(values: z.infer<typeof signupValidation>){
-        if(handleSubmit){
+    function onSubmit(values: z.infer<typeof signupValidation>){
+
+        if(newUser && !values.password){
+            return form.setError("password", {
+                message: "password is required"
+            })
+        }
+        // Create new user
+        if(newUser){
+            window.scrollTo(0, 0);
+            return handleSubmit(values as signUpType)
+        }  
+        // If, no changes are made
+        if(!newUser && lodash.isEqual(tempData, values)){
+            return toast.error("You have made no changes")
+        }
+        // update user
+        else {
+            window.scrollTo(0, 0);
             handleSubmit(values)
-        }    
+        }
     }
+
     
     return (
         <section className="w-full flex items-start justify-center max-lg:3 mt-10 mb-32">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-3">
                     <div className="w-full flex items-start">
-                        {FormHeader}
+                        <div className="w-full flex gap-14 max-lg:mt-10 mb-5">
+                            <div className="flex items-center mx-auto gap-4">
+                                <img src="/Icons/edit-profile.png" width={30} height={30} alt="form-icon"/>
+                                <h2 className="text-2xl text-stone-600 font-palanquin font-bold "> {newUser ? "Create Your Account" : "Update Your Profile"} </h2>
+                            </div>
+                        </div>
                     </div>
                     <main className="mt-4">
                         <div className="form_container">
@@ -73,7 +102,7 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
                                 <FormControl className="border-gray-400 focus:border-none py-5">
-                                    <Input type="text" placeholder="first name" className="max-lg:w-full w-[200px] no-autofill outline-none" {...field}/> 
+                                    <Input type="text" placeholder="first name" className={`${newUser ? "w-[200px]" : "w-[300px]"} max-lg:w-full no-autofill outline-none`} {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -90,13 +119,14 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
                                 <FormControl className="border-gray-400 focus:border-none py-5">
-                                    <Input type="text" placeholder="last name" className="max-lg:w-full w-[200px] no-autofill outline-none" {...field}/> 
+                                    <Input type="text" placeholder="last name"  className={`${newUser ? "w-[200px]" : "w-[300px]"} max-lg:w-full no-autofill outline-none`} {...field}/> 
                                 </FormControl>
                                 <FormMessage  className='text-sm text-red-500' />
                                 </FormItem>
                             )}
                             />
-                             {/* CITY */}
+                            {/* CITY */}
+                            {newUser && (
                             <FormField
                             control={form.control}
                             name="city"
@@ -106,9 +136,9 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 City 
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
-                                <Select onValueChange= {field.onChange}>
+                                <Select {...field} onValueChange= {field.onChange}>
                                     <FormControl className="border-gray-400 focus:border-none py-4">
-                                        <SelectTrigger>
+                                        <SelectTrigger {...field}>
                                             <SelectValue placeholder="Select your city" />
                                         </SelectTrigger>
                                     </FormControl>
@@ -123,7 +153,7 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 <FormMessage  className='text-sm text-red-500' />
                                 </FormItem>
                             )}
-                            />
+                            />)}
                         </div>
                         <div className="form_container mt-6" >
                             {/* Phone number */}
@@ -161,7 +191,7 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 Gender 
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
-                                <Select onValueChange= {field.onChange}>
+                                <Select {...field} onValueChange= {field.onChange}>
                                     <FormControl className="border-gray-400 focus:border-none py-3">
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select your Gender" />
@@ -189,13 +219,13 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
                                 <FormControl className="border-gray-400 focus:border-none py-5">
-                                    <Input type="text" placeholder="Email" className="max-lg:w-full w-[250px] no-autofill outline-none" {...field}/>
+                                    <Input type="text" placeholder="Email"  className={`${newUser ? "w-[200px]" : "w-[300px]"}max-lg:w-full no-autofill outline-none`} {...field}/>
                                 </FormControl>
                                 <FormMessage  className='text-sm text-red-500' />
                                 </FormItem>
                             )}
                             />
-                            {newUser ? (
+                            {newUser && (
                                 <div>
                                     {/* // PASSWORD */}
                                     <FormField
@@ -229,30 +259,35 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                     />
                                     
                                 </div>
-                            ) : (
-                                // GENDER
-                                <FormField
-                                control={form.control}
-                                name="gender"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-1 flex-col justify-start gap-2 w-full">
-                                    <FormLabel className="text-base text-stone-500 font-semibold font-palanquin"> Gender </FormLabel>
-                                    <Select onValueChange= {field.onChange}>
-                                    <FormControl className="border-gray-400 focus:border-none py-3">
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select your Gender" />
+                            )}
+                            {/* CITY */}
+                            {!newUser && <FormField
+                            control={form.control}
+                            name="city"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-1 flex-col justify-start gap-2 w-full">
+                                <FormLabel className="text-base text-stone-500 font-semibold font-palanquin">
+                                City 
+                                <span className="text-red-500 text-lg"> * </span>
+                                </FormLabel>
+                                <Select {...field} onValueChange= {field.onChange}>
+                                    <FormControl className="border-gray-400 focus:border-none py-4">
+                                        <SelectTrigger {...field}>
+                                            <SelectValue placeholder="Select your city" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value="male"> Male </SelectItem>
-                                        <SelectItem value="female"> Female </SelectItem>
+                                        {cities.map((city) => {
+                                            return (
+                                                <SelectItem key={city.label} value={city.label}> {city.label} </SelectItem>
+                                            )
+                                        })}
                                     </SelectContent>
                                 </Select>
-                                    <FormMessage  className='text-sm text-red-500' />
-                                    </FormItem>
-                                )}
-                                />
+                                <FormMessage  className='text-sm text-red-500' />
+                                </FormItem>
                             )}
+                            />}
                         </div>
                         <div className="form_container mt-3">
                             {/* BIRTHDATE */}
@@ -282,7 +317,7 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                                 Country 
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
-                                <Select onValueChange= {field.onChange}>
+                                <Select {...field} onValueChange= {field.onChange}>
                                     <FormControl className="border-gray-400 focus:border-none py-6">
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select your country" />
@@ -318,7 +353,7 @@ export default function UserForm({user, newUser, FormHeader, FormButtons, handle
                             />
                         )}
                     </main>
-                    {FormButtons}
+                    <button type="submit" className="max-lg:w-72 w-full mt-10 mx-auto flex justify-center bg-gradient-to-r from-primary to-secondary max-lg:px-16 px-16 max-lg:py-2 py-2 text-slate-100 text-lg rounded-full"> {newUser ? "Register" : "Update"} </button>
                 </form>
             </Form>
         </section>

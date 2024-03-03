@@ -6,7 +6,7 @@ export const loginValidation = z.object({
 })
 export const signupValidation = z.object({
     email: z.string().email(),
-    password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+    password: z.string().min(6, { message: "Password must be at least 6 characters." }).optional(),
     firstName: z.string().min(2, {message: "first name is required"}).max(8, {message: "first name is too long"}),
     lastName: z.string().min(2, {message: "last name is required"}).max(8, {message: "last name is too long"}),
     bio: z.string().min(2, {message: "bio is too short"}).max(100, {message: "bio is too long"}).optional(),

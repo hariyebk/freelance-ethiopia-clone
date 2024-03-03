@@ -1,11 +1,10 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
-import { signUpType } from "../../pages/Register"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
-import { POST1, POST2} from "../../types"
+import { AccountRoles, POST1, POST2, signUpType} from "../../types"
 
 // Query and Mutation hooks
 
@@ -241,6 +240,7 @@ export const useSavePost = () => {
         onError: (error) => toast.error(error.message)
     })
 }
+// UNSAVE POST
 export const useUnSavePost = () => {
     const {user, setUser} = useApi()
     const queryClient = useQueryClient()
@@ -255,5 +255,23 @@ export const useUnSavePost = () => {
             })
         },
         onError: (error) => toast.error(error.message)
+    })
+}
+// UPDATE USER DATA
+export const useUpdateUserData = () => {
+    const {role, user, setUser} = useApi()
+    const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (userInfo: signUpType) => updateUserData(user?.id as string, userInfo),
+        onSuccess: (data) => {
+            setUser(data.user[0])
+            queryClient.invalidateQueries({
+                queryKey: ["user_info", "user"]
+            })
+            toast.success("Your data has been updated")
+            role === AccountRoles.jobseeker ?  navigate("/my-profile") : navigate("/profile")
+        }
     })
 }

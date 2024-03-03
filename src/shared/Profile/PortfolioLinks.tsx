@@ -6,7 +6,7 @@ export default function PortfolioLinks() {
     return (
         <section className="max-lg:w-full w-[260px] flex items-start justify-between lg:rounded-xl lg:shadow-lg lg:border lg:border-gray-100 max-lg:px-10 max-lg:mt-5 py-5 pl-5">
             <div className="max-lg:w-full flex flex-wrap flex-col gap-3 w-36">
-                <h3 className="text-lg text-black font-palanquin font-bold"> Portfolio Links </h3>
+                <h3 className="text-lg text-black font-palanquin"> Portfolio Links </h3>
                 {!user?.portfolio_links ? null : (
                     user.portfolio_links.map((link) => {
                         return (

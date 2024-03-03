@@ -22,11 +22,13 @@ export default function SavedJobs(){
                 </div> : (
                     user?.saved_posts?.map((post) => {
                         return (
-                            <PostCard post={post} Header = {
-                                <PostHeader title={post.title} id={post.id}/>
-                            } MainSection = {
-                                <PostMain post={post} />
-                            } />
+                            <div key={post.id}>
+                                <PostCard post={post} Header = {
+                                    <PostHeader title={post.title} id={post.id}/>
+                                } MainSection = {
+                                    <PostMain post={post} />
+                                } />
+                            </div>
 
                         )
                     })
