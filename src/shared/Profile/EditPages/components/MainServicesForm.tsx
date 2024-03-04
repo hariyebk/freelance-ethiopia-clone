@@ -1,51 +1,50 @@
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../../components/ui/form"
-import { skillValidation } from "../../../../lib/validation"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import toast from "react-hot-toast"
-import { Textarea } from "../../../../components/ui/textarea"
+import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from "../../../../components/ui/form"
+import { MainServicesValidation } from "../../../../lib/validation"
 import { IoWarningOutline } from "react-icons/io5"
+import { Textarea } from "../../../../components/ui/textarea"
+import toast from "react-hot-toast"
 
-interface SkillFormProps {
-    handleSubmit: (skill: string) => void
+interface MainServicesProps {
+    handleSubmit : (service: string) => void
 }
 
-export default function SkillForm({handleSubmit}: SkillFormProps){
-
-    const form = useForm<z.infer<typeof skillValidation>>({
-        resolver: zodResolver(skillValidation),
+export default function MainServicesForm({handleSubmit}: MainServicesProps) {
+    
+    const form = useForm<z.infer<typeof MainServicesValidation >>({
+        resolver: zodResolver(MainServicesValidation),
         defaultValues: {
-            skill: ""
+            service: ""
         },
     })
     
-    function onSubmit(values: z.infer<typeof  skillValidation>){
-        if(!values.skill){
-            return toast.error("No skill added")
-        }
+    function onSubmit(values: z.infer<typeof MainServicesValidation>){
+        if(!values.service){
+            return toast.error("Invalid Input")
+        } 
         window.scrollTo(0, 0);
-        handleSubmit(values.skill)  
+        handleSubmit(values.service)
     }
 
-
     return (
-        <section className="mt-5 max-lg:ml-10 mx-10">
+        <section className="mt-5 max-lg:mx-2 mx-10">
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-3">
                 <FormField
                 control={form.control}
-                name="skill"
+                name="service"
                 render={({ field }) => (
                     <FormItem className="flex flex-1 flex-col justify-start gap-2 w-full">
-                    <FormLabel className="w-full text-start max-lg:text-lg text-xl text-black font-palanquin mb-5"> Add a new skill </FormLabel>
+                    <FormLabel className="w-full text-start max-lg:text-lg text-xl text-black font-palanquin mb-5"> What services do you offer ?  </FormLabel>
                     <div className="flex items-center gap-2">
                         <span> <IoWarningOutline /> </span>
-                        <p className="text-black max-lg:text-xs text-sm"> use comma to separate each skills.  </p>
+                        <p className="text-black max-lg:text-xs text-sm"> use comma to separate each services.  </p>
                     </div>
                     <div className="flex items-center gap-2 pb-4">
                         <span> <IoWarningOutline /> </span>
-                        <p className="text-black max-lg:text-xs text-sm"> A maximum of 9 skills allowed.  </p>
+                        <p className="text-black max-lg:text-xs text-sm"> A maximum of 4 services is allowed.  </p>
                     </div>
                     <FormControl className="max-lg:mt-2 mt-5">
                         <Textarea className="p-3 max-lg:h-[100px] h-[150px] border-gray-700 focus:outline-none focus-visible:ring-white overflow-y-auto custom-scrollbar" {...field} />

@@ -23,10 +23,7 @@ export type USER = signUpType & {
     appliedTo?: Application,
     saved_posts?: POST[],
     skills?: string[],
-    main_services?: {
-        sector: string,
-        title: string
-    }[],
+    main_services?: string[],
     experiences?: {
         role: string,
         companyName: string,

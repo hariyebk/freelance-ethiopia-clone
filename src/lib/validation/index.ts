@@ -50,10 +50,17 @@ export const EducationValidation = z.object({
     StartDate: z.string(),
     FinishedDate: z.string()
 })
-export const JobSectorValidation = z.object({
-    sector: z.string(),
-    role: z.string()
-})
+export const MainServicesValidation = z.object({
+    service: z.string()
+}).refine(
+    (value) => {
+        return /,/.test(value.service)
+    },
+    {
+        message: "Please use comma to separate each services you give",
+        path: ["service"],
+    }
+)
 export const skillValidation = z.object({
     skill: z.string()
 }).refine(
@@ -74,8 +81,8 @@ export const skillValidation = z.object({
         return /,/.test(value.skill)
     },
     {
-        message: "Please use comma to separate each responsibilities",
-        path: ["responsibilities"],
+        message: "Please use comma to separate each skills",
+        path: ["skill"],
     }
 )
 export const certificationValidation = z.object({
