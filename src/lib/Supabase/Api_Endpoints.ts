@@ -217,3 +217,8 @@ export async function DeleteSkill({userId, skill}: {userId: string, skill: strin
     if(error1) throw new Error(error1.message)
     return {user}
 }
+export async function updateUserBio ({userId, bio}: {userId: string, bio: string}){
+    const {data: user, error} = await supabase.from("users").update({bio}).eq("id", userId).select("*")
+    if(error) throw new Error(error.message)
+    return {user} 
+}

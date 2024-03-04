@@ -3,14 +3,16 @@ import { FaTrash } from "react-icons/fa";
 interface SkillProps {
     skill: string,
     onlyShow?: boolean,
-    handleDelete: (skill: string) => void
+    handleDelete?: (skill: string) => void
 }
 
 export default function Skill({skill, onlyShow, handleDelete}: SkillProps) {
 
     function handleClick(){
         window.scrollTo(0, 0);
-        handleDelete(skill)
+        if(handleDelete){
+            handleDelete(skill)
+        }
     }
 
     return (

@@ -12,7 +12,7 @@ export default function Skills() {
                 { !user?.skills ? <p className="no-posts"> You have no skills added to your profile 😣  </p> :
                     user.skills.map((skill) => {
                         return (
-                            <Skill skill={skill} onlyShow={true} />
+                            <Skill key={skill} skill={skill} onlyShow={true} />
                         )
                     })
                 }
