@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { AddNewSkill, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { AddNewSkill, DeleteSkill, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -286,7 +286,6 @@ export const useAddNewSkill = () => {
             skill
         }),
         onSuccess: (data) => {
-            console.log(data)
             setUser(data.user[0])
             toast.success("New skill has been added to your profile")
             return navigate("/my-profile")
@@ -294,4 +293,16 @@ export const useAddNewSkill = () => {
         onError: (error) => toast.error(error.message)
     })
 
+}
+// DELETE A SKILL
+export const useDeleteSkill = () => {
+    const {user, setUser} = useApi()
+    return useMutation({
+        mutationFn: (skill: string) => DeleteSkill({userId: user?.id as string, skill}),
+        onSuccess: (data) => {
+            setUser(data.user[0])
+            toast.success("skill has been deleted")
+        },
+        onError: (error) => toast.error(error.message)
+    })
 }

@@ -3,16 +3,21 @@ import useApi from "../../../context/hook";
 import Skill from "../../pieces/Skill";
 import { useNavigate } from "react-router-dom";
 import SkillForm from "./components/SkillForm";
-import { useAddNewSkill } from "../../../lib/Tanstackquery/queriesAndMutations";
+import { useAddNewSkill, useDeleteSkill } from "../../../lib/Tanstackquery/queriesAndMutations";
 import Spinner from "../../pieces/Spinner";
 
 
 export default function EditSkills(){
     const {isPending, mutate: addSkill} = useAddNewSkill()
+    const {isPending: isLoading, mutate: deleteSkill} = useDeleteSkill()
     const {user} = useApi()
     const navigate = useNavigate()
 
-    if(isPending){
+    function handleDeleteSkill(skill: string){
+        deleteSkill(skill)
+    }
+
+    if(isPending || isLoading){
         return (
             <Spinner />
         )
@@ -32,7 +37,7 @@ export default function EditSkills(){
                         { !user?.skills ? null :
                             user?.skills.map((skill) => {
                                     return (
-                                        <Skill key={skill} skill={skill} />
+                                        <Skill key={skill} skill={skill} handleDelete={handleDeleteSkill} />
                                     )
                             })
                         }

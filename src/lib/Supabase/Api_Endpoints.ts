@@ -206,3 +206,14 @@ export async function AddNewSkill({userId, skill}: {userId: string, skill: strin
     if(error1) throw new Error(error1.message)
     return {user}
 }
+export async function DeleteSkill({userId, skill}: {userId: string, skill: string}) {
+    // Retrieve the Skills array
+    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    // filter out all the skills from the deleted skill
+    const tempArray = data.skills.filter((element: string) => element !== skill) 
+    // update the array
+    const {data: user, error: error1} = await supabase.from("users").update({skills: tempArray}).eq("id", userId).select("*")
+    if(error1) throw new Error(error1.message)
+    return {user}
+}
