@@ -222,3 +222,16 @@ export async function updateUserBio ({userId, bio}: {userId: string, bio: string
     if(error) throw new Error(error.message)
     return {user} 
 }
+export async function updateMainServices({userId, service}: {userId: string, service: string}) {
+    // Retrieve the main_service array from the current user
+    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    const tempArray = data.main_services ? data.main_services : []
+    const tempArray1 = service.replace(/[\n\r]/g, "").split(",")
+    const tempArray2 = [...tempArray, ...tempArray1]
+    if(tempArray2.length > 4 ) throw new Error("total number of services exceeded the limit")
+    // update the array
+    const {data: user, error: error1} = await supabase.from("users").update({main_services: tempArray2}).eq("id", userId).select("*")
+    if(error1) throw new Error(error1.message)
+    return {user}
+}

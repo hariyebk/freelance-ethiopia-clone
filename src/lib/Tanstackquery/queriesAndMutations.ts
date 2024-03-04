@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { AddNewSkill, DeleteSkill, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { AddNewSkill, DeleteSkill, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updateMainServices, updatePassword, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -323,4 +323,21 @@ export const useUpdateUserBio = () => {
         onError: (error) => toast.error(error.message)
     })
 
+}
+// UPDATE USER MAIN SERVICES
+export const useUpdateMainServices = () => {
+    const {user, setUser} = useApi()
+    const navigate = useNavigate()
+    return useMutation({
+        mutationFn: (service: string) => updateMainServices({
+            userId: user?.id as string,
+            service
+        }),
+        onSuccess: (data) => {
+            setUser(data.user[0]),
+            toast.success("your main services have been updated")
+            navigate("/my-profile")
+        },
+        onError: (error) => toast.error(error.message)
+    })
 }
