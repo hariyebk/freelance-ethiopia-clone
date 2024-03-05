@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { AddNewSkill, DeleteSkill, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updateMainServices, updatePassword, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -125,6 +125,42 @@ export const useUpdatePreference = () => {
         },
         onError: (error) => toast.error(error.message)
     })
+}
+// UPDATE USER DATA
+export const useUpdateUserData = () => {
+    const {role, user, setUser} = useApi()
+    const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (userInfo: signUpType) => updateUserData(user?.id as string, userInfo),
+        onSuccess: (data) => {
+            setUser(data.user[0])
+            queryClient.invalidateQueries({
+                queryKey: ["user_info", "user"]
+            })
+            toast.success("Your data has been updated")
+            role === AccountRoles.jobseeker ?  navigate("/my-profile") : navigate("/profile")
+        }
+    })
+}
+// UPDATE USER BIO
+export const useUpdateUserBio = () => {
+    const {user, setUser} = useApi()
+    const navigate = useNavigate()
+    return useMutation({
+        mutationFn: (bio: string) => updateUserBio({
+            userId: user?.id as string,
+            bio
+        }),
+        onSuccess: (data) => {
+            setUser(data.user[0]),
+            toast.success("your bio has been updated")
+            navigate("/my-profile")
+        },
+        onError: (error) => toast.error(error.message)
+    })
+
 }
 //  CREATE FIRST POST SECTION
 export const useCreatePost1 = () => {
@@ -257,86 +293,26 @@ export const useUnSavePost = () => {
         onError: (error) => toast.error(error.message)
     })
 }
-// UPDATE USER DATA
-export const useUpdateUserData = () => {
-    const {role, user, setUser} = useApi()
-    const navigate = useNavigate()
-    const queryClient = useQueryClient()
-
-    return useMutation({
-        mutationFn: (userInfo: signUpType) => updateUserData(user?.id as string, userInfo),
-        onSuccess: (data) => {
-            setUser(data.user[0])
-            queryClient.invalidateQueries({
-                queryKey: ["user_info", "user"]
-            })
-            toast.success("Your data has been updated")
-            role === AccountRoles.jobseeker ?  navigate("/my-profile") : navigate("/profile")
-        }
-    })
-}
-// ADD NEW SKILL
-export const useAddNewSkill = () => {
-    const {user, setUser} = useApi()
-    const navigate = useNavigate()
-
-    return useMutation({
-        mutationFn: (skill: string) => AddNewSkill({
-            userId: user?.id as string,
-            skill
-        }),
-        onSuccess: (data) => {
-            setUser(data.user[0])
-            toast.success("New skill has been added to your profile")
-            return navigate("/my-profile")
-        },
-        onError: (error) => toast.error(error.message)
-    })
-
-}
-// DELETE A SKILL
-export const useDeleteSkill = () => {
-    const {user, setUser} = useApi()
-    return useMutation({
-        mutationFn: (skill: string) => DeleteSkill({userId: user?.id as string, skill}),
-        onSuccess: (data) => {
-            setUser(data.user[0])
-            toast.success("skill has been deleted")
-        },
-        onError: (error) => toast.error(error.message)
-    })
-}
-// UPDATE USER BIO
-export const useUpdateUserBio = () => {
+// REFACTORED
+export const useGeneral = ({isTobeDeleted, successMessage}: {isTobeDeleted: boolean, successMessage: string}) => {
     const {user, setUser} = useApi()
     const navigate = useNavigate()
     return useMutation({
-        mutationFn: (bio: string) => updateUserBio({
-            userId: user?.id as string,
-            bio
-        }),
+        mutationFn: ({
+            value,
+            column_name,
+            limit,
+            errorMessage,
+        } : {
+            value: string,
+            column_name: string,
+            limit?: number,
+            errorMessage?: string
+        }) => isTobeDeleted ? DeleteElement({userId: user?.id as string, value, column_name}) : UpdateElement({userId: user?.id as string, value, column_name, limit: limit! , errorMessage: errorMessage!}),
         onSuccess: (data) => {
             setUser(data.user[0]),
-            toast.success("your bio has been updated")
-            navigate("/my-profile")
-        },
-        onError: (error) => toast.error(error.message)
-    })
-
-}
-// UPDATE USER MAIN SERVICES
-export const useUpdateMainServices = () => {
-    const {user, setUser} = useApi()
-    const navigate = useNavigate()
-    return useMutation({
-        mutationFn: (service: string) => updateMainServices({
-            userId: user?.id as string,
-            service
-        }),
-        onSuccess: (data) => {
-            setUser(data.user[0]),
-            toast.success("your main services have been updated")
-            navigate("/my-profile")
+            toast.success(successMessage)
+            !isTobeDeleted && navigate("/my-profile")
         },
         onError: (error) => toast.error(error.message)
     })

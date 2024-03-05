@@ -8,7 +8,7 @@ export default function MainServices() {
     return (
         <section className="profile_container pb-5">
             <TitleAndEdit title="Main Services" routeTo="/edit-mainServices" add={Boolean(!user?.main_services)} />
-            <div className="mt-7 flex items-center gap-3">
+            <div className="mt-7 flex items-center gap-2">
                 { !user?.main_services ? (
                     <p className="mt-8 no-posts"> You haven't added any services you offer </p>
                 )

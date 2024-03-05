@@ -3,21 +3,27 @@ import useApi from "../../../context/hook";
 import Skill from "../../pieces/Skill";
 import { useNavigate } from "react-router-dom";
 import SkillForm from "./components/SkillForm";
-import { useAddNewSkill, useDeleteSkill } from "../../../lib/Tanstackquery/queriesAndMutations";
+import { useGeneral } from "../../../lib/Tanstackquery/queriesAndMutations";
 import Spinner from "../../pieces/Spinner";
 
 
 export default function EditSkills(){
-    const {isPending, mutate: addSkill} = useAddNewSkill()
-    const {isPending: isLoading, mutate: deleteSkill} = useDeleteSkill()
+    const {isPending, mutate: deleteSkill} = useGeneral({
+        isTobeDeleted: true,
+        successMessage: "skill has been successfully deleted"
+    })
+
     const {user} = useApi()
     const navigate = useNavigate()
 
     function handleDeleteSkill(skill: string){
-        deleteSkill(skill)
+        deleteSkill({
+            value: skill,
+            column_name: "skills"
+        })
     }
 
-    if(isPending || isLoading){
+    if(isPending){
         return (
             <Spinner />
         )
@@ -31,7 +37,7 @@ export default function EditSkills(){
             <div className="max-lg:px-10 px-20">
                 {user?.skills?.length === 9 ? (
                     <p className="no-posts"> You have reached your limits </p>
-                ) : <SkillForm handleSubmit={addSkill} />}
+                ) : <SkillForm />}
                 <div className="mt-4 lg:ml-6 flex items-center">
                     <div className="max-lg:mt-6 max-lg:mx-10 mt-10 mx-auto flex flex-wrap items-center">
                         { !user?.skills ? null :

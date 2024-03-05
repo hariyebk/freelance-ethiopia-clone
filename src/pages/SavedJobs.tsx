@@ -17,7 +17,7 @@ export default function SavedJobs(){
     return (
         <PostLayout title="Saved Jobs">
             <div className="mb-28">
-                <ApplicationFilter saved = {true} />
+                { user?.saved_posts ? <ApplicationFilter saved = {true} /> : null}
                 { !user?.saved_posts ?  <div className="my-16 ml-6">
                         <p className="no-posts"> You have no saved posts </p>
                     </div> : (

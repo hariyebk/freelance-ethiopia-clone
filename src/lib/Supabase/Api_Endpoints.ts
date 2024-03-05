@@ -1,6 +1,20 @@
 import supabase from "./config"
 import { signUpType, POST, POST1, POST2, USER } from "../../types"
 
+interface GeneralUpdateProps {
+    userId: string, 
+    value: string, 
+    column_name: string, 
+    limit: number, 
+    errorMessage: string
+}
+
+interface GeneralDeleteProps {
+    userId: string, 
+    value: string, 
+    column_name: string, 
+}
+
 
 // TODO: FOR FORGET PASSWORD -  supabase.auth.resetPasswordForEmail
 // API ENDPOINTS
@@ -142,28 +156,20 @@ export async function FetchAllPosts(preference?: {sector: string, location: stri
         return {posts}
     }
 }
+export async function updateUserData(id: string, userInfo: signUpType){
+    const {data: user, error} = await supabase.from("users").update({...userInfo, phone: `0${userInfo.phone}`}).eq("id", id).select("*")
+    if(error) throw new Error(error.message)
+    return {user}
+}
+export async function updateUserBio ({userId, bio}: {userId: string, bio: string}){
+    const {data: user, error} = await supabase.from("users").update({bio}).eq("id", userId).select("*")
+    if(error) throw new Error(error.message)
+    return {user} 
+}
 export async function updateUserPreference(id: string, preferences: {sector: string, location: string}){
     const {data: user, error} = await supabase.from("users").update({preference: preferences}).eq("id", id).select("*")
     if(error) throw new Error(error.message)
     return {user}
-}
-export async function apply( postId: string, userId: string, application: {coverLetter: string, applicant: USER}){
-    // First retrieve applications array
-    const {data, error} = await supabase.from("post").select().eq("id", postId).single()
-    if(error) throw new Error("something went wrong, try again")
-    const tempArray1 = data.applications ? data.applications : []
-    // Update the array with the new value
-    const {data: post, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
-    if(error1) throw new Error(error1.message)
-    // First retrieve all the users applications
-    const {data: data1, error: error2} = await supabase.from("users").select().eq("id", userId).single()
-    if(error2) throw new Error("something went wrong, try again")
-    const tempArray2 = data1.appliedTo ? data1.appliedTo : []
-    // Update the array with the new application
-    const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2, {"post": data, "status": "pending", "appliedAt": new Date()}] 
-    }).eq("id", userId).select("*")
-    if(error3) throw new Error(error3.message)
-    return {post, user}    
 }
 export async function savePost({postId, userId}: {postId: string, userId: string}) {
     const {data: post, error} = await supabase.from("post").select().eq("id", postId).single()
@@ -187,51 +193,50 @@ export async function unSavePost({postId, userId}: {postId: string, userId: stri
     if(error1) throw new Error(error1.message)
     return {user}
 }
-export async function updateUserData(id: string, userInfo: signUpType){
-    const {data: user, error} = await supabase.from("users").update({...userInfo, phone: `0${userInfo.phone}`}).eq("id", id).select("*")
-    if(error) throw new Error(error.message)
-    return {user}
-}
-export async function AddNewSkill({userId, skill}: {userId: string, skill: string}){
-    // Retrieve the Skills array
-    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
-    if(error) throw new Error(error.message)
-    const tempArray = data.skills ? data.skills : []
-    const tempArray1 = skill.replace(/[\n\r]/g, "").split(",")
-    const tempArray2 = [...tempArray, ...tempArray1]
-    // If the user added too many skills
-    if(tempArray2.length > 9) throw new Error("total number of skills exceeded the limit")
-    // update the array
-    const {data: user, error: error1} = await supabase.from("users").update({skills: tempArray2}).eq("id", userId).select("*")
+export async function apply( postId: string, userId: string, application: {coverLetter: string, applicant: USER}){
+    // First retrieve applications array
+    const {data, error} = await supabase.from("post").select().eq("id", postId).single()
+    if(error) throw new Error("something went wrong, try again")
+    const tempArray1 = data.applications ? data.applications : []
+    // Update the array with the new value
+    const {data: post, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
     if(error1) throw new Error(error1.message)
-    return {user}
+    // First retrieve all the users applications
+    const {data: data1, error: error2} = await supabase.from("users").select().eq("id", userId).single()
+    if(error2) throw new Error("something went wrong, try again")
+    const tempArray2 = data1.appliedTo ? data1.appliedTo : []
+    // Update the array with the new application
+    const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2, {"post": data, "status": "pending", "appliedAt": new Date()}] 
+    }).eq("id", userId).select("*")
+    if(error3) throw new Error(error3.message)
+    return {post, user}    
 }
-export async function DeleteSkill({userId, skill}: {userId: string, skill: string}) {
-    // Retrieve the Skills array
+
+
+// REFACTORED
+export async function UpdateElement({userId, value, column_name, limit, errorMessage}: GeneralUpdateProps) {
+        console.log(column_name)
+        // Retrieve the array
+        const {data, error} = await supabase.from("users").select().eq("id", userId).single()
+        if(error) throw new Error(error.message)
+        const tempArray = data[column_name] ? data[column_name] : []
+        const tempArray1 = value.replace(/[\n\r]/g, "").split(",").filter((element) => element !== "")
+        const tempArray2 = [...tempArray, ...tempArray1]
+        // If the user added beyond the limit
+        if(tempArray2.length > limit) throw new Error(errorMessage)
+        // update the array
+        const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray2}).eq("id", userId).select("*")
+        if(error1) throw new Error(error1.message)
+        return {user}
+}
+export async function DeleteElement({userId, value, column_name}: GeneralDeleteProps) {
+    // Retrieve the target array first
     const {data, error} = await supabase.from("users").select().eq("id", userId).single()
     if(error) throw new Error(error.message)
-    // filter out all the skills from the deleted skill
-    const tempArray = data.skills.filter((element: string) => element !== skill) 
+    // filter out the deleted value from the array
+    const tempArray = data[column_name].filter((element: string) => element !== value) 
     // update the array
-    const {data: user, error: error1} = await supabase.from("users").update({skills: tempArray}).eq("id", userId).select("*")
-    if(error1) throw new Error(error1.message)
-    return {user}
-}
-export async function updateUserBio ({userId, bio}: {userId: string, bio: string}){
-    const {data: user, error} = await supabase.from("users").update({bio}).eq("id", userId).select("*")
-    if(error) throw new Error(error.message)
-    return {user} 
-}
-export async function updateMainServices({userId, service}: {userId: string, service: string}) {
-    // Retrieve the main_service array from the current user
-    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
-    if(error) throw new Error(error.message)
-    const tempArray = data.main_services ? data.main_services : []
-    const tempArray1 = service.replace(/[\n\r]/g, "").split(",")
-    const tempArray2 = [...tempArray, ...tempArray1]
-    if(tempArray2.length > 4 ) throw new Error("total number of services exceeded the limit")
-    // update the array
-    const {data: user, error: error1} = await supabase.from("users").update({main_services: tempArray2}).eq("id", userId).select("*")
+    const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray}).eq("id", userId).select("*")
     if(error1) throw new Error(error1.message)
     return {user}
 }

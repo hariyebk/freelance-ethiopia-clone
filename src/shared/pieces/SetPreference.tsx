@@ -49,7 +49,7 @@ export default function SetPreference({setIsLoading}: Props){
                 render={({ field }) => (
                     <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
                     <FormLabel className="text-black"> choose your Industry </FormLabel>
-                    <div className="max-lg:w-[300px] w-[400px] leading-2 border border-gray-500 rounded-md">
+                    <div className="max-lg:w-[270px] w-[400px] leading-2 border border-gray-500 rounded-md">
                         <Select onValueChange= {field.onChange} defaultValue={field.value}>
                             <FormControl>
                                 <SelectTrigger className="focus:border-none focus:outline-none focus:ring-white">
@@ -78,7 +78,7 @@ export default function SetPreference({setIsLoading}: Props){
                             <FormLabel className="flex items-center gap-2 max-lg:text-xs text-sm text-black font-palanquin font-medium"> 
                             choose your working location
                             </FormLabel>
-                            <div className="max-lg:w-[300px] w-[400px] leading-2 border border-gray-500 rounded-md">
+                            <div className="max-lg:w-[270px] w-[400px] leading-2 border border-gray-500 rounded-md">
                                 <Select onValueChange= {field.onChange} defaultValue={field.value}>
                                     <FormControl>
                                         <SelectTrigger className="focus:border-none focus:outline-none focus:ring-white">
@@ -98,7 +98,7 @@ export default function SetPreference({setIsLoading}: Props){
                             </FormItem>
                         )}
                         />
-                <button className="max-lg:mt-14 mt-10 w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> set preference </button>
+                <button className="max-lg:mt-14 mt-10 max-lg:w-[270px] w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> set preference </button>
                 
                 </>
                 }

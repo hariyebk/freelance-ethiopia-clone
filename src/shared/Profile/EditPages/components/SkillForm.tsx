@@ -6,12 +6,14 @@ import { z } from "zod"
 import toast from "react-hot-toast"
 import { Textarea } from "../../../../components/ui/textarea"
 import { IoWarningOutline } from "react-icons/io5"
+import { useGeneral } from "../../../../lib/Tanstackquery/queriesAndMutations"
+import { Box, CircularProgress } from "@mui/material"
 
-interface SkillFormProps {
-    handleSubmit: (skill: string) => void
-}
 
-export default function SkillForm({handleSubmit}: SkillFormProps){
+
+export default function SkillForm(){
+
+    const {isPending, mutate: addSkill} = useGeneral({isTobeDeleted: false, successMessage: "New skills have been added."})
 
     const form = useForm<z.infer<typeof skillValidation>>({
         resolver: zodResolver(skillValidation),
@@ -24,10 +26,13 @@ export default function SkillForm({handleSubmit}: SkillFormProps){
         if(!values.skill){
             return toast.error("No skill added")
         }
-        window.scrollTo(0, 0);
-        handleSubmit(values.skill)  
+        addSkill({
+            value: values.skill,
+            column_name: "skills",
+            limit: 9,
+            errorMessage: "total number of skills exceeded the limit"
+        }) 
     }
-
 
     return (
         <section className="mt-5 max-lg:ml-10 mx-10">
@@ -54,7 +59,14 @@ export default function SkillForm({handleSubmit}: SkillFormProps){
                     </FormItem>
                 )}
                 />
-                <button className="bg-gradient-to-r from-primary to-secondary mt-5 max-lg:w-[100px] w-[130px] px-8 py-2 rounded-lg text-slate-100 max-lg:text-base text-lg font-palanquin"> Add </button>
+                <button className="bg-gradient-to-r from-primary to-secondary mt-5 max-lg:w-[100px] w-[130px] px-8 py-2 rounded-lg text-slate-100 max-lg:text-base text-lg font-palanquin">
+                    { isPending ? (
+                        <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                            <CircularProgress size={20} color="inherit" />
+                        </Box>
+
+                    ) : "Add"}
+                </button>
             </form>
             </Form>
         </section>

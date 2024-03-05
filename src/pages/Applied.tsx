@@ -20,7 +20,7 @@ export default function Applied() {
                         <h1 className="text-2xl max-lg:text-lg"> Your Applications </h1>
                         <p className="text-xl max-lg:text-lg"> Status </p>
                     </div>
-                    <ApplicationFilter />
+                    { user?.appliedTo ? <ApplicationFilter /> : null}
                 </div>
                 <ApplicationsList applications={user?.appliedTo as Application} />
             </div>

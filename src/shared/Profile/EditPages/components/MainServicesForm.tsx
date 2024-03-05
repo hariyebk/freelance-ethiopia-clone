@@ -6,12 +6,16 @@ import { MainServicesValidation } from "../../../../lib/validation"
 import { IoWarningOutline } from "react-icons/io5"
 import { Textarea } from "../../../../components/ui/textarea"
 import toast from "react-hot-toast"
+import { useGeneral } from "../../../../lib/Tanstackquery/queriesAndMutations"
+import { Box, CircularProgress } from "@mui/material"
 
-interface MainServicesProps {
-    handleSubmit : (service: string) => void
-}
 
-export default function MainServicesForm({handleSubmit}: MainServicesProps) {
+
+export default function MainServicesForm() {
+    const {isPending, mutate: addService} = useGeneral({
+        isTobeDeleted: false,
+        successMessage: "New Service has been added"
+    })
     
     const form = useForm<z.infer<typeof MainServicesValidation >>({
         resolver: zodResolver(MainServicesValidation),
@@ -24,8 +28,12 @@ export default function MainServicesForm({handleSubmit}: MainServicesProps) {
         if(!values.service){
             return toast.error("Invalid Input")
         } 
-        window.scrollTo(0, 0);
-        handleSubmit(values.service)
+        addService({
+            value: values.service,
+            column_name: "main_services",
+            limit: 4,
+            errorMessage: "total number of services exceeded the limit"
+        })
     }
 
     return (
@@ -53,7 +61,14 @@ export default function MainServicesForm({handleSubmit}: MainServicesProps) {
                     </FormItem>
                 )}
                 />
-                <button className="bg-gradient-to-r from-primary to-secondary mt-5 max-lg:w-[100px] w-[130px] px-8 py-2 rounded-lg text-slate-100 max-lg:text-base text-lg font-palanquin"> Add </button>
+                <button className="bg-gradient-to-r from-primary to-secondary mt-5 max-lg:w-[100px] w-[130px] px-8 py-2 rounded-lg text-slate-100 max-lg:text-base text-lg font-palanquin"> 
+                    { isPending ? (
+                            <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                                <CircularProgress size={20} color="inherit" />
+                            </Box>
+                        ) : "Add"
+                    }
+                </button>
             </form>
             </Form>
         </section>

@@ -57,7 +57,7 @@ export const MainServicesValidation = z.object({
         return /,/.test(value.service)
     },
     {
-        message: "Please use comma to separate each services you give",
+        message: "use comma at the end of the service",
         path: ["service"],
     }
 )
@@ -73,7 +73,7 @@ export const skillValidation = z.object({
         }
     }, 
     {
-        message: "At least two skills, are required",
+        message: "use comma at the end of the skill",
         path: ["skill"]
     }
 ).refine(

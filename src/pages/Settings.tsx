@@ -59,7 +59,7 @@ export default function Settings() {
                                 <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-base font-palanquin font-medium"> current Password </FormLabel>
                                 <FormControl className="focus:outline-none">
-                                    <div className="max-lg:w-[320px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                    <div className="max-lg:w-[270px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
                                         <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
                                         <div className="relative flex items-center pt-1">
                                             {showPassword ? (
@@ -86,7 +86,7 @@ export default function Settings() {
                                 <FormItem className="mt-7 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-base font-palanquin font-medium"> New Password </FormLabel>
                                 <FormControl className="focus:outline-none">
-                                    <div className="max-lg:w-[320px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                    <div className="max-lg:w-[270px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
                                         <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
                                         <div className="relative flex items-center pt-1">
                                             {showPassword ? (
@@ -113,7 +113,7 @@ export default function Settings() {
                                 <FormItem className="mt-5 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-base font-palanquin font-medium"> Confirm Password </FormLabel>
                                 <FormControl className="focus:outline-none">
-                                    <div className="max-lg:w-[320px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
+                                    <div className="max-lg:w-[270px] w-[350px] bg-white border border-gray-500 rounded-md focus-visible:ring-offset-black flex items-center">
                                             <Input type={`${showPassword ? "text" : "password"}`}  placeholder="Password" {...field} className="h-full w-full focus:outline-none border-none p-3" />
                                             <div className="relative flex items-center pt-1">
                                                 {showPassword ? (
@@ -132,7 +132,7 @@ export default function Settings() {
                                 </FormItem>
                             )}
                             />
-                        <button className="mt-10 w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> Update </button>
+                        <button className="mt-10 max-lg:w-[270px] w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> Update </button>
                     </main>
                 </form>
                 </Form>
