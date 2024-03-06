@@ -8,8 +8,9 @@ import { AccountRoles } from "../types";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import useApi from "../context/hook";
 import { useEffect, useState } from "react";
-import PopOver from "../shared/PopOver";
+import PopOverDelete from "../shared/PopOverDelete";
 import Spinner from "../shared/pieces/Spinner";
+
 
 export default function MyPosts(){
     const {isLoading, data} = useFetchAllMyPosts()
@@ -37,7 +38,7 @@ export default function MyPosts(){
     if(openModal){
         return (
             <section className="min-h-screen">
-                <PopOver open={true} handleClose={closeModal}>
+                <PopOverDelete open={true} handleClose={closeModal}>
                     <div>
                         <p className="text-lg font-palanquin"> Are you sure you want to delete this job post ? </p>
                         <div className="w-full mt-10 pr-10 flex items-center justify-end gap-7">
@@ -45,7 +46,7 @@ export default function MyPosts(){
                             <button onClick={() => handleDeletePost(currentId!) } className="px-8 py-2 bg-red-600 text-slate-100 text-sm font-palanquin rounded-full"> Delete </button>
                         </div>
                     </div>
-                </PopOver>
+                </PopOverDelete>
             </section>
         )
     }

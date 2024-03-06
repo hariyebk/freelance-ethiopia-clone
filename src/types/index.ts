@@ -1,3 +1,4 @@
+import { ExperienceProps } from "../shared/Profile/Experience"
 
 export type signUpType = {
     email: string,
@@ -24,14 +25,7 @@ export type USER = signUpType & {
     saved_posts?: POST[],
     skills?: string[],
     main_services?: string[],
-    experiences?: {
-        role: string,
-        companyName: string,
-        location: string,
-        startDate: string,
-        finishedDate: string,
-        contribution: string
-    }[],
+    experiences?: ExperienceProps[],
     education: {
         institute: string,
         enrolled_in: string,

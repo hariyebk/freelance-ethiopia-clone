@@ -6,7 +6,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: "80%",
-    maxWidth: 450,
+    maxWidth: 550,
     bgcolor: 'background.paper',
     border: '1px solid #b5b1b1',
     borderRadius: "15px",
@@ -20,7 +20,7 @@ interface ModalProps {
     handleClose: () => void,
     children: React.ReactNode
 }
-export default function PopOver({open, handleClose, children}: ModalProps) {
+export default function PopOverForm({open, handleClose, children}: ModalProps) {
     return (
         <Modal
             open={open}

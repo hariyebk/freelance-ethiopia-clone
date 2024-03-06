@@ -1,9 +1,10 @@
 import supabase from "./config"
 import { signUpType, POST, POST1, POST2, USER } from "../../types"
+import { ExperienceProps } from "../../shared/Profile/Experience"
 
 interface GeneralUpdateProps {
     userId: string, 
-    value: string, 
+    value: string | ExperienceProps , 
     column_name: string, 
     limit: number, 
     errorMessage: string
@@ -11,7 +12,7 @@ interface GeneralUpdateProps {
 
 interface GeneralDeleteProps {
     userId: string, 
-    value: string, 
+    value: string | ExperienceProps, 
     column_name: string, 
 }
 
@@ -211,32 +212,43 @@ export async function apply( postId: string, userId: string, application: {cover
     if(error3) throw new Error(error3.message)
     return {post, user}    
 }
-
-
 // REFACTORED
 export async function UpdateElement({userId, value, column_name, limit, errorMessage}: GeneralUpdateProps) {
-        console.log(column_name)
+        const isString  = typeof value === "string"
         // Retrieve the array
         const {data, error} = await supabase.from("users").select().eq("id", userId).single()
         if(error) throw new Error(error.message)
         const tempArray = data[column_name] ? data[column_name] : []
-        const tempArray1 = value.replace(/[\n\r]/g, "").split(",").filter((element) => element !== "")
-        const tempArray2 = [...tempArray, ...tempArray1]
+        let tempArray1
+        if(isString){
+            tempArray1 = value.replace(/[\n\r]/g, "").split(",").filter((element) => element !== "")
+        }
+        const tempArray2 =  isString ? [...tempArray, ...tempArray1!] : null
+        // If the value is string, we use tempArray2 else we push the current object to the Array
+        const finalValue = isString ? tempArray2 : [...tempArray, value]
+        console.log(finalValue)
         // If the user added beyond the limit
-        if(tempArray2.length > limit) throw new Error(errorMessage)
+        if(isString && tempArray2 && tempArray2.length> limit) throw new Error(errorMessage)
         // update the array
-        const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray2}).eq("id", userId).select("*")
+        const {data: user, error: error1} = await supabase.from("users").update({[column_name]: finalValue}).eq("id", userId).select("*")
         if(error1) throw new Error(error1.message)
         return {user}
 }
 export async function DeleteElement({userId, value, column_name}: GeneralDeleteProps) {
+    const isString  = typeof value === "string"
     // Retrieve the target array first
     const {data, error} = await supabase.from("users").select().eq("id", userId).single()
     if(error) throw new Error(error.message)
     // filter out the deleted value from the array
-    const tempArray = data[column_name].filter((element: string) => element !== value) 
+    let tempArray
+    if(isString){
+        tempArray = data[column_name].filter((element: string) => element !== value) 
+    }
+    else{
+        tempArray = data[column_name].filter((element: ExperienceProps) => element.company !== value.company) 
+    }
     // update the array
-    const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray}).eq("id", userId).select("*")
+    const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray.length > 0 ? tempArray : null}).eq("id", userId).select("*")
     if(error1) throw new Error(error1.message)
     return {user}
 }

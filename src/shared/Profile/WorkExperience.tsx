@@ -7,17 +7,17 @@ export default function WorkExperience() {
 
     return (
         <section className="profile_container pb-5">
-            <TitleAndEdit title="Work Experience" routeTo= "/edit-workExperiences" />
+            <TitleAndEdit title="Work Experience" routeTo= "/edit-workExperiences" add={Boolean(!user?.experiences)} />
             {/* Experience */}
             {!user?.experiences ? (
                 <p className="mt-10 no-posts"> You have no Experiences added to your profile 😣  </p>
             ) :
             user.experiences.map((experience) => {
                 return (
-                    <div key={experience.companyName}>
+                    <div key={experience.company}>
                         <Experience
-                        position={experience.role}
-                        company={experience.companyName}
+                        position={experience.position}
+                        company={experience.company}
                         location= {experience.location}
                         startDate={experience.startDate}
                         finishedDate={experience.finishedDate}

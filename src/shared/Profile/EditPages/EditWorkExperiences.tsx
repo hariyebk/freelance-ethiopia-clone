@@ -10,11 +10,11 @@ export default function EditWorkExperiences() {
     }, []);
 
     return (
-        <section className="w-full mt-36 mb-20">
+        <section className="w-full mt-36 mb-28">
             <Layout title="Work Experiences" MainComponent = {
                 <MainComponentForWork />
             } ModalComponent = {
-                <div className="h-[350px] overflow-scroll overflow-x-hidden custom-scrollbar">
+                <div className="h-[400px] overflow-scroll overflow-x-hidden custom-scrollbar">
                     <ModalForWork />
                 </div>
             } />

@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
 import { AccountRoles, POST1, POST2, signUpType} from "../../types"
+import { ExperienceProps } from "../../shared/Profile/Experience"
 
 // Query and Mutation hooks
 
@@ -304,12 +305,13 @@ export const useGeneral = ({isTobeDeleted, successMessage}: {isTobeDeleted: bool
             limit,
             errorMessage,
         } : {
-            value: string,
+            value: string | ExperienceProps,
             column_name: string,
             limit?: number,
             errorMessage?: string
         }) => isTobeDeleted ? DeleteElement({userId: user?.id as string, value, column_name}) : UpdateElement({userId: user?.id as string, value, column_name, limit: limit! , errorMessage: errorMessage!}),
         onSuccess: (data) => {
+            console.log(data.user)
             setUser(data.user[0]),
             toast.success(successMessage)
             !isTobeDeleted && navigate("/my-profile")
