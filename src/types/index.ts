@@ -33,7 +33,7 @@ export type USER = signUpType & {
         startDate: string,
         finishedDate: string
     }[],
-    certificates: {
+    certifications: {
         title: string,
         presentedBy: string,
         issuedDate: string,

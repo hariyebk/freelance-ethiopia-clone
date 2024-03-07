@@ -46,7 +46,7 @@ export const WorkExperienceValidation = z.object({
 export const EducationValidation = z.object({
     Institute: z.string().min(2, {message: "University name is too long"}).max(40, {message: "University name is too short"}),
     EnrolledIn: z.string(),
-    FieldOfStudy: z.string().min(2, {message: "Field of Study is too short"}).max(20, {message: "Field of Study is too long"}),
+    FieldOfStudy: z.string().min(2, {message: "Field of Study is too short"}).max(40, {message: "Field of Study is too long"}),
     StartDate: z.string(),
     FinishedDate: z.string().optional()
 })
@@ -86,7 +86,11 @@ export const skillValidation = z.object({
     }
 )
 export const certificationValidation = z.object({
-    certification: z.string()
+    title: z.string().min(3, {message: "title is too short"}).max(25, {message: "title is too long"}),
+    presentedBy: z.string(),
+    issuedDate: z.string(),
+    expirationDate: z.string(),
+    link: z.string().optional()
 })
 export const SettingsValidation = z.object({
     currentPassword: z.string().min(6, {message: "password must be at least 6 characters long"}),

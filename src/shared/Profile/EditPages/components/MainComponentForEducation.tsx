@@ -30,7 +30,7 @@ export default function MainComponentForEducation({isEditing}: Props) {
             user?.education?.map((education) => {
                 return (
                     <div key={education.fieldOfStudy}>
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-between gap-3">
                             <EducationItem 
                                 isEditing={isEditing}
                                 institute={education.institute} 

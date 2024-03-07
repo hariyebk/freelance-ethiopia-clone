@@ -5,7 +5,7 @@ export default function Languages() {
     const {user, setEditLanguages} = useApi()
     return (
         <div className="mt-5 max-lg:w-full w-[260px] flex items-start justify-between gap-4 lg:rounded-xl lg:shadow-lg lg:border lg:border-gray-100 py-5 max-lg:px-8 max-lg:mt-2 max-lg:pb-20 px-5"> 
-            <div className="max-lg:mt-4 flex flex-wrap flex-col gap-3 lg:w-36 max-lg:font-semibold">
+            <div className="max-lg:mt-4 flex flex-wrap flex-col gap-3 lg:w-36">
                 <h3 className="text-lg text-black font-palanquin"> Languages </h3>
                 {!user?.languages ? (
                     null

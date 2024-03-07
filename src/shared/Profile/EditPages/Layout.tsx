@@ -13,7 +13,6 @@ interface Props {
 }
 
 export default function Layout({isThereData, title, MainComponent, ModalComponent}: Props) {
-    console.log(isThereData)
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)

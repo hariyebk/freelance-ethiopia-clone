@@ -14,10 +14,6 @@ export default function SidebarEditProfile({children, close, title}: SidebarEdit
                     </button>
                 </div>
                 {children}
-                <div className="mt-20 mx-10 flex items-center gap-8">
-                    <button className="px-10 py-2 border border-stone-800 bg-stone-800 text-slate-100 rounded-md" onClick={() => close(false)}> cancel </button>
-                    <button className="px-10 py-2 border border-primary bg-gradient-to-r from-primary to-secondary  text-slate-100 text-base font-palanquin rounded-md"> save </button>
-                </div>
             </section>
         )
     }

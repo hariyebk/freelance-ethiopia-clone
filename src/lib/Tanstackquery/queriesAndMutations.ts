@@ -311,7 +311,6 @@ export const useGeneral = ({isTobeDeleted, successMessage}: {isTobeDeleted: bool
             errorMessage?: string
         }) => isTobeDeleted ? DeleteElement({userId: user?.id as string, value, column_name}) : UpdateElement({userId: user?.id as string, value, column_name, limit: limit! , errorMessage: errorMessage!}),
         onSuccess: (data) => {
-            console.log(data.user)
             setUser(data.user[0]),
             toast.success(successMessage)
             !isTobeDeleted && navigate("/my-profile")

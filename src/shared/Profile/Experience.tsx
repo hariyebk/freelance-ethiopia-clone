@@ -1,4 +1,6 @@
+
 import { formatDateString } from "../../utils/helpers"
+
 export type ExperienceProps = {
     isEditing?: boolean,
     position: string,
@@ -33,7 +35,7 @@ export default function Experience({isEditing, position, company, city, location
                         <span className="ml-2 max-lg:text-xs"> {formatDateString(startDate)}  </span>
                     </div>
                     <span className="mx-2"> - </span>
-                    <span className="max-lg:text-xs"> To: {formatDateString(finishedDate)}</span>
+                    <span className="max-lg:text-xs"> To: {finishedDate !== "now" ? formatDateString(finishedDate) : finishedDate.toUpperCase()}</span>
                 </div>
                 <div className="mt-5">
                     <h2 className="text-stone-600 font-palanquin font-semibold"> Contribution </h2>

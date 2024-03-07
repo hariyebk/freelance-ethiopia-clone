@@ -25,14 +25,14 @@ export default function MainComponentForWork({isEditing}: Props){
 
     return (
         <section className="max-lg:mt-3 mt-10 max-lg:mx-3 mx-6">
-            <div className="flex items-start justify-between">
+            <div>
             { !user?.experiences ? (
                 <p className="no-post mt-10 ml-14 lg:ml-20"> Start by adding your experiences </p>
             ) :
             user.experiences.map((experience) => {
                 return (
                     <div key={experience.company}>
-                        <div className="w-full flex items-start space-x-5">
+                        <div className="w-full flex items-start justify-between">
                             <Experience
                                 isEditing={isEditing}
                                 position={experience.position}

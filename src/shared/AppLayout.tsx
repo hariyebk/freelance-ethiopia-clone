@@ -21,7 +21,7 @@ export default function AppLayout() {
             {openNav && <SidebarNav />}
             {editPortfolioLinks && (
                 <SidebarEditProfile close={setEditPortfolioLinks} title="Update your Portfolio Links">
-                    <EditPortfolioLinks />
+                    <EditPortfolioLinks close={setEditPortfolioLinks} />
                 </SidebarEditProfile>
             )}
             {editLanguages && (

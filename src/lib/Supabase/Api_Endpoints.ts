@@ -2,6 +2,7 @@ import supabase from "./config"
 import { signUpType, POST, POST1, POST2, USER } from "../../types"
 import { ExperienceProps } from "../../shared/Profile/Experience"
 import { EducationProps } from "../../shared/pieces/EducationItem"
+import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
 
 interface GeneralUpdateProps{
     userId: string, 
@@ -236,7 +237,6 @@ export async function UpdateElement({userId, value, column_name, limit, errorMes
         if(error1) throw new Error(error1.message)
         return {user}
 }
-
 export async function DeleteElement({userId, value, column_name}: GeneralDeleteProps) {
     const isString  = typeof value === "string"
     // Retrieve the target array first
@@ -252,6 +252,9 @@ export async function DeleteElement({userId, value, column_name}: GeneralDeleteP
     }
     else if(value?.fieldOfStudy){
         tempArray = data[column_name].filter((element: EducationProps) => element.fieldOfStudy !== value.fieldOfStudy as string) 
+    }
+    else if(value?.presentedBy){
+        tempArray = data[column_name].filter((element: Certificate) => element.presentedBy !== value.presentedBy as string) 
     }
     // update the array
     const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray.length > 0 ? tempArray : null}).eq("id", userId).select("*")
