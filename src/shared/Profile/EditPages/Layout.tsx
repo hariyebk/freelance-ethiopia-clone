@@ -6,23 +6,26 @@ import { IoClose } from "react-icons/io5"
 import PopOverForm from "../../PopOverForm"
 
 interface Props {
+    isThereData: boolean,
     title: string,
     MainComponent: React.ReactNode,
     ModalComponent?: React.ReactNode
 }
 
-export default function Layout({title, MainComponent, ModalComponent}: Props) {
+export default function Layout({isThereData, title, MainComponent, ModalComponent}: Props) {
+    console.log(isThereData)
     const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
     const navigate = useNavigate()
+
     return (
-        <section className="w-full mb-14 pb-28">
+        <section className="w-full mb-36">
             <div className="lg:hidden mt-10 mb-14 ml-10">
                 <Goback />
             </div>
-            <div className="max-lg:mt-10 mt-20 mx-auto max-lg:w-[430px] w-[600px] h-auto bg-slate-50 border border-gray-100 shadow-md rounded-lg">
-                <div className="max-lg:mb-10 mb-20 flex flex-col flex-1 items-start max-lg:px-6 px-10 py-8">
+            <div className={`${isThereData ? "h-auto" : "h-[450px]"} max-lg:mt-10 mt-20 mx-auto max-lg:w-[430px] w-[600px] bg-slate-50 border border-gray-100 shadow-md rounded-lg`}>
+                <div className="max-lg:mb-10 mb-10 flex flex-col flex-1 items-start max-lg:px-6 px-10 py-7">
                     {/* HEADER */}
                     <div className="w-full flex items-center justify-between max-lg:px-2">
                         <div className="flex items-center gap-5 mt-4">

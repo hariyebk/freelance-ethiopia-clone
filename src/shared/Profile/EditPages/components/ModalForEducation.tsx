@@ -4,31 +4,46 @@ import { z } from "zod"
 import { EducationValidation } from "../../../../lib/validation"
 import { Form, FormField, FormItem, FormControl, FormLabel, FormMessage } from "../../../../components/ui/form"
 import { Input } from "../../../../components/ui/input"
-import { EducationProps } from "../../../pieces/EducationItem"
-import { EducationLevel } from "../../../../constants"
-import { Select, SelectTrigger, SelectValue, SelectItem, SelectContent} from "../../../../components/ui/select"
-import { SelectGroup } from "@radix-ui/react-select"
+import { useGeneral } from "../../../../lib/Tanstackquery/queriesAndMutations"
+import { Box, CircularProgress } from "@mui/material"
 
 
-interface ModalEducationProps {
-    education?: EducationProps
-}
 
-export default function ModalForEducation({education}: ModalEducationProps){
+export default function ModalForEducation(){
+    const {isPending, mutate: addEducation} = useGeneral({
+        isTobeDeleted: false,
+        successMessage: "New Education added to your profile "
+    })
+
     const form = useForm<z.infer<typeof  EducationValidation>>({
         resolver: zodResolver(EducationValidation),
         defaultValues: {
-            Institute: education?.Institute || "",
-            EnrolledIn: education?.EnrolledIn || "",
-            FieldOfStudy: education?.FinishedDate || "",
-            StartDate: education?.StartDate || "",
-            FinishedDate: education?.FinishedDate || ""
+            Institute:"",
+            EnrolledIn: "",
+            FieldOfStudy: "",
+            StartDate: "",
+            FinishedDate: ""
         },
     })
-    async function onSubmit(values: z.infer<typeof  EducationValidation>){
-        console.log(values)
+    
+    function onSubmit(values: z.infer<typeof  EducationValidation>){
+        
+        const tempData = {
+            institute: values.Institute,
+            enrolled_in: values.EnrolledIn,
+            fieldOfStudy: values.FieldOfStudy,
+            startDate: values.StartDate,
+            finishedDate: values.FinishedDate ? values.FinishedDate : "Now"
+        }
+
+        addEducation({
+            value: tempData,
+            column_name: "education",
+            errorMessage: "Failed to create data"
+        })
             
     }
+
     return (
         <section className="mt-4 mb-10 focus:border-none">
         <Form {...form}>
@@ -55,22 +70,7 @@ export default function ModalForEducation({education}: ModalEducationProps){
                     <FormItem className="flex flex-1 flex-col justify-start gap-2 w-full">
                     <FormLabel className="mt-2 text-base text-stone-500 font-semibold font-palanquin"> Level of Education </FormLabel>
                     <FormControl className="z-50">
-                        <Select onValueChange= {field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                                <SelectTrigger>
-                                    <SelectValue placeholder="Select your level of Education" />
-                                </SelectTrigger>
-                            </FormControl>
-                            <SelectContent className="container">
-                                <SelectGroup>
-                                    {EducationLevel.map((level) => {
-                                        return (
-                                            <SelectItem value={level}> {level} </SelectItem>
-                                        )
-                                    })}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
+                        <Input type="text" placeholder="Bachlor of Science" className="w-full mt-2 border border-gray-400 no-autofill focus:border-none" {...field} />
                     </FormControl>
                     <FormMessage className='text-sm text-red-500' />
                     </FormItem>
@@ -84,7 +84,7 @@ export default function ModalForEducation({education}: ModalEducationProps){
                     <FormItem className="mt-2 flex flex-1 flex-col justify-start gap-2 w-full">
                     <FormLabel className="mt-2 text-base text-stone-500 font-semibold font-palanquin"> Field of Study </FormLabel>
                     <FormControl className="no-foucs">
-                        <Input type="text" placeholder="department" className="w-full mt-2 border border-gray-400 no-autofill focus:border-none" {...field} />
+                        <Input type="text" placeholder="Computer Science" className="w-full mt-2 border border-gray-400 no-autofill focus:border-none" {...field} />
                     </FormControl>
                     <FormMessage className='text-sm text-red-500' />
                     </FormItem>
@@ -124,7 +124,12 @@ export default function ModalForEducation({education}: ModalEducationProps){
                     </FormItem>
                 )}
                 />
-                <button className="mt-7 btn"> Create </button>
+                <button className="mt-7 btn"> { isPending ? (
+                    <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                        <CircularProgress size={20} color="inherit" />
+                    </Box>
+                ) : "Create"
+                } </button>
             </form>
         </Form>
     </section>

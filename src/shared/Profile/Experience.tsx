@@ -1,5 +1,5 @@
 import { formatDateString } from "../../utils/helpers"
-export interface ExperienceProps {
+export type ExperienceProps = {
     isEditing?: boolean,
     position: string,
     company: string,
@@ -28,16 +28,16 @@ export default function Experience({isEditing, position, company, city, location
                         )
                     }
                 </p>
-                <div className="mt-3 flex items-center text-sm font-semibold">
+                <div className="mt-3 flex items-center text-sm text-black font-semibold font-palanquin">
                     <div> From: 
-                        <span className="ml-2"> {formatDateString(startDate)}  </span>
+                        <span className="ml-2 max-lg:text-xs"> {formatDateString(startDate)}  </span>
                     </div>
                     <span className="mx-2"> - </span>
-                    <span> To: {formatDateString(finishedDate)}</span>
+                    <span className="max-lg:text-xs"> To: {formatDateString(finishedDate)}</span>
                 </div>
                 <div className="mt-5">
                     <h2 className="text-stone-600 font-palanquin font-semibold"> Contribution </h2>
-                    <p className="mt-2 pr-7 text-sm font-palanquin font-medium leading-6"> {contribution} </p>
+                    <p className="mt-2 pr-7 max-lg:text-justify text-sm font-palanquin font-medium leading-6"> {contribution} </p>
                 </div>
         </section>
     )

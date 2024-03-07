@@ -6,7 +6,6 @@ import { FaTrash } from "react-icons/fa";
 
 interface Props {
     isEditing?: boolean
-
 }
 
 export default function MainComponentForWork({isEditing}: Props){
@@ -28,7 +27,7 @@ export default function MainComponentForWork({isEditing}: Props){
         <section className="max-lg:mt-3 mt-10 max-lg:mx-3 mx-6">
             <div className="flex items-start justify-between">
             { !user?.experiences ? (
-                <p className="no-posts mt-10 ml-14 lg:ml-20"> Start by adding your experiences </p>
+                <p className="no-post mt-10 ml-14 lg:ml-20"> Start by adding your experiences </p>
             ) :
             user.experiences.map((experience) => {
                 return (
@@ -53,7 +52,7 @@ export default function MainComponentForWork({isEditing}: Props){
                                 }
                             </button>
                         </div>
-                        <hr className="w-full lg:mx-8 mt-5 lg:my-6 border-0.5 border-gray-300"/>
+                        {user.experiences && user.experiences[user.experiences?.length - 1] === experience ? null : <hr className="w-full lg:mx-8 mt-5 lg:my-6 border-0.5 border-gray-300"/>}
                     </div>
                 )
             })

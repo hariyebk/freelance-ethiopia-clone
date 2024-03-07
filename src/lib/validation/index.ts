@@ -48,7 +48,7 @@ export const EducationValidation = z.object({
     EnrolledIn: z.string(),
     FieldOfStudy: z.string().min(2, {message: "Field of Study is too short"}).max(20, {message: "Field of Study is too long"}),
     StartDate: z.string(),
-    FinishedDate: z.string()
+    FinishedDate: z.string().optional()
 })
 export const MainServicesValidation = z.object({
     service: z.string()

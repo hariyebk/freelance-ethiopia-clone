@@ -7,7 +7,7 @@ export default function Education() {
     
     return (
         <section className="profile_container pb-5">
-            <TitleAndEdit title="Education" routeTo="edit-education" />
+            <TitleAndEdit title="Education" routeTo="/edit-education" add={Boolean(!user?.education)} />
             {!user?.education ? (
                 <p className="no-posts mt-7"> You have no education background in your profile 😣 </p>
 
@@ -16,7 +16,7 @@ export default function Education() {
                     return (
                         <div key={education.enrolled_in}>
                             <EducationItem institute={education.institute} fieldOfStudy={education.fieldOfStudy} enrolled_in={education.enrolled_in} startDate={education.startDate} finishedDate={education.finishedDate} />
-                            <hr className="w-full mt-5 border-t border-gray-200" />
+                            {user.education && user.education[user.education?.length - 1] === education ? null : <hr className="w-full mt-5 border-0.5 border-gray-300"/>}
                         </div>
                     )
                 })

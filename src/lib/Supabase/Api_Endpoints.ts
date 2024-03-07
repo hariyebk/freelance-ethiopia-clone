@@ -1,18 +1,21 @@
 import supabase from "./config"
 import { signUpType, POST, POST1, POST2, USER } from "../../types"
 import { ExperienceProps } from "../../shared/Profile/Experience"
+import { EducationProps } from "../../shared/pieces/EducationItem"
 
-interface GeneralUpdateProps {
+interface GeneralUpdateProps{
     userId: string, 
-    value: string | ExperienceProps , 
+     // eslint-disable-next-line
+    value:  any, 
     column_name: string, 
     limit: number, 
     errorMessage: string
 }
 
-interface GeneralDeleteProps {
-    userId: string, 
-    value: string | ExperienceProps, 
+interface GeneralDeleteProps{
+    userId: string,
+     // eslint-disable-next-line
+    value:  any, 
     column_name: string, 
 }
 
@@ -226,7 +229,6 @@ export async function UpdateElement({userId, value, column_name, limit, errorMes
         const tempArray2 =  isString ? [...tempArray, ...tempArray1!] : null
         // If the value is string, we use tempArray2 else we push the current object to the Array
         const finalValue = isString ? tempArray2 : [...tempArray, value]
-        console.log(finalValue)
         // If the user added beyond the limit
         if(isString && tempArray2 && tempArray2.length> limit) throw new Error(errorMessage)
         // update the array
@@ -234,6 +236,7 @@ export async function UpdateElement({userId, value, column_name, limit, errorMes
         if(error1) throw new Error(error1.message)
         return {user}
 }
+
 export async function DeleteElement({userId, value, column_name}: GeneralDeleteProps) {
     const isString  = typeof value === "string"
     // Retrieve the target array first
@@ -244,8 +247,11 @@ export async function DeleteElement({userId, value, column_name}: GeneralDeleteP
     if(isString){
         tempArray = data[column_name].filter((element: string) => element !== value) 
     }
-    else{
-        tempArray = data[column_name].filter((element: ExperienceProps) => element.company !== value.company) 
+    else if(value?.company){
+        tempArray = data[column_name].filter((element: ExperienceProps) => element.company !== value.company as string) 
+    }
+    else if(value?.fieldOfStudy){
+        tempArray = data[column_name].filter((element: EducationProps) => element.fieldOfStudy !== value.fieldOfStudy as string) 
     }
     // update the array
     const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray.length > 0 ? tempArray : null}).eq("id", userId).select("*")

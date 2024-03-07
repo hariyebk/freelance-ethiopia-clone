@@ -1,32 +1,59 @@
-import EducationItem from "../../../pieces/EducationItem";
+import { Box, CircularProgress } from "@mui/material";
+import useApi from "../../../../context/hook";
+import { useGeneral } from "../../../../lib/Tanstackquery/queriesAndMutations";
+import EducationItem, { EducationProps } from "../../../pieces/EducationItem";
 import { FaTrash } from "react-icons/fa";
 
-// TODO: FETCH USERS EDUCATIONS 
+interface Props {
+    isEditing?: boolean
+}
 
-export default function MainComponentForEducation() {
+export default function MainComponentForEducation({isEditing}: Props) {
+    const {user} = useApi()
+    const {isPending, mutate: deleteEducation} = useGeneral({
+        isTobeDeleted: true,
+        successMessage: "Education deleted successfully"
+    })
 
-    function handleDeleteEducation(){
-
+    function handleDeleteEducation(education: EducationProps){
+        deleteEducation({
+            value: education,
+            column_name: "education",
+        })
     }
 
     return (
         <section className="mx-3 mt-6"> 
-            <div className="flex items-center gap-3">
-                <EducationItem Institute="Dire Dawa University" EnrolledIn="Bachlor of Science" FieldOfStudy="Chemical Enginnering" StartDate="Oct, 2018" FinishedDate="July, 2023" />
-                <button onClick={handleDeleteEducation} className="hover:text-primary">
-                    <FaTrash className = "w-4 h-4 text-red-600" />
-                </button>
-            </div>
-            <hr className="w-full mt-3 border-t border-gray-200" />
-            <div className="mt-3 flex items-center gap-3">
-                <EducationItem Institute="Ethio-Italy poly Techinc Colledge" EnrolledIn="Bachlor of Science" FieldOfStudy="Information Technology" StartDate="Oct, 2019" FinishedDate="July, 2024" />
-                <button onClick={handleDeleteEducation} className="hover:text-primary">
-                    <FaTrash className = "w-4 h-4 text-red-600" />
-                </button>
-            </div>
-            <div className="mt-10">
-                <button className="btn"> Update </button>
-            </div>
+            {!user?.education ? (
+                <p className="no-post mt-16 ml-14 lg:ml-24"> Start by adding You Education background </p>
+            ) :( 
+            user?.education?.map((education) => {
+                return (
+                    <div key={education.fieldOfStudy}>
+                        <div className="flex items-center gap-3">
+                            <EducationItem 
+                                isEditing={isEditing}
+                                institute={education.institute} 
+                                enrolled_in={education.enrolled_in}
+                                fieldOfStudy={education.fieldOfStudy} 
+                                startDate={education.startDate}
+                                finishedDate={education.finishedDate} />
+                            {isPending ? (
+                                <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                                    <CircularProgress size={20} color="inherit" />
+                                </Box>
+                            ) : 
+                            <button onClick={() => handleDeleteEducation(education)} className="hover:text-primary">
+                                <FaTrash className = "w-4 h-4 text-red-600" />
+                            </button>
+                            }
+                        </div>
+                        {user.education && user.education[user.education?.length - 1] === education ? null : <hr className="w-full lg:mx-8 lg:my-6 mt-3 border-t border-gray-200" />}
+                    </div>
+                )
+            })
+            )
+            }
         </section>
     )
 }

@@ -5,9 +5,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
 import { AccountRoles, POST1, POST2, signUpType} from "../../types"
-import { ExperienceProps } from "../../shared/Profile/Experience"
 
-// Query and Mutation hooks
+export type ValueType<T> = T
 
 // CREATE NEW USER
 export const useSignup = () => {
@@ -305,7 +304,8 @@ export const useGeneral = ({isTobeDeleted, successMessage}: {isTobeDeleted: bool
             limit,
             errorMessage,
         } : {
-            value: string | ExperienceProps,
+             // eslint-disable-next-line
+            value: any,
             column_name: string,
             limit?: number,
             errorMessage?: string
