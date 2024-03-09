@@ -1,7 +1,7 @@
 import { IoClose } from "react-icons/io5"
 interface SidebarEditProps {
     children: React.ReactNode
-    close: (state: boolean) => void,
+    close : React.Dispatch<React.SetStateAction<boolean>>,
     title: string
 }
 export default function SidebarEditProfile({children, close, title}: SidebarEditProps) {

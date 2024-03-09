@@ -1,29 +1,36 @@
-import { ChangeEvent, useState } from "react"
-import { Language_levels } from "../../constants"
+import { FaTrash } from "react-icons/fa"
+import { useLanguage } from "../../lib/Tanstackquery/queriesAndMutations"
+import { Box, CircularProgress } from "@mui/material"
 
 interface LanguageCardProps {
     title: string,
-    level: string
+    close: React.Dispatch<React.SetStateAction<boolean>>
 }
-export default function LanguageCard({title, level}: LanguageCardProps) {
-    const [optionValue, setOptionValue] = useState(level)
-    function handleChange(e: ChangeEvent<HTMLSelectElement>){
-        setOptionValue(e.target.value)
+
+export default function LanguageCard({title, close}: LanguageCardProps) {
+
+    const {isPending, mutate: deleteLanguage} = useLanguage({
+        close,
+        isTobeDeleted: true
+    })
+
+    function handleDeleteLanguage(){
+        deleteLanguage({
+            language: title
+        })
     }
+    
     return (
-        <div className="mt-10 ml-6 w-[300px] px-5 py-2 border border-gray-300 focus:border-primary">
-                <h2 className="pl-2 text-base font-palanquin"> {title} </h2>
-                <hr className=" mt-2 border-0.5 border-gray-300" />
-                <select className="w-full mt-3 outline-none text-sm font-palanquin" value={optionValue} onChange={handleChange}>
-                    {
-                        Language_levels.map((value) => {
-                            return (
-                                <option key={value}> {value} </option>
-                            )
-                        })
-                    }
-                    <option> {level} </option>
-                </select>
-        </div>
+        <section className="w-[300px] ml-10 mt-6 flex items-center justify-between">
+            <h2 className="pl-2 text-base font-palanquin"> {title} </h2>
+            <button onClick={handleDeleteLanguage} className="">
+            {isPending ? (
+                <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                    <CircularProgress size={20} color="inherit" />
+                </Box>
+                ) :
+                <FaTrash className ="text-red-600 w-3 h-3" />}
+            </button>
+        </section>
     )
 }

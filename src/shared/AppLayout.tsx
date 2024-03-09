@@ -26,7 +26,7 @@ export default function AppLayout() {
             )}
             {editLanguages && (
                 <SidebarEditProfile close={setEditLanguages} title="Update Languages">
-                    <EditLanguages />
+                    <EditLanguages close={setEditLanguages} />
                 </SidebarEditProfile>
             )}
         </section>

@@ -6,10 +6,9 @@ import { useGeneral } from "../../lib/Tanstackquery/queriesAndMutations";
 import { Box, CircularProgress } from "@mui/material";
 import useApi from "../../context/hook";
 import { Link } from "react-router-dom";
-import Spinner from "./Spinner";
 
 interface EditPortfolioLinks {
-    close: (state: boolean) => void,
+    close: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export default function EditPortfolioLinks({close}: EditPortfolioLinks) {
@@ -23,7 +22,8 @@ export default function EditPortfolioLinks({close}: EditPortfolioLinks) {
     })
     const {isPending: isLoading, mutate: deleteLink} = useGeneral({
         isTobeDeleted: true,
-        successMessage: "Link deleted successfully"
+        successMessage: "Link deleted successfully",
+        dontRedirect: true
     })
 
     const hasReachedLimits = user?.portfolio_links ? user.portfolio_links?.length === 2 : false
@@ -37,16 +37,16 @@ export default function EditPortfolioLinks({close}: EditPortfolioLinks) {
     }
 
     function handleSave(){
-        if(!link1 || !link2) return toast.error("Invalid Input")
+        if(!link1 && !link2) return toast.error("Invalid Input")
         const tempData = link1 && link2 ? `${link1}, ${link2}` : link1 ? link1 : link2
-        if(link1){
-            addLink({
-                value: tempData,
-                column_name: "portfolio_links",
-                limit: 2,
-                errorMessage: "Failed to add your link"
-            })
-        }
+        addLink({
+            value: tempData,
+            column_name: "portfolio_links",
+            limit: 2,
+            errorMessage: "Failed to add your link",
+        })
+        // CLOSES THE SIDEBAR
+        close(false)
     }
 
     function handleDeleteLink(link: string){
@@ -60,8 +60,9 @@ export default function EditPortfolioLinks({close}: EditPortfolioLinks) {
 
     return (
         <section>
-            <div className="flex items-center justify-between gap-3 pt-10">
-                {!hasReachedLimits && <form className="w-[280px] border-2 border-gray-300 focus:border-primary ml-4 mt-10 rounded-sm">
+            <h4 className="mt-10 ml-6 text-lg text-black font-palanquin"> Update your Portfolio Links </h4>
+            <div className="flex items-center justify-between gap-3 mt-6">
+                {!hasReachedLimits && <form className="w-[280px] border-2 border-gray-300 focus:border-primary ml-4 rounded-sm">
                     <input onChange={handleLink1Change} defaultValue="" placeholder="https://example.com" className="w-full pl-4 py-2 outline-none text-stone-600 text-sm font-palanquin" /> 
                 </form>}
             </div>
@@ -78,7 +79,11 @@ export default function EditPortfolioLinks({close}: EditPortfolioLinks) {
             </button>}
             {/* Links */}
             {isLoading ? (
-                <Spinner />
+                <div className="my-5 pr-3 w-full flex items-center justify-center">
+                    <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                        <CircularProgress size={20} color="inherit" />
+                    </Box>
+                </div>
             ) : 
                 (<div className="w-[300px] mt-6 mb-10 ml-8">
                 {!user?.portfolio_links ? null : (

@@ -17,7 +17,7 @@ export default function PortfolioLinks() {
                     })
                 )}
             </div>
-            <button className="max-lg:pb-12 lg:pr-8 text-sm text-red-500 font-palanquin font-semibold" onClick={() => setEditPortfolioLinks(true)}> Edit </button>
+            <button className="max-lg:pb-12 lg:pr-8 text-sm text-red-500 font-palanquin font-semibold" onClick={() => setEditPortfolioLinks(true)}> {user?.portfolio_links ? "Edit" : "Add"} </button>
         </section>
     )
 }

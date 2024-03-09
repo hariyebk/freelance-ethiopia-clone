@@ -3,6 +3,7 @@ import { signUpType, POST, POST1, POST2, USER } from "../../types"
 import { ExperienceProps } from "../../shared/Profile/Experience"
 import { EducationProps } from "../../shared/pieces/EducationItem"
 import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
+import { Language } from "../../shared/pieces/EditLanguages"
 
 interface GeneralUpdateProps{
     userId: string, 
@@ -258,6 +259,22 @@ export async function DeleteElement({userId, value, column_name}: GeneralDeleteP
     }
     // update the array
     const {data: user, error: error1} = await supabase.from("users").update({[column_name]: tempArray.length > 0 ? tempArray : null}).eq("id", userId).select("*")
+    if(error1) throw new Error(error1.message)
+    return {user}
+}
+export async function UpdateOrDeleteLanguages({userId, languages, isTobeDeleted, language}: {userId: string, languages?: {language?: string, proficiency: string}[], isTobeDeleted?: boolean, language?: string}) {
+
+    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    const tempArray = data.languages ? data.languages : []
+    let tempArray1
+    if(!isTobeDeleted && languages){
+        tempArray1 = [...tempArray, ...languages]
+    }
+    else if(isTobeDeleted){
+        tempArray1 = tempArray.filter((element: Language) => element.language !== language)
+    }
+    const {data: user, error: error1} = await supabase.from("users").update({languages: tempArray1}).eq("id", userId).select("*")
     if(error1) throw new Error(error1.message)
     return {user}
 }

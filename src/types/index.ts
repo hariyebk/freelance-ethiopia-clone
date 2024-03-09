@@ -40,7 +40,10 @@ export type USER = signUpType & {
         expirationDate: string,
         link?: string
     }[],
-    languages: string[],
+    languages: {
+        language: string,
+        proficiency: string
+    }[],
     portfolio_links: string[]
 } 
 

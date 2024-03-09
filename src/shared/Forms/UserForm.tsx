@@ -136,7 +136,7 @@ export default function UserForm({newUser, handleSubmit} : UserFormProps) {
                                 City 
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
-                                <Select {...field} onValueChange= {field.onChange}>
+                                <Select onValueChange= {field.onChange} defaultValue={field.value}>
                                     <FormControl className="border-gray-400 focus:border-none py-4">
                                         <SelectTrigger {...field}>
                                             <SelectValue placeholder="Select your city" />
@@ -191,7 +191,7 @@ export default function UserForm({newUser, handleSubmit} : UserFormProps) {
                                 Gender 
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
-                                <Select {...field} onValueChange= {field.onChange}>
+                                <Select onValueChange= {field.onChange} defaultValue={field.value}>
                                     <FormControl className="border-gray-400 focus:border-none py-3">
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select your Gender" />
@@ -270,7 +270,7 @@ export default function UserForm({newUser, handleSubmit} : UserFormProps) {
                                 City 
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
-                                <Select {...field} onValueChange= {field.onChange}>
+                                <Select onValueChange= {field.onChange} defaultValue={field.value}>
                                     <FormControl className="border-gray-400 focus:border-none py-4">
                                         <SelectTrigger {...field}>
                                             <SelectValue placeholder="Select your city" />
@@ -317,7 +317,7 @@ export default function UserForm({newUser, handleSubmit} : UserFormProps) {
                                 Country 
                                 <span className="text-red-500 text-lg"> * </span>
                                 </FormLabel>
-                                <Select {...field} onValueChange= {field.onChange}>
+                                <Select onValueChange= {field.onChange} defaultValue={field.value}>
                                     <FormControl className="border-gray-400 focus:border-none py-6">
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select your country" />

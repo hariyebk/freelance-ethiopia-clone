@@ -1,12 +1,11 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
 import { AccountRoles, POST1, POST2, signUpType} from "../../types"
 
-export type ValueType<T> = T
 
 // CREATE NEW USER
 export const useSignup = () => {
@@ -294,7 +293,7 @@ export const useUnSavePost = () => {
     })
 }
 // REFACTORED
-export const useGeneral = ({isTobeDeleted, successMessage}: {isTobeDeleted: boolean, successMessage: string}) => {
+export const useGeneral = ({isTobeDeleted, successMessage, dontRedirect}: {isTobeDeleted: boolean, successMessage: string, dontRedirect?: boolean}) => {
     const {user, setUser} = useApi()
     const navigate = useNavigate()
     return useMutation({
@@ -313,8 +312,27 @@ export const useGeneral = ({isTobeDeleted, successMessage}: {isTobeDeleted: bool
         onSuccess: (data) => {
             setUser(data.user[0]),
             toast.success(successMessage)
-            !isTobeDeleted && navigate("/my-profile")
+            !isTobeDeleted && dontRedirect ? null : navigate("/my-profile")
         },
         onError: (error) => toast.error(error.message)
+    })
+}
+// UPDATE OR DELETE LANGUAGES
+export const useLanguage = ({close, isTobeDeleted}: {close: React.Dispatch<React.SetStateAction<boolean>>, isTobeDeleted?: boolean}) => {
+    const {user, setUser} = useApi()
+    return useMutation({
+        mutationFn: ({language, languages}: {language?: string, languages?: {language: string, proficiency: string}[]}) => isTobeDeleted ? UpdateOrDeleteLanguages({
+            userId: user?.id as string,
+            isTobeDeleted: true,
+            language
+        }) : UpdateOrDeleteLanguages({
+            userId: user?.id as string,
+            languages
+        }),
+        onSuccess: (data) => {
+            setUser(data.user[0])
+            toast.success("language updated successfully")
+            close(false)
+        }
     })
 }

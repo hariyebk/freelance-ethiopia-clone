@@ -174,3 +174,11 @@ export const preferenceValidation = z.object({
     sectorPreference: z.string(),
     locationPreference: z.string()
 })
+export const languageValidation = z.object({
+    language1: z.string().min(2, {message: "Language is Required"}).max(20, {message: "Language is too long"}),
+    lang1Level: z.string(),
+    language2: z.string().min(2, {message: "Language is Required"}).max(20, {message: "Language is too long"}).optional(),
+    lang2Level: z.string().min(2, {message: "Language is Required"}).max(20, {message: "Language is too long"}).optional(),
+    language3: z.string().min(2, {message: "Language is Required"}).max(20, {message: "Language is too long"}).optional(),
+    lang3Level: z.string().min(2, {message: "Language is Required"}).max(20, {message: "Language is too long"}).optional()
+})
