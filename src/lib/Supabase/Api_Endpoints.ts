@@ -273,6 +273,9 @@ export async function UpdateOrDeleteLanguages({userId, languages, isTobeDeleted,
     }
     else if(isTobeDeleted){
         tempArray1 = tempArray.filter((element: Language) => element.language !== language)
+        if(tempArray1.length === 0){
+            tempArray1 = null
+        }
     }
     const {data: user, error: error1} = await supabase.from("users").update({languages: tempArray1}).eq("id", userId).select("*")
     if(error1) throw new Error(error1.message)

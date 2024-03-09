@@ -246,7 +246,7 @@ export default function EditLanguages({close}: EditLanguageProps){
                 </Form>
             }
             {user?.languages && <div className="mt-6">
-                {!hasReachedLimits && user?.languages.length > 0 && <h4 className="mt-10 ml-10 text-lg text-black font-palanquin"> Your Languages </h4>}
+                {!hasReachedLimits && user?.languages && <h4 className="mt-10 ml-10 text-lg text-black font-palanquin"> Your Languages </h4>}
                 {!user?.languages ? null  :
                 user.languages.map((element) => {
                     return (
