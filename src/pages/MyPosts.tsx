@@ -4,12 +4,13 @@ import ApplicationFilter from "../shared/pieces/ApplicationFilter";
 import PostCard from "../shared/pieces/PostCard";
 import PostMain from "../shared/post/PostMain";
 import PostHeader from "../shared/post/PostHeader";
-import { AccountRoles } from "../types";
+import { AccountRoles, POST } from "../types";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import useApi from "../context/hook";
 import { useEffect, useState } from "react";
 import PopOverDelete from "../shared/PopOverDelete";
 import Spinner from "../shared/pieces/Spinner";
+import { useNavigate } from "react-router-dom";
 
 
 export default function MyPosts(){
@@ -20,13 +21,20 @@ export default function MyPosts(){
     const [currentId, setCurrentId] = useState<number | null>(null)
     const closeModal = () => setOpenModal(false) 
     const handleOpenModal = () => setOpenModal(true)
+    const navigate = useNavigate()
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    function handleEditPost(){
+    function handleEditPost(post: POST){
+        navigate(`/edit-post/${post.id}`)
+    }
 
+    function handleClick(post: POST){
+        window.scrollTo(0, 0);
+        handleOpenModal()
+        setCurrentId(parseInt(post.id))
     }
 
     function handleDeletePost(id: number){
@@ -72,13 +80,10 @@ export default function MyPosts(){
                                 <PostCard post={post} Header = {
                                     <PostHeader title={post.title} id={post.id}>
                                         { role === AccountRoles.employer && <div className="flex items-center gap-7">
-                                                <button onClick={handleEditPost}>
+                                                <button onClick={() => handleEditPost(post)}>
                                                     <FaEdit className = "text-blue-600 w-5 h-5" />
                                                 </button>
-                                                <button onClick={() => {
-                                                    handleOpenModal()
-                                                    setCurrentId(post.id)
-                                                }}>
+                                                <button onClick={() => handleClick(post)}>
                                                     <FaTrash className = "text-red-600 w-5 h-5" />
                                                 </button>
                                             </div>  

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -173,6 +173,21 @@ export const useCreatePost1 = () => {
             navigate(`/post/${data?.jobpost[0].id}/descriptions`)
         },
         onError: (error) => toast(error.message)
+    })
+}
+export const useUpdatePost = () => {
+    const navigate = useNavigate()
+    return useMutation({
+        mutationFn: ({postId, post1, post2}: {postId: string, post1?: POST1, post2?: POST2}) =>  updatePost({
+            postId,
+            post1,
+            post2
+        }),
+        onSuccess: () => {
+            toast.success("post has been updated successfully")
+            navigate("/my-posts")
+        },
+        onError: (error) => toast.error(error.message) 
     })
 }
 // CREATE SECOND POST SECTION

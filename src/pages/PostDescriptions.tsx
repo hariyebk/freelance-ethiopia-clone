@@ -6,22 +6,28 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../components/ui/input"
 import { Textarea } from "../components/ui/textarea"
 import { IoWarningOutline } from "react-icons/io5";
-import { useCreatePost2 } from "../lib/Tanstackquery/queriesAndMutations"
+import { useCreatePost2, useUpdatePost } from "../lib/Tanstackquery/queriesAndMutations"
 import Spinner from "../shared/pieces/Spinner"
 import { useEffect } from "react"
+import lodash from "lodash"
+import toast from "react-hot-toast"
+import { Box, CircularProgress } from "@mui/material"
 
 interface jobPostProps {
+    id?: string,
     description?: string,
     requirments?: string,
     responsibilities?: string,
     qualifications?: string | null,
     salary?: number | null,
-    howToApply?: string | null
+    howToApply?: string | null,
+    isTobeEdited?: boolean
 }
 
-export default function PostDescriptions({description, responsibilities, requirments, qualifications, salary, howToApply}: jobPostProps){
+export default function PostDescriptions({id, description, responsibilities, requirments, qualifications, salary, howToApply, isTobeEdited}: jobPostProps){
 
     const {isPending, mutate: createPost2} = useCreatePost2()
+    const {isPending: isLoading, mutate: updatePost} = useUpdatePost()
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -40,8 +46,18 @@ export default function PostDescriptions({description, responsibilities, requirm
     })
 
     function onSubmit(values: z.infer<typeof Post2Validation>){
-        window.scrollTo(0, 0);
-        createPost2(values)
+        if(isTobeEdited){
+            const currentData = {description, responsibilities, requirments, qualifications, salary, howToApply}
+            console.log(currentData, values)
+            if(lodash.isEqual(currentData, values)){
+                return toast.error("update aborted: No changes were made")
+            }
+            updatePost({postId: id as string, post2: values})
+        }
+        else {
+            window.scrollTo(0, 0);
+            createPost2(values)
+        }
     }
 
     // LOADING SPINNER
@@ -57,7 +73,7 @@ export default function PostDescriptions({description, responsibilities, requirm
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-full lg:pl-24">
                     <main className="">
-                        <h1 className="text-2xl text-stone-500 font-semibold "> Tell us more about the Job </h1>
+                        <h1 className="text-2xl text-stone-500 font-semibold "> {isTobeEdited ? "Update your post" : "Tell us more about the Job"} </h1>
                             {/* SALARY */}
                             <FormField
                             control={form.control}
@@ -70,7 +86,7 @@ export default function PostDescriptions({description, responsibilities, requirm
                                     <p className="text-black max-lg:text-xs text-sm"> You can skip this , if you want </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Input type="text" className="max-lg:w-[350px] w-[400px] no-autofill outline-none" {...field}/> 
+                                    <Input type="text" placeholder={isTobeEdited ? !salary ? "Not specified" : "" : ""} className="max-lg:w-[350px] w-[400px] no-autofill outline-none" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -142,7 +158,7 @@ export default function PostDescriptions({description, responsibilities, requirm
                                     <p className="text-black max-lg:text-xs text-sm"> Please use comma (,) to separate each requirments </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
+                                    <Textarea placeholder={isTobeEdited ? !qualifications ? "Not specified": "" : ""} className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -160,13 +176,21 @@ export default function PostDescriptions({description, responsibilities, requirm
                                     <p className="text-black max-lg:text-xs text-sm"> You can skip this , if you want </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[450px] h-[90px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
+                                    <Textarea placeholder={isTobeEdited ? !howToApply ? "Not specified" : "" : ""} className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[450px] h-[90px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
                             )}
                             />
-                            <button className="max-lg:mt-14 mt-14 max-lg:w-[350px] w-[450px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-lg text-slate-100 font-palanquin"> Submit </button>
+                            <button className="max-lg:mt-14 mt-14 max-lg:w-[350px] w-[450px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-lg text-slate-100 font-palanquin"> 
+                            {isLoading ? (
+                                <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                                    <CircularProgress size={20} color="inherit" />
+                                </Box>
+                            ) : 
+                            isTobeEdited ? "Update" : "Submit"
+                            } 
+                            </button>
                     </main>
                 </form>
                 </Form>

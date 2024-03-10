@@ -43,18 +43,29 @@ export default function NavBar() {
                             <Link to="/profile-type" className="hover:text-primary max-lg:hidden" onClick={handleAccountSwitch}>
                                 <RxLoop style = {{fontSize: "26px"}} />
                             </Link>
-                            {isPending ? (
-                                <Box sx={{ display: 'flex' }}>
-                                    <CircularProgress size={25} />
-                                </Box>
-                                ) :
-                                (
-                                <button onClick={handleLogout} className="max-lg:hidden bg-stone-800 mr-3 text-slate-100 text-sm py-2 max-lg:px-5 px-7 rounded-full"> Log out</button>
+                            <div className="max-lg:hidden">
+                                {isPending ? (
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress size={25} />
+                                    </Box>
+                                    ) :
+                                    (
+                                    <button onClick={handleLogout} className="max-lg:hidden bg-stone-800 mr-3 text-slate-100 text-sm py-2 max-lg:px-5 px-7 rounded-full"> Log out</button>
+                                    )
+                                }
+                            </div>
+                            <div>
+                                {isPending ? (
+                                    <Box sx={{ display: 'flex' }}>
+                                        <CircularProgress size={25} />
+                                    </Box>
                                 )
-                            }
-                            <button onClick={handleLogout} className="lg:hidden mr-5 hover:text-primary">
-                                <SlLogout style = {{fontSize: "26px"}}/>
-                            </button>
+                                : 
+                                <button onClick={handleLogout} className="lg:hidden mr-5 hover:text-primary">
+                                    <SlLogout style = {{fontSize: "26px"}}/>
+                                </button>
+                                }
+                            </div>
                             <Link to={`${role === AccountRoles.jobseeker ? "/my-profile/" : "/profile"}`} className="max-lg:mr-6 mr-3 -ml-3">
                                 <img src={`${user?.avatar ? user.avatar : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
                             </Link>

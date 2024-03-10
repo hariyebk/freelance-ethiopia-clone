@@ -41,14 +41,14 @@ export default function App(){
                     }>
                             {/* AUTHENTICATED USERS PAGES */}
                             <Route path="/profile-type" element = {<Profile />} />
-                            <Route path="/post/:jid/apply" element = {<Apply />} />
+                            <Route path="/post/:id/apply" element = {<Apply />} />
                             <Route path="/settings" element = {<Settings />} />
+                            <Route path= "/edit-userDetails" element = {<EditUserDetails />}/>
                       {/* JOB SEEKER AUTHORIZATION MIDDLEWARE */}
                       <Route element = {
                         <JobSeekerOnly />
                       }>
-                            <Route path="/my-profile" element = {<JobSeekerProfile />} />
-                            <Route path= "/edit-userDetails" element = {<EditUserDetails />}/> 
+                            <Route path="/my-profile" element = {<JobSeekerProfile />} /> 
                             <Route path= "/edit-skills" element = {<EditSkills />}/> 
                             <Route path= "/edit-bio" element = {<EditBio />}/> 
                             <Route path= "/edit-mainServices" element = {<EditMainServices />}/> 

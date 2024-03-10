@@ -129,9 +129,36 @@ export async function createPost2(id: string, post: POST2){
     }).eq("id", id).select()
 
     if(error) throw new Error(error.message)
-    console.log(error)
-
     return {data}
+}
+export async function updatePost({postId, post1, post2}: {postId: string, post1?: POST1, post2?: POST2}){
+    if(post1){
+        const {data, error} = await supabase.from("post").update({
+            postedBy: post1.postedBy,
+            title: post1.title,
+            site: post1.site,
+            type: post1.level,
+            sector: post1.sector,
+            compensationType: post1.compensationType,
+            location: post1.location ? post1.location : null,
+            gender: post1.gender,
+            deadline: post1.deadline,
+            quantity: parseInt(post1.quantity)
+        }).eq("id", postId).select("*")
+        if(error) throw new Error(error.message)
+        return {data}
+    }
+    else if(post2){
+        const {data, error} = await supabase.from("post").update({ description: post2.description, salary: post2.salary ? parseInt(post2.salary) : null, 
+            responsibilities: post2.responsibilities.replace(/[\n\r]/g, "").split(","),
+            requirments: post2.requirments.replace(/[\n\r]/g, "").split(","),
+            qualifications: post2.qualifications ? post2.qualifications.split(",") : null,
+            howToApply: post2.howToApply ? post2.howToApply.replace(/[\n\r]/g, "") : null
+        }).eq("id", postId).select()
+    
+        if(error) throw new Error(error.message)    
+        return {data}
+    }
 }
 export async function findPostById(id: string){
     const {data:post, error} = await supabase.from("post").select("*").eq("id", id).single()
