@@ -32,7 +32,7 @@ export default function PostMain({post}: PostMianProps){
                 {/* Tags */}
                 <PostTags sector={post?.sector} site={post?.site} type={post?.type} />
                 {/* Details */}
-                <PostDeatils compensationType={post?.compensationType} salary={post?.salary} level={post?.level} deadline={post?.deadline}/>
+                <PostDeatils compensationType={post?.compensationType} salary={post?.salary?.toLocaleString()} level={post?.level} deadline={post?.deadline}/>
                 <div className="my-16 flex items-center justify-between">
                     <div  className="flex items-center hover:text-primary cursor-pointer" onClick={() => {
                         window.scrollTo(0, 0);

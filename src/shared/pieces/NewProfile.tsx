@@ -2,6 +2,8 @@ import { useReducer} from "react"
 import { AccountRoles} from "../../types"
 import { useUpdateAccountType } from "../../lib/Tanstackquery/queriesAndMutations"
 import { Box, CircularProgress } from "@mui/material"
+import useApi from "../../context/hook"
+import toast from "react-hot-toast"
 
 interface STATEPROPS {
     Jobseeker: boolean,
@@ -78,6 +80,7 @@ const reducer = (state: STATEPROPS, action: ACTIONPROPS) => {
 export default function NewProfile(){
     const {isPending, mutate: updateAccountType} = useUpdateAccountType()
     const [{Jobseeker, Private, Coorporate, Lstartup, Ustartup}, dispatch] = useReducer(reducer, initial)
+    const {user} = useApi()
     // checks if at least one of the account type is selected , then it turn the button color to orange, if noting is selected it will stay inactive
     const isNotSelected = !Jobseeker && !Private && !Coorporate && !Lstartup && !Ustartup
     let currentlyActive: string
@@ -101,6 +104,9 @@ export default function NewProfile(){
     function handleAccountType(){
         // If nothing is selected , return
         if(!currentlyActive) return
+        if(user){
+            return toast.error("Feature will be implemented soon")
+        }
         updateAccountType(currentlyActive)
     }
 

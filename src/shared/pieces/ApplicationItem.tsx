@@ -3,7 +3,8 @@ import { changeDateFromIsoToNormal, formatDistanceFromNow } from "../../utils/he
 
 interface ApplicationItemProps {
     application: {
-        title: string
+        id: string,
+        title: string,
         status: string,
         location: string,
         appliedAt: string,
@@ -14,8 +15,7 @@ interface ApplicationItemProps {
     }
 }
 
-export default function ApplicationItem({application}: ApplicationItemProps){
-    
+export default function ApplicationItem({application}: ApplicationItemProps){  
     let statusColor:string
     if(application.status === status.pending){
         statusColor = "bg-blue-500"
@@ -26,7 +26,6 @@ export default function ApplicationItem({application}: ApplicationItemProps){
     else {
         statusColor = "bg-red-500"
     }
-
     return (
         <section className='my-7'>
             <div className="flex items-center justify-between">

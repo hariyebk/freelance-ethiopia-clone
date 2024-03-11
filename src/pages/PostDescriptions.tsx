@@ -48,7 +48,6 @@ export default function PostDescriptions({id, description, responsibilities, req
     function onSubmit(values: z.infer<typeof Post2Validation>){
         if(isTobeEdited){
             const currentData = {description, responsibilities, requirments, qualifications, salary, howToApply}
-            console.log(currentData, values)
             if(lodash.isEqual(currentData, values)){
                 return toast.error("update aborted: No changes were made")
             }

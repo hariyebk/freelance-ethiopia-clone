@@ -1,16 +1,31 @@
-import { useEffect } from "react";
+import { useEffect} from "react";
 import ApplicationsList from "../shared/ApplicationsList";
 import ApplicationFilter from "../shared/pieces/ApplicationFilter";
 import useApi from "../context/hook";
 import { Application } from "../types";
+import { useDeletePostFromAppliedToArray } from "../lib/Tanstackquery/queriesAndMutations";
+import Spinner from "../shared/pieces/Spinner";
 
 export default function Applied() {
+
+    const {isPending, mutate: deleteIfPostDoesntExist} = useDeletePostFromAppliedToArray()
     const {user} = useApi()
 
-    useEffect(() => {   
+    useEffect(() => {
+        if(user?.appliedTo){
+            deleteIfPostDoesntExist({
+                appliedToArray: user.appliedTo,
+                userId: user.id as string
+            })
+        }
         window.scrollTo(0, 0);
-    }, []);
+    }, [user?.appliedTo, user?.id, deleteIfPostDoesntExist]);
 
+    if(isPending){
+        return (
+            <Spinner />
+        )
+    }
 
     return (
         <section className="w-full mt-40 mb-36">

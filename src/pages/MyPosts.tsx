@@ -22,6 +22,7 @@ export default function MyPosts(){
     const closeModal = () => setOpenModal(false) 
     const handleOpenModal = () => setOpenModal(true)
     const navigate = useNavigate()
+    const AreTherePosts = data?.posts?.length !== 0
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -71,7 +72,7 @@ export default function MyPosts(){
             <div>
                 <ApplicationFilter saved = {true} />
             
-                { data?.posts.length === 0 ?  <div className="my-16 ml-6">
+                { !AreTherePosts ?  <div className="my-16 ml-6">
                         <p className="no-posts"> You haven't posted any jobs yet 😣 </p> 
                 </div> : (
                     data?.posts.map((post) => {

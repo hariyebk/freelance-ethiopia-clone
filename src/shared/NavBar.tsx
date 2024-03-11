@@ -54,7 +54,7 @@ export default function NavBar() {
                                     )
                                 }
                             </div>
-                            <div>
+                            <div className="lg:hidden">
                                 {isPending ? (
                                     <Box sx={{ display: 'flex' }}>
                                         <CircularProgress size={25} />

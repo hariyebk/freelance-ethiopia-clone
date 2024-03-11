@@ -20,6 +20,7 @@ export default function ApplicationsList({applications}: ApplicationListProps){
             {applications?.map((application) => {
                 return (
                     <ApplicationItem key={application.post.id} application={{
+                        id: application.post.id,
                         title: application.post.title,
                         status: application.status,
                         location: application.post.location || "Remote",

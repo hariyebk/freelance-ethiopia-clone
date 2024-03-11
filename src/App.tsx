@@ -30,7 +30,7 @@ export default function App(){
                     <Route path="/login" element = {<Login />} />
                     <Route path="/onboard" element = {<Signup />} />
                     <Route path="/register" element = {<Register />} />
-                    <Route path="/profile-type/:id/new" element = {<ProfileSetUp />} />
+                    <Route path="/profile-type/new" element = {<ProfileSetUp />} />
                     <Route path="/register/:id/upload-photo" element = {<UploadUserAvatar />} />
                     {/* TODO: IMPLEMENT THIS FEATURE */}
                     <Route path="/verify-your-phone-number" element = {<VerifyPhoneNumber />} />

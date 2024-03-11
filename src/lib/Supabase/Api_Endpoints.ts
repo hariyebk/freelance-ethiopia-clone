@@ -1,5 +1,5 @@
 import supabase from "./config"
-import { signUpType, POST, POST1, POST2, USER } from "../../types"
+import { signUpType, POST, POST1, POST2, USER, Application } from "../../types"
 import { ExperienceProps } from "../../shared/Profile/Experience"
 import { EducationProps } from "../../shared/pieces/EducationItem"
 import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
@@ -307,4 +307,17 @@ export async function UpdateOrDeleteLanguages({userId, languages, isTobeDeleted,
     const {data: user, error: error1} = await supabase.from("users").update({languages: tempArray1}).eq("id", userId).select("*")
     if(error1) throw new Error(error1.message)
     return {user}
+}
+export async function deletePostFromAppliedTo({appliedToArray, userId}: {appliedToArray: Application, userId: string}){
+    if(!appliedToArray || appliedToArray.length === 0) return
+    const idArray = appliedToArray.map((element) => element.post.id)
+    const {data:post, error: error1} = await supabase.from("post").select("*")
+    if(error1) throw new Error(error1.message)
+    const AllPostIds = post.map((item) => item.id)
+    // check if the ids from the appliedToArray exist in AllPostIds array
+    const updatedArray = idArray.filter((id) => AllPostIds.includes(id))
+    const {data: user, error: error2} = await supabase.from("users").update({appliedTo: updatedArray.length > 0 ? updatedArray : null}).eq("id", userId).select("*")
+    if(error2) throw new Error(error2.message)
+    return {user}
+    
 }
