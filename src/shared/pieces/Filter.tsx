@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { Checkbox } from "../../components/ui/checkbox"
 import useApi from "../../context/hook"
+import { useState } from "react"
 
 
 interface FilterProps {
@@ -11,6 +12,9 @@ interface FilterProps {
 
 export default function Filter({title, lists, param}: FilterProps) {
     const [searchParms, setSearchParms] = useSearchParams()
+    const currentQuery = searchParms.get(param)
+    const [checkedItem, setCheckedItem] = useState<string | null>(currentQuery)
+
     const {role} = useApi()
     const navigate = useNavigate()
 
@@ -19,9 +23,18 @@ export default function Filter({title, lists, param}: FilterProps) {
             return  navigate("/login")
         }
         const query = value.replace(/ /g, "_") as string
-        searchParms.set(param, query)
+        // If it's already checked
+        if(checkedItem === query){
+            setCheckedItem(null)
+            searchParms.delete(param)
+        }
+        else{
+            setCheckedItem(query)
+            searchParms.set(param, query)
+        }
         setSearchParms(searchParms)
     }
+    
 
     return (
         <div className="mt-3">
@@ -30,7 +43,7 @@ export default function Filter({title, lists, param}: FilterProps) {
                 {lists.map((value) => {
                     return (
                         <div key={value} className="flex items-center gap-2 my-1.5">
-                        <Checkbox onCheckedChange={() => handleClick(value)} className="border-gray-700 w-4 h-4 checked:text-primary focus:outline-none focus-visible:ring-0" />
+                        <Checkbox checked={checkedItem === value.replace(/ /g, "_") as string}  onCheckedChange={() => handleClick(value)} className="border-gray-700 w-4 h-4 checked:text-primary focus:outline-none focus-visible:ring-0" />
                         <p className={`${title === "sectors" ? "text-sm truncate ...": "capitalize text-sm"}`}> {value} </p>
                     </div>
                     )
