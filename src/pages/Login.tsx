@@ -96,7 +96,7 @@ export default function Login() {
                             Don’t have an account? </p>
                             <hr className="w-16 h-0.5 bg-stone-700 ml-3"/>
                         </div>
-                        <Link to="/onboard" className="w-full max-lg:w-[200px] mx-10 mt-8 px-8 py-2 rounded-full text-base text-center text-slate-100  bg-gradient-to-r from-primary to-secondary"> Sign up </Link>
+                        <Link to="/onboard" className="w-[280px] max-lg:w-[200px] mx-10 mt-8 px-8 py-2 rounded-full text-base text-center text-slate-100  bg-gradient-to-r from-primary to-secondary"> Sign up </Link>
                     </div>
                 </form>
             </Form>

@@ -6,6 +6,9 @@ import { useSavePost, useUnSavePost } from "../../lib/Tanstackquery/queriesAndMu
 import { Box, CircularProgress } from "@mui/material";
 import { GoBookmarkFill } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
+import { XIcon } from "react-share"
+import {TelegramShareButton, TelegramIcon, FacebookShareButton, FacebookIcon, EmailShareButton, EmailIcon, TwitterShareButton, WhatsappShareButton, WhatsappIcon} from "react-share"
+import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
 
 interface PostHeader {
     id: string
@@ -19,6 +22,7 @@ export default function PostHeader({id, children, title}: PostHeader){
     const navigate = useNavigate()
     const {isPending: isLoading, mutate: unSavePost} = useUnSavePost()
     const saved = user?.saved_posts?.find((post) => post.id === id)
+    const shareLink = `https://freelance-clone/shared/post/${id}.vercel.app/`
 
     function handleSavePost(){
         if(!role){
@@ -35,7 +39,30 @@ export default function PostHeader({id, children, title}: PostHeader){
                 {children}
             </div>
             { (role === AccountRoles.jobseeker || !role) && <div className="flex items-center gap-3">
-                <button> <IoMdShareAlt  className = "text-primary w-6 h-6"/> </button>
+                <Popover>
+                    <PopoverTrigger>
+                        <button> <IoMdShareAlt  className = "text-primary w-6 h-6"/> </button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <div className="flex items-center gap-3">
+                            <FacebookShareButton url={shareLink}>
+                                <FacebookIcon size={30} round={true}/>
+                            </FacebookShareButton>
+                            <TelegramShareButton url={shareLink}>
+                                <TelegramIcon size={30} round={true} />
+                            </TelegramShareButton>
+                            <TwitterShareButton url={shareLink}>
+                                <XIcon size={30} round={true} />
+                            </TwitterShareButton>
+                            <WhatsappShareButton url={shareLink}>
+                                <WhatsappIcon size={30} round={true} />
+                            </WhatsappShareButton>
+                            <EmailShareButton url={shareLink} subject={title} openShareDialogOnClick={true} >
+                                <EmailIcon size={30} round={true} />
+                            </EmailShareButton>
+                        </div>
+                    </PopoverContent>
+                </Popover>
                 {isPending || isLoading ? (
                     <Box sx={{ display: 'flex' }}>
                         <CircularProgress size={20} />

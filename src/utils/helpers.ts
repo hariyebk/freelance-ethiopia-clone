@@ -10,7 +10,6 @@ export function formatDateString(date: string){
     })
     return formattedDate
 }
-
 export function formatDistanceFromNow(date: string | undefined){
     if(!date) return
     return formatDistance(parseISO(date), new Date(), {
@@ -23,14 +22,12 @@ export function changeDateFromIsoToNormal(date: string){
     const day = new Date(date);
     return formatDate(day, 'yyyy-MM-dd HH:mm:ss')
 }
-
 export function calculateAge(date: string | undefined){
     if(!date) return
     const thisYear = new Date().getFullYear()
     const usersBirthYear = new Date(date).getFullYear()
     return thisYear - usersBirthYear
 }
-
 // A function that returns all the search parameters in the current url
 export function getAllQueryStrings() {
     const queryParams = new URLSearchParams(window.location.search);
