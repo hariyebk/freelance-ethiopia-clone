@@ -30,3 +30,13 @@ export function calculateAge(date: string | undefined){
     const usersBirthYear = new Date(date).getFullYear()
     return thisYear - usersBirthYear
 }
+
+// A function that returns all the search parameters in the current url
+export function getAllQueryStrings() {
+    const queryParams = new URLSearchParams(window.location.search);
+    const queryStringObj: {[key: string]: string} = {};
+    for (const [key, value] of queryParams.entries()) {
+        queryStringObj[key] = value === "On_site" ? value : value.replace(/_/g, " ")
+    }
+    return queryStringObj
+}

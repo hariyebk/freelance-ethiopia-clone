@@ -14,16 +14,16 @@ export default function AcccountCard({user}: AccountCardProps) {
         if(!selected){
             return toast.error("please choose your account first")
         }
-        return user.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
+        return user?.type === AccountRoles.jobseeker ? navigate("/job") : navigate("/my-posts")
     }
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="max-lg:w-[400px] w-[390px] h-[100px] max-lg:mt-6 mt-3 bg-white shadow-md rounded-md flex items-center justify-between gap-5 px-4 pt-7 pb-12">
                 <div className="flex items-center justify-between space-x-9">
-                    <img src={`${user.avatar ? user.avatar : "./Images/userAvatar.png"}`} alt="profile-image" width={50} height={50} className="rounded-full object-contain mt-2" />
+                    <img src={`${user?.avatar ? user.avatar : "./Images/userAvatar.png"}`} alt="profile-image" width={50} height={50} className="rounded-full object-contain mt-2" />
                     <div className="pt-7 flex flex-col items-start gap-3">
-                        <h2 className="text-base text-darkblue font-palanquin font-medium"> {`${user.firstName} ${user.lastName}`} </h2>
-                        <p className="text-sm text-darkblue font-palanquin font-semibold"> {user.type} </p>
+                        <h2 className="text-base text-darkblue font-palanquin font-medium"> {`${user?.firstName} ${user?.lastName}`} </h2>
+                        <p className="text-sm text-darkblue font-palanquin font-semibold"> {user?.type} </p>
                     </div>
                 </div>
                 <p className={`${selected ? "bg-stone-800 ring-2 ring-primary" : "border-gray-600"} border rounded-full w-4 h-4 cursor-pointer focus:outline-none`} onClick={() => setSelected((select) => !select)} />

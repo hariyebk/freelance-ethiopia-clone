@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, deletePostFromAppliedTo, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, deletePostFromAppliedTo, filterPosts, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -111,16 +111,23 @@ export const useUpdateAccountType = () => {
 }
 // UPDATE USER PREFERENCE
 export const useUpdatePreference = () => {
-    const {user} = useApi()
+    const {user, setUser} = useApi()
     const id = user?.id as string
+    const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
     return useMutation({
-        mutationFn: ({sector, location}: {sector: string, location: string}) => updateUserPreference( id, {
+        mutationFn: ({sector, location}: {sector: string | null, location: string | null}) => updateUserPreference( id, {
             "sector": sector,
             "location": location
         }),
         onSuccess: (data) => {
-            console.log(data.user[0])
+            setUser(data.user[0])
+            queryClient.invalidateQueries({
+                queryKey: ["posts", "user"]
+            })
             toast.success("your preference has been set")
+            navigate("/job")
         },
         onError: (error) => toast.error(error.message)
     })
@@ -176,6 +183,7 @@ export const useCreatePost1 = () => {
     })
 }
 export const useUpdatePost = () => {
+    const queryClient = useQueryClient()
     return useMutation({
         mutationFn: ({postId, post1, post2}: {postId: string, post1?: POST1, post2?: POST2}) =>  updatePost({
             postId,
@@ -183,6 +191,9 @@ export const useUpdatePost = () => {
             post2
         }),
         onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["posts", "my-posts"]
+            })
             toast.success("post has been updated successfully")
         },
         onError: (error) => toast.error(error.message) 
@@ -234,10 +245,7 @@ export const useDeletePostById = () => {
                 return toast.error("failed to delete the post, please try agin")
             }
             queryClient.invalidateQueries({
-                queryKey: ["my-posts"]
-            })
-            queryClient.invalidateQueries({
-                queryKey: ["posts"]
+                queryKey: ["posts", "my-posts"]
             })
             toast.success(`post has been successfully deleted`)
         },
@@ -360,6 +368,20 @@ export const useDeletePostFromAppliedToArray = () => {
         onSuccess: (data) => {
             setUser(data?.user[0])
         },
+        onError: (error) => toast.error(error.message)
+    })
+}
+// FILTER, PAGINATION AND SORTING
+export const useFilterPosts = () => {
+    return useMutation({
+        mutationFn: ({type, level, sector, gender, location, site}: {type?: string, level?: string, sector?: string, gender?: string, location?: string, site?: string}) => filterPosts({
+            type,
+            level,
+            sector,
+            gender,
+            location,
+            site
+        }),
         onError: (error) => toast.error(error.message)
     })
 }

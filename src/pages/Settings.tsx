@@ -14,7 +14,6 @@ import SetPreference from "../shared/pieces/SetPreference"
 export default function Settings() {
     const [showPassword, setShowPassword] = useState(false)
     const {isPending, mutate: updatePassword} = useUpdatePassword()
-    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -38,7 +37,7 @@ export default function Settings() {
         updatePassword({currentPassword: values.currentPassword, newPassword: values.newPassword})   
     }
 
-    if(isPending || isLoading){
+    if(isPending){
         return (
             <Spinner />
         )
@@ -137,7 +136,7 @@ export default function Settings() {
                 </form>
                 </Form>
                  {/* SET PREFERENCES */}
-                <SetPreference setIsLoading={setIsLoading} />
+                <SetPreference />
             </div>
         </section>
     )

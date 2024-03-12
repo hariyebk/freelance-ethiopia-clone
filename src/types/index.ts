@@ -79,6 +79,9 @@ export type POST = POST1 & POST2 & {
     }[]
 }
 
+ // eslint-disable-next-line
+export type queryObjType = any
+
 export type IcontextType = {
     user: USER | null,
     setUser: React.Dispatch<React.SetStateAction<USER | null>> | React.Dispatch<React.SetStateAction<null>>
@@ -93,7 +96,10 @@ export type IcontextType = {
     editLanguages: boolean,
     setEditLanguages: React.Dispatch<React.SetStateAction<boolean>>,
     role: string,
-    setRole: React.Dispatch<React.SetStateAction<string>>
+    setRole: React.Dispatch<React.SetStateAction<string>>,
+    queryObj: queryObjType,
+     // eslint-disable-next-line
+    setQueryObj: React.Dispatch<React.SetStateAction<any>>
 }
 
 export enum status {

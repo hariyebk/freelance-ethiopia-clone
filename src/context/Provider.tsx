@@ -17,8 +17,11 @@ const initial_state = {
     editPortfolioLinks: false,
     setEditPortfolioLinks: () => {},
     editLanguages: false,
-    setEditLanguages: () => {}
+    setEditLanguages: () => {},
+    queryObj: null,
+    setQueryObj: () => {}
 }
+
 export const FilterConext = createContext<IcontextType>(initial_state)
 export default function Provider({children}: {children: React.ReactNode}) {
     const {isLoading, data} = useGetUserInfo()
@@ -30,6 +33,7 @@ export default function Provider({children}: {children: React.ReactNode}) {
     const [editLanguages, setEditLanguages] = useState(false)
     const [role, setRole] = useState("")
     const [user, setUser] = useState<USER | null>(null)
+    const [queryObj, setQueryObj] = useState(null)
 
     function updateRoleAndUser(){
         if(!role &&  data?.user){
@@ -60,7 +64,9 @@ export default function Provider({children}: {children: React.ReactNode}) {
             editPortfolioLinks,
             setEditPortfolioLinks,
             editLanguages,
-            setEditLanguages
+            setEditLanguages,
+            queryObj,
+            setQueryObj
         }}>
             {children}
         </FilterConext.Provider>

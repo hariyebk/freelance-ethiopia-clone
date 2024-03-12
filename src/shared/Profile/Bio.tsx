@@ -13,7 +13,7 @@ export default function Bio() {
         <section className="profile_container">
             <TitleAndEdit title="Bio" routeTo="/edit-bio" add={Boolean(!user?.bio)} />
             <div className="mt-5 pr-8">
-                {user?.bio ? <p className="text-base text-black max-lg:text-justify font-palanquin leading-6">
+                {user?.bio ? <p className="text-base text-black max-lg:text-justify font-palanquin leading-7">
                     {user?.bio}
                 </p>: (
                     <p className="my-5 no-posts"> You have no bio 😣  </p>

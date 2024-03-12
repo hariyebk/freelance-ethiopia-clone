@@ -2,21 +2,22 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 import { Checkbox } from "../../components/ui/checkbox"
 import useApi from "../../context/hook"
 import { useState } from "react"
+import { getAllQueryStrings } from "../../utils/helpers"
 
 
 interface FilterProps {
     lists: string[],
     title: string,
-    param: string
+    param: string,
 }
 
 export default function Filter({title, lists, param}: FilterProps) {
     const [searchParms, setSearchParms] = useSearchParams()
     const currentQuery = searchParms.get(param)
     const [checkedItem, setCheckedItem] = useState<string | null>(currentQuery)
-
-    const {role} = useApi()
+    const {role, setQueryObj} = useApi()
     const navigate = useNavigate()
+
 
     function handleClick(value: string){
         if(!role){
@@ -33,6 +34,8 @@ export default function Filter({title, lists, param}: FilterProps) {
             searchParms.set(param, query)
         }
         setSearchParms(searchParms)
+        const UrlQueries = getAllQueryStrings()
+        setQueryObj(Object.keys(UrlQueries).length === 0 ? null : UrlQueries)
     }
     
 

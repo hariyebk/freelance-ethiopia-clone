@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { Form, FormControl, FormField, FormItem, FormMessage } from "../../components/ui/form"
+import { Form, FormControl, FormField, FormLabel, FormItem, FormMessage } from "../../components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 import { cities, jobSectors } from "../../constants"
 import { AccountRoles } from "../../types"
@@ -8,16 +8,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import useApi from "../../context/hook"
 import { useForm } from "react-hook-form"
 import { useUpdatePreference } from "../../lib/Tanstackquery/queriesAndMutations"
-import { FormLabel } from "@mui/material"
+import { CircularProgress, Box } from "@mui/material"
 
-interface Props {
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export default function SetPreference({setIsLoading}: Props){
+export default function SetPreference(){
     const {role, user} = useApi()
     const {isPending, mutate: updatePreference} = useUpdatePreference()
     const sectors = [ "None", ...jobSectors]
+    const arrangedCities = cities.map((element) => element.label)
+    const locations = ["None", ...arrangedCities]
 
     const form = useForm<z.infer<typeof preferenceValidation>>({
         resolver: zodResolver(preferenceValidation),
@@ -28,13 +26,10 @@ export default function SetPreference({setIsLoading}: Props){
     })
 
     function onSubmit(values: z.infer<typeof preferenceValidation>){
-        window.scrollTo(0, 0);
         const preferences = {
-            sector: values.sectorPreference,
-            location: values.locationPreference
+            sector: values.sectorPreference === "None" ? null : values.sectorPreference ,
+            location: values.locationPreference === "None" ? null : values.locationPreference
         }
-
-        setIsLoading(isPending)
         updatePreference(preferences)
     }
 
@@ -86,9 +81,9 @@ export default function SetPreference({setIsLoading}: Props){
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        {cities.map((city) => {
+                                        {locations.map((city) => {
                                             return (
-                                                <SelectItem  key={city.value} value={city.label}> {city.label} </SelectItem>
+                                                <SelectItem  key={city} value={city}> {city} </SelectItem>
                                             )
                                         })}
                                     </SelectContent>
@@ -98,7 +93,15 @@ export default function SetPreference({setIsLoading}: Props){
                             </FormItem>
                         )}
                         />
-                <button className="max-lg:mt-14 mt-10 max-lg:w-[270px] w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> set preference </button>
+                <button className="max-lg:mt-14 mt-10 max-lg:w-[270px] w-[330px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-slate-100 text-base font-palanquin"> 
+                { isPending ? (
+                    <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                        <CircularProgress size={20} color="inherit" />
+                    </Box>
+
+                ) : "set preference "
+                }
+                </button>
                 
                 </>
                 }

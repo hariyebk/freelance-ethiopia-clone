@@ -1,5 +1,5 @@
 import supabase from "./config"
-import { signUpType, POST, POST1, POST2, USER, Application } from "../../types"
+import { signUpType, POST, POST1, POST2, USER, Application} from "../../types"
 import { ExperienceProps } from "../../shared/Profile/Experience"
 import { EducationProps } from "../../shared/pieces/EducationItem"
 import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
@@ -137,7 +137,7 @@ export async function updatePost({postId, post1, post2}: {postId: string, post1?
             postedBy: post1.postedBy,
             title: post1.title,
             site: post1.site,
-            type: post1.level,
+            type: post1.type,
             sector: post1.sector,
             compensationType: post1.compensationType,
             location: post1.location ? post1.location : null,
@@ -178,16 +178,21 @@ export async function deletePostById(id: number){
     return {post}
 }
 export async function FetchAllPosts(preference?: {sector: string, location: string}){
+    let query = supabase.from("post").select("*")
     if(preference){
-        const {data, error} = await supabase.from("post").select().eq("sector", preference.sector).eq("location", preference.location)
-        if(error) throw new Error(error.message)
-        return {data}
+        if(preference.location){
+            query = query.eq("location", preference.location)
+        }
+        if(preference.sector){
+            query =  query.eq("sector", preference.sector)
+        }
     }
-    else {
-        const {data: posts, error: error1} = await supabase.from("post").select("*")
-        if(error1) throw new Error(error1.message)
-        return {posts}
-    }
+    const {data: posts, error} = await query.order("created_at", {
+        ascending: false
+    })
+    if(error) throw new Error(error.message)
+    return {posts}
+    
 }
 export async function updateUserData(id: string, userInfo: signUpType){
     const {data: user, error} = await supabase.from("users").update({...userInfo, phone: `0${userInfo.phone}`}).eq("id", id).select("*")
@@ -199,8 +204,13 @@ export async function updateUserBio ({userId, bio}: {userId: string, bio: string
     if(error) throw new Error(error.message)
     return {user} 
 }
-export async function updateUserPreference(id: string, preferences: {sector: string, location: string}){
-    const {data: user, error} = await supabase.from("users").update({preference: preferences}).eq("id", id).select("*")
+export async function updateUserPreference(id: string, preferences: {sector: string | null, location: string | null}){
+    if(!preferences.sector && !preferences.location){
+        const {data: user, error} =  await supabase.from("users").update({preference: null}).eq("id", id).select("*")
+        if(error) throw new Error(error.message)
+        return {user}
+    }
+    const {data: user, error} =  await supabase.from("users").update({preference: preferences}).eq("id", id).select("*")
     if(error) throw new Error(error.message)
     return {user}
 }
@@ -320,4 +330,36 @@ export async function deletePostFromAppliedTo({appliedToArray, userId}: {applied
     if(error2) throw new Error(error2.message)
     return {user}
     
+}
+export async function filterPosts({type, level, sector, gender, location, site}: {type?: string, level?: string, sector?: string, gender?: string, location?: string, site?: string}) {
+    let query = supabase.from("post").select("*")
+
+    if (type) {
+        query = query.eq("type", type)
+    }
+    if (level) {
+        query = query.eq("level", level)
+    }
+    if (sector) {
+        query = query.eq("sector", sector)
+    }
+    if (location) {
+        query = query.eq("location", location)
+    }
+    if (site) {
+        query = query.eq("site", site)
+    }
+    if (gender === "All") {
+        query = query.filter("gender", "in", ["Male", "Female"])
+    } else if (gender) {
+        query = query.eq("gender", gender)
+    }
+
+    const { data: posts, error } = await query
+
+    if (error) throw new Error(error.message)
+
+    if (!posts || posts.length === 0)  return [];
+
+    return posts;
 }

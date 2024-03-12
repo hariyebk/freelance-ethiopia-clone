@@ -24,6 +24,7 @@ export default function PostHeader({id, children, title}: PostHeader){
         if(!role){
             return navigate("/login")
         }
+        window.scrollTo(0, 0);
         saved ? unSavePost(id) : savePost(id)
     }
 

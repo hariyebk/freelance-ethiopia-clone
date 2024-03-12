@@ -58,6 +58,7 @@ export default function Post({id, title, site, type, level, sector, location, co
     
 
     function onSubmit(values: z.infer<typeof Post1Validation>){
+        console.log(values)
         const jobPoster = user?.firstName as string
         // If it is being updated and no changes were made 
         if(isTobeEdited){

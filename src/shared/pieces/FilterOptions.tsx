@@ -1,4 +1,4 @@
-import { Experience, Gender, jobSectors, jobTypes, location, salary } from "../../constants";
+import { Experience, Gender, jobSectors, jobSite, jobTypes, location} from "../../constants";
 import Filter from "./Filter";
 
 export default function FilterOptions() {
@@ -10,14 +10,14 @@ export default function FilterOptions() {
                 <Filter title="Job Types" param="type" lists={jobTypes} />
                 <hr className="w-full mt-6 border-1 border-primary" />
                 <Filter title="Experience level" param="level" lists={Experience} />
-                <hr className="w-full mt-4 border-1 border-primary" />
+                <hr className="w-full mt-6 border-1 border-primary" />
+                <Filter title="Site" param="site" lists={jobSite} />
+                <hr className="w-full mt-6 border-1 border-primary" />
                 <Filter title="sectors" param="sector" lists={jobSectors} />
                 <hr className="w-full mt-6 border-1 border-primary" />
                 <Filter title="Gender" param="gender" lists={Gender} />
                 <hr className="w-full mt-6 border-1 border-primary" />
                 <Filter title="Location" param="location" lists={location} />
-                <hr className="w-full mt-6 border-1 border-primary" />
-                <Filter title="Salary" param="salary" lists={salary} />
             </div>
         </div>
     )

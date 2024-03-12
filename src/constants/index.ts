@@ -551,3 +551,4 @@ export const coverLetterGuide = [
     "Keep your cover letter focused and straightforward. Avoid unnecessary jargon or lengthy explanations.",
     "Follow Instructions regarding how to apply for the job."
 ]
+export const PAGE_SIZE = 10
