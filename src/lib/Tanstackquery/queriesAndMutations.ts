@@ -1,10 +1,10 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, deletePostFromAppliedTo, filterPosts, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, filterPosts, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
 import useApi from "../../context/hook"
-import { AccountRoles, Application, POST1, POST2, signUpType} from "../../types"
+import { AccountRoles, POST1, POST2, signUpType} from "../../types"
 
 
 // CREATE NEW USER
@@ -355,20 +355,6 @@ export const useLanguage = ({close, isTobeDeleted}: {close: React.Dispatch<React
             toast.success("language updated successfully")
             close(false)
         }
-    })
-}
-// FIND AND DELETE A POST FROM APPLIEDTO ARRAY IF IT DOESN'T EXIST
-export const useDeletePostFromAppliedToArray = () => {
-    const {setUser} = useApi()
-    return useMutation({
-        mutationFn: ({appliedToArray, userId}: {appliedToArray: Application, userId: string}) => deletePostFromAppliedTo({
-            appliedToArray,
-            userId
-        }),
-        onSuccess: (data) => {
-            setUser(data?.user[0])
-        },
-        onError: (error) => toast.error(error.message)
     })
 }
 // FILTER, PAGINATION AND SORTING

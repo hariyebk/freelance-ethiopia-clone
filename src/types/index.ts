@@ -121,10 +121,12 @@ export enum AccountTypes {
 } 
 
 export type Application = {
-    post: POST1 & POST2 & {
-        id: string,
-        created_at: string
-    }, 
-    status: string,
-    appliedAt: string
+    "application": {
+        "post": POST1 & POST2 & {
+            id: string,
+            created_at: string
+        }, 
+        "status": string,
+        "appliedAt": string
+    }
 }[] | null

@@ -1,9 +1,10 @@
 import supabase from "./config"
-import { signUpType, POST, POST1, POST2, USER, Application} from "../../types"
+import { signUpType, POST, POST1, POST2, USER} from "../../types"
 import { ExperienceProps } from "../../shared/Profile/Experience"
 import { EducationProps } from "../../shared/pieces/EducationItem"
 import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
 import { Language } from "../../shared/pieces/EditLanguages"
+import { changeDateFromIsoToNormal } from "../../utils/helpers"
 
 interface GeneralUpdateProps{
     userId: string, 
@@ -175,6 +176,7 @@ export async function findMyPosts(name: string){
 export async function deletePostById(id: number){
     const {data:post, error} = await supabase.from("post").delete().eq("id", id).select()
     if(error) throw new Error(error.message)
+    //TODO: remove the post from appliedTo array of every user that have applied to this post
     return {post}
 }
 export async function FetchAllPosts(preference?: {sector: string, location: string}){
@@ -238,21 +240,35 @@ export async function unSavePost({postId, userId}: {postId: string, userId: stri
 }
 export async function apply( postId: string, userId: string, application: {coverLetter: string, applicant: USER}){
     // First retrieve applications array
-    const {data, error} = await supabase.from("post").select().eq("id", postId).single()
+    const {data: originalPost, error} = await supabase.from("post").select("id, location, description, sector, site, type, applications").eq("id", postId).single()
     if(error) throw new Error("something went wrong, try again")
-    const tempArray1 = data.applications ? data.applications : []
+    const tempArray1 = originalPost.applications ? originalPost.applications : []
     // Update the array with the new value
-    const {data: post, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
+    const {data: updatedPost, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
     if(error1) throw new Error(error1.message)
     // First retrieve all the users applications
-    const {data: data1, error: error2} = await supabase.from("users").select().eq("id", userId).single()
+    const {data: data, error: error2} = await supabase.from("users").select("*").eq("id", userId).single()
     if(error2) throw new Error("something went wrong, try again")
-    const tempArray2 = data1.appliedTo ? data1.appliedTo : []
+    const tempArray2 = data.appliedTo ? data.appliedTo : []
     // Update the array with the new application
-    const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2, {"post": data, "status": "pending", "appliedAt": new Date()}] 
-    }).eq("id", userId).select("*")
+    const tempObj = {
+        "application": {
+            "post": {
+                id: originalPost.id.toString(),
+                location: originalPost.location,
+                description: originalPost.description,
+                sector: originalPost.sector,
+                site: originalPost.site,
+                type: originalPost.type
+            },
+            "status": "pending",
+            "appliedAt": changeDateFromIsoToNormal(new Date().toISOString())
+        }
+    }
+    console.log(tempArray2, tempObj)
+    const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2,  tempObj]}).eq("id", userId).select("*")
     if(error3) throw new Error(error3.message)
-    return {post, user}    
+    return {updatedPost, user}    
 }
 // REFACTORED
 export async function UpdateElement({userId, value, column_name, limit, errorMessage}: GeneralUpdateProps) {
@@ -317,19 +333,6 @@ export async function UpdateOrDeleteLanguages({userId, languages, isTobeDeleted,
     const {data: user, error: error1} = await supabase.from("users").update({languages: tempArray1}).eq("id", userId).select("*")
     if(error1) throw new Error(error1.message)
     return {user}
-}
-export async function deletePostFromAppliedTo({appliedToArray, userId}: {appliedToArray: Application, userId: string}){
-    if(!appliedToArray || appliedToArray.length === 0) return
-    const idArray = appliedToArray.map((element) => element.post.id)
-    const {data:post, error: error1} = await supabase.from("post").select("*")
-    if(error1) throw new Error(error1.message)
-    const AllPostIds = post.map((item) => item.id)
-    // check if the ids from the appliedToArray exist in AllPostIds array
-    const updatedArray = idArray.filter((id) => AllPostIds.includes(id))
-    const {data: user, error: error2} = await supabase.from("users").update({appliedTo: updatedArray.length > 0 ? updatedArray : null}).eq("id", userId).select("*")
-    if(error2) throw new Error(error2.message)
-    return {user}
-    
 }
 export async function filterPosts({type, level, sector, gender, location, site}: {type?: string, level?: string, sector?: string, gender?: string, location?: string, site?: string}) {
     let query = supabase.from("post").select("*")

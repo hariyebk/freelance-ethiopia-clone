@@ -1,3 +1,4 @@
+import useApi from "../context/hook";
 import { Application} from "../types";
 import ApplicationItem from "./pieces/ApplicationItem";
 
@@ -6,6 +7,8 @@ interface ApplicationListProps {
 }
 
 export default function ApplicationsList({applications}: ApplicationListProps){
+    const {user} = useApi()
+    console.log(user?.appliedTo)
     // IF THERE IS NO APPLICATION
     if(!applications){
         return (
@@ -17,18 +20,18 @@ export default function ApplicationsList({applications}: ApplicationListProps){
 
     return (
         <section className="mt-16 max-lg:mx-16 mx-16">
-            {applications?.map((application) => {
+            {applications?.map((item) => {
                 return (
-                    <ApplicationItem key={application.post.id} application={{
-                        id: application.post.id,
-                        title: application.post.title,
-                        status: application.status,
-                        location: application.post.location || "Remote",
-                        appliedAt: application.appliedAt,
-                        description: application.post.description,
-                        sector: application.post.sector,
-                        site: application.post.site,
-                        type: application.post.type
+                    <ApplicationItem key={item.application?.post.id} application={{
+                        id: item.application?.post.id,
+                        title: item.application?.post.title,
+                        status: item.application?.status,
+                        location: item.application?.post.location || "Remote",
+                        appliedAt: item.application?.appliedAt,
+                        description: item.application?.post.description,
+                        sector: item.application?.post.sector,
+                        site: item.application?.post.site,
+                        type: item.application?.post.type
                     }}  />
                 )
             })}

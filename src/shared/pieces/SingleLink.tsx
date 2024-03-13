@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import useApi from "../../context/hook"
 
 interface LinkProps {
     link: {
@@ -7,9 +8,17 @@ interface LinkProps {
     }
 }
 export default function SingleLink({link}: LinkProps) {
+    const {setOpenNav} = useApi()
+    const navigate = useNavigate()
+
+    function handleNavigate(){
+        setOpenNav(false)
+        navigate(link.path)
+    }
+
     return (
-        <Link to={link.path} key={link.label} className="block bg-white max-lg:mt-3 font-normal text-md text-gray-500 hover:text-primary z-40" >
+        <button key={link.label} onClick={handleNavigate} className="block bg-white max-lg:mt-3 font-normal text-md text-gray-500 hover:text-primary z-40" >
             {link.label}
-        </Link>
+        </button>
     )
 }

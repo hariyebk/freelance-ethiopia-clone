@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { CoverLetterValidation } from "../lib/validation"
 import { z } from "zod"
 import { Form, FormField, FormItem, FormMessage } from "../components/ui/form"
-import { FormControl } from "@mui/material"
+import { Box, CircularProgress, FormControl } from "@mui/material"
 import { Textarea } from "../components/ui/textarea"
 import Goback from "../shared/pieces/Goback"
 import { useEffect } from "react"
@@ -11,7 +11,6 @@ import { coverLetterGuide } from "../constants"
 import { LuDot } from "react-icons/lu";
 import { useApply } from "../lib/Tanstackquery/queriesAndMutations"
 import useApi from "../context/hook"
-import Spinner from "../shared/pieces/Spinner"
 
 export default function Apply() {
     const {isPending, mutate: apply} = useApply()
@@ -34,11 +33,7 @@ export default function Apply() {
         })
     }
 
-    if(isPending){
-        return (
-            <Spinner />
-        )
-    }
+
     return (
         <section className="w-full max-lg:my-40 mt-40 lg:mb-40">
             <Form {...form}>
@@ -62,7 +57,14 @@ export default function Apply() {
                                 )}
                                 />
                                 <div className="w-full flex justify-end mt-10 mr-5">
-                                    <button type="submit" className="max-lg:mx-auto max-lg:w-full w-[250px] lg:text-lg bg-gradient-to-r from-primary to-secondary rounded-full text-base max-lg:text-sm text-center text-white py-2 px-4"> submit </button>
+                                    <button type="submit" className="max-lg:mx-auto max-lg:w-full w-[250px] lg:text-lg bg-gradient-to-r from-primary to-secondary rounded-full text-base max-lg:text-sm text-center text-white py-2 px-4">
+                                        {isPending ? (
+                                        <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                                            <CircularProgress size={20} color="inherit" />
+                                        </Box>
+
+                                        ): "submit"}
+                                    </button>
                                 </div>
                         </div>
                     </form>
