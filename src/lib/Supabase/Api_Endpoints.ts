@@ -240,7 +240,7 @@ export async function unSavePost({postId, userId}: {postId: string, userId: stri
 }
 export async function apply( postId: string, userId: string, application: {coverLetter: string, applicant: USER}){
     // First retrieve applications array
-    const {data: originalPost, error} = await supabase.from("post").select("id, location, description, sector, site, type, applications").eq("id", postId).single()
+    const {data: originalPost, error} = await supabase.from("post").select("id, location, description, sector, site, type, title, applications").eq("id", postId).single()
     if(error) throw new Error("something went wrong, try again")
     const tempArray1 = originalPost.applications ? originalPost.applications : []
     // Update the array with the new value
@@ -255,6 +255,7 @@ export async function apply( postId: string, userId: string, application: {cover
         "application": {
             "post": {
                 id: originalPost.id.toString(),
+                title: originalPost.title,
                 location: originalPost.location,
                 description: originalPost.description,
                 sector: originalPost.sector,
@@ -365,4 +366,10 @@ export async function filterPosts({type, level, sector, gender, location, site}:
     if (!posts || posts.length === 0)  return [];
 
     return posts;
+}
+export async function fetchAllPostApplications({postedBy, postId}: {postedBy: string, postId: string}){
+    const {data, error} = await supabase.from("post").select("*").eq("postedBy", postedBy).eq("id", postId).single()
+    if(error) throw new Error(error.message)
+    const applications = data.applications
+    return applications
 }

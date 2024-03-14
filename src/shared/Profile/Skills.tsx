@@ -9,7 +9,7 @@ export default function Skills() {
         <section className="profile_container">
             {<TitleAndEdit title="Skills" routeTo= "/edit-skills" add={Boolean(!user?.skills)} />}
             <div className="w-full flex flex-wrap items-start gap-2 mt-5 pr-2 pb-5">
-                { !user?.skills ? <p className="no-posts"> You have no skills added to your profile 😣  </p> :
+                {!user?.skills ? <p className="no-posts"> You have no skills added to your profile 😣  </p> :
                     user.skills.map((skill) => {
                         return (
                             <Skill key={skill} skill={skill} onlyShow={true} />

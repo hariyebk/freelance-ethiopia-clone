@@ -8,11 +8,15 @@ export default function NavLinkLogic() {
     return (
         <>
             {role === AccountRoles.employer ? (
-                EmployerNavLinks.map((link) => {
-                    return (
-                        <SingleLink key={link.label} link={link} />
-                    )
-                    })
+                <div className="flex max-lg:flex-col max-lg:items-start items-center max-lg:gap-3 gap-10 max-lg:pl-3">
+                    {
+                        EmployerNavLinks.map((link) => {
+                        return (
+                            <SingleLink key={link.label} link={link} />
+                        )
+                        })
+                    }
+                </div>
             ): role === AccountRoles.jobseeker ? (
                 <div className="flex max-lg:flex-col max-lg:items-start items-center max-lg:gap-3 gap-10 max-lg:pl-3">
                     {

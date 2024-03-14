@@ -72,7 +72,7 @@ export default function MyPosts(){
             <div>
                 <ApplicationFilter saved = {true} />
             
-                { !AreTherePosts ?  <div className="my-16 ml-6">
+                { !AreTherePosts ?  <div className="my-16 ml-5">
                         <p className="no-posts"> You haven't posted any jobs yet 😣 </p> 
                 </div> : (
                     data?.posts.map((post) => {

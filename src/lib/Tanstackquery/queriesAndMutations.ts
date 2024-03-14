@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, filterPosts, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -371,3 +371,17 @@ export const useFilterPosts = () => {
         onError: (error) => toast.error(error.message)
     })
 }
+// FETCH POST APPLICATIONS
+export const useFetchPostApplications = () => {
+    const {user} = useApi()
+    const {id} = useParams()
+    const {isLoading, data: applications} = useQuery({
+        queryKey: ["post_applications"],
+        queryFn: () => fetchAllPostApplications({
+            postedBy: user?.firstName as string,
+            postId: id!
+        })
+    })
+    return {isLoading, applications}
+}
+

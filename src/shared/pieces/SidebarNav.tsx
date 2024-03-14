@@ -3,10 +3,11 @@ import NavLinkLogic from "./NavLinkLogic"
 import { RxLoop } from "react-icons/rx"
 import { handleAccountSwitch } from "../../utils/switchAccount"
 import useApi from "../../context/hook"
+import { AccountRoles } from "../../types"
 
 
 export default function SidebarNav() {
-    const {setOpenNav, isAuthenticated} = useApi()
+    const {setOpenNav, role} = useApi()
     return (
         <section className="lg:hidden fixed top-0 left-0 w-[150px] h-full bg-white pl-4 max-lg:pt-20">
             <nav className="mt-8 flex flex-col gap-7">
@@ -14,7 +15,7 @@ export default function SidebarNav() {
                     <IoMdClose style = {{fontSize: "20px"}} />
                 </button>
                 <ul className="flex flex-col gap-3 font-normal text-md text-gray-500">
-                    <li className="pl-3"> <a href={`${isAuthenticated ? "/job" : "/"}`} className="hover:text-primary"> Home </a></li>
+                    <li className="pl-3"> <a href={`${role ? role === AccountRoles.employer ? "/my-posts" : "/job" : "/"}`} className="hover:text-primary"> Home </a></li>
                     <NavLinkLogic />
                     <button className="hover:text-primary mt-3 flex flex-col items-center mr-14 gap-3" onClick={handleAccountSwitch}>
                         <RxLoop style = {{fontSize: "26px"}} />

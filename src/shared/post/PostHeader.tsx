@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { XIcon } from "react-share"
 import {TelegramShareButton, TelegramIcon, FacebookShareButton, FacebookIcon, EmailShareButton, EmailIcon, TwitterShareButton, WhatsappShareButton, WhatsappIcon} from "react-share"
 import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
+import { MdOutlineOpenInNew } from "react-icons/md";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface PostHeader {
     id: string
@@ -20,6 +22,7 @@ export default function PostHeader({id, children, title}: PostHeader){
     const {role, user} = useApi()
     const {isPending, mutate: savePost} = useSavePost()
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
     const {isPending: isLoading, mutate: unSavePost} = useUnSavePost()
     const saved = user?.saved_posts?.find((post) => post.id === id)
     const shareLink = `https://freelance-clone/shared/post/${id}.vercel.app/`
@@ -32,10 +35,22 @@ export default function PostHeader({id, children, title}: PostHeader){
         saved ? unSavePost(id) : savePost(id)
     }
 
+    function handlePostNavigation(){
+        queryClient.removeQueries({
+            queryKey: ["post_applications"]
+        })
+        navigate(`/post/${id}`)
+    }
+
     return (
         <div className="flex items-center justify-between w-full">
             <div className="w-full flex items-center justify-between">
-                <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {title} </h2>
+                <div className="flex items-center gap-5">
+                    <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {title} </h2>
+                    {role === AccountRoles.employer && <button onClick={handlePostNavigation}>
+                        <MdOutlineOpenInNew className="text-primary w-5 h-5" />
+                    </button>}
+                </div>
                 {children}
             </div>
             { (role === AccountRoles.jobseeker || !role) && <div className="flex items-center gap-3">
