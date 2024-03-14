@@ -18,10 +18,13 @@ interface ApplicationItemProps {
 export default function ApplicationItem({application}: ApplicationItemProps){  
     let statusColor:string
     if(application.status === status.pending){
-        statusColor = "bg-blue-500"
+        statusColor = "bg-yellow-500"
     }
     else if(application.status === status.hired){
         statusColor = "bg-green-500"
+    }
+    else if(application.status === status.shortListed){
+        statusColor = "bg-blue-500"
     }
     else {
         statusColor = "bg-red-500"

@@ -105,7 +105,7 @@ export default function NewProfile(){
         // If nothing is selected , return
         if(!currentlyActive) return
         if(user){
-            return toast.error("Feature will be implemented soon")
+            return toast.error("This Feature will be implemented soon")
         }
         updateAccountType(currentlyActive)
     }

@@ -105,6 +105,7 @@ export type IcontextType = {
 export enum status {
     pending = "pending",
     hired = "hired",
+    shortListed = "shortListed",
     rejected = "rejected"
 }
 export enum AccountRoles {
@@ -121,13 +122,18 @@ export enum AccountTypes {
 } 
 
 export type Application = {
-    "application": {
-        "post": POST1 & POST2 & {
+    application: {
+        post: {
             id: string,
-            created_at: string
-        }, 
-        "status": string,
-        "appliedAt": string
+            title: string,
+            location: string,
+            description: string,
+            sector: string,
+            site: string,
+            type: string
+        },
+        status: string,
+        appliedAt: string
     }
 }[] | null
 

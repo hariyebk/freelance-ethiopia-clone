@@ -240,20 +240,12 @@ export async function unSavePost({postId, userId}: {postId: string, userId: stri
 }
 export async function apply( postId: string, userId: string, application: {coverLetter: string, applicant: USER}){
     // First retrieve applications array
-    const {data: originalPost, error} = await supabase.from("post").select("id, location, description, sector, site, type, title, applications").eq("id", postId).single()
+    const {data: originalPost, error} = await supabase.from("post").select("id, location, description, sector, site, type, title, created_at, applications").eq("id", postId).single()
     if(error) throw new Error("something went wrong, try again")
     const tempArray1 = originalPost.applications ? originalPost.applications : []
-    // Update the array with the new value
-    const {data: updatedPost, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
-    if(error1) throw new Error(error1.message)
-    // First retrieve all the users applications
-    const {data: data, error: error2} = await supabase.from("users").select("*").eq("id", userId).single()
-    if(error2) throw new Error("something went wrong, try again")
-    const tempArray2 = data.appliedTo ? data.appliedTo : []
-    // Update the array with the new application
     const tempObj = {
-        "application": {
-            "post": {
+        application: {
+            post: {
                 id: originalPost.id.toString(),
                 title: originalPost.title,
                 location: originalPost.location,
@@ -262,11 +254,22 @@ export async function apply( postId: string, userId: string, application: {cover
                 site: originalPost.site,
                 type: originalPost.type
             },
-            "status": "pending",
-            "appliedAt": changeDateFromIsoToNormal(new Date().toISOString())
+            status: "pending",
+            appliedAt: changeDateFromIsoToNormal(new Date().toISOString()) as string
         }
     }
-    console.log(tempArray2, tempObj)
+    // update the user's appliedTo array in the Post applications to include the currenta applied post
+    const appliedToArray = application.applicant.appliedTo ? application.applicant.appliedTo : []
+    appliedToArray.push(tempObj)
+    application.applicant.appliedTo = appliedToArray
+    // Update the array with the new value
+    const {data: updatedPost, error: error1} = await supabase.from("post").update({applications: [...tempArray1, application]}).eq("id", postId).select("*")
+    if(error1) throw new Error(error1.message)
+    // First retrieve all the users applications
+    const {data: data, error: error2} = await supabase.from("users").select("*").eq("id", userId).single()
+    if(error2) throw new Error("something went wrong, try again")
+    const tempArray2 = data.appliedTo ? data.appliedTo : []
+    // Update the array with the new application
     const {data: user, error: error3} = await supabase.from("users").update({appliedTo: [...tempArray2,  tempObj]}).eq("id", userId).select("*")
     if(error3) throw new Error(error3.message)
     return {updatedPost, user}    
@@ -402,4 +405,37 @@ export async function rejectApplication({postId, userId}: {postId: string, userI
     const {error: error3} = await supabase.from("users").update({appliedTo: tempArray1}).eq("id", userId).select("*")
     if(error3) throw new Error(error3.message)
     return {post}
+}
+export async function shortListApplication({postId, userId}: {postId: string, userId: string}){
+    // Update the application status for the applicant
+    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    let tempArray = data.appliedTo
+    tempArray = tempArray.map((element: ApplicationType) => {
+        if(element.application.post.id === postId){
+            element.application.status = "shortListed"
+        }
+        return element
+    })
+    // update the application status
+    const {data: updatedUser, error: error1} = await supabase.from("users").update({appliedTo: tempArray}).eq("id", userId).select("*")
+    if(error1) throw new Error(error1.message)
+    // Update the application in the post
+    const {data: post, error: error2 } = await supabase.from("post").select().eq("id", postId).single()
+    if(error2) throw new Error(error2.message)
+    let tempArray1 = post.applications
+    tempArray1 = tempArray1.map((element: { applicant: USER, coverLetter: string }) => {
+        if(element.applicant.id === userId){
+            element.applicant.appliedTo?.map((item) => {
+                if(item.application.post.id === postId){
+                    item.application.status = "shortListed"
+                }
+                return item
+            })
+        }
+        return element
+    })
+    const {data: updatedPost, error: error3} = await supabase.from("post").update({applications: tempArray1}).eq("id", postId).select("*")
+    if(error3) throw new Error(error3.message)
+    return {updatedPost, updatedUser}
 }

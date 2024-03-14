@@ -15,7 +15,7 @@ interface PostMianProps {
 export default function PostMain({post}: PostMianProps){
     const [expand, setExpand] = useState(false)
     const {role, user} = useApi()
-    const applied = post.applications?.find((application) => application.applicant.id === user?.id)
+    const applied = user?.appliedTo?.find((element) => element.application.post.id === post.id.toString())
 
     return (
         <section>
