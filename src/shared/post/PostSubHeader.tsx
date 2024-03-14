@@ -11,7 +11,7 @@ export default function PostSubHeader({postedBy, created_at, location}: Props) {
         <div className="flex items-center justify-evenly max-lg:gap-4 gap-7 mt-3 max-lg:text-xs text-sm text-fade">
             <p className="hover:text-primary"> {postedBy?.toUpperCase() || "Jambo bet"} </p>
             <p className="hover:text-primary"> {created_at ? formatDistanceFromNow(changeDateFromIsoToNormal(created_at)) : "posted 4 hours ago"} </p>
-            <p className="uppercase hover:text-primary "> {location || "Remote"}, {location && "Ethiopia" }</p>
+            <p className="uppercase"> {location || "Remote"}, {location && "Ethiopia" }</p>
         </div>
     )
 }

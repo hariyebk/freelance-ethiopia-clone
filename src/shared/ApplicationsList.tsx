@@ -1,4 +1,3 @@
-import useApi from "../context/hook";
 import { Application} from "../types";
 import ApplicationItem from "./pieces/ApplicationItem";
 
@@ -7,8 +6,6 @@ interface ApplicationListProps {
 }
 
 export default function ApplicationsList({applications}: ApplicationListProps){
-    const {user} = useApi()
-    console.log(user?.appliedTo)
     // IF THERE IS NO APPLICATION
     if(!applications){
         return (

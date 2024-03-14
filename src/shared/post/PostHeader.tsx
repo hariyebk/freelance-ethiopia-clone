@@ -39,7 +39,7 @@ export default function PostHeader({id, children, title}: PostHeader){
         queryClient.removeQueries({
             queryKey: ["post_applications"]
         })
-        navigate(`/post/${id}`)
+        navigate(`/post/${id}/applications`)
     }
 
     return (
@@ -56,7 +56,7 @@ export default function PostHeader({id, children, title}: PostHeader){
             { (role === AccountRoles.jobseeker || !role) && <div className="flex items-center gap-3">
                 <Popover>
                     <PopoverTrigger>
-                        <button> <IoMdShareAlt  className = "text-primary w-6 h-6"/> </button>
+                        <IoMdShareAlt  className = "text-primary w-6 h-6"/>
                     </PopoverTrigger>
                     <PopoverContent>
                         <div className="flex items-center gap-3">

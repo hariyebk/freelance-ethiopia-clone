@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { USER } from "../../types";
 import { MdOutlineOpenInNew } from "react-icons/md";
+import { Link} from "react-router-dom";
 
 interface Props {
     applicant: USER,
@@ -18,7 +19,9 @@ export default function UserApplication({applicant, cover_letter}: Props){
             <div className="flex items-center gap-3">
                 <img src={applicant.avatar ? applicant.avatar : "/Images/userAvatar.png"} alt="user-avatar" className="rounded-full w-7 h-7 object-contain" />
                 <p className="text-black font-palanquin text-base font-semibold"> {`${applicant.firstName} ${applicant.lastName}`} </p>
-                <MdOutlineOpenInNew className="text-primary w-5 h-5" />
+                <Link to={`/applicant/${applicant.id}/profile`}>
+                    <MdOutlineOpenInNew className="text-primary w-5 h-5" />
+                </Link>
             </div>
             <p className="mt-6 text-justify lg:pl-9 pr-4 max-lg:text-sm"> {cover_letter} </p>
             <div className="mt-5 lg:pl-4 max-lg:pr-5 flex max-lg:flex-col items-center max-lg:items-start gap-3 lg:mx-6 text-black max-lg:text-xs text-sm font-montserrat">

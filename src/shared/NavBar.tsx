@@ -1,4 +1,4 @@
-import { Link} from "react-router-dom"
+import { Link, useNavigate} from "react-router-dom"
 import { HiBars4 } from "react-icons/hi2";
 import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
@@ -9,13 +9,23 @@ import useApi from "../context/hook";
 import {AccountRoles} from "../types";
 import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
 import { Box, CircularProgress } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function NavBar() {
     const {setOpenNav, role, user} = useApi()
     const {isPending, mutate: logout} = useLogout()
+    const queryClient = useQueryClient()
+    const navigate = useNavigate()
 
     function handleLogout(){
         logout()
+    }
+
+    function handleProfileNavigation(){
+        queryClient.removeQueries({
+            queryKey: ["user"]
+        })
+        return role === AccountRoles.jobseeker ? navigate("/my-profile/") : navigate("/profile")
     }
 
     return (
@@ -66,9 +76,9 @@ export default function NavBar() {
                                 </button>
                                 }
                             </div>
-                            <Link to={`${role === AccountRoles.jobseeker ? "/my-profile/" : "/profile"}`} className="max-lg:mr-6 mr-3 -ml-3">
+                            <button onClick={handleProfileNavigation} className="max-lg:mr-6 mr-3 -ml-3">
                                 <img src={`${user?.avatar ? user.avatar : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
-                            </Link>
+                            </button>
                         </div>
                     ):(
                         <div>

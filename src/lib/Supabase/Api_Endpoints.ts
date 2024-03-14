@@ -373,3 +373,9 @@ export async function fetchAllPostApplications({postedBy, postId}: {postedBy: st
     const applications = data.applications
     return applications
 }
+export async function findUserById(userId: string | undefined){
+    if(!userId) return
+    const {data: user, error} = await supabase.from("users").select("*").eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    return {user}
+}

@@ -17,7 +17,7 @@ export default function SingleLink({link}: LinkProps) {
     }
 
     return (
-        <button key={link.label} onClick={handleNavigate} className="block bg-white max-lg:mt-3 font-normal text-md text-gray-500 hover:text-primary z-40" >
+        <button key={link.label} onClick={handleNavigate} className="block bg-white max-lg:mt-3 font-normal text-md text-gray-500 hover:text-primary z-40 focus-visible:outline-none" >
             {link.label}
         </button>
     )

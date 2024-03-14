@@ -65,9 +65,10 @@ export default function App(){
                             <Route path="/my-posts" element={<MyPosts />} />
                             <Route path="/post" element={<Post />} />
                             <Route path="/post/:id/descriptions" element={<PostDescriptions />} />
-                            <Route path="/post/:id" element={<PostDetails />} />
+                            <Route path="/post/:id/applications" element={<PostDetails />} />
                             <Route path="/edit-post/:id" element={<EditPost />} />
                             <Route path="/profile" element = {<EmployerProfile />} />
+                            <Route path="/applicant/:id/profile" element = {<JobSeekerProfile />} />
                     </Route>
                     </Route>
                 </Route>

@@ -2,10 +2,14 @@ import ApplicationsList from "../shared/ApplicationsList";
 import ApplicationFilter from "../shared/pieces/ApplicationFilter";
 import useApi from "../context/hook";
 import { Application } from "../types";
+import { useEffect } from "react";
 
 export default function Applied() {
-
     const {user} = useApi()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <section className="w-full mt-40 mb-36">
