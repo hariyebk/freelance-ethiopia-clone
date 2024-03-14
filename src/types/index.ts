@@ -130,3 +130,14 @@ export type Application = {
         "appliedAt": string
     }
 }[] | null
+
+export type ApplicationType = {
+    application: {
+        post: POST1 & POST2 & {
+            id: string,
+            created_at: string
+        }, 
+        status: string,
+        appliedAt: string
+    }
+}

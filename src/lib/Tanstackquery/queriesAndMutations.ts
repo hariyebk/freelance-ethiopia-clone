@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, findUserById, getCurrentUser, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, findUserById, getCurrentUser, rejectApplication, savePost, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams } from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -384,6 +384,7 @@ export const useFetchPostApplications = () => {
     })
     return {isLoading, applications}
 }
+// FIND USER BY ID
 export const useFindUserById = () => {
     const {id} = useParams()
     const {isLoading, data} = useQuery({
@@ -391,4 +392,20 @@ export const useFindUserById = () => {
         queryFn: () => findUserById(id)
     })
     return {isLoading, data}
+}
+// REJECT JOB APPLICANT
+export const useRejectApplicant = () => {
+    const queryClient = useQueryClient()
+    return useMutation({
+        mutationFn: ({postId, userId}: {postId: string, userId: string}) => rejectApplication({
+            postId,
+            userId
+        }),
+        onSuccess: () => {
+            toast.success("applicant has been rejected")
+            queryClient.invalidateQueries({
+                queryKey: ["post_applications"]
+            })
+        }  
+    })
 }

@@ -32,7 +32,7 @@ export default function Certifications() {
                     {data.user?.certifications && data.user.certifications[data.user.certifications?.length - 1] === certificate ? null : <hr className="w-full lg:mx-2 mt-5 border-0.5 border-gray-300"/>}
                 </div>
             )
-            }) : <p className="no-posts"> certifications are not specified </p>
+            }) : <p className="mt-6 ml-4 text-base text-gray-600"> certifications are not specified </p>
             :
             !user?.certifications ? (
                 <p className="no-posts mt-8"> You have added no certificates to your profile </p>

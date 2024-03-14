@@ -24,7 +24,7 @@ export default function Bio() {
             <div className="mt-5 pr-8">
                 {data?.user ? data?.user.bio ? <p className="text-base text-black max-lg:text-justify font-palanquin leading-7">
                     {data.user.bio}
-                </p> : <p className="no-posts"> Bio is not added </p>
+                </p> : <p className="mt-6 ml-4 text-base text-gray-600"> Bio is not added </p>
                 :
                 user?.bio ? <p className="text-base text-black max-lg:text-justify font-palanquin leading-7">
                     {user?.bio}

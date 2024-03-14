@@ -1,5 +1,5 @@
 import supabase from "./config"
-import { signUpType, POST, POST1, POST2, USER} from "../../types"
+import { signUpType, POST, POST1, POST2, USER, ApplicationType} from "../../types"
 import { ExperienceProps } from "../../shared/Profile/Experience"
 import { EducationProps } from "../../shared/pieces/EducationItem"
 import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
@@ -378,4 +378,28 @@ export async function findUserById(userId: string | undefined){
     const {data: user, error} = await supabase.from("users").select("*").eq("id", userId).single()
     if(error) throw new Error(error.message)
     return {user}
+}
+export async function rejectApplication({postId, userId}: {postId: string, userId: string}){
+    // First find the post where the applicant will be rejected
+    const {data, error} = await supabase.from("post").select().eq("id", postId).single()
+    if(error) throw new Error(error.message)
+    // remove the user from applications array
+    let tempArray = data.applications
+    tempArray = tempArray.filter((element: {applicant: USER, coverLetter: string}) => element.applicant.id !== userId)
+    // update the application array
+    const {data: post, error: error1} = await supabase.from("post").update({applications: tempArray}).eq("id", postId).select("*")
+    if(error1) throw new Error(error1.message)
+    const {data: user, error: error2} = await supabase.from("users").select().eq("id", userId).single()
+    if(error2) throw new Error(error2.message)
+    let tempArray1 = user.appliedTo
+    tempArray1 = tempArray1.map((element: ApplicationType) => {
+        if(element.application.post.id === postId){
+            element.application.status = "rejected"
+        }
+        return element
+    })
+    // update the user's appiedTo array
+    const {error: error3} = await supabase.from("users").update({appliedTo: tempArray1}).eq("id", userId).select("*")
+    if(error3) throw new Error(error3.message)
+    return {post}
 }
