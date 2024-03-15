@@ -382,7 +382,7 @@ export async function findUserById(userId: string | undefined){
     if(error) throw new Error(error.message)
     return {user}
 }
-export async function rejectApplication({postId, userId}: {postId: string, userId: string}){
+export async function rejectApplication({postId, userId, feedback}: {postId: string, userId: string, feedback: string}){
     // First find the post where the applicant will be rejected
     const {data, error} = await supabase.from("post").select().eq("id", postId).single()
     if(error) throw new Error(error.message)
@@ -398,6 +398,7 @@ export async function rejectApplication({postId, userId}: {postId: string, userI
     tempArray1 = tempArray1.map((element: ApplicationType) => {
         if(element.application.post.id === postId){
             element.application.status = "rejected"
+            element.application.feedback = feedback
         }
         return element
     })

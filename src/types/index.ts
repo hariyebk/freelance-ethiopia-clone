@@ -133,6 +133,7 @@ export type Application = {
             type: string
         },
         status: string,
+        feedback?: string,
         appliedAt: string
     }
 }[] | null
@@ -144,6 +145,7 @@ export type ApplicationType = {
             created_at: string
         }, 
         status: string,
+        feedback?: string,
         appliedAt: string
     }
 }

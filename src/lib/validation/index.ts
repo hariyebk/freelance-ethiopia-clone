@@ -182,3 +182,6 @@ export const languageValidation = z.object({
     language3: z.string().min(2, {message: "Language is Required"}).max(20, {message: "Language is too long"}).optional(),
     lang3Level: z.string().min(2, {message: "Language is Required"}).max(20, {message: "Language is too long"}).optional()
 })
+export const rejectionComment = z.object({
+    Comment: z.string().min(2, {message: "You need to specify the reason why the applicant is rejected"}).max(250, {message: "comment is too long"})
+})
