@@ -397,9 +397,10 @@ export const useFindUserById = () => {
 export const useRejectApplicant = () => {
     const queryClient = useQueryClient()
     return useMutation({
-        mutationFn: ({postId, userId}: {postId: string, userId: string}) => rejectApplication({
+        mutationFn: ({postId, userId, feedback}: {postId: string, userId: string, feedback: string}) => rejectApplication({
             postId,
-            userId
+            userId,
+            feedback
         }),
         onSuccess: () => {
             toast.success("applicant has been rejected")

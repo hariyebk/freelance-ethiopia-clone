@@ -11,7 +11,8 @@ interface ApplicationItemProps {
         description: string,
         sector: string,
         site: string,
-        type: string
+        type: string,
+        feedback?: string
     }
 }
 
@@ -29,6 +30,7 @@ export default function ApplicationItem({application}: ApplicationItemProps){
     else {
         statusColor = "bg-red-500"
     }
+
     return (
         <section className='my-7'>
             <div className="flex items-center justify-between">
@@ -48,6 +50,11 @@ export default function ApplicationItem({application}: ApplicationItemProps){
                 <p className="max-lg:mt-2 px-6 py-2 text-xs text-slate-100 rounded-full bg-stone-800"> {application.site} </p>
                 <p className="max-lg:mt-2 px-6 py-2 text-xs text-slate-100 rounded-full bg-stone-800"> {application.type} </p>
             </div>
+            {application.feedback && <div className="flex items-center gap-2 mt-7 text-base text-black font-palanquin">
+                    <span> Feedback: </span>
+                    <span> {application.feedback} </span>
+                </div>
+            }
             <hr className="mt-8 mb-10 border-0.5 border-slate-400 shadow-md"/>
         </section>
     )

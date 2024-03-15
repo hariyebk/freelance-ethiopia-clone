@@ -28,7 +28,8 @@ export default function ApplicationsList({applications}: ApplicationListProps){
                         description: item.application?.post.description,
                         sector: item.application?.post.sector,
                         site: item.application?.post.site,
-                        type: item.application?.post.type
+                        type: item.application?.post.type,
+                        feedback: item.application.feedback
                     }}  />
                 )
             })}
