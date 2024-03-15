@@ -440,3 +440,9 @@ export async function shortListApplication({postId, userId}: {postId: string, us
     if(error3) throw new Error(error3.message)
     return {updatedPost, updatedUser}
 }
+export async function SearchJob(query: string | null){
+    // partial and case-insensetive matches
+    const {data, error} = await supabase.from("post").select().ilike("title", `%${query}%`)
+    if(error) throw new Error(error.message)
+    return {data}
+}
