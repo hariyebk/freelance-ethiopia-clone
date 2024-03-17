@@ -3,11 +3,17 @@ import { FiPhoneCall } from "react-icons/fi";
 import { CiMail } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import useApi from "../context/hook";
+import SocialMedia from "./pieces/SocialMedia";
 
 export default function Footer() {
+
+    const {role} = useApi()
+
     return (
-        <footer className="bg-stone-700 relative bottom-0 inset-x-0">
-            <div className="flex justify-between items-center">
+        <footer className="bg-[#3e3e3e] relative bottom-0 inset-x-0">
+            {!role && <section>
+                <div className="flex justify-between items-center">
                 <div className="max-lg:mb-10 my-20 max-lg:ml-12 ml-20 flex max-lg:flex-col justify-between items-center gap-10">
                     <div className="flex flex-1 max-lg:flex-row max-lg:gap-10 flex-col max-lg:-ml-16">
                         <img src="/Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />
@@ -63,6 +69,22 @@ export default function Footer() {
                     <p> 2023 Afriwork Inc. All right reserved </p>
                 </div>
             </div>
+
+            </section>
+            }
+            {role && <section className="w-full inset-x-0 bottom-0 h-auto">
+                <div className="flex flex-1 flex-col items-center justify-center py-20">
+                    <h2 className="text-xl text-white font-palanquin"> 2024 Afriworks. All right reserved </h2>
+                    <div className="mt-10 flex flex-1 flex-col items-center gap-4 text-base text-white font-sans">
+                        <Link to="/tos" className="hover:text-primary"> Terms of service </Link>
+                        <Link to="/privacy-policy" className="hover:text-primary"> Privacy policy </Link>
+                        <Link to="/help" className="hover:text-primary"> Help center </Link>
+                    </div>
+                    <hr className="w-full my-10 border border-white" />
+                    <SocialMedia />
+                </div>
+            </section>
+            }
         </footer>
     )
 }

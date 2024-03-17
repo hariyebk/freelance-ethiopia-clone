@@ -1,5 +1,5 @@
 import { Route, Routes} from "react-router-dom"
-import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber, PostDescriptions, EditPost } from "./pages"
+import {About, Job, Faq, Help, Login, Signup, Home, NotFound, Register, Profile, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber, PostDescriptions, EditPost, TermsOfService, PrivacyPolicy } from "./pages"
 import {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly, HelpEmployers, HelpJobSeeker, HelpMaq} from "./shared"
 import EmployersOnly from "./shared/EmployersOnly"
 import EmployerProfile from "./pages/EmployerProfile"
@@ -33,6 +33,8 @@ export default function App(){
                     <Route path="/login" element = {<Login />} />
                     <Route path="/onboard" element = {<Signup />} />
                     <Route path="/register" element = {<Register />} />
+                    <Route path="/tos" element = {<TermsOfService />} />
+                    <Route path="/privacy-policy" element = {<PrivacyPolicy />} />
                     <Route path="/profile-type/new" element = {<ProfileSetUp />} />
                     <Route path="/register/:id/upload-photo" element = {<UploadUserAvatar />} />
                     {/* TODO: IMPLEMENT THIS FEATURE */}
