@@ -237,9 +237,71 @@ export const faq = [
     {
         question: "Is Freelance Ethiopia free for job seekers?",
         answer: "Freelance Ethiopia is a free job listing platform for job seekers. Including our advanced features such as setting up a profile, filtering job posts, applying for a job, chatting with employers who have either shortlisted them or hired them.",
-
     },
     
+]
+export const msq = [
+    {
+        question: "What Are Company Registration document requirements ?",
+        answer: "Registering or verifying your business on Freelance Ethiopia Afriwork have a range of benefits besides your companies verified presence, it could give you an organized company profile where you can track on your companies engagement, access to a range of data in the recruitment industry, unlimited range and sectors of job posts along with privileged access to selected and new features. Since registration is also one of the ways to verify the legal personality of your company, to verify your company you need to provide legal documents that proves the legitimacy of your company."
+    },
+    {
+        question: "Why does your job post gets declined ?",
+        answer: "After a job post is submitted by employers, each part of the job post will be reviewed by our approval team to check several issues regarding the job post. If the job post fully meets all the requirements and qualifications, the job post will be approved right away. If it fails to fit with our policy and guidelines and is unable to meet the minimum requirements, it will be declined."
+    },
+    {
+        question: "Is Freelance Ethiopia free for job seekers?",
+        answer: "Freelance Ethiopia is a free job listing platform for job seekers. Including our advanced features such as setting up a profile, filtering job posts, applying for a job, chatting with employers who have either shortlisted them or hired them"
+    },
+    {
+        question: "Is there an app and when is it Launching?",
+        answer: "Yes there are Mobile and Web applications which are currently under development and they will be launched soon with powerful features."
+    },
+]
+export const helpEmployer = [
+    {
+        question: "How to register your company as representative ?",
+        answer: "Go to open the Afriwork Home page, If you have created a profile, select the login option and login with your login details, If you haven’t created a profile yet, select the signup option, Select “Corporate Company” from the list of profile options. then Fill in the details of your company, Upload the trade license in the form of an image or pdf, Wait for the Support team to review your documents and approve the registration of your company, Wait for the Support team to review your documents and approve the registration of your company, You will finally receive confirmation that your payment has been confirmed and your subscription has been commenced"
+    }, 
+    {
+        question: "How to Post a job ?",
+        answer: "Once you are logged in as an employer, go the post page by clicking on the top navigation link. fill the details of job and necessary informations required. Finally submit the post by cliking the submit button"
+    },
+    {
+        question: "How to manage your account ?",
+        answer: "Signup and login to the Afriwork home page, which provides a list of different profiles you have created before. From list of options presented at the top-left corner of the page, select the settings icon “⚙️”, then select the “account Settings” option"
+    },
+    {
+        question: "How to post a job as a private client ?",
+        answer: "Posting a job as a private client doesn't require you any special registration. You can post your job as a private client just with a few clicks. after you logged in to your employer account, click the post menu from the top navigation bar, then fill out the form for the job. that's it "
+    },
+    {
+        question: "How to register your company as representative ?",
+        answer: "Fill in the details of your company, Insert the official name of your company, Upload the trade license in the form of an image or pdf, Select the “Representative” option, Upload your Identification Card, Passport or Driving License, Upload a letter that indicates you have been anointed to represent the company in the form of an image or a pdf file"
+    },
+    {
+        question: "How To Register Your Company as General Manager ?",
+        answer: "To Add your company on the web follow the steps below First go to the Freelance Ethiopia Afriwork web and log in as a user, if you haven't created an account yet then( click here ) to see how to create a user profile. After you Login on the web successfully, Click on (+ Add New ) to Start Adding your Company Account. After Filling in the company name and uploading trade license, Select General Manager (Because you are the General Manager of the company) Click here to see who is the General manager."
+    }, 
+    {
+        question: "How to register your company as representative ?", 
+        answer: "If you have created a profile, select the login option and login with your login details. If you haven’t created a profile yet, select the signup option. Select “Corporate Company” from the list of profile options. Fill in the details of your company Insert the official name of your company"
+
+    }
+]
+export const helpJobSeeker = [
+    {
+        question: "Building a Job Seeker User Profile",
+        answer: "After logging in as a job seeker, click your profile image at the top right corner then you can add your education background, main services you offer, you skills, your working experiences, and any certifications or portfolio links you have"
+    }, 
+    {
+        question: "How to search for jobs ?",
+        answer: "Finding job opportunities is effortless. Just follow these steps to search for your dream job Sign in as a job seeker using your registered credentials. If you wish to further refine your search results, you can use the filters available. Simply click on the checkboxes of the presented options: Job Sectors: Choose the industry or sector that aligns with your interests and expertise. Job Type: Select the type of employment you are seeking, such as full-time, part-time, contract, etc. Gender: Some jobs might have specific gender preferences. Choose the appropriate option if applicable. Experience Level: Filter jobs based on your experience level, whether you are an entry-level candidate or have more experience."
+    }, 
+    {
+        question: "How do I organize my portfolio ?",
+        answer: "Understand the purpose of your portfolio. Are you targeting a specific job or industry? Do you want to showcase a particular set of skills or experiences? Clarifying your objectives will help you determine what to include and how to structure your portfolio, Choose your strongest work samples that align with your goals and target audience. Quality over quantity is key. Include a variety of projects that demonstrate your range of skills and expertise. Consider including both completed projects and works-in-progress to showcase your process and growth, Organize your work into clear categories or sections to make it easy for viewers to navigate and find relevant content. For example, you could arrange your portfolio by project type, industry, or skill set. Make use of clear headings and labels to create a logical flow."
+    }
 ]
 export enum userTypes {
     newuser = "newuser",
@@ -551,4 +613,9 @@ export const coverLetterGuide = [
     "Keep your cover letter focused and straightforward. Avoid unnecessary jargon or lengthy explanations.",
     "Follow Instructions regarding how to apply for the job."
 ]
+export enum helpCatagories {
+    employers = "Employers",
+    msq = "Mostly Asked Quetions",
+    jobseekers = "Job Seekers"
+}
 export const PAGE_SIZE = 10

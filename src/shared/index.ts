@@ -9,5 +9,8 @@ import Protect from "./Protect"
 import AppLayout from "./AppLayout"
 import JobSeekerOnly from "./JobSeekerOnly"
 import UnAuthenticatedOnly from "./UnAuthenticatedOnly"
+import HelpEmployers from "./Help/HelpEmployers"
+import HelpJobSeeker from "./Help/HelpJobSeeker"
+import HelpMaq from "./Help/HelpMaq"
 
-export {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly, UnAuthenticatedOnly}
+export {EditUserDetails, EditSkills, EditBio, EditMainServices, EditWorkExperiences, EditEducation, EditCertifications, Protect, AppLayout, JobSeekerOnly, UnAuthenticatedOnly, HelpEmployers, HelpJobSeeker, HelpMaq}
