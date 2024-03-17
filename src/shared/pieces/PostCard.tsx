@@ -11,7 +11,7 @@ interface PostCardProps {
 export default function PostCard({post, Header, MainSection}: PostCardProps){
         
     return (
-        <div className="flex flex-col items-start mt-10 max-lg:mx-2 ml-4 mr-3">
+        <div className="flex flex-col items-start mt-5 max-lg:mx-2 ml-4 mr-3">
             {/* HEADER */}
             {Header}
             {/* SUB-HEADER */}
