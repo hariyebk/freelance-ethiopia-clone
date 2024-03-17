@@ -9,7 +9,8 @@ import Spinner from "../shared/pieces/Spinner";
 import PostHeader from "../shared/post/PostHeader";
 import { useEffect, useState} from "react";
 import { Box, CircularProgress } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function Job() {
     const {setOpenFilter} = useApi()
@@ -19,7 +20,8 @@ export default function Job() {
     const [searchQuery, setSearchQuery] = useState("")
     const [finalSearchString, setFinalSearchString] = useState("")
     const [searchParams, setSearchParams] = useSearchParams()
-    const {user, queryObj} = useApi()
+    const navigate = useNavigate()
+    const {user, queryObj, role} = useApi()
     const checkIfNoDataExists = data?.posts.length === 0
 
     useEffect(() => {
@@ -34,7 +36,8 @@ export default function Job() {
 
     function handleSearch(e?: React.FormEvent<HTMLFormElement> ){
         if(e) e.preventDefault()
-        if(!searchQuery) return
+        if(!role) return navigate("/login")
+        if(!searchQuery) return toast.error("No query is provided")
         setFinalSearchString(searchQuery)
         searchParams.set("search", searchQuery)
         setSearchParams(searchParams)

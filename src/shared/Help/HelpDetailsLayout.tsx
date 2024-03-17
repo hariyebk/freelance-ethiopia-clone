@@ -71,9 +71,9 @@ export default function HelpDetailsLayout({label, questions}: HelpDetailsLayoutP
                     </div>
                 </div>
                 <div className="w-[580px] max-lg:w-[400px] lg:mt-10 md:mx-auto">
-                    {questions.map((q) => {
+                    {questions.map((q, i) => {
                         return (
-                            <div>
+                            <div key={i}>
                                 <Accordion disableGutters elevation={0} className='mt-6 shadow-md hover:border hover:border-primary py-2 px-3'>
                                     <AccordionSummary
                                     expandIcon={<MdExpandMore />}
