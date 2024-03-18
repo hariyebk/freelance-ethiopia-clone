@@ -21,8 +21,7 @@ import Apply from "./Apply";
 import VerifyPhoneNumber from "./VerifyPhoneNumber";
 import PostDescriptions from "./PostDescriptions";
 import EditPost from "./EditPost";
-import TermsOfService from "./TermsOfService";
 import PrivacyPolicy from "./PrivacyPolicy";
 
 
-export {About, Faq, Job, Login, Signup, Help, Home, NotFound, Register, Profile, ProfileLayout, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber, PostDescriptions, EditPost, TermsOfService, PrivacyPolicy}
+export {About, Faq, Job, Login, Signup, Help, Home, NotFound, Register, Profile, ProfileLayout, ProfileSetUp, Applied, SavedJobs, Settings, MyPosts, Post, PostDetails, JobSeekerProfile, Apply, VerifyPhoneNumber, PostDescriptions, EditPost, PrivacyPolicy}

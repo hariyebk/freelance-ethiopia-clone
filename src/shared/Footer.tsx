@@ -76,7 +76,6 @@ export default function Footer() {
                 <div className="flex flex-1 flex-col items-center justify-center py-20">
                     <h2 className="text-xl text-white font-palanquin"> 2024 Afriworks. All right reserved </h2>
                     <div className="mt-10 flex flex-1 flex-col items-center gap-4 text-base text-white font-sans">
-                        <Link to="/tos" className="hover:text-primary"> Terms of service </Link>
                         <Link to="/privacy-policy" className="hover:text-primary"> Privacy policy </Link>
                         <Link to="/help" className="hover:text-primary"> Help center </Link>
                     </div>

@@ -478,6 +478,14 @@ export const salary = [
     "20,000 - 50,000",
     "> 50,000"
 ]
+export const informationWeCollect = [
+    "To provide and improve the Service, address your inquiries, process your registration, verify the information you provide is valid, and for compliance and internal business purposes.",
+    "To contact you with administrative communications and Afriwork newsletters, marketing or promotional materials (on behalf of Afriwork or third parties) and other information that may be of interest to you. If you decide at any time that you no longer wish to receive such communications from us, please follow the instructions in the Your Choices and Rights section, below.",
+    "To tailor content we display to you and offers we may present to you, both on the Service and elsewhere online.",
+    "To enforce and comply with the law, including to conduct an investigation, to protect the property and rights of Afriwork or a third party, to protect the safety of the public or any person, or to prevent or stop activity we may consider to be, or to pose a risk of being, illegal, fraudulent, unethical or legally actionable activity.",
+    "To Honor Our Contractual Commitments to You. Much of our processing of Personal Information is to meet our contractual obligations to our investors, or to take steps at Users' request in anticipation of entering into a contract with them. For Our Legitimate Interests. In many cases, we handle Personal Information on the grounds that it furthers our legitimate interests in commercial activities"
+]
+
 export const location = [
     "Addis Ababa",
     "Dire Dawa",

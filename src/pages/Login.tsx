@@ -53,7 +53,7 @@ export default function Login() {
                     render={({ field }) => (
                         <FormItem className="flex flex-1 flex-col justify-start gap-3 w-full">
                         <FormControl className="focus:outline-none">
-                        <Input placeholder="Email" className="w-full border-gray-500 focus:border-none no-autofill outline-none py-3" {...field} />
+                        <Input placeholder="Email" className="w-full border-gray-500 focus:border-none outline-none py-3" {...field} />
                         </FormControl>
                         <FormMessage className='text-sm text-red-500 font-palanquin' />
                         </FormItem>
