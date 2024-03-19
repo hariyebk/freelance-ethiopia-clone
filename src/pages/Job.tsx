@@ -58,8 +58,8 @@ export default function Job() {
 
     return (
         <section className="w-full mt-20">
-            <div className="flex gap-8 lg:ml-44 max-lg:mx-7">
-                <div className="max-lg:w-[600px] w-[700px] mb-20">
+            <div className="flex gap-8 lg:ml-44">
+                <div className="container w-[700px] mb-20">
                     <div className="flex flex-col flex-1 shadow-md max-lg:px-5 p-2 my-14">
                         <div className="flex items-center justify-start border border-slate-200 rounded-lg pl-3">
                             <IoSearchOutline style = {{color: "#ef754c", fontSize: "20px"}} />
@@ -140,7 +140,7 @@ export default function Job() {
                             )}
                     </div>
                 </div>
-                {!user?.preference && <div className="my-14 shadow-md max-lg:hidden pb-14 px-5 overflow-scroll custom-scrollbar">
+                {!user?.preference && <div className="my-14 shadow-md max-lg:hidden lg:mr-10 pb-14 px-5 overflow-scroll overflow-x-hidden custom-scrollbar">
                     <FilterOptions/>
                 </div>}
             </div>

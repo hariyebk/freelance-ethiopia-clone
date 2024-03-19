@@ -35,7 +35,7 @@ export default function EditPost(){
     }
 
     return (
-        <div className="min-h-screen lg:mx-56 mb-20">
+        <div className="mb-20">
             {!showNext &&  <PostDescriptions id={data?.post.id} description={data?.post.description} responsibilities={data?.post.responsibilities.join(",")} requirments={data?.post.requirments.join(",")} qualifications={data?.post?.qualifications ?data?.post?.qualifications?.join(",") : ""} salary={data?.post?.salary ? data?.post?.salary : ""} howToApply={data?.post?.howToApply ? data?.post?.howToApply : ""} isTobeEdited={true} />}
             {!showNext ? null : (
                 <Post
@@ -53,12 +53,14 @@ export default function EditPost(){
                 quantity={data?.post.quantity}
                 />
             )}
-            <div className="-mt-20 max-lg:ml-36 pr-48 pb-28 w-full flex justify-end">
-                <button onClick={handleClick} className="flex items-center gap-3 max-lg:px-5 px-8 py-2 bg-stone-800 text-white max-lg:text-sm text-base rounded-md ">
-                {showNext && <IoIosArrowRoundBack className = "w-6 h-6 text-white hover:text-primary" />}
-                <span> {showNext ? "Previous" : "Next"} </span>
-                {!showNext && <IoIosArrowRoundForward className = "w-6 h-6 text-white hover:text-primary" />}
-                </button>
+            <div className="w-full flex flex-1 items-center justify-center -mt-20">
+                <div className="max-lg:w-[550px] w-[730px] pb-28 pr-16 flex justify-end">
+                    <button onClick={handleClick} className="flex items-center gap-3 max-lg:px-5 px-8 py-2 bg-stone-800 text-white max-lg:text-sm text-base rounded-md ">
+                    {showNext && <IoIosArrowRoundBack className = "w-6 h-6 text-white hover:text-primary" />}
+                    <span> {showNext ? "Previous" : "Next"} </span>
+                    {!showNext && <IoIosArrowRoundForward className = "w-6 h-6 text-white hover:text-primary" />}
+                    </button>
+                </div>
             </div>
         </div>
     )

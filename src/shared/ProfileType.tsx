@@ -13,7 +13,7 @@ export default function ProfileType({children, title, description}: ProfileTypeP
     }, []);
 
     return (
-        <div className="max-lg:mt-40 w-full h-full pb-20 flex max-lg:items-center max-lg:justify-center">
+        <div className="container max-lg:mt-40 w-full h-full pb-20 flex max-lg:items-center max-lg:justify-center">
             <span className="max-lg:pl-5 pl-48 lg:mt-20">
                 <img src="/Frame.svg" alt="poster" className="max-lg:hidden w-[460px] h-auto"  />
             </span>

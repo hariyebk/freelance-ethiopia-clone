@@ -140,7 +140,7 @@
         @apply w-full mt-8 rounded-full bg-gradient-to-r from-primary to-secondary px-8 py-2 text-white text-base
     }
     .filter {
-        @apply bg-gradient-to-r from-primary to-secondary text-sm text-slate-100 font-palanquin rounded-full max-lg:px-5 px-7 py-2 mr-2 capitalize
+        @apply bg-gradient-to-r from-primary to-secondary max-sm:text-xs text-sm text-slate-100 font-palanquin rounded-full max-md:px-4 md:px-5 lg:px-7 py-2 mr-2 capitalize
     }
     /* .common-container {
         @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:px-8 lg:p-14 custom-scrollbar;
@@ -152,6 +152,6 @@
         @apply text-base text-stone-600 font-palanquin font-semibold
     }
     .no-posts {
-        @apply max-lg:text-lg text-xl text-black font-palanquin
+        @apply max-md:text-base max-md:leading-5 text-xl text-black font-palanquin
     }
 }

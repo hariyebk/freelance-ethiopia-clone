@@ -36,7 +36,7 @@ export default function Services() {
                         <IoMdMail  style = {{fontSize: "15px"}} />
                         <span> semegn@freelanceethiopia.com </span>
                     </Link>
-                    <Link to="mailto:semegn@freelanceethiopia.com" className="mt-6 w-full flex justify-center items-center gap-3 text-slate-100 bg-stone-800 rounded-full px-5 py-2"> 
+                    <Link to="mailto:semegn@freelanceethiopia.com" className="mt-6 sm:[w-250px] md:w-[300px] flex justify-center items-center gap-3 text-slate-100 bg-stone-800 rounded-full px-5 py-2"> 
                         <span> contact sales </span> 
                         <HiOutlinePaperAirplane />        
                     </Link>

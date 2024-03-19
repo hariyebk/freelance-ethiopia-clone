@@ -4,7 +4,6 @@ import { RxLoop } from "react-icons/rx";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlLogout } from "react-icons/sl";
 import NavLinkLogic from "./pieces/NavLinkLogic";
-import { handleAccountSwitch } from "../utils/switchAccount";
 import useApi from "../context/hook";
 import {AccountRoles} from "../types";
 import { useLogout } from "../lib/Tanstackquery/queriesAndMutations";
@@ -32,13 +31,13 @@ export default function NavBar() {
         <div className="w-full fixed inset-x-0 top-0 z-30">
             <div className="pl-8 max-lg:pt-5 pt-8 pb-5 max-lg:pl-5  flex justify-between items-center bg-white border-b border-b-slate-50">
                 <div className="flex justify-between items-center">
-                    <button className="md:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
+                    <button className="lg:hidden mr-2 h-16" onClick={() => setOpenNav(true)}>
                         <HiBars4 style = {{fontSize: "30px", color: "#e94969"}} />
                     </button>
                     <Link to={`${role ? role === AccountRoles.jobseeker ? "/job" : "/my-posts": "/"}`}>
                         <img src="/Images/logo.png" alt="logo" className="h-10 w-32 object-contain" />
                     </Link>
-                    <nav className="max-xl:hidden ml-7">
+                    <nav className="max-lg:hidden ml-7">
                         <ul className="flex justify-between items-center gap-5">
                             <NavLinkLogic />
                         </ul>
@@ -50,7 +49,7 @@ export default function NavBar() {
                             <Link to="/settings" className="hover:text-primary">
                                 <IoSettingsOutline style = {{fontSize: "26px"}} />
                             </Link>
-                            <Link to="/profile-type" className="hover:text-primary max-lg:hidden" onClick={handleAccountSwitch}>
+                            <Link to="/profile-type" className="hover:text-primary max-lg:hidden">
                                 <RxLoop style = {{fontSize: "26px"}} />
                             </Link>
                             <div className="max-lg:hidden">

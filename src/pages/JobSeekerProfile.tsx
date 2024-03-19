@@ -22,7 +22,7 @@ export default function JobSeekerProfile() {
 
     return (
         <ProfileLayout MainProfile = {(
-        <div className="flex flex-col items-start">
+        <div className="md:w-[650px] container flex flex-col items-start">
             <div className="w-full">
                 <div className="w-full h-[150px] rounded-t-2xl bg-gradient-to-r from-primary to-secondary" />
                 <UserDetail />

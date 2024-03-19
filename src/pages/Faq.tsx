@@ -13,9 +13,9 @@ export default function Faq(){
     }, []);
 
     return (
-        <div className="mb-36 flex flex-col mt-36 max-lg:mx-16 max-lg:text-justify mx-56">
+        <div className="mb-36 flex flex-col mt-36 max-lg:text-justify max-lg:mx-3 mx-56">
             <h1 className="max-lg:text-4xl text-6xl text-secondary font-palanquin mx-auto"> FAQ's </h1>
-            <div className='mt-10 w-full'>
+            <div className='mt-10 container'>
                 {
                     faq.map((q) => {
                         return (
@@ -26,13 +26,13 @@ export default function Faq(){
                                     aria-controls="panel1a-content"
                                     id="panel1a-header"
                                     >
-                                    <Typography className='mb-3 max-lg:text-base text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
+                                    <Typography className='mb-3 max-lg:text-sm text-ellipsis text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                    <Typography className='text-sm text-stone-600 mx-5'>
-                                        {q.answer && <span className='mx-4 mb-3'> {q.answer} </span>}
+                                    <Typography className='mx-5'>
+                                        {q.answer && <span className='mx-4 mb-3 text-sm text-stone-600'> {q.answer} </span>}
                                         {q.list && (
-                                            <span  className='mx-10 list-disc space-y-2'>
+                                            <span  className='mx-10 list-disc space-y-2 text-sm text-stone-600'>
                                                 {q.list.map((point: string, index: number) => {
                                                     return (
                                                         <li key={index}> {point} </li>

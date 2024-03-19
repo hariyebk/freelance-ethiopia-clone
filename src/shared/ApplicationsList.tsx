@@ -16,7 +16,7 @@ export default function ApplicationsList({applications}: ApplicationListProps){
     }
 
     return (
-        <section className="mt-16 max-lg:mx-16 mx-16">
+        <section className="mt-10 max-lg:mx-16 mx-16">
             {applications?.map((item) => {
                 return (
                     <ApplicationItem key={item.application?.post.id} application={{

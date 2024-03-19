@@ -84,7 +84,7 @@ export default function Post({id, title, site, type, level, sector, location, co
     
     return (
         <section className="w-full mt-32 mb-36">
-            <div className="mx-auto max-lg:w-[435px] w-[600px] h-auto shadow-lg bg-slate-50 rounded-md pt-10 max-lg:ml-7 pb-28 max-lg:px-8">
+            <div className="container max-lg:w-[435px] w-[600px] h-auto shadow-lg bg-slate-50 rounded-md pt-10 pb-28 max-lg:px-8">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-lg:pl-12 lg:pl-24">
                     <h1 className="text-2xl text-stone-500 font-semibold"> {isTobeEdited ? "Update your post" : "Post a Job"} </h1>

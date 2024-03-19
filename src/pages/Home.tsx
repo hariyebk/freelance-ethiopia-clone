@@ -14,17 +14,17 @@ export default function Home(){
     }, []);
 
     return ( 
-        <section className="max-container max-lg:mx-10 mx-56 mt-20">
+        <section className="max-container max-lg:mx-10 lg:mx-20 xl:mx-48 mt-20">
             <Hero />
             <Marquee style={{zIndex: -10}}>
                 <Brands />
             </Marquee>
-            <Card id={1} Title="Free for Job Seekers" des="Freelance Ethiopia is FREE for job seekers and our platform offers job and gig opportunities 365 days a year. So Get Started now and discover opportunities that are meant for you." />
+            <Card id={1} Title="Free for Job Seekers" des="Freelance Ethiopia is an empowering platform that puts job seekers at the forefront, providing them with a remarkable opportunity to explore a wide range of job and gig opportunities, all completely free of charge. Our platform operates tirelessly, ensuring that job and gig opportunities are available to you 365 days a year" />
             <Pricing />
             <div className="-mt-9">
-                <Card id={2} Title="Find the right candidates" des="You are in charge of every hiring step. From posting a job to hiring a candidate. Chat with applicants directly, Shortlist and Hire the right candidates." />
+                <Card id={2} Title="Find the right candidates" des="You are in charge of every hiring step, meticulously overseeing the entire process from start to finish. You begin by crafting compelling job postings that attract top-tier talent, leveraging your exceptional communication skills to engage with applicants." />
             </div>
-            <div className="mb-40">
+            <div className="mb-40 mt-20">
                 <Testimonials subject="Clients" testimonial={clientTestimonials} />
                 <Testimonials subject="Freelancers" testimonial={freelancersTestimonials} />
             </div>
