@@ -473,3 +473,15 @@ export async function FilterAndSortApplications({userId, filterString, sortStrin
     return applications
     
 }
+export async function sortMyPosts({firstName, sort}: {firstName: string, sort: string}) {
+    const {data, error} = await supabase.from("post").select().eq("postedBy", firstName)
+    if(error) throw new Error(error.message)
+    let posts
+    if(sort === sortQuery.descending){
+        posts = data.sort((a:POST, b:POST) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    }   
+    if(sort === sortQuery.ascending){
+        posts = data.sort((a:POST, b:POST) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+    }
+    return posts
+}

@@ -1,4 +1,4 @@
-import { useDeletePostById, useFetchAllMyPosts } from "../lib/Tanstackquery/queriesAndMutations";
+import { useDeletePostById, useFetchAllMyPosts, useSortMyPosts } from "../lib/Tanstackquery/queriesAndMutations";
 import PostLayout from "../shared/PostLayout";
 import ApplicationFilter from "../shared/pieces/ApplicationFilter";
 import PostCard from "../shared/pieces/PostCard";
@@ -10,7 +10,9 @@ import useApi from "../context/hook";
 import { useEffect, useState } from "react";
 import PopOverDelete from "../shared/PopOverDelete";
 import Spinner from "../shared/pieces/Spinner";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { IoClose } from "react-icons/io5";
+import { Box, CircularProgress } from "@mui/material";
 
 
 export default function MyPosts(){
@@ -19,14 +21,20 @@ export default function MyPosts(){
     const {isPending, mutate: deletePost} = useDeletePostById()
     const [openModal, setOpenModal] = useState(false)
     const [currentId, setCurrentId] = useState<number | null>(null)
+    const [sort, setSort] = useState("")
+    const [searchParams, setSearchParams] = useSearchParams()
     const closeModal = () => setOpenModal(false) 
     const handleOpenModal = () => setOpenModal(true)
+    const {isPending: isSorting, mutate: sortPosts, data: sortedPosts} = useSortMyPosts()
     const navigate = useNavigate()
     const AreTherePosts = data?.posts?.length !== 0
 
     useEffect(() => {
+        if(sort){
+            sortPosts(sort)
+        }
         window.scrollTo(0, 0);
-    }, []);
+    }, [sort, sortPosts]);
 
     function handleEditPost(post: POST){
         navigate(`/edit-post/${post.id}`)
@@ -36,6 +44,12 @@ export default function MyPosts(){
         window.scrollTo(0, 0);
         handleOpenModal()
         setCurrentId(parseInt(post.id))
+    }
+
+    function handleDeleteSort(){
+        searchParams.delete("sort")
+        setSearchParams(searchParams)
+        setSort("")
     }
 
     function handleDeletePost(id: number){
@@ -70,12 +84,48 @@ export default function MyPosts(){
     return (
         <PostLayout title="My Posts">
             <div>
-                <ApplicationFilter saved = {true} />
+                <ApplicationFilter saved = {true} setSort={setSort} />
+                {sort && <div className="mt-6 mb-10 -ml-2">
+                    <button onClick={handleDeleteSort} className="bg-stone-800 w-fit ml-3 mt-5 px-5 py-2 text-white text-xs flex items-center gap-4 rounded-full">  
+                        <span> {sort} </span>
+                        <IoClose className = "text-white hover:text-primary w-4 h-4" />
+                    </button>
+                </div>
+                }
             
                 { !AreTherePosts ?  <div className="my-16 ml-5">
                         <p className="no-posts"> You haven't posted any jobs yet 😣 </p> 
                 </div> : (
-                    data?.posts.map((post) => {
+                    isSorting ? (
+                        <div className="h-[350px] mt-20">
+                            <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
+                                <CircularProgress size={40} color="inherit" />
+                            </Box>
+                        </div>
+                    ): sort ? (
+                        sortedPosts?.map((post: POST) => {
+                            return (
+                                <div key={post.id}>
+                                <PostCard post={post} Header = {
+                                    <PostHeader title={post.title} id={post.id}>
+                                        { role === AccountRoles.employer && <div className="flex items-center gap-7">
+                                                <button onClick={() => handleEditPost(post)}>
+                                                    <FaEdit className = "text-blue-600 w-5 h-5" />
+                                                </button>
+                                                <button onClick={() => handleClick(post)}>
+                                                    <FaTrash className = "text-red-600 w-5 h-5" />
+                                                </button>
+                                            </div>  
+                                        }
+                                    </PostHeader>
+                                } MainSection = {
+                                    <PostMain post={post} />
+                                } />
+                                <hr className="border-t border-gray-300 shadow-lg w-full" />
+                            </div>
+                            )
+                        })
+                    ) : data?.posts.map((post) => {
                         return (
                             <div key={post.id}>
                                 <PostCard post={post} Header = {
