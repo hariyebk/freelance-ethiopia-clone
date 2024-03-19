@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, Login, Logout, SearchJob, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, findUserById, getCurrentUser, rejectApplication, savePost, shortListApplication, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, FilterAndSortApplications, Login, Logout, SearchJob, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, findUserById, getCurrentUser, rejectApplication, savePost, shortListApplication, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams} from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -437,6 +437,18 @@ export const useShortListApplicant = () => {
 export const useSearchJob = () => {
     return useMutation({
         mutationFn: (query: string) => SearchJob(query),
+        onError: (error) => toast.error(error.message)
+    })
+}
+// FILTER AND SORT USER APPLICATIONS
+export const useFilterAndSort = () => {
+    const {user} = useApi()
+    return useMutation({
+        mutationFn: ({filterString, sortString}: {filterString?: string, sortString?: string}) => FilterAndSortApplications({
+            userId: user?.id as string,
+            filterString,
+            sortString
+        }),
         onError: (error) => toast.error(error.message)
     })
 }

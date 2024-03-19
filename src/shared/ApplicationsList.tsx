@@ -14,9 +14,16 @@ export default function ApplicationsList({applications}: ApplicationListProps){
             </div>
         )
     }
+    if(applications.length === 0){
+        return (
+            <div className="m-20">
+                <p className="no-posts"> No applications found to match your query 😔 </p>
+            </div>
+        )
+    }
 
     return (
-        <section className="mt-10 max-lg:mx-16 mx-16">
+        <section className="max-lg:mx-16 mx-16">
             {applications?.map((item) => {
                 return (
                     <ApplicationItem key={item.application?.post.id} application={{

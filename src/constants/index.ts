@@ -594,20 +594,14 @@ export const Applications = [
     }
 ]
 export const ApplicationStatus = [
-    "all",
     "pending",
+    "shortListed",
     "hired",
     "rejected",
 ]
 export const sortByDate = [
-    {
-        label: "latest",
-        query: "Recent first"
-    },
-    {
-        label: "earlier",
-        query: "Earlier first"
-    }
+    "descending",
+    "ascending"
 ]
 export const authenticated = "authenticated"
 export enum UrlPaths {
@@ -625,5 +619,15 @@ export enum helpCatagories {
     employers = "Employers",
     msq = "Mostly Asked Quetions",
     jobseekers = "Job Seekers"
+}
+export enum status {
+    pending = "pending",
+    shortListed = "shortListed",
+    rejected = "rejected",
+    hired = "hired"
+}
+export const sortQuery = {
+    ascending: "ascending",
+    descending: "descending" 
 }
 export const PAGE_SIZE = 10

@@ -20,13 +20,13 @@ export default function Testimonials({subject, testimonial}: TestimonialsProps) 
                 opts={{
                     align: "center",
                 }}
-                className="mt-20 lg:w-[700px] max-md:w-[350px] md:w-[600px] mx-auto"
+                className="mt-20 lg:w-[800px] max-md:w-[350px] md:w-[600px] mx-auto"
                 >
                     <CarouselContent>
                         {testimonial.map((client) => {
                             return (
                                 <CarouselItem key={client.name} className="md:basis-1/2 lg:basis-1/2" >
-                                    <Card className="w-[300px] border border-primary ml-4">
+                                    <Card className="w-[300px] xl:w-[360px] border border-primary ml-4">
                                         <CardContent className="bg-white rounded-lg h-[270px] flex flex-col items-center justify-center shadow-lg py-3 px-4">
                                             <h2 className="mt-5 text-center text-base font-palanquin font-semibold"> {client.name} </h2>
                                             <p className="text-sm font-palanquin mt-5"> {client.comment} </p>

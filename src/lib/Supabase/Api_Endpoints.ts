@@ -5,6 +5,7 @@ import { EducationProps } from "../../shared/pieces/EducationItem"
 import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
 import { Language } from "../../shared/pieces/EditLanguages"
 import { changeDateFromIsoToNormal } from "../../utils/helpers"
+import { sortQuery} from "../../constants"
 
 interface GeneralUpdateProps{
     userId: string, 
@@ -445,4 +446,30 @@ export async function SearchJob(query: string | null){
     const {data, error} = await supabase.from("post").select().ilike("title", `%${query}%`)
     if(error) throw new Error(error.message)
     return {data}
+}
+export async function FilterAndSortApplications({userId, filterString, sortString}: {userId: string, filterString?: string, sortString?: string}){
+    const {data: user, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    let applications = user.appliedTo
+    if(filterString){
+        applications = applications.filter((element: ApplicationType) => element.application.status === filterString)
+    }
+    if(filterString){
+        applications = applications.filter((element: ApplicationType) => element.application.status === filterString)
+    }
+    if(filterString){
+        applications = applications.filter((element: ApplicationType) => element.application.status === filterString)
+    }
+    if(filterString){
+        applications = applications.filter((element: ApplicationType) => element.application.status === filterString)
+    }
+    if(sortString && sortString === sortQuery.descending){
+        applications = applications.sort((a: ApplicationType, b: ApplicationType) => new Date(b.application.appliedAt).getTime() - new Date(a.application.appliedAt).getTime())
+    }
+    if(sortString &&  sortString === sortQuery.ascending){
+        applications = applications?.sort((a: ApplicationType, b: ApplicationType) => new Date(a.application.appliedAt).getTime() - new Date(b.application.appliedAt).getTime())
+    }
+
+    return applications
+    
 }
