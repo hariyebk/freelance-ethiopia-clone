@@ -4,8 +4,8 @@ import { ExperienceProps } from "../../shared/Profile/Experience"
 import { EducationProps } from "../../shared/pieces/EducationItem"
 import { Certificate } from "../../shared/Profile/EditPages/components/MainComponentForCertification"
 import { Language } from "../../shared/pieces/EditLanguages"
-import { changeDateFromIsoToNormal } from "../../utils/helpers"
 import { sortQuery} from "../../constants"
+import { changeDateFromIsoToNormal } from "../../utils/helpers"
 
 interface GeneralUpdateProps{
     userId: string, 
@@ -15,14 +15,12 @@ interface GeneralUpdateProps{
     limit: number, 
     errorMessage: string
 }
-
 interface GeneralDeleteProps{
     userId: string,
      // eslint-disable-next-line
     value:  any, 
     column_name: string, 
 }
-
 
 // TODO: FOR FORGET PASSWORD -  supabase.auth.resetPasswordForEmail
 // API ENDPOINTS
@@ -484,4 +482,16 @@ export async function sortMyPosts({firstName, sort}: {firstName: string, sort: s
         posts = data.sort((a:POST, b:POST) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
     }
     return posts
+}
+export async function sortSavedPosts({userId, sort}: {userId: string, sort: string}) {
+    const {data, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    let sortedPosts
+    if(sort === sortQuery.descending){
+        sortedPosts = data.saved_posts?.sort((a: POST, b: POST) => Date.parse(b.created_at) - Date.parse(a.created_at))
+    }
+    if(sort === sortQuery.ascending){
+        sortedPosts = data.saved_posts?.sort((a: POST, b: POST) =>  Date.parse(a.created_at) - Date.parse(b.created_at))
+    }
+    return sortedPosts
 }
