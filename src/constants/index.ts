@@ -90,15 +90,19 @@ export const contactInfo = [
     }
 ]
 export const brands = [
-    "https://www.freelanceethiopia.com/images/free/unnamed.png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(1).png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(2).png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(3).png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(5).png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(6).png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(7).png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(8).png",
-    "https://www.freelanceethiopia.com/images/free/unnamed%20(9).png"
+    "/Brands/haile.png",
+    "/Brands/tapu.png",
+    "/Brands/care.png",
+    "/Brands/mulmul.png",
+    "/Brands/z.png",
+    "/Brands/shega.png",
+    "/Brands/donkey.png",
+    "/Brands/efoy.png",
+    "/Brands/arts.png",
+    "/Brands/zayride.png",
+    "/Brands/abbay.png",
+    "/Brands/unkown.png",
+    "/Brands/purpose.png",
 ]
 export const packages = [
     {

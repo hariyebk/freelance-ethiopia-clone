@@ -15,7 +15,9 @@ export default function EditCertifications() {
     return (
         <section className="w-full mt-40 pb-16">
             <Layout isThereData={Boolean(user?.certifications)} title="Certifications" ModalComponent = {
-                <ModalForCertifications />
+                <div className="h-[350px] overflow-scroll overflow-x-hidden custom-scrollbar">
+                    <ModalForCertifications />
+                </div>
             } MainComponent = {
                 <MainComponentForCertification isEditing={true} />
             } />

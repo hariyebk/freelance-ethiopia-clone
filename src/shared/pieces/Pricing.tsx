@@ -5,7 +5,7 @@ import { FaRegCheckCircle } from "react-icons/fa";
 
 export default function Pricing() {
     return (
-        <div className="max-lg:mt-20 mt-10 flex flex-1 flex-col items-start min-h-screen">
+        <div className="mt-20 flex flex-1 flex-col items-start min-h-screen">
             <h1 className="mx-auto font-bold font-palanquin max-lg:text-5xl text-6xl text-black"> Our <span className="text-primary font-bold"> Pricing </span></h1>
             <p className="mt-10 max-lg:ml-3 max-lg:px-4 text-black max-lg:text-lg text-lg font-palanquin leading-7 max-lg:tex-justify"> Our subscription packages provide an easy and cost-efficient way to find qualified job candidates quickly. The three packages offer different lengths of subscription time, so you can choose the one that meets your needs. </p>
             <div className="mt-16 flex max-md:flex-col justify-center items-start w-full max-md:w-[300px] max-lg:mx-auto gap-7">

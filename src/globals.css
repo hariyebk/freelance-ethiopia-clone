@@ -152,6 +152,6 @@
         @apply text-base text-stone-600 font-palanquin font-semibold
     }
     .no-posts {
-        @apply max-md:text-base max-md:leading-5 text-xl text-black font-palanquin
+        @apply max-md:text-base max-md:leading-5 text-lg text-black font-palanquin
     }
 }

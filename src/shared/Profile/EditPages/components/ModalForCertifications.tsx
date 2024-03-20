@@ -42,7 +42,7 @@ export default function ModalForCertifications(){
     }
 
     return (
-        <section className="mt-4 mb-5 focus:border-none">
+        <section className="my-5 focus:border-none">
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start mx-5 gap-3">
                 {/* TITLE */}
