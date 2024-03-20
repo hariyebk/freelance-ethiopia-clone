@@ -495,3 +495,23 @@ export async function sortSavedPosts({userId, sort}: {userId: string, sort: stri
     }
     return sortedPosts
 }
+export async function deleteApplication({postId, userId}: {postId: string, userId: string}){
+    const {data: user, error} = await supabase.from("users").select().eq("id", userId).single()
+    if(error) throw new Error(error.message)
+    let tempArray = user.appliedTo
+    tempArray = tempArray.filter((element: ApplicationType) => element.application.post.id !== postId)
+    // update the appliedTo array
+    const {data: updatedUser, error: error1} = await supabase.from("users").update({appliedTo: tempArray.length === 0 ? null : tempArray}).eq("id", userId).select("*")
+    if(error1) throw new Error(error1.message)
+    const {data:post, error: error2} = await supabase.from("post").select().eq("id", postId).single()
+    if(error2) throw new Error(error2.message)
+    let tempArray1 = post.applications
+    tempArray1 = tempArray1.filter((element: {
+        applicant: USER,
+        coverLetter: string
+    }) => element.applicant.id !== userId)
+    // update the applications array of the post
+    const {data: updatedPost, error: error3} = await supabase.from("post").update({applications: tempArray1.length === 0 ? null : tempArray1}).eq("id", postId).select("*")
+    if(error3) throw new Error(error3.message)
+    return {updatedPost, updatedUser}
+}   

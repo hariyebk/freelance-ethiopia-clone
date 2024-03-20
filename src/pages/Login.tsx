@@ -10,6 +10,7 @@ import { IoEyeOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useLogin } from "../lib/Tanstackquery/queriesAndMutations";
 import Spinner from "../shared/pieces/Spinner";
+import toast from "react-hot-toast";
 
 export default function Login() {
     const {isPending, mutate:login} = useLogin()
@@ -26,10 +27,17 @@ export default function Login() {
             password: ""
         },
     })
+
+    function handlePasswordForget (){
+        // TODO: Implement password forget
+        toast.error("This feature will be implemented soon")
+
+    }
     function handlePassword(){
         setShowPassword(!showPassword)
     }
-    async function onSubmit(values: z.infer<typeof loginValidation>){
+    
+    function onSubmit(values: z.infer<typeof loginValidation>){
         const email = values.email
         const password = values.password
         login({email, password})
@@ -85,9 +93,9 @@ export default function Login() {
                         </FormItem>
                     )}
                     />
-                    <p className="flex items-center justify-end -mt-6">
-                        <Link to="/forgot-password" className="mt-3 text-stone-500 text-base text-right"> Forgot password ?</Link>
-                    </p>
+                    <div className="flex items-center justify-end -mt-6">
+                        <button type="button" onClick={handlePasswordForget} className="mt-3 text-stone-500 text-base text-right"> Forgot password ?</button>
+                    </div>
                     <div className="w-full flex flex-col justify-center items-center">
                         <button type="submit" className="bg-stone-800 max-lg:px-10 px-20 rounded-3xl max-lg:text-sm text-slate-100 py-2"> Continue with email </button> 
                         <div className="flex items-center justify-evenly mt-8">

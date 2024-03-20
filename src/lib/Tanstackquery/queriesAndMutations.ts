@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
-import { DeleteElement, FetchAllPosts, FetchFullUserData, FilterAndSortApplications, Login, Logout, SearchJob, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, findUserById, getCurrentUser, rejectApplication, savePost, shortListApplication, sortMyPosts, sortSavedPosts, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
+import { DeleteElement, FetchAllPosts, FetchFullUserData, FilterAndSortApplications, Login, Logout, SearchJob, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deleteApplication, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, findUserById, getCurrentUser, rejectApplication, savePost, shortListApplication, sortMyPosts, sortSavedPosts, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams} from "react-router-dom"
 import { authenticated } from "../../constants"
@@ -471,6 +471,29 @@ export const useSortSavedPosts = () => {
             userId: user?.id as string,
             sort
         }),
+        onError: (error) => toast.error(error.message)
+    })
+}
+// DELETE JOB APPLICATION
+export const useDeleteApplication = () => {
+    const {user, setUser} = useApi()
+    const queryClient = useQueryClient()
+
+    return useMutation({
+        mutationFn: (postId: string) => deleteApplication({
+            postId,
+            userId: user?.id as string
+        }),
+        onSuccess: (data) => {
+            setUser(data.updatedUser[0])
+            toast.success("applications is deleted successfully")
+            queryClient.invalidateQueries({
+                queryKey: ["post_applications"]
+            })
+            queryClient.invalidateQueries({
+                queryKey: ["user"]
+            })
+        },
         onError: (error) => toast.error(error.message)
     })
 }

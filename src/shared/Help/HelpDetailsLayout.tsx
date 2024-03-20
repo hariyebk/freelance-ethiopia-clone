@@ -60,7 +60,7 @@ export default function HelpDetailsLayout({label, questions}: HelpDetailsLayoutP
                             <span className="text-sm text-black"> {questions.length} </span>
                         </span>
                         <div className="mt-10 max-lg:mt-5 flex flex-1 flex-col items-center justify-center">
-                            <IoLayers className = "w-14 h-14 text-primary"/>
+                            <IoLayers className = "w-14 h-14 text-[#3e3e3e]"/>
                             <p className="mt-6 text-xl text-stone-600 font-palanquin font-semibold"> {label} </p>
                             <FiUser className = "mt-7 w-7 h-7 text-primary" />
                             <div className="flex items-center gap-3 mt-10">

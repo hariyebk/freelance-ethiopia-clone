@@ -26,7 +26,7 @@ export default function Apply() {
         window.scrollTo(0, 0);
     }, []);
 
-    async function onSubmit(values: z.infer<typeof CoverLetterValidation>){
+    function onSubmit(values: z.infer<typeof CoverLetterValidation>){
         apply({
             userId: user?.id as string,
             coverLetter: values.coverLetter
@@ -35,15 +35,15 @@ export default function Apply() {
 
 
     return (
-        <section className="w-full max-lg:my-40 mt-40 lg:mb-40">
+        <section className="w-full container md:my-52 max-md:my-40">
             <Form {...form}>
-                <div className="mb-16 lg:mb-10 ml-6 lg:ml-24">
+                <div className="md:hidden mb-16 lg:mb-10 ml-6">
                     <Goback />
                 </div>
-                <div className="flex items-start justify-between max-lg:ml-10  ml-36 mt-24 ">
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="max-lg:mx-10 lg:w-[600px]">
+                <div className="flex items-center justify-center mt-10 max-md:mt-20 xl:ml-16">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="lg:w-[600px]">
                         <h1 className="max-lg:text-lg text-2xl font-palanquin"> Write a Cover Letter for the hiring manager </h1>
-                        <div className="lg:w-[500px] w-[350px]">
+                        <div className="md:w-[500px] max-md:w-[350px]">
                             <FormField
                                 control={form.control}
                                 name="coverLetter"
@@ -56,7 +56,7 @@ export default function Apply() {
                                     </FormItem>
                                 )}
                                 />
-                                <div className="w-full flex justify-end mt-10 mr-5">
+                                <div className="w-full flex justify-end mt-10">
                                     <button type="submit" className="max-lg:mx-auto max-lg:w-full w-[250px] lg:text-lg bg-gradient-to-r from-primary to-secondary rounded-full text-base max-lg:text-sm text-center text-white py-2 px-4">
                                         {isPending ? (
                                         <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
@@ -69,7 +69,7 @@ export default function Apply() {
                         </div>
                     </form>
                     {/* GUIDELINES */}
-                    <div className="max-lg:hidden">
+                    <div className="max-xl:hidden mb-10 -ml-6">
                         <h3 className="pl-16 text-base text-black font-palanquin"> Make sure that your cover letter incorporates these key points. </h3>
                         <hr className="w-[450px] shadow-xl ml-14 mt-3 border-t" />
                         <ul className="mt-5 pr-5">
