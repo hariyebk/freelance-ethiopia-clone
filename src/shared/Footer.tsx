@@ -14,12 +14,12 @@ export default function Footer() {
         <footer className="bg-[#3e3e3e] relative bottom-0 inset-x-0">
             {!role && <section>
                     <div className="flex flex-1 items-center justify-center">
-                        <div className="max-lg:mb-10 my-20 max-lg:ml-12 md:mx-20 xl:ml-24 flex max-lg:flex-col justify-between items-center max-lg:gap-10">
+                        <div className="max-lg:mb-10 my-20 max-sm:ml-20 sm:ml-12 md:mx-20 xl:ml-24 flex max-lg:flex-col justify-between items-center max-lg:gap-10">
                             <div className="flex flex-1 max-lg:flex-row max-lg:gap-10 flex-col max-lg:-ml-16">
                                 <img src="/Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />
-                                <p className="mt-5 font-montserrat text-slate-200 max-lg:text-sm max-lg:w-[200px] text-base font-normal  max-w-[400px]"> Powerful Freelance Marketplace System with ability to change the Users (Freelancers & Clients)</p>
+                                <p className="mt-5 font-montserrat text-slate-200 max-sm:text-xs max-lg:text-sm max-lg:w-[200px] text-base font-normal  max-w-[400px] max-sm:pr-5"> Powerful Freelance Marketplace System with ability to change the Users (Freelancers & Clients)</p>
                             </div>
-                            <div className="flex items-center gap-10 md:ml-10 max-lg:max-w-[450px] w-[500px]">
+                            <div className="flex max-sm:ml-3 max-sm:gap-3 items-center gap-10 md:ml-10 max-lg:max-w-[450px] w-[500px]">
                                 {
                                     footerLinks.map((catagory) => {
                                         return (
@@ -39,7 +39,7 @@ export default function Footer() {
                                     })
                                 }
                             </div>
-                            <div className="xl:mr-10 max-lg:mx-auto">
+                            <div className="xl:mr-10 max-sm:-ml-20 sm:mx-auto">
                                 {contactInfo.map((info) => {
                                     return (
                                         <div key={info.Title} className="flex flex-1 flex-col text-slate-200">
