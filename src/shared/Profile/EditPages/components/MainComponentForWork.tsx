@@ -27,7 +27,7 @@ export default function MainComponentForWork({isEditing}: Props){
         <section className="max-lg:mt-3 mt-10 max-lg:mx-3 mx-6">
             <div>
             { !user?.experiences ? (
-                <p className="no-post mt-20 flex items-center justify-center"> Start by adding your experiences </p>
+                <p className="no-post max-sm:-ml-3 mt-20 flex items-center justify-center"> Start by adding your experiences </p>
             ) :
             user.experiences.map((experience) => {
                 return (

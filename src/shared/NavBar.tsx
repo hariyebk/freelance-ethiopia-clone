@@ -45,7 +45,7 @@ export default function NavBar() {
                 </div>
                 <div className="flex items-center gap-2 max-lg:mr-2 mr-10">
                     {role ? (
-                        <div className="flex items-center justify-between gap-7">
+                        <div className="flex items-center justify-between max-sm:gap-4 gap-7">
                             <Link to="/settings" className="hover:text-primary">
                                 <IoSettingsOutline style = {{fontSize: "26px"}} />
                             </Link>
@@ -70,12 +70,12 @@ export default function NavBar() {
                                     </Box>
                                 )
                                 : 
-                                <button onClick={handleLogout} className="lg:hidden mr-5 hover:text-primary">
+                                <button onClick={handleLogout} className="lg:hidden pt-1 mr-5 hover:text-primary">
                                     <SlLogout style = {{fontSize: "26px"}}/>
                                 </button>
                                 }
                             </div>
-                            <button onClick={handleProfileNavigation} className="max-lg:mr-6 mr-3 -ml-3">
+                            <button onClick={handleProfileNavigation} className="max-lg:mr-6 mr-3 md:-ml-3">
                                 <img src={`${user?.avatar ? user.avatar : "/Images/userAvatar.png"}`} alt="avatar" width={40} height={40} className="rounded-full object-contain"/>
                             </button>
                         </div>

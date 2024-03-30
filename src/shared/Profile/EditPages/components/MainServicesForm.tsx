@@ -39,7 +39,7 @@ export default function MainServicesForm() {
     }
 
     return (
-        <section className="mt-5 max-lg:mx-2 mx-10">
+        <section className="mt-5 max-sm:mt-10 max-lg:mx-2 max-sm:mr-10 mx-10">
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-3">
                 <FormField

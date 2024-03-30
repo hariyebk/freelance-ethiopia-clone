@@ -35,7 +35,7 @@ export default function SkillForm(){
     }
 
     return (
-        <section className="mt-5 max-lg:ml-10 mx-10">
+        <section className="mt-5 max-sm:mt-10 max-lg:ml-10 max-sm:mx-3 mx-10">
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-3">
                 <FormField
@@ -53,7 +53,7 @@ export default function SkillForm(){
                         <p className="text-black max-lg:text-xs text-sm"> A maximum of 9 skills allowed.  </p>
                     </div>
                     <FormControl className="max-lg:mt-2 mt-5">
-                        <Textarea className="p-3 max-lg:h-[100px] h-[150px] border-gray-700 focus:outline-none focus-visible:ring-white overflow-y-auto custom-scrollbar" {...field} />
+                        <Textarea className="p-3 max-lg:h-[100px] h-[150px] max-sm:w-[280px] border-gray-700 focus:outline-none focus-visible:ring-white overflow-y-auto custom-scrollbar" {...field} />
                     </FormControl>
                     <FormMessage className='text-sm text-red-500' />
                     </FormItem>

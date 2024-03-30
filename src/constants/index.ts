@@ -39,10 +39,6 @@ export const EmployerNavLinks = [
         path: "/post",
         label: "Post A job"
     },
-    {
-        path: "/post/:4/descriptions",
-        label: "Post 2"
-    },
 ]
 export const footerLinks = [
     {

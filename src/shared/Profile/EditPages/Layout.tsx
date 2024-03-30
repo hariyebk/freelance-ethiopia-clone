@@ -26,12 +26,12 @@ export default function Layout({isThereData, title, MainComponent, ModalComponen
             <div className={`${isThereData ? "h-auto" : "h-[450px]"} max-lg:mt-10 mt-20 mx-auto max-sm:pr-6 max-lg:w-[430px] w-[600px] bg-slate-50 border border-gray-100 shadow-md rounded-lg`}>
                 <div className="max-lg:mb-10 mb-10 flex flex-col flex-1 items-start max-lg:px-6 px-10 py-7">
                     {/* HEADER */}
-                    <div className="w-full flex items-center justify-between max-lg:px-2">
+                    <div className="w-full max-sm:pr-10 flex items-center justify-between max-lg:px-2">
                         <div className="flex items-center gap-5 mt-4">
                             <span className="max-lg:hidden bg-gray-200 cursor-pointer hover:text-primary rounded-full flex justify-center items-center w-10 h-10" onClick={() => navigate(-1)}>
                                 <GoArrowLeft style = {{fontSize: "20px"}} />
                             </span>
-                            <h2 className="text-xl text-stone-600 font-palanquin font-semibold"> {title} </h2>
+                            <h2 className="max-sm:text-base text-xl text-stone-600 font-palanquin font-semibold"> {title} </h2>
                         </div>
                         <div className="ml-8 mt-3 cursor-pointer hover:text-primary">
                             <p className="text-base text-stone-600 font-palanquin font-semibold hover:text-primary" onClick={handleOpen}>  Add new </p>
