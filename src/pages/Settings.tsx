@@ -46,7 +46,7 @@ export default function Settings() {
     return (
         <section className="w-full mt-32 mb-36">
             <div className="mx-auto max-lg:w-[450px] w-[700px] h-auto shadow-lg bg-slate-50 rounded-md pt-10 pb-28 max-lg:px-16">
-                <div className="flex flex-1 flex-col items-center justify-center">
+                <div className="flex flex-1 flex-col max-sm:items-start items-center justify-center">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <main className="">

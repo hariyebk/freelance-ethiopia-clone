@@ -25,9 +25,11 @@ export default function MainServicesForm() {
     })
     
     function onSubmit(values: z.infer<typeof MainServicesValidation>){
-        if(!values.service){
+
+        if(values.service.split(",").includes("") || values.service.split(",").includes(" ")){
             return toast.error("Invalid Input")
-        } 
+        }
+
         addService({
             value: values.service,
             column_name: "main_services",

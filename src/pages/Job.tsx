@@ -60,7 +60,7 @@ export default function Job() {
         <section className="w-full mt-20">
             <div className="flex gap-8 lg:ml-44">
                 <div className="container w-[700px] mb-20">
-                    <div className="flex flex-col flex-1 shadow-md max-lg:px-5 p-2 my-14">
+                    <div className="flex flex-col flex-1 shadow-md  p-2 my-14">
                         <div className="flex items-center justify-start border border-slate-200 rounded-lg pl-3">
                             <IoSearchOutline style = {{color: "#ef754c", fontSize: "20px"}} />
                             <form onSubmit={handleSearch} className="w-full">

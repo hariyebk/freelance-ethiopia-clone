@@ -47,14 +47,14 @@ export default function HelpDetailsLayout({label, questions}: HelpDetailsLayoutP
     return (
         <section className="min-h-screen mb-36">
             <HelpHeader showDetails={true} />
-            <div className="flex max-lg:flex-1 max-lg:flex-col items-start max-lg:mx-7 gap-20 max-lg:gap-10">
+            <div className="flex max-lg:flex-1 max-lg:flex-col items-start gap-20 max-lg:gap-10">
                 <div className="ml-48 max-sm:ml-10 max-md:mx-auto">
                     <div className="mt-10 flex items-center">
                         <Link to="/help" className="text-primary font-palanquin font-semibold"> All Catagories </Link>
                         <FaAngleRight className = "text-primary w-5 h-5" />
                         <p className="pl-3 text-sm text-black font-palanquin"> {label} </p>
                     </div>
-                    <div className="mt-10 bg-white shadow-lg w-[320px] h-[340px] max-lg:h-[330px]">
+                    <div className="mt-10 max-sm:-ml-3 bg-white shadow-lg w-[320px] h-[340px] max-lg:h-[330px]">
                         <span className="w-full flex justify-end gap-2 pt-5 pr-10 max-lg:pr-5">
                             <CgNotes className = "text-primary w-5 h-5" />
                             <span className="text-sm text-black"> {questions.length} </span>
@@ -70,7 +70,7 @@ export default function HelpDetailsLayout({label, questions}: HelpDetailsLayoutP
                         </div>
                     </div>
                 </div>
-                <div className="w-[580px] max-lg:w-[400px] lg:mt-10 md:mx-auto">
+                <div className="max-sm:w-[350px] w-[580px] max-lg:w-[400px] lg:mt-10 max-sm:ml-5 md:mx-auto">
                     {questions.map((q, i) => {
                         return (
                             <div key={i}>

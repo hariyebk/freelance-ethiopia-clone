@@ -37,7 +37,7 @@ export default function SetPreference(){
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="">
             {role === AccountRoles.jobseeker && <>
-                <h1 className="mt-14 max-lg:text-lg text-xl text-stone-500 font-semibold "> Set what kind of jobs you want to see </h1>
+                <h1 className="mt-14 max-sm:text-base max-lg:text-lg text-xl text-stone-500 font-semibold "> Set what kind of jobs you want to see </h1>
                 <FormField
                 control={form.control}
                 name="sectorPreference"

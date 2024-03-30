@@ -23,7 +23,7 @@ export default function Layout({isThereData, title, MainComponent, ModalComponen
             <div className="lg:hidden mt-10 mb-14 ml-10">
                 <Goback />
             </div>
-            <div className={`${isThereData ? "h-auto" : "h-[450px]"} max-lg:mt-10 mt-20 mx-auto max-lg:w-[430px] w-[600px] bg-slate-50 border border-gray-100 shadow-md rounded-lg`}>
+            <div className={`${isThereData ? "h-auto" : "h-[450px]"} max-lg:mt-10 mt-20 mx-auto max-sm:pr-6 max-lg:w-[430px] w-[600px] bg-slate-50 border border-gray-100 shadow-md rounded-lg`}>
                 <div className="max-lg:mb-10 mb-10 flex flex-col flex-1 items-start max-lg:px-6 px-10 py-7">
                     {/* HEADER */}
                     <div className="w-full flex items-center justify-between max-lg:px-2">
@@ -40,7 +40,7 @@ export default function Layout({isThereData, title, MainComponent, ModalComponen
                                 <button onClick={handleClose}>
                                     <IoClose style = {{fontSize: "20px"}} />
                                 </button>
-                                <div className="flex flex-col mx-6">
+                                <div className="flex flex-col md:mx-6">
                                     {ModalComponent}
                                 </div>
                             </PopOverForm>

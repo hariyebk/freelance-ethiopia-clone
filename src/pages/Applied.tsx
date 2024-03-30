@@ -41,21 +41,21 @@ export default function Applied() {
     return (
         <section className="w-full mt-40 mb-36">
             <div className="mx-auto max-md:w-[450px] md:w-[600px] lg:w-[700px] h-auto shadow-lg bg-slate-50 rounded-md pb-28">
-                <div className="pt-10 max-lg:px-14 px-14">
-                    <div className="flex items-center justify-between text-stone-600 font-palanquin font-semibold">
+                <div className="pt-10 max-lg:px-14 max-sm:px-10 sm:px-14">
+                    <div className="flex items-center max-sm:gap-24 sm:justify-between text-stone-600 font-palanquin font-semibold">
                         <h1 className="text-2xl max-lg:text-lg"> Your Applications </h1>
                         <p className="text-xl max-lg:text-lg"> Status </p>
                     </div>
                     { user?.appliedTo ? <ApplicationFilter setFilter={setFilter} setSort={setSort} /> : null}
                 </div>
                 <div className="flex items-center -mt-3">
-                    {filter && <div className="ml-14">
+                    {filter && <div className="max-sm:mx-5 sm:ml-14">
                         <button onClick={handleDeleteFilter} className="bg-stone-800 w-fit ml-3 mt-5 px-5 py-2 text-white text-xs flex items-center gap-4 rounded-full">  
                             <span> {filter} </span>
                             <IoClose className = "text-white hover:text-primary w-4 h-4" />
                         </button>
                     </div>}
-                    {sort && <div className={`${filter ? "ml-4" : "ml-14"}`}>
+                    {sort && <div className={`${filter ? "max-sm:ml-2 sm:ml-4" : "max-sm:ml-5 sm:ml-14"}`}>
                         <button onClick={handleDeleteSort} className="bg-stone-800 w-fit ml-3 mt-5 px-5 py-2 text-white text-xs flex items-center gap-4 rounded-full">  
                             <span> {sort} </span>
                             <IoClose className = "text-white hover:text-primary w-4 h-4" />

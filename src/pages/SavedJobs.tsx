@@ -53,7 +53,7 @@ export default function SavedJobs(){
                     
                     sort ? sortedPosts?.map((post: POST) => {
                         return (
-                            <div key={post.id}>
+                            <div key={post.id} >
                                 <PostCard post={post} Header = {
                                     <PostHeader title={post.title} id={post.id}/>
                                 } MainSection = {
@@ -63,10 +63,10 @@ export default function SavedJobs(){
                         )
                     }) : !user?.saved_posts ?  <div className="my-16 ml-6">
                             <p className="no-posts"> You have no saved posts </p>
-                        </div> : (
+                        </div > : (
                             user?.saved_posts?.map((post) => {
                                 return (
-                                    <div key={post.id}>
+                                    <div key={post.id} className="max-sm:mr-10">
                                         <PostCard post={post} Header = {
                                             <PostHeader title={post.title} id={post.id}/>
                                         } MainSection = {

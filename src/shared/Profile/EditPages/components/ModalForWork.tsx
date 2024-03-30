@@ -53,7 +53,7 @@ export default function ModalForWork({experience}: ModalForWorkProps) {
     }
 
     return (
-        <section className="mt-4 mb-10 focus:border-none">
+        <section className="mt-4 mb-10 max-sm:pl-5  focus:border-none">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start max-lg:mr-5 lg:mx-5 gap-3">
                     {/* POSITION */}

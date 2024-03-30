@@ -42,7 +42,7 @@ export default function ApplicationItem({application}: ApplicationItemProps){
     }
 
     return (
-        <section className='my-7'>
+        <section className='my-7 max-sm:pr-10'>
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5 lg:text-lg md:text-sm max-md:text-sm max-lg:text-ellipsis font-palanquin">
                     <p> {application.title}, </p>

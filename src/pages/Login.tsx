@@ -97,7 +97,7 @@ export default function Login() {
                         <button type="button" onClick={handlePasswordForget} className="mt-3 text-stone-500 text-base text-right"> Forgot password ?</button>
                     </div>
                     <div className="w-full flex flex-col justify-center items-center">
-                        <button type="submit" className="bg-stone-800 max-lg:px-10 px-20 rounded-3xl max-lg:text-sm text-slate-100 py-2"> Continue with email </button> 
+                        <button type="submit" className="bg-stone-800 max-lg:px-10 px-20 rounded-3xl max-lg:text-sm text-slate-100 py-3"> Continue with email </button> 
                         <div className="flex items-center justify-evenly mt-8">
                             <hr className="w-16 h-0.5 bg-stone-700 ml-3" />
                             <p className="text-stone-800 max-lg:text-sm text-base ml-3">

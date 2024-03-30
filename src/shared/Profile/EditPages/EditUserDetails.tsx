@@ -25,10 +25,10 @@ export default function EditUserDetails(){
 
     return (
         <section className="container w-full md:w-[600px] lg:w-[700px] max-lg:mt-36 mt-28">
-            <div className="md:hidden max-lg:flex ml-10 mt-10 items-center gap-3 hover:text-primary">
+            <div className="md:hidden max-lg:flex sm:ml-10 mt-10 items-center gap-3 hover:text-primary">
                 <Goback />
             </div>
-            <div className="mx-48 mb-20 flex flex-col flex-1 items-start">
+            <div className="sm:mx-48 mb-20 flex flex-col flex-1 items-start">
                 <UserForm handleSubmit={UpdateUser} newUser={false} />
             </div>
         </section>
