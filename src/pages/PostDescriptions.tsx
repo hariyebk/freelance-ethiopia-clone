@@ -79,13 +79,13 @@ export default function PostDescriptions({id, description, responsibilities, req
                             name="salary"
                             render={({ field }) => (
                                 <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
-                                <FormLabel className="text-sm lg:text-base font-palanquin font-semibold text-primary"> Salary amount </FormLabel>
+                                <FormLabel className="text-base lg:text-base font-palanquin font-semibold text-primary"> Salary amount </FormLabel>
                                 <div className="flex items-center gap-2">
                                     <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> You can skip this , if you want </p>
+                                    <p className="text-black text-sm"> You can skip this , if you want </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Input type="text" placeholder={isTobeEdited ? !salary ? "Not specified" : "" : ""} className="max-lg:w-[350px] w-[400px] no-autofill outline-none" {...field}/> 
+                                    <Input type="text" placeholder={isTobeEdited ? !salary ? "Not specified" : "" : ""} className="max-sm:w-[300px] max-lg:w-[350px] w-[400px] no-autofill outline-none" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -97,9 +97,9 @@ export default function PostDescriptions({id, description, responsibilities, req
                             name="description"
                             render={({ field }) => (
                                 <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
-                                <FormLabel className="text-sm lg:text-base font-palanquin font-semibold text-primary"> Basic Job Description </FormLabel>
+                                <FormLabel className="text-base lg:text-base font-palanquin font-semibold text-primary"> Basic Job Description </FormLabel>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
+                                    <Textarea className="p-3 max-lg:h-[100px] max-sm:w-[300px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -112,12 +112,12 @@ export default function PostDescriptions({id, description, responsibilities, req
                             render={({ field }) => (
                                 <FormItem className="mt-10 flex flex-1 flex-col justify-start gap-2 w-full">
                                 <FormLabel className="text-sm lg:text-base font-palanquin font-semibold text-primary"> Responsibilities </FormLabel>
-                                <div className="flex items-center gap-2">
+                                <div className="flex items-center gap-2 max-sm:pr-6 max-sm:leading-5">
                                     <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Please use comma (,) to separate each responsibilities </p>
+                                    <p className="text-black text-sm"> Please use comma (,) to separate each responsibilities </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
+                                    <Textarea className="p-3 max-lg:h-[100px] max-sm:w-[300px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -132,10 +132,10 @@ export default function PostDescriptions({id, description, responsibilities, req
                                 <FormLabel className="text-sm lg:text-base font-palanquin font-semibold text-primary"> Requiremnts </FormLabel>
                                 <div className="flex items-center gap-2">
                                     <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Please use comma (,) to separate each requirments </p>
+                                    <p className="text-black text-sm"> Please use comma (,) to separate each requirments </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Textarea className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
+                                    <Textarea className="p-3 max-lg:h-[100px] max-sm:w-[300px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -150,14 +150,14 @@ export default function PostDescriptions({id, description, responsibilities, req
                                 <FormLabel className="text-sm lg:text-base font-palanquin font-semibold text-primary"> Qualifications </FormLabel>
                                 <div className="flex items-center gap-2">
                                     <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> You can skip this , if you want </p>
+                                    <p className="text-black text-sm"> You can skip this , if you want </p>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> Please use comma (,) to separate each requirments </p>
+                                    <p className="text-black text-sm"> Please use comma (,) to separate each requirments </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Textarea placeholder={isTobeEdited ? !qualifications ? "Not specified": "" : ""} className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
+                                    <Textarea placeholder={isTobeEdited ? !qualifications ? "Not specified": "" : ""} className="p-3 max-lg:h-[100px] max-sm:w-[300px] max-lg:w-[350px] w-[430px] h-[150px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
@@ -172,16 +172,16 @@ export default function PostDescriptions({id, description, responsibilities, req
                                 <FormLabel className="text-sm lg:text-base font-palanquin font-semibold text-primary"> How should the candidate Apply ? </FormLabel>
                                 <div className="flex items-center gap-2">
                                     <span> <IoWarningOutline /> </span>
-                                    <p className="text-black max-lg:text-xs text-sm"> You can skip this , if you want </p>
+                                    <p className="text-black text-sm"> You can skip this , if you want </p>
                                 </div>
                                 <FormControl className="border-gray-400 focus:border-none py-3">
-                                    <Textarea placeholder={isTobeEdited ? !howToApply ? "Not specified" : "" : ""} className="p-3 max-lg:h-[100px] max-lg:w-[350px] w-[450px] h-[90px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
+                                    <Textarea placeholder={isTobeEdited ? !howToApply ? "Not specified" : "" : ""} className="p-3 max-lg:h-[100px] max-sm:w-[300px] max-lg:w-[350px] w-[450px] h-[90px] overflow-y-scroll custom-scrollbar rounded-md" {...field}/> 
                                 </FormControl>
                                 <FormMessage className='text-sm text-red-500' />
                                 </FormItem>
                             )}
                             />
-                            <button className="max-lg:mt-14 mt-14 max-lg:w-[350px] w-[450px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-lg text-slate-100 font-palanquin"> 
+                            <button className="max-lg:mt-14 mt-14 max-sm:w-[300px] max-lg:w-[350px] w-[450px] bg-gradient-to-r from-primary to-secondary rounded-full px-5 py-2 text-lg text-slate-100 font-palanquin"> 
                             {isLoading ? (
                                 <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "center"}}>
                                     <CircularProgress size={20} color="inherit" />

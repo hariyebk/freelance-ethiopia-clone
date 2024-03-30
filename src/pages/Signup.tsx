@@ -62,7 +62,7 @@ export default function Signup() {
             <div className="mt-20 flex items-start justify-center gap-16">
                 <img src="/Images/onboard.svg" alt="onboarding-image" className=" max-lg:hidden object-contain w-80 h-auto"/>
                 <div className="flex flex-col ml-10">
-                    <h1 className="max-lg:text-xl text-2xl text-slate-800 font-palanquin"> Are you new or our Telegram Bot user? </h1>
+                    <h1 className="max-sm:text-base max-lg:text-xl text-2xl text-slate-800 font-palanquin"> Are you new or our Telegram Bot user? </h1>
                     <div className="flex max-lg:flex-col justify-between items-center max-lg:gap-2 gap-7">
                         <div className={`w-[220px] h-[140px] mt-16 flex flex-col gap-7 items-center justify-center shadow-md rounded-xl cursor-pointer ${telegramUser ? "border-2 border-primary": ""}`} onClick={() => dispatch({type: userTypes.olduser})}>
                             <FiUserCheck style = {{fontSize: "50px", color: 'text-gray-400' }} />
@@ -75,10 +75,12 @@ export default function Signup() {
                     </div>
                 </div>
             </div>
-            <button onClick={handleClick} className={`${!newUser && !telegramUser ? "bg-stone-800 opacity-50" : "bg-stone-800"} lg:hidden mt-16 mb-28 mx-40 rounded-full  text-slate-100 text-sm w-[200px] px-3 py-2 text-center`}>
-                countinue
-            </button>
-            <div className="max-lg:hidden">
+            <div className="mx-auto mt-16 mb-28">
+                <button onClick={handleClick} className={`${!newUser && !telegramUser ? "bg-stone-800 opacity-50" : "bg-stone-800"} lg:hidden rounded-full max-md:ml-10 text-slate-100 text-sm w-[200px] px-3 py-2 text-center`}>
+                    countinue
+                </button>
+            </div>
+            <div className="max-lg:hidden -mt-48">
                 <BottomNav place={bottomNavRoute.onboard} route={bottomNavRoute.register} newUser = {newUser} telegramUser = {telegramUser} />
             </div>
         </section>

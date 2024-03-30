@@ -13,7 +13,7 @@ export default function Footer() {
     return (
         <footer className="bg-[#3e3e3e] relative bottom-0 inset-x-0">
             {!role && <section>
-                    <div className="flex flex-1 items-center justify-center">
+                    <div className="flex flex-1 items-center justify-center max-sm:pl-4">
                         <div className="max-lg:mb-10 my-20 max-sm:ml-20 sm:ml-12 md:mx-20 xl:ml-24 flex max-lg:flex-col justify-between items-center max-lg:gap-10">
                             <div className="flex flex-1 max-lg:flex-row max-lg:gap-10 flex-col max-lg:-ml-16">
                                 <img src="/Images/footer-logo.png" alt="footer-logo" className="h-16 w-36 object-contain" />

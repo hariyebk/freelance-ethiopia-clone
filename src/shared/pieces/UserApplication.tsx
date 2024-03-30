@@ -40,7 +40,7 @@ export default function UserApplication({applicant, cover_letter, handleOpenModa
 
     return (
         <div className="w-full mt-16 lg:pb-7 px-3">
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex max-sm:flex-col max-sm:gap-6 max-sm:items-start items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                     <img src={applicant.avatar ? applicant.avatar : "/Images/userAvatar.png"} alt="user-avatar" className="rounded-full w-7 h-7 object-contain" />
                     <p className="text-black font-palanquin text-base font-semibold"> {`${applicant.firstName} ${applicant.lastName}`} </p>
@@ -53,7 +53,7 @@ export default function UserApplication({applicant, cover_letter, handleOpenModa
                     <span className="text-black text-sm font-palanquin font-semibold"> short-listed </span>
                 </div>}
             </div>
-            <p className="mt-6 text-justify lg:pl-9 pr-4 max-lg:text-sm"> {cover_letter} </p>
+            <p className="mt-6 max-sm:pr-10 text-justify lg:pl-9 pr-4 max-lg:text-sm"> {cover_letter} </p>
             {!applicant.skills ? null : <div className="mt-5 lg:pl-4 max-lg:pr-5 flex max-lg:flex-col items-center max-lg:items-start gap-3 lg:mx-6 text-black max-lg:text-xs text-sm font-montserrat">
                 <p className="text-base max-lg:text-sm max-lg:text-start text-black font-palanquin font-semibold"> Skills :- </p>
                 <div className="flex items-center gap-3">

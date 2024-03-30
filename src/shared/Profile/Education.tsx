@@ -34,7 +34,7 @@ export default function Education() {
                         </div>
                     )
 
-                }) : <p className="mt-6 ml-4 text-base text-gray-600"> Education background is not specified </p>
+                }) : <p className="mt-6 md:ml-4 max-sm:leading-7 text-base text-gray-600"> Education background is not specified </p>
                 :
                 !user?.education ? (
                     <p className="no-posts mt-7"> You have no education background in your profile 😣 </p>

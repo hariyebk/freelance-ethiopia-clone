@@ -15,7 +15,7 @@ export default function Faq(){
     return (
         <div className="mb-36 flex flex-col mt-36 max-lg:text-justify max-lg:mx-3 mx-56">
             <h1 className="max-lg:text-4xl text-6xl text-secondary font-palanquin mx-auto"> FAQ's </h1>
-            <div className='mt-10 container'>
+            <div className='mt-10 md:container'>
                 {
                     faq.map((q) => {
                         return (
@@ -26,7 +26,7 @@ export default function Faq(){
                                     aria-controls="panel1a-content"
                                     id="panel1a-header"
                                     >
-                                    <Typography className='mb-3 max-lg:text-sm text-ellipsis text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
+                                    <Typography className='mb-3 max-lg:text-sm text-ellipsis max-sm:px-3 text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                     <Typography className='mx-5'>

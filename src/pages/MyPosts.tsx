@@ -83,7 +83,7 @@ export default function MyPosts(){
 
     return (
         <PostLayout title="My Posts">
-            <div>
+            <div className="max-sm:pr-5">
                 <ApplicationFilter saved = {true} setSort={setSort} />
                 {sort && <div className="mt-6 mb-10 -ml-2">
                     <button onClick={handleDeleteSort} className="bg-stone-800 w-fit ml-3 mt-5 px-5 py-2 text-white text-xs flex items-center gap-4 rounded-full">  
@@ -105,10 +105,10 @@ export default function MyPosts(){
                     ): sort ? (
                         sortedPosts?.map((post: POST) => {
                             return (
-                                <div key={post.id}>
+                                <div key={post.id} className="max-sm:mr-10">
                                 <PostCard post={post} Header = {
                                     <PostHeader title={post.title} id={post.id}>
-                                        { role === AccountRoles.employer && <div className="flex items-center gap-7">
+                                        { role === AccountRoles.employer && <div className="flex items-center sm:gap-7">
                                                 <button onClick={() => handleEditPost(post)}>
                                                     <FaEdit className = "text-blue-600 w-5 h-5" />
                                                 </button>

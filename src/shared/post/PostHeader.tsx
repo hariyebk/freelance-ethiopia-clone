@@ -43,14 +43,16 @@ export default function PostHeader({id, children, title}: PostHeader){
 
     return (
         <div className="flex items-center justify-between w-full">
-            <div className="w-full flex items-center justify-between">
+            <div className="w-full flex max-sm:flex-col max-sm:gap-5 max-sm:items-start items-center justify-between">
                 <div className="flex items-center gap-5">
                     <h2 className="text-darkblue max-lg:text-lg text-xl font-palanquin font-semibold"> {title} </h2>
                     {role === AccountRoles.employer && <button onClick={handlePostNavigation}>
                         <MdOutlineOpenInNew className="text-primary w-5 h-5" />
                     </button>}
                 </div>
-                {children}
+                <div className={`${children && "max-sm:mb-7 max-sm:mt-3"}`}>
+                    {children}
+                </div>
             </div>
             { (role === AccountRoles.jobseeker || !role) && <div className="flex items-center gap-3">
                 <Popover>
