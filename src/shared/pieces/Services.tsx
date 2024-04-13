@@ -16,7 +16,7 @@ export default function Services() {
                     <p className="mt-3 text-black font-montserrat text-base max-w-[300px]"> Ideal for enterprise customers with unique, scalable or high volume recruitment needs. </p>
                 </div>
                 <hr className="lg:hidden bodrer-0.5 border-gray-300" />
-                <ul className="mt-7 max-sm:px-4 sm:px-9">
+                <ul className="mt-7 max-sm:px-4 sm:px-6">
                     {enterpriseOpr.map((service) => {
                         return (
                             <li key={service} className="text-base flex items-center gap-3 max-lg:mb-2 mb-3 font-montserrat text-black"> 

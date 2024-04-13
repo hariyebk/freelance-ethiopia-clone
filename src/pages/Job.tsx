@@ -11,6 +11,7 @@ import { useEffect, useState} from "react";
 import { Box, CircularProgress } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import DatabaseError from "../shared/pieces/DatabaseError";
 
 export default function Job() {
     const {setOpenFilter} = useApi()
@@ -59,7 +60,7 @@ export default function Job() {
     return (
         <section className="w-full mt-20">
             <div className="flex gap-8 lg:ml-44">
-                <div className="container w-[700px] mb-20">
+                <div className="sm:container max-sm:mx-4 w-[700px] mb-20">
                     <div className="flex flex-col flex-1 shadow-md  p-2 my-14">
                         <div className="flex items-center justify-start border border-slate-200 rounded-lg pl-3">
                             <IoSearchOutline style = {{color: "#ef754c", fontSize: "20px"}} />
@@ -75,7 +76,7 @@ export default function Job() {
                             <IoClose className = "text-white hover:text-primary w-4 h-4" />
                         </button>}
                         <div className="flex items-center justify-between mt-10 ml-5 pr-4">
-                            <h1 className="text-2xl text-darkblue font-palanquin"> Jobs You Might Like </h1>
+                            <h1 className="text-2xl max-sm:text-lg text-darkblue font-palanquin"> Jobs You Might Like </h1>
                             <button className="lg:hidden focus:outline-none mt-2" onClick={() => setOpenFilter(true)}>
                                 <CiFilter style = {{fontSize: "40px", color: "#ef754c"}} />
                             </button>
@@ -126,6 +127,9 @@ export default function Job() {
                                         )
                                     })
                                 )
+                                :
+                                !data ? 
+                                <DatabaseError />
                                 :
                                 (
                                 data?.posts?.map((post) => {

@@ -14,7 +14,7 @@ export default function Home(){
     }, []);
 
     return ( 
-        <section className="max-container max-lg:mx-10 lg:mx-20 xl:mx-48 mt-20">
+        <section className="max-container max-lg:mx-5 lg:mx-20 xl:mx-48 mt-20">
             <Hero />
             <Marquee style={{zIndex: -10}}>
                 <Brands />

@@ -98,11 +98,11 @@ export default function Login() {
                     </div>
                     <div className="w-full flex flex-col justify-center items-center">
                         <button type="submit" className="bg-stone-800 max-lg:px-10 px-20 rounded-3xl max-lg:text-sm text-slate-100 py-3"> Continue with email </button> 
-                        <div className="flex items-center justify-evenly mt-8">
-                            <hr className="w-16 h-0.5 bg-stone-700 sm:ml-3" />
-                            <p className="text-stone-800 max-lg:text-sm text-base ml-3">
+                        <div className="flex items-center max-sm:gap-3 sm:gap-5 mt-8">
+                            <hr className="w-16 h-0.5 bg-stone-700" />
+                            <p className="text-stone-800 max-sm:text-xs sm:text-sm text-base">
                             Don’t have an account? </p>
-                            <hr className="w-16 h-0.5 bg-stone-700 max-sm:ml-2.5 sm:ml-3"/>
+                            <hr className="w-16 h-0.5 bg-stone-700"/>
                         </div>
                         <Link to="/onboard" className="w-[280px] max-lg:w-[200px] mx-10 mt-8 px-8 py-2 rounded-full text-base text-center text-slate-100  bg-gradient-to-r from-primary to-secondary"> Sign up </Link>
                     </div>

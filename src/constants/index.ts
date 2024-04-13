@@ -635,3 +635,7 @@ export const sortQuery = {
     descending: "descending" 
 }
 export const PAGE_SIZE = 10
+
+export const DATABASE_ERRORS = ["Failed to fetch", "TypeError: Failed to fetch"]
+
+export const DATABASE_CONNECTION_FAILED_MESSAGE = "Database connection has failed"

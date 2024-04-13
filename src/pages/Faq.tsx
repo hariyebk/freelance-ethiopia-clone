@@ -26,7 +26,7 @@ export default function Faq(){
                                     aria-controls="panel1a-content"
                                     id="panel1a-header"
                                     >
-                                    <Typography className='mb-3 max-lg:text-sm text-ellipsis max-sm:px-3 text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
+                                    <Typography className='mb-3 max-sm:text-xs sm:text-sm text-black font-medium font-palanquin hover:text-primary'> {q.question} </Typography>
                                     </AccordionSummary>
                                     <AccordionDetails>
                                     <Typography className='mx-5'>

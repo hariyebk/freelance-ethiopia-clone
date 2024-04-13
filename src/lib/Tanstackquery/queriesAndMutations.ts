@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
 import { DeleteElement, FetchAllPosts, FetchFullUserData, FilterAndSortApplications, Login, Logout, SearchJob, Signup, UpdateElement, UpdateOrDeleteLanguages, UpdateUserAccountType, UploadAvatar, apply, createPost1, createPost2, deleteApplication, deletePostById, fetchAllPostApplications, filterPosts, findMyPosts, findPostById, findUserById, getCurrentUser, rejectApplication, savePost, shortListApplication, sortMyPosts, sortSavedPosts, unSavePost, updatePassword, updatePost, updateUserBio, updateUserData, updateUserPreference } from "../Supabase/Api_Endpoints"
 import toast from "react-hot-toast"
 import { useNavigate, useParams} from "react-router-dom"
-import { authenticated } from "../../constants"
+import { DATABASE_CONNECTION_FAILED_MESSAGE, DATABASE_ERRORS, authenticated } from "../../constants"
 import useApi from "../../context/hook"
 import { AccountRoles, POST1, POST2, signUpType} from "../../types"
 
@@ -15,7 +15,13 @@ export const useSignup = () => {
         onSuccess: (response) => {
             navigate(`/register/${response?.data[0].id}/upload-photo`)
         },
-        onError: (error) => toast.error(error.message)
+        onError: (error) => {
+            console.log(error.message)
+            if(DATABASE_ERRORS.includes(error.message)){
+                return toast.error(DATABASE_CONNECTION_FAILED_MESSAGE)
+            }
+            toast.error(error.message)
+        }
     })
 }
 // LOGIN
@@ -32,7 +38,12 @@ export const useLogin = () => {
                 return navigate("/profile-type")
             }
         },
-        onError: (error) => toast.error(error.message)
+        onError: (error) => {
+            if(DATABASE_ERRORS.includes(error.message)){
+                return toast.error(DATABASE_CONNECTION_FAILED_MESSAGE)
+            }
+            toast.error(error.message)
+        }
     })
 }
 // LOGOUT
