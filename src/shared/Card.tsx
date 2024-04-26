@@ -7,7 +7,7 @@ interface CardProps {
 }
 export default function Card({Title, des, id}: CardProps) {
     return (
-        <div className={`relative lg:max-w-full ${id === 1 ? "max-sm:h-[520px]" : "max-sm:h-[460px]"} sm:h-[390px] md:h-[420px] lg:h-[550px] max-lg:rounded-xl rounded-[30px] mt-16 mb-10`}>
+        <div className={`relative lg:max-w-full ${id === 1 ? "max-sm:h-[500px]" : "max-sm:h-[460px]"} max-sm:break-all sm:h-[390px] md:h-[420px] lg:h-[550px] max-lg:rounded-xl rounded-[30px] mt-16 mb-10`}>
             <div className="absolute inset-y-0 max-lg:rounded-lg rounded-[47px] bg-gradient-to-b from-primary to-secondary max-lg:w-full h-full w-full max-sm:px-4 sm:px-6 lg:pr-72 lg:pl-16 max-sm:pt-10 sm:pt-20 flex flex-col items-start">
                 <h1 className="text-white max-sm:text-xl sm:text-[27px] lg:text-5xl lg:leading-tight font-bold max-sm:ml-3"> {Title} </h1>
                 <p className="w-full lg:w-[460px] text-white max-md:text-base max-md:leading-8 md:text-lg font-palanquin max-lg:font-sans mt-8 lg:mt-14 max-lg:px-3 "> {des} </p>
